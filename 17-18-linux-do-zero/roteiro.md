@@ -55,7 +55,7 @@ Desta vez iremos fazer uma modificação nas configurações padrão. Como quere
 
 > $ make -j8
 
-Isto demorará bem menos que a compilação do kernel e pode ser feito enquanto outras coisas acontecem. Após a compilação um executável `busybox` deverá ter sido gerado na pasta .... Teste se ele está funcionando 
+Isto demorará bem menos que a compilação do kernel e pode ser feito enquanto outras coisas acontecem. Após a compilação um executável `busybox` deverá ter sido gerado na pasta *busybox-1.30.1*. Teste se ele está funcionando 
 
 O `busybox` inclui, em um só executável, todas ferramentas padrão como `cd`, `ls`, etc. Para executá-las digite.
 
@@ -97,9 +97,11 @@ A partir de agora, o dispositivo */dev/loop0* (ou algo similar que tenha sido re
 
 Vamos agora formatar essa partição e montá-la no diretório *raiz_linux*.
 
-> \# mkfs.ext4 /dev/loop0p1
-> \# mkdir raiz_linux
-> \# mount -t ext4 /dev/loop0p1 raiz_linux
+```
+\# mkfs.ext4 /dev/loop0p1
+\# mkdir raiz_linux
+\# mount -t ext4 /dev/loop0p1 raiz_linux
+```
 
 Tudo o que for escrito na pasta *raiz_linux* será escrito diretamente no nosso arquivo *raiz.img* da mesma maneira que seria escrito em um disco físico. No nosso caso, tudo o que for colocado nesta pasta estará presente no diretório `/` do nosso sistema Linux. Ou seja, a pasta *raiz_linux/bin* no nosso sistema será somente */bin*. 
 
@@ -113,10 +115,11 @@ Vamos agora copiar para *raiz_linux* o mínimo necessário para conseguirmos lig
 
 Como vimos anteriormente, o *busybox* contém todas as ferramentas de usuário em um único executável. Porém, não é nada prático digitar *busybox* antes de **todo comando**. Por isso criaremos uma série de links simbólicos que ligam o nome de cada ferramenta oferecida pelo *busybox* ao seu nome "tradicional".
 
-> \# for util in $(./usr/bin/busybox --list-full); do
-> \#  ln -s /usr/bin/busybox $util
-> \# done
-
+```
+for util in $(./usr/bin/busybox --list-full); do
+ ln -s /usr/bin/busybox $util
+done
+```
 **Exercício**: Cheque agora que as pastas `bin, sbin` e `usr/bin` estão cheias de executáveis com ferramentas tradicionais de linux. Se não estiverem houve algum problema. 
 
 **Exercício**: copie `hello-static` e `hello-dyn` para a pasta `root`. 
@@ -217,7 +220,6 @@ Todos os executáveis que conseguimos rodar até agora foram compilados estatica
 
 Ao montar nosso sistema do zero não incluimos nenhuma biblioteca! Logo, o nosso executável não consegue carregar as partes faltantes e não irá rodar. Felizmente, nosso sistema Linux possui a mesma arquitetura do Ubuntu instalado em nossas máquinas e podemos copiar os arquivos necessários para nosso sistema!
 
-<div class="alert"> Se você usa *macOS* você não terá esse arquivo. Use a [busca por pacotes do Ubuntu](https://packages.ubuntu.com/) para encontrar os arquivos necessários e prosseguir. </div>
 
 **Exercício**: Faça a cópia das bibliotecas dinâmicas para os locais apontados por `ldd` e rode de novo `hello-dyn`. Funcionou agora?
 
