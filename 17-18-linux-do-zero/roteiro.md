@@ -6,7 +6,7 @@
 
 Vamos precisar dos seguintes softwares instalados no sistema. Como o resto do curso, os pacotes abaixo são para o Ubuntu 18.04 LTS, 
 
-> build-essential flex bison qemu ncurses-devel libssl-dev libelf-dev qemu-system-x86
+> build-essential flex bison qemu ncurses-dev libssl-dev libelf-dev qemu-system-x86
 
 # Parte 1 - compilando o kernel
 
