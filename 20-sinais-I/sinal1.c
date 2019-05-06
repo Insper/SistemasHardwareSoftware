@@ -10,6 +10,7 @@ int main() {
     struct sigaction s;
     s.sa_handler = sig_handler;
     sigemptyset(&s.sa_mask);
+    s.sa_flags = 0;
     sigaction(SIGINT, &s, NULL);
 
     printf("Meu pid: %d\n", getpid());
