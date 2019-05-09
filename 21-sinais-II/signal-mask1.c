@@ -22,11 +22,13 @@ int main() {
     struct sigaction sint;
     sint.sa_handler = sigint_handler;
     sigemptyset(&sint.sa_mask);
+    sint.sa_flags = 0;
     sigaction(SIGINT, &sint, NULL);
 
     struct sigaction sterm;
     sterm.sa_handler = sigterm_handler;
     sigemptyset(&sterm.sa_mask);
+    sterm.sa_flags = 0;
     sigaction(SIGTERM, &sterm, NULL);
 
     printf("Meu pid: %d\n", getpid());
