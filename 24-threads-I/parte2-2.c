@@ -5,6 +5,8 @@
 void *minha_thread(void *arg) {
     int *i = (int *) arg;
     printf("Hello thread! %d\n", *i);
+
+    return NULL;
 }
 
 pthread_t *criar_threads(int n) {

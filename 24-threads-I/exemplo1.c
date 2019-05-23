@@ -4,6 +4,7 @@
 
 void *minha_thread(void *arg) {
     printf("Hello thread!\n");
+    return NULL;
 }
 
 
