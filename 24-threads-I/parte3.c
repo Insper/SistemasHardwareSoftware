@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <semaphore.h>
 
 struct args {
     int i, j, res;
@@ -10,6 +11,8 @@ void *minha_thread(void *_arg) {
     struct args *args = (struct args*) _arg;
     printf("Hello thread! %d %d\n", args->i, args->j);
     args->res = args->i * args->j;
+
+    return NULL;
 }
 
 

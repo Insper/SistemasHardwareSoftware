@@ -5,21 +5,25 @@
 
 void *minha_thread(void *arg) {
     printf("Hello thread!\n");
+    return NULL;
 }
 
 
 void *minha_thread2(void *arg) {
     printf("Hello thread2!\n");
+    return NULL;
 }
 
 
 void *minha_thread3(void *arg) {
     printf("Hello thread3!\n");
+    return NULL;
 }
 
 
 void *minha_thread4(void *arg) {
     printf("Hello thread4!\n");
+    return NULL;
 }
 
 
