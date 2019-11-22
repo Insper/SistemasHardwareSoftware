@@ -28,12 +28,20 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; i++) {
         scanf("%lf", &vetor[i]);
     }
-    
-    /* TODO: crie aqui os vetores de soma parcial para dividir em 2 partes */
-    /* TODO: declare as variáveis e crie as threads aqui */
-    /* TODO: espere pelo término das threads aqui */
 
-    printf("%lf\n", soma);
+    /* TODO: crie as threads aqui e use-as para calcular a soma */
+    /* Para nossos fins iremos usar uma global soma e atribuiremos a
+       ela dentro do for */    
+
+    printf("Paralela: %lf\n", soma);
+
+    soma = 0;
+    struct soma_parcial_args aa;
+    aa.vetor = vetor;
+    aa.start = 0;
+    aa.end = n;
+    soma_parcial(&aa);
+    printf("Sequencial: %lf\n", soma);
 
     return 0;
 }
