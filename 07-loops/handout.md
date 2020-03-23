@@ -2,11 +2,51 @@
 % Sistemas Hardware-Software - 2019/1
 % Igor Montagner
 
-# Parte 1 - loops `while` e `for`
+# Parte 1 - revisão
 
-**Exercício 1**: veja o código assembly abaixo(arquivo `ex1.o`) e responda os itens.
+**Exercício 1**: 
 
-~~~{asm}
+```asm
+Dump of assembler code for function ex1:
+   0x066a <+0>:	    lea    (%rsi,%rdi,2),%eax
+   0x066d <+3>:	    lea    (%rdx,%rdx,2),%edx
+   0x0670 <+6>:	    add    %edx,%eax
+   0x0672 <+8>:	    lea    (%rcx,%rcx,2),%ecx
+   0x0675 <+11>:	lea    (%rcx,%rcx,1),%edx
+   0x0678 <+14>:	add    %edx,%eax
+   0x067a <+16>:	retq   
+``` 
+
+1. Quantos argumentos a função recebe? Quais seus tipos? Ela retorna algo? O quê? \vspace{5em}
+1. Traduza o programa acima linha a linha. \vspace{10em}
+1. Escreva uma versão legível do programa acima. \newpage
+
+**Exercício 2**: 
+
+```asm
+Dump of assembler code for function ex2:
+   0x06da <+0>:	    cmp    %esi,%edi
+   0x06dc <+2>:	    jg     0x6e6 <ex2+12>
+   0x06de <+4>:	    mov    %esi,(%rdx)
+   0x06e0 <+6>:	    mov    $0x0,%eax
+   0x06e5 <+11>:	retq   
+   0x06e6 <+12>:	mov    %edi,(%rdx)
+   0x06e8 <+14>:	mov    $0x1,%eax
+   0x06ed <+19>:	retq   
+```
+
+1. Quantos argumentos a função recebe? Quais seus tipos? Ela retorna algo? O quê? \vspace{5em}
+1. A função acima faz uma comparação. Qual e entre quais variáveis? \vspace{5em}
+1. As instruções nas linhas `ex2+4` e `ex2+12` fazem acessos a memória. Qual o tipo da variável destino?  \vspace{5em}
+1. Faça uma tradução da função acima usando somente `if-goto` \vspace{10em}
+1. Faça uma versão legível da função acima. \newpage
+
+
+# Parte 2 - loops `while` e `for`
+
+**Exercício 3**: veja o código assembly abaixo(arquivo `ex1.o`) e responda os itens.
+
+```asm
 Dump of assembler code for function soma_2n:
     0x0000 <+0>:     mov    $0x1,%eax
     0x0005 <+5>:     cmp    $0x1,%edi
@@ -15,7 +55,7 @@ Dump of assembler code for function soma_2n:
     0x000c <+12>:    add    $0x1,%eax
     0x000f <+15>:    jmp    0x5 <soma_2n+5>
     0x0011 <+17>:    retq
-~~~
+```
 
 1. Localize no código acima as instruções de saltos (`jmp` ou condicionais `j*`). Desenhe setas indicando para qual linha do código elas pulam.
 
@@ -27,21 +67,21 @@ Dump of assembler code for function soma_2n:
 
 Vamos agora exercitar o que vimos na aula expositiva.
 
-**Exercício 2**: Leia o código assembly abaixo e responda.
+**Exercício 4**: Leia o código assembly abaixo e responda.
 
-~~~{asm}
+```asm
 Dump of assembler code for function soma_n:
-    0x0000 <+0>:     mov    $0x0,%eax
-    0x0005 <+5>:     mov    $0x0,%edx
-    0x0000a <+10>:   cmp    %edi,%eax
-    0x000c <+12>:    jge    0x19 <soma_n+25>
-    0x000e <+14>:    movslq %eax,%rcx
-    0x0011 <+17>:    add    %rcx,%rdx
-    0x0014 <+20>:    add    $0x1,%eax
-    0x0017 <+23>:    jmp    0xa <soma_n+10>
-    0x0019 <+25>:    mov    %rdx,%rax
-    0x001c <+28>:    retq
-~~~
+   0x066a <+0>:	    mov    $0x0,%edx
+   0x066f <+5>:	    mov    $0x0,%eax
+   0x0674 <+10>:	jmp    0x67f <soma_n+21>
+   0x0676 <+12>:	movslq %edx,%rcx
+   0x0679 <+15>:	add    %rcx,%rax
+   0x067c <+18>:	add    $0x1,%edx
+   0x067f <+21>:	cmp    %edi,%edx
+   0x0681 <+23>:	jl     0x676 <soma_n+12>
+   0x0683 <+25>:	repz retq 
+
+```
 
 1. Desenhe as flechas indicando o destino de cada instrução de pulo (`jmp` ou `j*`).
 1. Escreva abaixo o cabeçalho da função `soma_n`. **Dica**: procure por registradores que são lidos *antes* de serem escritos. \vspace{3em}
@@ -79,7 +119,6 @@ c:    48 83 c0 01             add    $0x1,%rax
 
 4. Faça uma versão `if-goto` deste código. \vspace{13em}
 1. Escreva ao lado de sua versão `if-goto` uma versão legível do código usando `if` e `while/for`.
--->
 
 # Parte 2 - variáveis locais
 
@@ -129,13 +168,13 @@ Dump of assembler code for function exemplo2:
 4. Com base nos itens acima, escreva a chamada para o `scanf` feita em `exemplo2`.  \vspace{5em}
 5. O `lea` pode ser usado tanto para a operação *endereço de* (`&`) como para cálculos simples. Escreva ao lado de cada ocorrência acima se o uso é para `&` ou para aritmética.
 6. Com todas essas informações em mãos, faça uma tradução da função acima para *C* \newpage
+ -->
+ 
 
-# Parte 3 - Exercícios avançados
+**Exercício 5**: Considerando o arquivo *ex5*, responda as perguntas abaixo.
 
-**Exercício 4**: Considerando o arquivo *ex4*, responda as perguntas abaixo.
-
-~~~{asm}
-Dump of assembler code for function ex4:
+```asm
+Dump of assembler code for function ex5:
     0x1139 <+0>:     mov    $0x0,%ecx
     0x113e <+5>:     mov    $0x0,%r8d
     0x1144 <+11>:    jmp    0x114a <ex4+17>
@@ -151,7 +190,7 @@ Dump of assembler code for function ex4:
     0x115f <+38>:    jmp    0x1146 <ex4+13>
     0x1161 <+40>:    mov    %r8,%rax
     0x1164 <+43>:    retq
-~~~
+```
 
 1. Quantos argumentos a função acima recebe? Quais seus tipos? **Dica**: não se esqueça de buscar por registradores que são lidos antes de serem escritos. \vspace{5em}
 1. A função retorna algum valor? Se sim, qual seu tipo? \vspace{5em}
@@ -163,6 +202,7 @@ Dump of assembler code for function ex4:
 1. Escreva uma versão do código acima usando somente `if-goto`. \vspace{35em}
 1. Escreva uma versão legível do código acima \newpage
 
+<!--
 **Exercício 5**: Considerando o arquivo *ex5* (função `main` abaixo), responda as perguntas.
 
 ~~~{asm}
@@ -194,4 +234,4 @@ Dump of assembler code for function main:
 
 1. Finalmente, faça uma versão em *C* do código acima. Se necessário faça uma versão intermediária usando `if-goto`.
 
-
+-->/
