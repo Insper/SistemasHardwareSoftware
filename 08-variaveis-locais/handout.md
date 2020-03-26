@@ -59,16 +59,17 @@ lea    0x8(%rsp),%rdx
 
 ```asm
 Dump of assembler code for function func1:
-   0x0004 <+0>:	    sub    $0x10,%rsp
-   0x0008 <+4>:	    movl   $0xa,0xc(%rsp)
-   0x0010 <+12>:	movl   $0xb,0x8(%rsp)
-   0x0018 <+20>:	lea    0xc(%rsp),%rdi
-   0x001d <+25>:	callq  0x22 <func1+30>
-   0x0022 <+30>:	addl   $0x1,0x8(%rsp)
-   0x0027 <+35>:	lea    0x8(%rsp),%rdi
-   0x002c <+40>:	callq  0x31 <func1+45>
-   0x0031 <+45>:	add    $0x10,%rsp
-   0x0035 <+49>:	retq   
+   0x05fe <+0>:	    sub    $0x10,%rsp
+   0x0602 <+4>:	    movl   $0xa,0xc(%rsp)
+   0x060a <+12>:	movl   $0xb,0x8(%rsp)
+   0x0612 <+20>:	lea    0xc(%rsp),%rdi
+   0x0617 <+25>:	callq  0x5fa <func2>
+   0x061c <+30>:	addl   $0x1,0x8(%rsp)
+   0x0621 <+35>:	lea    0x8(%rsp),%rdi
+   0x0626 <+40>:	callq  0x5fa <func2>
+   0x062b <+45>:	add    $0x10,%rsp
+   0x062f <+49>:	retq   
+
 ```
 
 1. Vamos começar analisando as três primeiras linhas do programa. Quanto espaço é reservado na pilha? Quantas variáveis são inicializadas e quais seus tamanhos e conteúdos? Dê um nome para cada uma delas. \vspace{5em}
