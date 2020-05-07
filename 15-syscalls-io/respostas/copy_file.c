@@ -11,7 +11,7 @@ int main (int argc, char *argv[]) {
     char arq1[100]; // nomes do arquivo, recebido via scanf
     char arq2[100];
     char buf[1]; // local usado para guardar os dados lidos de arq1
-    fff
+    
     scanf("%s", arq1);
     scanf("%s", arq2);
     int fd1 = open(arq1, O_RDONLY);
