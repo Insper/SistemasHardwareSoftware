@@ -13,6 +13,8 @@ A chamada `fork` cria um clone do processo atual e retorna duas vezes: uma vez n
 
 \newpage
 
+Leia o código abaixo e responda.
+
 <div class="include code" id="exemplo1-fork.c" language="C"></div>
 
 **Exercício**:
