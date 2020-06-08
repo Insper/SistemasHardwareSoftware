@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
     aa.vetor = vetor;
     aa.start = 0;
     aa.end = n;
-    aa.m = NULL;
     soma_parcial(&aa);
     printf("Sequencial: %lf\n", soma);
 
