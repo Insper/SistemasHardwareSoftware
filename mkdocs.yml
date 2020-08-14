@@ -1,0 +1,80 @@
+site_name: Sistemas Hardware-Software - 2020/2
+site_author: Igor Montagner
+
+extra:
+    materia: Sistemas Hardware-Software
+    professor: Igor Montagner
+    semestre: 2020/2
+
+theme:
+  feature:
+    tabs: true
+  name: 'material'
+  palette:
+    scheme: preference
+    primary: deep orange
+    accent: amber
+  font:
+    text: Roboto
+    code: Roboto Mono
+  custom_dir: 'custom_theme'
+
+docs_dir: material
+site_dir: docs
+
+repo_url: https://github.com/insper/sistemashardwaresoftware
+repo_name: "sistemashardwaresoftware"
+site_url: https://insper.github.io/SistemasHardwareSoftware/
+
+
+nav:
+    - Home: index.md
+    - Burocracias: sobre.md
+
+    - Aulas:
+        - aulas/01-introducao/index.md
+
+
+extra_javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
+    - translate-admonitions.js
+
+extra_css:
+    - css/printing.css
+
+markdown_extensions:
+  - markdown.extensions.tables
+  - tables
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.snippets:
+      base_path: code
+      check_paths: true
+plugins:
+    - search

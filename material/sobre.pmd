@@ -1,0 +1,19 @@
+```{python, echo=False}
+import tabulate
+import pandas as pd
+```
+# Plano de aulas
+
+* SEG 13:30 - 15:40
+* QUI 15:45 - 17:45
+
+* Atendimento: QUI 14:00 - 15:30
+
+??? note "Plano de aulas"
+```{python, results='md', echo=False}
+t1 = pd.read_excel('plano-de-aulas.xlsx')
+t1['Data'] = t1['Data'].apply(lambda x: x.strftime('%d/%m'))
+print('\n'.join(['    %s'%l for l in tabulate.tabulate(t1[['Data', 'Questão/Problema',
+'Conteúdo/Atividade']], headers=['Data', 'Questão/Problema',
+'Conteúdo/Atividade'], tablefmt='pipe', showindex=False).split('\n')  ]))
+```
