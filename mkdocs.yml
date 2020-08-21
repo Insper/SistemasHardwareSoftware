@@ -12,7 +12,7 @@ theme:
   name: 'material'
   palette:
     scheme: preference
-    primary: deep orange
+    primary: brown
     accent: amber
   font:
     text: Roboto
