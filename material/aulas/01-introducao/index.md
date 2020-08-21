@@ -143,7 +143,9 @@ Os exercícios para entrega nesta página contarão na nota de atividades assim 
 !!! example
     Faça um programa que lê dois inteiros `m < 100` e `n < 100`. Então seu programa deverá ler uma matriz de `m` linhas por `n` colunas e mostrar no terminal o índice do maior valor de cada coluna.
 
-    !!! warning "Declare sua matriz como variável global. Iremos aprender como alocar matrizes de tamanho arbitrário no curso.
+    Declare sua matriz como variável global. Iremos aprender como alocar matrizes de tamanho arbitrário no curso.
+
+
 
     **Entrada**:    
     ```
