@@ -145,8 +145,6 @@ Os exercícios para entrega nesta página contarão na nota de atividades assim 
 
     Declare sua matriz como variável global. Iremos aprender como alocar matrizes de tamanho arbitrário no curso.
 
-
-
     **Entrada**:    
     ```
     3 4
@@ -159,4 +157,25 @@ Os exercícios para entrega nesta página contarão na nota de atividades assim 
     ```
     2 1 1 0
     ```
+
+!!! example
+    **Entrega**: Faça um programa que encontra "vales" em uma matriz. Uma posição `i,j` é um vale se todos os seus vizinhos diretos são maiores que ele. Considere que todas as posições fora da matriz tem valor 0.
+
+
+    **Entrada**:    
+    ```
+    5 5 
+    1 1 2  4   7
+    4 5 -1 -2  8
+    1 1 1  1   2
+    4 5 0  6   10
+    4 4 4  4   4
+    ```
+
+    **Saída**
+    ```
+    1 3
+    3 2
+    ```
+
 

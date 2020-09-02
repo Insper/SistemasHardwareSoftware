@@ -10,10 +10,19 @@ Algumas atividades de sala de aula entrarão na nota final. Elas estão marcadas
 3. O corretor automático depende do pacote `grading-tools`, que deverá ser instalado como abaixo.
 
 ```shell
-$> python3 -m pip install --user git+https://github.com/igordsm/grading-tools
+$> python3.8 -m pip install --user git+https://github.com/igordsm/grading-tools
 ```
 
-4. Com isso configurado, é só compilar seu programa e rodar `corretor.py executavel`. 
+??? tip "Python 3.8 no Ubuntu"
+    Se seu `python3` é uma versão inferior ao 3.8, você pode instalá-lo com os pacotes abaixo:
+
+    ```
+    python3.8 python3.8-dev 
+    ``` 
+
+    A partir daí poderá seguir normalmente as instruções desta página.
+
+4. Com isso configurado, é só compilar seu programa e rodar `python3.8 corretor.py executavel`. 
 5. Para baixar os novos exercícios é só rodar `git pull`. 
 6. Os exercícios serão entregues criando um commit com sua resposta e dando `git push`. 
 
