@@ -34,6 +34,7 @@ nav:
     - Aulas:
         - aulas/01-introducao/index.md
         - aulas/02-inteiros/index.md
+        - aulas/03-ram/index.md
         - aulas/99-corretor-automatico.md
 
 
