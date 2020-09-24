@@ -6,13 +6,14 @@ Com base no código assembly abaixo(arquivo `ex1.o`) e responda os itens.
 
 ```asm
 Dump of assembler code for function soma_2n:
-    0x0000 <+0>:     mov    $0x1,%eax
-    0x0005 <+5>:     cmp    $0x1,%edi
-    0x0008 <+8>:     jbe    0x11 <soma_2n+17>
-    0x000a <+10>:    shr    %edi
-    0x000c <+12>:    add    $0x1,%eax
-    0x000f <+15>:    jmp    0x5 <soma_2n+5>
-    0x0011 <+17>:    retq
+   0x066a <+0>:	    mov    $0x1,%eax
+   0x066f <+5>:	    jmp    0x676 <soma_2n+12>
+   0x0671 <+7>:	    shr    %edi
+   0x0673 <+9>:	    add    $0x1,%eax
+   0x0676 <+12>:	cmp    $0x1,%edi
+   0x0679 <+15>:	ja     0x671 <soma_2n+7>
+   0x067b <+17>:	repz retq
+
 ```
 
 !!! question short
