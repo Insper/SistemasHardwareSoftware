@@ -85,10 +85,10 @@ Vamos começar analisando as três primeiras linhas do programa.
     Os `lea` das linhas `+20` e `+35` podem ser aritméticos? Que operação eles representam?
 
 !!! question medium
-   Com base em sua resposta acima, traduza as chamadas de função que ocorrem nas linhas `+25` e `+40`.
+    Com base em sua resposta acima, traduza as chamadas de função que ocorrem nas linhas `+25` e `+40`.
 
 !!! question medium
-   Traduza o programa acima para *C* 
+    Traduza o programa acima para *C* 
 
 ## Arquivo `ex3`
 
