@@ -41,7 +41,11 @@ nav:
         - aulas/07-loops/index.md
         - aulas/08-variaveis-locais/index.md
         - aulas/09-arrays/index.md
+        - aulas/10-malloc/index.md
         - aulas/99-corretor-automatico.md
+
+    - Projetos:
+        projetos/bomblab.md
 
 
 
