@@ -283,42 +283,32 @@ Vamos destrinchar essa chamada:
 !!! done
     Não funcionou? Perfeito! Na próxima aula transformaremos nosso sistema capenga em um sistema mínimo e totalmente funcional.
 
-<!--
+## Inicialização do sistema - `init`
 
-**Exercício**: localize o programa `hello-static` compilado na seção 2 e execute-o. Se tudo funcionou tire um print ;)
+Se você explorou um pouco o sistema criado na parte anterior já deve ter notado que várias coisas não funcionam. Não conseguimos, por exemplo, escrever em nenhum arquivo. Vamos explorar dois casos mais interessantes:
 
-**Exercício**: tente rodar o programa `hello-dyn`. Funciona? Você tem alguma ideia do por que? \vspace{3em}
+!!! example
+    O comando `df` (*disk free*) é usado para listar o espaço livre em todos os discos presentes no sistema. Tente executá-lo no seu sistema. O quê acontece?
 
-**Exercício**: Vamos agora explorar um pouco mais as opções de máquinas virtuais criadas com *QEmu*. Escreva abaixo as opções de linha de comando usadas para alterar a quantidade de RAM e cores usados na VM.
+!!! example
+    O comando `lspci` (*list pci devices*) mostra todos os periféricos ligados diretamente na placa mãe do seu PC. Tente executá-lo no seu sistema. O quê acontece?
 
-**Exercício**: Qual é o mínimo de memória RAM em que o sistema criado nesta seção ainda liga? Vá testando até que o sistema não ligue mais corretamente.
+!!! question short
+    Consulte as pastas apontadas nos itens anteriores. Elas tem conteúdo? Elas *deveriam* ter conteúdo?
 
-
-
-<!--
-
-# Parte 6 - sistema `init`
-
-Na última parte trabalhamos com . Se você explorou um pouco o sistema já deve ter notado que várias coisas não funcionam. Não conseguimos, por exemplo, escrever em nenhum arquivo. Vamos explorar dois casos mais interessantes:
-
-<div class="alert"> Nosso sistema não está finalizado! Várias coisas ainda não funcionam e não deveriam funcionar mesmo! </div>
-
-**Exercício**: O comando `df` (*disk free*) é usado para listar o espaço livre em todos os discos presentes no sistema. Tente executá-lo no seu sistema. O quê acontece?
+Para conseguirmos testar logo, adicionamos ao kernel o parâmetro `init=/bin/sh`. Este parâmetro diz para o kernel abrir um *shell* assim que iniciar. Isto também é fonte de nossos problemas, já que nosso sistema não inicializa automaticamente nenhum serviço essencial para seu funcionamento. Ou seja, nosso sistema está capenga pois ele não possui um processo `init`, que é responsável por supervisionar a criação de todos os sistemas de arquivos especiais (`/proc, /sys, /dev/`) e por iniciar serviços essenciais para o funcionamento do sistema. Da mesma maneira, ao finalizar ele é responsável por desligar todos os recursos de hardware de maneira segura.
 
 
-**Exercício**: O comando `lspci` (*list pci devices*) mostra todos os periféricos ligados diretamente na placa mãe do seu PC. Tente executá-lo no seu sistema. O quê acontece?
+!!! example
+    Além de ser usado para mídias removíveis, o comando `mount` também é usado para criar os diretórios especiais `/proc` e `/sys`. Rode os seguintes comandos e verifique que agora `df` e `lspci` funcionam corretamente.
 
+    ```
+    #> mount -t proc proc /proc -o nosuid,noexec,nodev
+    #> mount -t sysfs sys /sys -o nosuid,noexec,nodev
+    ```
 
-**Exercício**: Consulte as pastas apontadas nos itens anteriores. Elas tem conteúdo? Elas *deveriam* ter conteúdo?
-
-Chegamos agora na importância do processo `init` (*pid=1*): ele é responsável por supervisionar a criação de todos os sistemas de arquivos especiais (`/proc, /sys, /dev/`) e por iniciar serviços essenciais para o funcionamento do sistema. Da mesma maneira, ao finalizar ele é responsável por desligar todos os recursos de hardware de maneira segura.
-
-**Exercício**: O comandou `mount` é usado para criar os diretórios especiais `/proc` e `/sys`. Rode os seguintes comandos e verifique que agora `df` e `lspci` funcionam corretamente.
-
-```
-#> mount -t proc proc /proc -o nosuid,noexec,nodev
-#> mount -t sysfs sys /sys -o nosuid,noexec,nodev
-```
+!!! question short
+    Qual o papel das pastas especias `/proc` e `/sys` em um sistema Linux?
 
 Estes comandos fazem parte da inicialização normal de um sistema e expõe estruturas do kernel para o resto do sistema via arquivos. O *busybox* já nos fornece um sistema de inicialização bastante simplificado que, entre outras coisas, rodaria estes comandos automaticamente a todo boot. Aproveitaremos ele para três propósitos:
 
@@ -335,36 +325,92 @@ Primeiro vamos copiar versões padrão de todos os arquivos de configuração ne
 * `hostname`: configura o nome da nossa máquina na rede.
 * `fstab`: lista todos os discos que devem ser montados além do *rootfs*.
 
-**Exercício**: copie estes arquivos para o `etc` do seu sistema.
+!!! example
+    Copie estes arquivos para o `etc` do seu sistema.
 
-O sistema de `init` disponibilizado pelo *busybox* lê o arquivo `/etc/inittab` e o interpreta de acordo com as regras mostradas no arquivo *busybox-1.30.1/examples/inittab*. Iremos usar o seguinte arquivo, já disponível em `configs/inittab`.
+O sistema de `init` disponibilizado pelo *busybox* lê o arquivo `/etc/inittab` e o interpreta de acordo com as regras mostradas no arquivo *busybox-1.30.1/examples/inittab*. Iremos usar o arquivo disponível em `configs/inittab`.
 
-<div class="include code" id="configs/inittab" language="shell"></div>
+!!! question
+    Leia o arquivo `config/inittab` e tente interpretar seu conteúdo.
 
 A primeira coluna do arquivo mostra o momento em que ela deve rodar. Vemos, por exemplo, que o script `/etc/init.d/startup` rodará ao inicializar o sistema e que toda vez que o processo `/sbin/getty` (terminal com login) terminar ele é reiniciado. Também existem scripts para serem rodados ao desligar o sistema.
 
 Em especial, este arquivo `/etc/init.d/startup` (presente no repositório como `configs/init.d/startup`) contém comandos para configurar o sistema, incluindo os diretórios especiais que mostramos acima. Seu conteúdo é mostrado abaixo por completude.
 
-<div class="include code" id="configs/init.d/startup" language="shell"></div>
+```shell
+# Monta os sistemas de arquivos especiais
+mount -t proc proc /proc -o nosuid,noexec,nodev
+mount -t sysfs sys /sys -o nosuid,noexec,nodev
 
-**Exercício**: Este script requer a criação de um diretório `/run`. Para que ele serve? Crie-o e copie ambos arquivos acima para seu sistema.
+# Configura detector de dispositivos
+mkdir -p /dev/pts /dev/shm
+mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
+mdev -s
+echo /sbin/mdev > /proc/sys/kernel/hotplug
 
-**Exercício**: Agora vamos rodar de novo, desta vez com nosso novo sistema de inicialização configurado. Modifique sua linha de comando do *QEmu* e retire a porção `init=/bin/sh`. Por padrão o kernel buscará o executável `/sbin/init`, que usará os arquivos que criamos para inicializar o sistema.
+# Configura terminais
+mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
 
-<div class="alert"> Se tudo deu certo você deverá ter um prompt de login. Logue como *root* e continue o roteiro. </div>
+# Configura /run, que guarda algumas informações de execução.
+mount -t tmpfs run /run -o mode=0755,nosuid,nodev
 
-**Exercício**: Crie um arquivo dentro de seu sistema. Você pode usar o editor `vi` ou o comando `touch` para criar um arquivo vazio. Se não deu certo revise se ocorreu tudo certo na execução do seu script `startup` rolando a tela para cima com `Shift+PageUp`.
+# Atribui nome ao PC
+cat /etc/hostname > /proc/sys/kernel/hostname
 
-**Exercício**: Desligue seu sistema com `poweroff`. Ligue-o novamente e confira se o arquivo ainda está lá.
+# Monta todos os sistemas de arquivos contidos em /etc/fstab
+mount -a
+
+mount -o remount,rw /
+```
+
+!!! example
+    Este script requer a criação de um diretório `/run`. Para que ele serve? Crie-o e copie ambos arquivos acima para seu sistema.
+
+Agora vamos rodar de novo, desta vez com nosso novo sistema de inicialização configurado.
+!!! example
+    Modifique sua linha de comando do *QEmu* e retire a porção `init=/bin/sh`. Por padrão o kernel buscará o executável `/sbin/init`, que usará os arquivos que criamos para inicializar o sistema.
+
+!!! tip
+    Se tudo deu certo você deverá ter um prompt de login. Logue como *root* e continue o roteiro.
+
+!!! warning
+    Não se esqueça de usar `umount` para desmontar a pasta `raiz_linux`.
+
+!!! example
+    Crie um arquivo dentro de seu sistema. Você pode usar o editor `vi` ou o comando `touch` para criar um arquivo vazio. Se não deu certo revise se ocorreu tudo certo na execução do seu script `startup` rolando a tela para cima com `Shift+PageUp`.
+
+!!! example
+    Desligue seu sistema com `poweroff`. Ligue-o novamente e confira se o arquivo ainda está lá.
 
 # Parte 7 - bibliotecas e carregamento dinâmico
 
+Quando compilamos o *busybox* habilitamos uma opção que pedia executáveis compilados estaticamente, fazendo que o executável criado não tenha dependências. Vamos agora aprender a configurar nosso sistema para rodar executáveis com dependências.
+
+!!! example
+    Copie os executáveis `hello-static` e `hello-dyn` para sua VM. Não se esqueça de adicionar permissões de execução para eles.
+
+!!! question short
+    Tente rodar ambos executáveis. Ambos funcionam? Anote abaixo o resultado da execução de cada um.
+
 Todos os executáveis que conseguimos rodar até agora foram compilados estaticamente. Quando tentamos rodar `hello-dyn` tivemos um erro.
 
-**Exercício**: Reveja, em sua resposta da Parte 2, o resultado do comando `ldd` no `hello-dyn`. Estes arquivos existem no seu sistema? \vspace{3em}
+!!! question
+    Execute (em seu sistema) `ldd` em `hello-dyn`. Anote abaixo as dependências encontradas.
+
+!!! example
+    Os arquivos acima existem na sua VM?
+
 
 Ao montar nosso sistema do zero não incluimos nenhuma biblioteca! Logo, o nosso executável não consegue carregar as partes faltantes e não irá rodar. Felizmente, nosso sistema Linux possui a mesma arquitetura do Ubuntu instalado em nossas máquinas e podemos copiar os arquivos necessários para nosso sistema!
 
-**Exercício**: Faça a cópia das bibliotecas dinâmicas para os locais apontados por `ldd` e rode de novo `hello-dyn`. Funcionou agora?
 
--->
+!!! example
+    Copie os arquivos acima para os locais indicados na saída de `ldd`.
+
+!!! example
+    Teste novamente `hello-dyn`. Agora ele funciona?
+
+Gerenciar **dependências** é a principal atribuição de gerenciadores de pacotes como `apt`, `pacman` e `dnf`. Eles estruturam todos os softwares instaláveis em um sistema de modo que ao instalar um programa todas as suas dependências sejam instaladas também.
+
+!!! done
+    Pronto! Agora temos um sistema mínimo e funcional. Ainda faltam vários pedaços que normalmente compõem um sistema, como um bootloader instalado na imagem de disco e um gerenciador de pacotes. Mas ao menos agora ele é plenamente funcional dentro do que propomos.
