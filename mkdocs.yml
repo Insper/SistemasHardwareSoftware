@@ -49,7 +49,8 @@ nav:
         - aulas/99-corretor-automatico.md
 
     - Projetos:
-        projetos/bomblab.md
+        - projetos/bomblab.md
+        - projetos/posix.md
 
 
 
