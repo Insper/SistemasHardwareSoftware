@@ -46,6 +46,9 @@ nav:
         - aulas/12-linux-do-zero/index.md
         - aulas/13-entrada-saida/index.md
         - aulas/14-processos/index.md
+        - aulas/15-exec/index.md
+        - aulas/16-sinais-1/index.md
+        - aulas/17-sinais-2/index.md
         - aulas/99-corretor-automatico.md
 
     - Projetos:
