@@ -1,5 +1,0 @@
-
-PATH="/usr/local/sbin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin"
-export PATH
-
-echo "Profile carregado!"

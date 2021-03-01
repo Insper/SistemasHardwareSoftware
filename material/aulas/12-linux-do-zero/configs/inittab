@@ -1,9 +1,0 @@
-# /etc/inittab
-::sysinit:/bin/echo "Iniciando..."
-::sysinit:/etc/init.d/startup
-tty1::respawn:/sbin/getty 38400 tty1
-#tty2::respawn:/sbin/getty 38400 tty2
-#tty3::respawn:/sbin/getty 38400 tty3
-#::ctrlaltdel:/bin/umount -a -r
-::shutdown:/bin/echo SHUTTING DOWN
-::shutdown:/bin/umount -a -r
