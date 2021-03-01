@@ -1,6 +1,6 @@
 # Sistemas Hardware-Software
 
-Bem vindo ao curso de Sistemas Hardware-Software 2020/2. 
+Bem vindo ao curso de Sistemas Hardware-Software 2021/1. 
 
 * **Professor**: Igor Montagner
 
