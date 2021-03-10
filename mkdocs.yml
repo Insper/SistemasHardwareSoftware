@@ -35,6 +35,7 @@ nav:
         - aulas/01-inteiros/index.md
         - aulas/02-ram/index.md
         - aulas/03-arquitetura-x86/index.md
+        - aulas/04-funcoes-mov/index.md 
 
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
