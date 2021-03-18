@@ -37,10 +37,12 @@ nav:
         - aulas/03-arquitetura-x86/index.md
         - aulas/04-funcoes-mov/index.md
         - aulas/05-condicionais/index.md
+        - aulas/06-condicionais-funcoes/index.md
 
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - translate-admonitions.js
+    - quiz.js
 
 extra_css:
     - css/printing.css
@@ -80,4 +82,4 @@ markdown_extensions:
       base_path: code
       check_paths: true
 plugins:
-    - search
+    - search    
