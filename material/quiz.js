@@ -59,6 +59,8 @@ multiple_choice_questions.forEach((item, k) => {
                     check_quiz.classList.add("wrong-answer");
                 }
 
+                localStorage[storage_key] = i;
+
                 toggle_disabled(form_quiz_choices, true);
                 answer.style.display = "";
 
