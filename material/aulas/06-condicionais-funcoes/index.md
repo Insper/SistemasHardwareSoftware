@@ -42,6 +42,9 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
 !!! question short
     A instrução `call` realiza chamadas de função. Traduza a chamada de função acima para *C*.
 
+    ??? details "Resposta"
+        `exemplo1(1, 2, 3, 4, 5, 6)`
+
 Vamos agora analisar o código de `exemplo1`:
 
 ```asm
@@ -61,7 +64,7 @@ Dump of assembler code for function exemplo1:
     Declare a função acima com base na sua resposta anterior.
 
     ??? details "Resposta"
-        int exemplo1(int a, int b, int c, int d, int e, int f);
+        `int exemplo1(int a, int b, int c, int d, int e, int f);`
 
 !!! question medium
     O que faz o conjunto de instruções `add` nas linhas `+0` até `+6`? Escreva uma expressão em *C* equivalente.
@@ -75,7 +78,7 @@ Vemos na linha `exemplo1+9` que colocamos um valor no registrador `%eax` e depoi
 
 Se usada de maneira literal, a instrução LEA (**L**oad **E**ffective **A**ddress) serve para calcular o endereço de uma variável local e é equivalente ao operador `&` em *C*. Porém, ela é frequentemente "abusada" para fazer aritmética. Um ponto importante quando usamos `LEA` é que todos os operandos são registradores de `64` bits.
 
-!!! tip "Regra geral":
+!!! tip "Regra geral"
 
     1. Se `LEA` for usada com o registrador `%rsp` então ela sempre representa o operador `&`
     1. Se os registradores envolvidos foram usados como números inteiros em instruções anteriores, então ela representa uma conta com os valores dos registradores.
@@ -98,6 +101,7 @@ C(%R1, %R2, S)
 * `S` é `1, 2, 4`  ou `8` (todos os tamanhos possíveis de registradores inteiros)
 
 A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca acessa a memória**, apenas move o resultado deste cálculo para o registrador destino. **Qualquer outra operação que use a sintaxa acima está fazendo um acesso a memória. `LEA` é a única exceção!**
+
 
 !!! question short
     Traduza a operação abaixo para *C*

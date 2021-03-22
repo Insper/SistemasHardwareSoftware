@@ -1,0 +1,5 @@
+extensions:
+  - translate-admonitions
+  - quiz
+  - short-questions
+  - progress-check
