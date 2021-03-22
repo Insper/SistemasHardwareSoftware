@@ -38,11 +38,12 @@ nav:
         - aulas/04-funcoes-mov/index.md
         - aulas/05-condicionais/index.md
         - aulas/06-condicionais-funcoes/index.md
+        - aulas/07-loops/index.md
 
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
-    - translate-admonitions.js
-    - quiz.js
+    - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
+    - markdown-enhancer.js
 
 extra_css:
     - css/printing.css
