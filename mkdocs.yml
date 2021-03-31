@@ -40,6 +40,7 @@ nav:
         - aulas/06-condicionais-funcoes/index.md
         - aulas/07-loops/index.md
         - aulas/08-variaveis-locais/index.md
+        - aulas/09-arrays/index.md
     - Labs:
         - labs/bomblab.md
 
