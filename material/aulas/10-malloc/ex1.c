@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 10
+1#define N 8
 
 int main(int argc, char *argv[]) {
     int *vetor = malloc(N * sizeof(int));
