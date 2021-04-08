@@ -20,10 +20,10 @@ O acesso é feito ao endereço `D + %reg1 + S * %reg2`. Ou seja, primeiro comput
     - [ ] `0x32`
     - [ ] `0x48`
     - [ ] `0x56`
-    - [x] `0x3c`
+    - [x] `0x44`
 
     !!! details "Resposta"
-        Tudo está em hexa. A conta é `36 + 4 * 8 = 60`.
+        Tudo está em hexa. A conta é `36 + 4 * 8 = 68`.
 
 !!! question choice
     Supondo que `%rdx=0x44`, o valor da expressão `0x12(%rdx)` é
@@ -53,7 +53,7 @@ Considerando um vetor `short *vec` e que o endereço do primeiro elemento de `ve
     Qual a instrução usada para mover o conteúdo de `vec[i]` para o registrador `%eax` ?(supondo que o valor de `i` esteja em `%esi`)
 
     !!! details "Resposta"
-        `mov (%rdi, %rsi, 4), %eax`
+        `mov (%rdi, %rsi, 2), %eax`
 
 !!! question short
     Qual a instrução usada para mover `&vec[i]` para o registrador `%eax`?
@@ -61,7 +61,7 @@ Considerando um vetor `short *vec` e que o endereço do primeiro elemento de `ve
     **Dica**: como você implementava o operador `&` com variáveis locais?
 
     !!! details "Resposta"
-        `lea (%rdi, %rsi, 4), %eax`
+        `lea (%rdi, %rsi, 2), %eax`
 
 ## Exercício 1 - função `soma`
 
@@ -108,7 +108,7 @@ Considerando o exemplo acima, responda.
     Escreva a instrução usada para mover o valor `0` para `v[5]` (supondo que o endereço do primeiro elemento esteja em `%rdi`).
 
     !!! details "Resposta"
-        `mov $0, 0x40(%rdi)`
+        `mov $0, 0x28(%rdi)` = Início de `%rdi` + 40 bytes.
 
 !!! tip "Importante"
     O compilador pode (e vai) aplicar diversas otimizações para economizar o máximo possível. Por essa razão, é importante saber calcular os endereços de memória na mão. Assim conseguimos "refazer" o processo que gerou a otimização e entender melhor o código *C* original.
