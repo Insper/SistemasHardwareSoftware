@@ -21,7 +21,7 @@ Vamos primeiro fazer o download do kernel do Linux no [site oficial](https://www
 Isto criará uma pasta `linux-X.Y.Z` que contém os fontes de todo o kernel. O kernel pode ser compilado com uma quantidade enorme de configurações diferentes, sendo que a configuração atual é salva no arquivo `.config` dentro da pasta do código fonte.
 
 !!! example
-    Crie um kernel com as opções padrão usando o  comando.
+    Compile um kernel com as opções padrão usando o  comando.
 
     ```
     $> make defconfig
@@ -83,52 +83,6 @@ No primeiro caso deverão ter aparecido alguns arquivos listados como dependênc
     Verifique que foi criado o arquivo `bzImage` na pasta `linux-X.Y.Z/arch/x86_64/boot/`. Este é o arquivo executável contendo o kernel Linux que compilamos.
 
 ## Sistema de Arquivos e discos virtuais
-
-
-
-## Ferramentas de modo usuário - `busybox`
-
-Agora que já temos uma interface com o kernel via `glibc` precisamos de programas básicos para utilizar nosso sistema. Estamos falando de programas como `cp`, `ls` e até mesmo o nosso shell (`bash`). Assim como o kernel e a libc, o padrão *POSIX* também diz como esses programas deverão funcionar, fazendo com que sua utilização básica seja igual em qualquer sistema compatível. Lembre-se que o kernel não faz nada, ele apenas *intermedia* o acesso ao hardware. Precisamos então de programas que irão tornar esse hardware útil.
-
-O *busybox*([https://busybox.net/about.html](https://busybox.net/about.html)) é um conjunto de ferramentas modo usuário bastante compacto e rápido. Ele contém implementações leves dos executáveis `ash` (shell leve alternativo ao `bash`), `ls`, `vi`, `pwd`, etc. Sua vantagem é o baixo consumo de memória e seu tamanho pequeno após compilado. É muito usado em sistemas embarcados.
-
-Vamos começar baixando os fontes da versão `1.31.1`. A compilação é feita no mesmo esquema do kernel:
-
-```
-$> make defconfig
-$> make menuconfig
-```
-
-!!! question medium
-    O busy box disponibiliza um grande número de ferramentas. Procure no menu acima o lugar onde são listados os editores de texto disponíveis no *busybox*.
-
-Desta vez iremos fazer uma modificação nas configurações padrão. Como queremos que esses executáveis pequenos, muito rápidos e que rodem sem qualquer outro tipo de serviço carregado no sistema, iremos compilá-los **estaticamente**.
-
-!!! example
-    Procure a opção para lincar o `busybox`estaticamente (Submenu *Settings*), habilite-a e faça a compilação.
-
-    ```
-    $> make -j8
-    ```
-
-Isto demorará bem menos que a compilação do kernel e pode ser feito enquanto outras coisas acontecem. Após a compilação um executável `busybox` deverá ter sido gerado na pasta *busybox-1.31.1*.
-
-O `busybox` inclui, em um só executável, todas ferramentas listadas acima. Para executá-las basta passar o nome da ferramenta escolhida como argumento. Veja o exemplo abaixo.
-
-```
-$> ./busybox ls
-```
-
-Se tudo funcionou igual ao `ls` padrão de seu sistema então passe para o próximo passo.
-
-!!! example
-    Execute `busybox ls --help`. Compare a saída com `ls --help`. Existe diferença? Procure na saída do `ls` do seu sistema qual a implementação utilizada.
-
-!!! example
-    Você pode obter uma lista completa de todas as ferramentas que o busybox oferece executando `busybox --list-full`. Execute o comando e interprete sua saída. Esses comandos estão disponíveis no seu sistema atual?
-
-
-## Criando o sistema de arquivos
 
 Agora que já temos um kernel e um programa que será rodado pelo nosso sistema, vamos criar a primeira versão do disco de nosso sistema. Nossa primeira organização do sistema será incrivelmente minimal e rudimentar. Nosso sistema disco conterá apenas um arquivo: o executável `hello` criado no item anterior.
 
@@ -214,7 +168,7 @@ Nosso comando de boot terá o formato abaixo:
 
 ```
 #> qemu-system-x86_64 \
-                     -nographic
+                     -nographic \
                      -kernel linux-X.Y.Z/arch/x86_64/boot/bzImage \
                      -append "quiet init=/hello root=PARTUUID=XXXXXXXX-01 console=ttyS0"  \
                      /dev/loop0
@@ -311,14 +265,14 @@ Você deve perceber que nosso sistema funciona menos ainda com `hello-dyn`. Isto
 
 !!! example
     Siga os passos abaixo
-    
+
     1. Faça uma lista dos arquivos necessários e de suas localizações.
     2. Copie-os para o sistema de arquivos em `raiz-linux` usando o terminal.
     3. Copie `hello-dyn` para o nosso sistema de arquivos.
     4. Inicie o qemu como `init` apontando para `hello-dyn`.
 
 !!! done
-    Pronto! Agora nosso sistema tem também as dependências básicas para rodar programas no terminal! Iremos examinar bibliotecas compartilhadas mais para a frente de novo. 
+    Pronto! Agora nosso sistema tem também as dependências básicas para rodar programas no terminal! Iremos examinar bibliotecas compartilhadas mais para a frente de novo.
 
 <!---
 
