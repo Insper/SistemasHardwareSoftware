@@ -177,7 +177,7 @@ Vamos destrinchar essa chamada:
 
 * `-kernel linux-X.Y.Z/arch/x86_64/boot/bzImage`: instrui o *QEmu* a carregar o kernel presente no caminho passado.
 * `-nographic` pede para o QEmu uma sessão modo texto.
-* `-append "quiet init=/bin/sh root=PARTUUID=XXXXXXXX-01 console=ttyS0"`: estas opções são passadas para o kernel e configuram sua execução
+* `-append "quiet init=/hello root=PARTUUID=XXXXXXXX-01 console=ttyS0"`: estas opções são passadas para o kernel e configuram sua execução
     * `quiet`: minimiza mensagens de debug
     * `init=/hello`: aqui configuramos o primeiro programa rodado pelo nosso kernel Linux
     * `root=PARTUUID=XXXXXXXX-01`: sistema de arquivos raiz está na partição `01` do disco identificado pelo `UUID` que vocês obtiveram no `fdisk`

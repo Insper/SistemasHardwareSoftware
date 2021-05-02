@@ -46,6 +46,7 @@ nav:
         - aulas/12-linux-do-zero/index.md
         - aulas/13-processos/index.md
         - aulas/14-exec/index.md
+        - aulas/15-linux-do-zero-II/index.md
     - Labs:
         - labs/bomblab.md
 
