@@ -50,9 +50,13 @@ nav:
         - aulas/16-entrada-saida/index.md
         - aulas/17-sinais-I/index.md
         - aulas/18-sinais-II/index.md
+        - aulas/19-threads-I/index.md
+        - aulas/20-sincronizacao/index.md
+        - aulas/21-semaforos/index.md
     - Labs:
         - labs/bomblab.md
         - labs/processos.md
+        - labs/threads.md
 
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
