@@ -13,7 +13,7 @@ Este exercício serve como avaliação dos conceitos vistos na disciplina. Porta
 
 ## Avaliação
 
-O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota.
+O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. Você deverá colocar sua entrega na pasta `lab-threads` do repositório de atividades.
 
 ### Conceito **I**
 
@@ -42,11 +42,11 @@ O programa será avaliado usando uma rubrica que descreve as funcionalidades imp
 ### **Conceito C+**
 
 - As mensagens de finalização de baixar uma página são mostradas sem estar embaralhadas mesmo se várias threads terminarem ao mesmo tempo. As mensagens deverão ser mostradas assim que o download for finalizado.
-- Se o download falhar por alguma razão seu programa deverá mostrar a mensagem "{url} não pode ser baixada.". Nenhum arquivo deverá ser produzido neste caso. Essas mensagens também não podem estar embaralhadas. 
+- Se o download falhar por alguma razão seu programa deverá mostrar a mensagem "{url} não pode ser baixada.". Nenhum arquivo deverá ser produzido neste caso. Essas mensagens também não podem estar embaralhadas.
 
 ### Conceito **B+**
 
-- O programa abre até `N` threads em paralelo. Esse valor é passado pela linha de comando via flag `-N`. Se nada for passado assuma `N=4`. Este item corresponde a implementar um produtor-consumidor básico usando threads. 
+- O programa abre até `N` threads em paralelo. Esse valor é passado pela linha de comando via flag `-N`. Se nada for passado assuma `N=4`. Este item corresponde a implementar um produtor-consumidor básico usando threads.
 - Ao apertar Ctrl+C o programa pergunta se o usuário deseja realmente sair. Se sim, todas as transferências são paradas e os arquivos que não foram baixados até o fim são deletados.
 
 ### Conceito **A**

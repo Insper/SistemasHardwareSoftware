@@ -13,7 +13,7 @@ Este exercício serve como avaliação dos conceitos vistos na disciplina. Porta
 
 ## Avaliação
 
-O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota.
+O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. Você deverá colocar sua entrega na pasta `lab-processos` do repositório de atividades.
 
 ### Conceito **I**
 
