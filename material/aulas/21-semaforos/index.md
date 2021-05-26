@@ -107,6 +107,9 @@ Seguiremos o seguinte algoritmo:
         Cada `sem_post` libera exatamente um thread que estava no `sem_wait`. Logo, preciso de um `sem_post` para cada thread esperando.
 
 !!! example
-    Implemente as ideias acima no arquivo `barrier.c`. Validaremos esse arquivo na aula do dia *03/06*.
+    Implemente as ideias acima no arquivo `barrier.c`.
+
+!!! done
+    Acabou? Coloque seu resultado na pasta `09-barrier` do repositório de atividades. Iremos discutir essa solução na aula do dia *03/06*.
 
 
