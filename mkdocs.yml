@@ -53,6 +53,7 @@ nav:
         - aulas/19-threads-I/index.md
         - aulas/20-sincronizacao/index.md
         - aulas/21-semaforos/index.md
+        - aulas/22-modelos-de-concorrencia/index.md
     - Labs:
         - labs/bomblab.md
         - labs/processos.md
