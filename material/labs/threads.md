@@ -1,19 +1,19 @@
-# Lab de Processos e Bibliotecas
+# Lab de Threads
 
-Nesse primeiro lab de Sistemas Operacionais iremos trabalhar com bibliotecas e processos para a criação de um programa similar ao `wget`. Nosso programa, chamado de  `web_downloader`, fará download de páginas web usando a biblioteca `libCurl`.
+Agora que já temos uma versão de `web_downloader` usando processos iremos reimplementá-lo usando threads. Com isso, poderemos comparar o quão fácil (ou difícil) cada funcionalidade é de implementar com cada tecnologia e quais as vantagens e desvantagens de usar processos e threads para implementar programas concorrentes.
 
 ## Restrições
 
 Este exercício serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas aos código de vocês. Isso significa que algumas APIs de alto
 
 - todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula;
-- seu programa deverá compilar sem warnings usando as opções `-Wall -Wno-unused-result -Og -g -lcurl`
+- seu programa deverá compilar sem warnings usando as opções `-Wall -Wno-unused-result -Og -g -lcurl -pthread`
 - você deverá usar a biblioteca `libCurl` para realizar o download das páginas. Veja sua [documentação](https://curl.se/libcurl/c/libcurl-easy.html) para aprender a usá-la.
 - se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.
 
 ## Avaliação
 
-O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. Você deverá colocar sua entrega na pasta `lab-processos` do repositório de atividades.
+O programa será avaliado usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. Você deverá colocar sua entrega na pasta `lab-threads` do repositório de atividades.
 
 ### Conceito **I**
 
@@ -35,19 +35,19 @@ O programa será avaliado usando uma rubrica que descreve as funcionalidades imp
 ### Conceito **C**
 
 - O programa compila sem warnings.
-- O download de cada página é feito em um processo separado e em paralelo. Você deve observar uma diminuição grande no tempo de download de páginas pequenas.
+- O download de cada página é feito em uma thread.
 - Ao terminar de baixar uma página, você deverá mostrar a mensagem "{url} baixada com sucesso!"
-- O processo principal só termina depois que todos os arquivos foram baixados.
+- O programa principal só termina depois que todos os arquivos foram baixados.
 
 ### **Conceito C+**
 
-- O programa abre até `N` processos em paralelo. Se houver mais que `N` urls então os processos deverão sempre existir no máximo `N+1` processos (`N` para fazer download mais o original). Esse valor é passado pela linha de comando via flag `-N`. Se nada for passado assuma `N=4`.
+- As mensagens de finalização de baixar uma página são mostradas sem estar embaralhadas mesmo se várias threads terminarem ao mesmo tempo. As mensagens deverão ser mostradas assim que o download for finalizado.
+- Se o download falhar por alguma razão seu programa deverá mostrar a mensagem "{url} não pode ser baixada.". Nenhum arquivo deverá ser produzido neste caso. Essas mensagens também não podem estar embaralhadas.
 
-### Conceito **B**
+### Conceito **B+**
 
-- As mensagens de finalização de baixar uma página são mostradas sem estar embaralhadas mesmo se vários processos terminarem ao mesmo tempo.
+- O programa abre até `N` threads em paralelo. Esse valor é passado pela linha de comando via flag `-N`. Se nada for passado assuma `N=4`. Este item corresponde a implementar um produtor-consumidor básico usando threads.
 - Ao apertar Ctrl+C o programa pergunta se o usuário deseja realmente sair. Se sim, todas as transferências são paradas e os arquivos que não foram baixados até o fim são deletados.
-- Se o download falhar por alguma razão seu programa deverá mostrar a mensagem "{url} não pode ser baixada.". Nenhum arquivo deverá ser produzido neste caso.
 
 ### Conceito **A**
 
