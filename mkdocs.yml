@@ -1,10 +1,10 @@
-site_name: Sistemas Hardware-Software - 2021/1
-site_author: Igor Montagner
+site_name: Sistemas Hardware-Software - 2021/2
+site_author: Igor Montagner, Maciel Calebe Vidal
 
 extra:
     materia: Sistemas Hardware-Software
-    professor: Igor Montagner
-    semestre: 2021/1
+    professor: Maciel Vidal
+    semestre: 2021/2
 
 theme:
   feature:

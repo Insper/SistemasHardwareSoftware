@@ -1,8 +1,8 @@
 # Sistemas Hardware-Software
 
-Bem vindo ao curso de Sistemas Hardware-Software 2021/1. 
+Bem vindo ao curso de Sistemas Hardware-Software 2021/2. 
 
-* **Professor**: Igor Montagner
+* **Professor**: Maciel Calebe Vidal
 
 ## Avaliação
 
