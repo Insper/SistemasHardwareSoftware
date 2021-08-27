@@ -7,9 +7,13 @@ Os exercícios da aula de hoje estão no executável `bases_e_sinais`.
 Nesta atividade, é esperado que você realize diversas conversoes entre bases.
 
 Então, o que você precisa fazer é:
+
 1. Rodar programa bases_e_sinais
+
 2. Colocar sua solução em solucoes.txt
+
 3. Verificar se tudo está ok rodando (a saida final do programa é **Exercício correto!**)
+
 
 Você deve entregar **apenas** o **arquivo de entrada (solucoes.txt)**. Então, é esperado que o executável `bases_e_sinais` seja invocado com
 
