@@ -12,7 +12,7 @@
 
 | Data início | Atividade                                            | Como entregar                          | Prazo       |
 |-------------|------------------------------------------------------|----------------------------------------|-------------|
-| 23/08       | Bases e Sinais da [aula 01](aulas/01-inteiros/) | Blackboard (conteúdos/Atividades/ATV1) | 30/08 13:30 |
+| 23/08       | Bases e Sinais da [aula 01](../aulas/01-inteiros/) | Blackboard (conteúdos/Atividades/ATV1) | 30/08 13:30 |
 
 
 # Provas
