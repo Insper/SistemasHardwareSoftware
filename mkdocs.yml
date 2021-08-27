@@ -29,7 +29,7 @@ site_url: https://insper.github.io/SistemasHardwareSoftware/
 
 nav:
     - Home: index.md
-    - Burocracias: sobre.md
+    - Entregas e Prazos: sobre.md
 
     - Aulas:
         - aulas/01-inteiros/index.md
