@@ -4,7 +4,7 @@ Os exercícios da aula de hoje estão no executável `bases_e_sinais`.
 
 !!! warning "Aula com atividade para entrega!"
 
-Nesta atividade, é esperado que você realize diversas conversoes entre bases.
+Nesta atividade, é esperado que você realize diversas conversões entre bases.
 
 O que você precisa fazer é:
 
@@ -25,8 +25,8 @@ o esperado é que seja obitido na saída o texto **Exercício correto!**. Assim,
 !!! warning "Você deve entregar **apenas** o **arquivo solucoes.txt**"
 
 
+!!! example
 Veja no repositório da disciplina, na pasta da aula 01 um arquivo chamado `exemplo_entrega.txt`. Ele está com o usuário do professor (quando você adicionar o seu, os números solicitados serão diferentes!). Utilize este arquivo para verificar o formato das respostas esperadas para cada transformação.
-
 ```
 bases_e_sinais < exemplo_entrega.txt
 ```
