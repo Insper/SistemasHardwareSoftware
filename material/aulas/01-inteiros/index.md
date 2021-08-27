@@ -26,9 +26,9 @@ o esperado é que seja obitido na saída o texto **Exercício correto!**. Assim,
 
 
 !!! example
-Veja no repositório da disciplina, na pasta da aula 01 um arquivo chamado `exemplo_entrega.txt`. Ele está com o usuário do professor (quando você adicionar o seu, os números solicitados serão diferentes!). Utilize este arquivo para verificar o formato das respostas esperadas para cada transformação.
-```
-bases_e_sinais < exemplo_entrega.txt
-```
+    Veja no repositório da disciplina, na pasta da aula 01 um arquivo chamado `exemplo_entrega.txt`. Ele está com o usuário do professor (quando você adicionar o seu, os números solicitados serão diferentes!). Utilize este arquivo para verificar o formato das respostas esperadas para cada transformação.
+    ```
+    bases_e_sinais < exemplo_entrega.txt
+    ```
 
 Boa atividade!
