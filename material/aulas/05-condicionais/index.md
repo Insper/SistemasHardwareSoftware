@@ -116,7 +116,7 @@ if (cond-booleana) {
 
 A tabela abaixo mostra as operações de saltos condicionais.
 
-![Tabela de set para saltos condicionais](tabela-jmp.png){width=400px}
+![Tabela de set para saltos condicionais](tabela-jmp.png)
 
 ### Exemplo guiado
 
