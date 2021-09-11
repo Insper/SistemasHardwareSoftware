@@ -10,9 +10,10 @@
 # Entregas de Atividades
 
 
-| Data início | Atividade                                            | Como entregar                          | Prazo       |
-|-------------|------------------------------------------------------|----------------------------------------|-------------|
-| 23/08       | Bases e Sinais da [aula 01](../aulas/01-inteiros/) | Blackboard (conteúdos/Atividades/ATV1) | 30/08 13:30 |
+| Data início | Atividade                                            | Como entregar                                              | Prazo       |
+|-------------|------------------------------------------------------|------------------------------------------------------------|-------------|
+| 23/08       | 01 Bases e Sinais da [aula 01](../aulas/01-inteiros/)| Blackboard (conteúdos/Atividades/ATV1)                     | 30/08 13:30 |
+| 11/09       | 02 Funções                                           | Github Classroom (https://classroom.github.com/a/m7kBdBQM) | 18/09 23:59 |
 
 
 # Provas
