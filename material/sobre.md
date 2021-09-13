@@ -14,6 +14,7 @@
 |-------------|------------------------------------------------------|------------------------------------------------------------|-------------|
 | 23/08       | 01 Bases e Sinais da [aula 01](../aulas/01-inteiros/)| Blackboard (conteúdos/Atividades/ATV1)                     | 30/08 13:30 |
 | 11/09       | 02 Funções                                           | Github Classroom (https://classroom.github.com/a/m7kBdBQM) | 18/09 23:59 |
+| 13/09       | 03 Condicionais e Funções                            | Seu repositório do Github Classroom                        | 20/09 23:59 |
 
 
 # Provas
