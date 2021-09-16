@@ -2,7 +2,7 @@
 
 ## Arquivo `ex1.o`
 
-Com base no código assembly abaixo(arquivo `ex1`) e responda os itens.
+Utilize como base o código assembly abaixo (arquivo `ex1`) e responda os itens.
 
 ```asm
 Dump of assembler code for function soma_2n:
