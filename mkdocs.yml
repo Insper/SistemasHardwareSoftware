@@ -39,7 +39,7 @@ nav:
         - aulas/05-condicionais/index.md
         - aulas/06-condicionais-funcoes/index.md
         - aulas/07-loops/index.md
-        # - aulas/08-variaveis-locais/index.md
+        - aulas/08-variaveis-locais/index.md
         # - aulas/09-arrays/index.md
         # - aulas/10-malloc/index.md
         # - aulas/11-tipos-de-dados/index.md
@@ -63,7 +63,7 @@ nav:
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
-    - markdown-enhancer.js
+    - js/markdown-enhancer.js
 
 extra_css:
     - css/printing.css
