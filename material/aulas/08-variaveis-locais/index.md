@@ -7,13 +7,13 @@ Como visto na expositiva, variáveis locais são armazenadas na pilha. O topo da
 Funções que guardam variáveis na pilha seguem um padrão facilmente identificável. Primeiro elas subtraem um valor da pilha (`0x10` no exemplo abaixo) correspondente ao tamanho total de todas as variáveis usadas. Depois temos várias instruções usando endereços relativos a `%rsp` e por fim devolvemos o espaço usado somando `0x10` de volta a `%rsp`.
 
 ```asm
-sub $0x10, %rsp
+sub     $0x10, %rsp
 . . . // código da função aqui!
 movl    0x8(%rsp),%eax
-mov    %eax,%edx
+mov     %eax,%edx
 addl    0xc(%rsp),%edx
 . . . // função continua
-add $0x10, %rsp
+add     $0x10, %rsp
 ret
 ```
 
