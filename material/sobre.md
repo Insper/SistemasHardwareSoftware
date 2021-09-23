@@ -17,6 +17,7 @@
 | 13/09       | 03 Condicionais e Funções                            | Seu repositório do Github Classroom. [Ver enunciado](https://github.com/insper-classroom/21_2_sishard_entrega_atividades_template/tree/main/03-condicionais-funcoes) | 20/09 23:59 |
 | 16/09       | 04 Loops              | Seu repositório do Github Classroom. [Ver enunciado](https://github.com/insper-classroom/21_2_sishard_entrega_atividades_template/tree/main/04-loops) | 22/09 23:59 |
 | 20/09       | 05 Variáveis locais   | Seu repositório do Github Classroom. [Ver enunciado](https://github.com/insper-classroom/21_2_sishard_entrega_atividades_template/tree/main/05-variaveis-locais) | 25/09 23:59 |
+| 23/09       | 06 Arrays             | Seu repositório do Github Classroom. [Ver enunciado](https://github.com/insper-classroom/21_2_sishard_entrega_atividades_template/tree/main/06-arrays) | 28/09 23:59 |
 
 
 # Provas
