@@ -12,7 +12,7 @@ Para iniciar vamos revisar a notação de cálculo de endereços de memória: `D
 * `%reg2` contém o índice do elemento a ser acessado
 * `S` contém o tamanho de cada elemento do vetor e pode ser `1, 2, 4` ou `8`.
 
-O acesso é feito ao endereço `D + %reg1 + S * %reg2`. Ou seja, primeiro computamos o endereço e depois acessamos a memória *no endereço computado*.
+O acesso é feito ao endereço `D + %reg1 + %reg2 * S`. Ou seja, primeiro computamos o endereço e depois acessamos a memória *no endereço computado*.
 
 !!! question choice
     Supondo que `%rsi=0x24, %rdi=0x8`, o valor final da expressão `(%rsi, %rdi, 4)` é
