@@ -24,7 +24,7 @@ Abra o código-fonte ex1.c e confira a função main. Compile e execute o exerc�
 
 Neste exercício iremos fazer engenharia reversa de Assembly para C. Os códigos-fonte estão disponíveis no repositório, mas evite abri-los antes de ter feito pelo menos uma primeira versão da engenharia reversa.
 
-Compile o ex2.c mas sem abrir o código-fonte e responda:
+Compile o ex2.c com `gcc -Wall -std=c99 -Og ex2.c -c -o ex2` mas sem abrir o código-fonte e responda:
 
 !!! question short
     Liste as variáveis e funções existentes.
@@ -42,6 +42,9 @@ Analise a função `func1` com o gdb e responda:
 
 !!! question short
     Em `movw   $0x14,0x4(%rdi)`, qual a operação realizada e o que significa o trecho `0x4(%rdi)`?
+
+!!! tip
+    Acese na aula 05-Condicionais a explicação sobre as variântes da instrução `mov`
 
 !!! question long
     Faça uma versão legível em *C* da função `func1`.
@@ -68,3 +71,37 @@ Analise a função `func2` com o gdb e responda:
     Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
 
 ## Exercício 3
+
+Neste exercício iremos fazer engenharia reversa de Assembly para C. Os códigos-fonte estão disponíveis no repositório, mas evite abri-los antes de ter feito pelo menos uma primeira versão da engenharia reversa.
+
+Compile o ex3.c com `gcc -Wall -std=c99 -Og ex3.c -o ex3` mas sem abrir o código-fonte e responda:
+
+!!! question short
+    Liste as funções disponíveis.
+
+!!! question short
+    Faça a tradução das funções `func1` e `func2`. Existe alguma semelhança?
+
+!!! tip
+    Fique atento a chamadas de variáveis globais. Utilize o comando `x` para imprimir o conteúdo:
+    ex:
+    `x/d ` 0x100
+    `x/s ` 0x100
+
+!!! question short
+    Defina a assinatura da função `func3` e faça sua tradução para C.
+
+!!! question short
+Defina a assinatura da função `func4`. Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
+
+## Exercício 4
+
+Neste exercício iremos fazer engenharia reversa de Assembly para C. Os códigos-fonte estão disponíveis no repositório, mas evite abri-los antes de ter feito pelo menos uma primeira versão da engenharia reversa.
+
+Compile o ex3.c com `gcc -Wall -std=c99 -fno-stack-protector -Og ex4.c -o ex4` mas sem abrir o código-fonte e responda:
+
+!!! question short
+Defina a assinatura da função `ex4`. Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
+
+!!! tip
+    Fique atentos a chamadas de variáveis (relativos a `%rip`) e acessos à stack (relativos a `%rsp`).
