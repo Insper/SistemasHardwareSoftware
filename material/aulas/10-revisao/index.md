@@ -61,7 +61,7 @@ Analise a função `func2` com o gdb e responda:
     Você conseguiria agregar as operações `lea    (%rax,%rax,4),%edx` e `add    %edx,%edx` em uma única operação aritmética mais simples?
     
         !!! details "Resposta"
-        Suponto que em `%eax` temos a variável `i`, então estamos armazenando em `%edx` o equivalente a `i * 10`
+            Suponto que em `%eax` temos a variável `i`, então estamos armazenando em `%edx` o equivalente a `i * 10`
 
 !!! question long
     Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
