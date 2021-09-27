@@ -37,7 +37,8 @@ Analise a função `func1` com o gdb e responda:
 !!! question long
     Em `movw   $0x0,(%rdi)`, qual a operação realizada e o que significa o trecho `(%rdi)`?
     
-        !!! details "Dica" Para este e o próximo exercício, veja a seção **Acesso a elementos constantes** da aula **09 - Arrays**
+        !!! details "Dica"
+            Para este e o próximo exercício, veja a seção **Acesso a elementos constantes** da aula **09 - Arrays**
 
 !!! question short
     Em `movw   $0x14,0x4(%rdi)`, qual a operação realizada e o que significa o trecho `0x4(%rdi)`?
@@ -59,7 +60,8 @@ Analise a função `func2` com o gdb e responda:
 !!! question long
     Você conseguiria agregar as operações `lea    (%rax,%rax,4),%edx` e `add    %edx,%edx` em uma única operação aritmética mais simples?
     
-        !!! details "Reposta" Suponto que em `%eax` temos a variável `i`, então estamos armazenando em `%edx` o equivalente a `i * 10`
+        !!! details "Reposta"
+        Suponto que em `%eax` temos a variável `i`, então estamos armazenando em `%edx` o equivalente a `i * 10`
 
 !!! question long
     Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
