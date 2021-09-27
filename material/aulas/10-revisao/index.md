@@ -60,9 +60,11 @@ Analise a função `func2` com o gdb e responda:
 !!! question short
     Você conseguiria agregar as operações `lea    (%rax,%rax,4),%edx` e `add    %edx,%edx` em uma única operação aritmética mais simples?
 
-        !!! details "Resposta"
-            Supondo que `%eax` representa a variável `i`, então a junção das duas operações é equivalente a fazer `i * 10`, cujo resultado é armazenado em `%edx`.
+    !!! details "Resposta"
+        Supondo que %eax representa a variável i, então a junção das duas operações é equivalente a fazer i * 10, cujo resultado é armazenado em %edx.
+
 
 !!! question long
     Faça uma versão em *C* do código acima usando somente `if-goto`. Escreva, então, ao lado desta versão um código legível em *C*.
 
+## Exercício 3
