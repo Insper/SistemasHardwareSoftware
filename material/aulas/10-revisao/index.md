@@ -37,8 +37,8 @@ Analise a função `func1` com o gdb e responda:
 !!! question long
     Em `movw   $0x0,(%rdi)`, qual a operação realizada e o que significa o trecho `(%rdi)`?
     
-        !!! details "Dica"
-            Para este e o próximo exercício, veja a seção **Acesso a elementos constantes** da aula **09 - Arrays**
+!!! tip
+    Veja a seção **Acesso a elementos constantes** da aula **09 - Arrays**
 
 !!! question short
     Em `movw   $0x14,0x4(%rdi)`, qual a operação realizada e o que significa o trecho `0x4(%rdi)`?
