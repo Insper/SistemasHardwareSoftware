@@ -60,7 +60,7 @@ Analise a função `func2` com o gdb e responda:
 !!! question long
     Você conseguiria agregar as operações `lea    (%rax,%rax,4),%edx` e `add    %edx,%edx` em uma única operação aritmética mais simples?
     
-        !!! details "Reposta"
+        !!! details "Resposta"
         Suponto que em `%eax` temos a variável `i`, então estamos armazenando em `%edx` o equivalente a `i * 10`
 
 !!! question long
