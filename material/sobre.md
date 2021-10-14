@@ -24,6 +24,6 @@
 # Provas
 
 - Labs de C: ocorreu 20/08.
-- AI: a ser definido
+- AI: 30/09 15h00
 - AF: a ser definido
 - SUB: a ser definido
