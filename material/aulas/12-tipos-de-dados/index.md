@@ -53,7 +53,7 @@ Notem que essa lista de operações "toma conta" da alocação e liberação de 
 
 ### Ponteiros opacos
 
-Note que no exemplo acima a definição do `struct` `Point2D` não está inclusa no arquivo `point2d.h`! Por conta de ponteiro se um tipo de dado em *C*, podemos declarar ponteiros para `Point2D` e passá-los para as funções de nosso *TAD* *mesmo sem saber a definição exata de onde eles apontam!*. Só não podemos tentar acessar *a variável apontada* por este ponteiros (usando `*` ou `->`). Por isso, **alocação dinâmica de memória** é essencial em *TAD*s: ela permite que todos os detalhes da implementação interna estejam **encapsulados** e que só possamos interagir com o tipo via as funções definidas para isso.
+Note que no exemplo acima a definição do `struct` `Point2D` não está inclusa no arquivo `point2d.h`! Por conta de ponteiro se um tipo de dado em *C*, podemos declarar ponteiros para `Point2D` e passá-los para as funções de nosso *TAD* *mesmo sem saber a definição exata de onde eles apontam!*. Só não podemos tentar acessar *a variável apontada* por este ponteiros (usando `*` ou `->`). Por isso, **alocação dinâmica de memória** é essencial em *TADs*: ela permite que todos os detalhes da implementação interna estejam **encapsulados** e que só possamos interagir com o tipo via as funções definidas para isso.
 
 !!! example
     Abra o arquivo `test_point2d.c`. Você consegue entender seu conteúdo? Examine o código e entenda como `Point2D` deve ser usado.
