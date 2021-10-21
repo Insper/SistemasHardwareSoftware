@@ -46,7 +46,7 @@ return 0;
 
     ~~~
     Eu sou o processo pai, pid=%d, meu id do programa é %d\n
-    Eu sou um processo filho, pid=%d, ppied=%d, meu id do programa é %d\n
+    Eu sou um processo filho, pid=%d, ppid=%d, meu id do programa é %d\n
     ~~~
 
     A primeira linha só deve ser mostrada uma vez pelo processo pai. Para verificar que seu programa funciona corretamente não se esqueça de contar quantos `printf` foram feitos. Se houver mais que 9 houve algum problema na sua solução.
