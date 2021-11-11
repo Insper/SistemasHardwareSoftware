@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <signal.h>
 
 void sig_handler(int num) {
     printf("Chamou Ctrl+C\n");
