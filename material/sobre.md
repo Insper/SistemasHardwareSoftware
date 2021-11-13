@@ -25,8 +25,8 @@
 
 # Provas
 
-- Labs de C: ocorreu 20/08.
-- AI: 30/09 15h00 às 18h00
-- AF: 02/12 15h00 às 18h00
-- SUB: a ser definido
-- Delta: a ser definido
+- **Labs de C**: ocorreu 20/08.
+- **AI**: 30/09 15h00 às 18h00
+- **AF**: 02/12 15h00 às 18h00
+- **SUB**: 13/12 13h00 às 15h00
+- **Delta**: no mesmo dia e horário da SUB
