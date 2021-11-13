@@ -56,9 +56,10 @@ nav:
         # - aulas/21-semaforos/index.md
         # - aulas/22-modelos-de-concorrencia/index.md
         # - aulas/23-questoes-de-revisao/index.md
-     - Labs:
-    #     - labs/bomblab.md
+    - Labs:
         - labs/processos.md
+    #     - labs/bomblab.md
+        
     #     - labs/threads.md
 
 extra_javascript:
