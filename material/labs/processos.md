@@ -47,3 +47,7 @@ O programa será avaliado usando uma rubrica que descreve as funcionalidades imp
 - As mensagens de finalização de baixar uma página são mostradas sem estar embaralhadas mesmo se vários processos terminarem ao mesmo tempo.
 - Ao apertar Ctrl+C o programa pergunta se o usuário deseja realmente sair. Se sim, todas as transferências são paradas e os arquivos que não foram baixados até o fim são deletados.
 - Se o download falhar por alguma razão seu programa deverá mostrar a mensagem "{url} não pode ser baixada.". Nenhum arquivo deverá ser produzido neste caso.
+
+### Prazo:
+
+[Clique aqui!](../../sobre).
