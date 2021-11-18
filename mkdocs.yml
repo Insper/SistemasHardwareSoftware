@@ -52,7 +52,7 @@ nav:
         - aulas/16-sinais-I/index.md
         - aulas/17-sinais-II/index.md
         - aulas/18-threads-I/index.md
-        # - aulas/20-sincronizacao/index.md
+        - aulas/19-sincronizacao/index.md
         # - aulas/21-semaforos/index.md
         # - aulas/22-modelos-de-concorrencia/index.md
         # - aulas/23-questoes-de-revisao/index.md
