@@ -1,4 +1,4 @@
-# 21 - Semáforos
+# 20 - Semáforos
 
 Nas última aulas aprendemos as APIs da biblioteca `pthread` para criar e esperar a finalização de threads. Também aprendemos a passar argumentos e receber de volta valores usando um `struct` alocado dinamicamente.
 
