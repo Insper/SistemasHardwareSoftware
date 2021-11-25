@@ -38,5 +38,17 @@ Vamos implementar o modelo produtor consumidor, levando em consideração que:
     !!! details
         Procure por fila circular, buffer circular!
 
+!!! question short
+    Como podemos controlar para que a thread produtora espere caso o buffer esteja cheio?
+
+    !!! details
+        Podemos utilizar um semáforo inicializado com o tamanho no buffer. Cada produção realiza um wait neste semáforo. Quando o semáforo zera então o cache está cheio e a thread produtora deve esperar. Tente pensar se o consumo deve ou não atualizar este semáforo!
+
+!!! question short
+    Como podemos controlar para que a thread consumidora espere caso o buffer esteja vazio?
+
+    !!! details
+        Podemos utilizar um semáforo inicializado com zero. Quando a thread produtora produz algo, este semáforo recebe um post. Tente pensar se o consumo deve ou não atualizar este semáforo!
+
 !!! example
     Implemente uma versão com `M` threads produtoras e `N` threads consumidoras.
