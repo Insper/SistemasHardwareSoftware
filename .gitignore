@@ -2,3 +2,4 @@ docs/*
 *.pptx
 *~
 *.xoj
+.vscode
