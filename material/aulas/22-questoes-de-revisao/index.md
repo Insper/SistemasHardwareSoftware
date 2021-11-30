@@ -49,7 +49,7 @@ A figura *sincronizacao.svg* mostra uma situação com 4 threads em que existem 
 
 ![](sincronizacao.svg)
 
-Faça as tarefas abaixo no programa *parte3.c*.
+Faça as tarefas abaixo no programa *parte2.c*.
 
 !!! example
     Lance as threads no main.
