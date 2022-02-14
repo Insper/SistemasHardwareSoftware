@@ -32,7 +32,7 @@ nav:
     - Entregas e Prazos: sobre.md
 
     - Aulas:
-        # - aulas/01-inteiros/index.md
+        - aulas/01-inteiros/index.md
         # - aulas/02-ram/index.md
         # - aulas/03-arquitetura-x86/index.md
         # - aulas/04-funcoes-mov/index.md
@@ -57,7 +57,7 @@ nav:
         # - aulas/21-semaforos-II/index.md
         # - aulas/22-modelos-de-concorrencia/index.md
         # - aulas/22-questoes-de-revisao/index.md
-    - Labs:
+    # - Labs:
         # - labs/processos.md
     #     - labs/bomblab.md
         
