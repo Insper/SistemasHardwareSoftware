@@ -10,7 +10,7 @@
 # Entregas de Atividades e Labs
 
 
-| Data início | Atividade/Lab                                        | Como entregar                                              | Prazo       |
+| Data início | Atividade/Lab                     | Como entregar                                                                 | Prazo       |
 |-------------|-----------------------------------|-------------------------------------------------------------------------------|-------------|
 | 21/02 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/JPDpzr6H) e [Configurar webhook](https://insper.blackboard.com/bbcswebdav/pid-980938-dt-content-rid-9706549_2/xid-9706549_2)) | 25/02 |
 
