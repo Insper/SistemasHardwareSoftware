@@ -4,15 +4,15 @@
 
 Vamos trabalhar com os arquivos `experimento0-4.c`. Compile e execute cada um deles e coloque suas saídas abaixo. Comente os resultados comparando os valores das constantes no código em *C* e a saída dos programas.
 
-Para compilar cada `.c, utilize:
+Para compilar cada `.c`, utilize:
 
-    <div class="termy">
+<div class="termy">
 
-    ```console
-    $ gcc -Wall -pedantic experimento0.c
-    ```
+```console
+$ gcc -Wall -pedantic experimento0.c
+```
 
-    </div>
+</div>
 
 !!! question medium
     Examine o código *C* do arquivo *experimento0.c* e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.
