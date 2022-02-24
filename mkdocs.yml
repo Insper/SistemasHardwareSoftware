@@ -67,12 +67,12 @@ extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
     - js/markdown-enhancer.js
-    - js/termynal/termynal.js
-    - js/termynal/custom.js
+    - assets/javascripts/termynal.js
+    - assets/javascripts/custom.js
 
 extra_css:
     - css/printing.css
-    - css/termynal.css
+    - assets/stylesheets/termynal.css
 
 markdown_extensions:
   - markdown.extensions.tables
