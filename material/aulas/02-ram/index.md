@@ -68,7 +68,7 @@ Podemos examinar um programa durante sua execução usando o *gdb*. Podemos para
 <div class="termy">
 
 ```console
-$ gcc -g -Wall -pedantic parte1.c -o parte1
+$ gcc -g -Wall -pedantic parte2.c -o parte2
 ```
 
 </div>
@@ -81,7 +81,7 @@ Siga os passos abaixo para para carregar um programa usando o *gdb*.
 <div class="termy">
 
 ```console
-$ gdb ./parte1
+$ gdb ./parte2
 ```
 
 </div>
