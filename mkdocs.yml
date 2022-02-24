@@ -68,6 +68,7 @@ extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
     - js/markdown-enhancer.js
     - js/termynal/termynal.js
+    - js/termynal/custom.js
 
 extra_css:
     - css/printing.css
