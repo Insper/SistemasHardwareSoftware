@@ -9,7 +9,7 @@ Para compilar cada `.c`, utilize:
 <div class="termy">
 
 ```console
-$ gcc -Wall -pedantic experimento0.c
+$ gcc -Wall -pedantic experimento0.c -o e0
 ```
 
 </div>
@@ -63,22 +63,48 @@ Podemos examinar um programa durante sua execução usando o *gdb*. Podemos para
 !!! example
     Para compilar um programa com suporte a *debugging* usamos a flag `-g` do `gcc`
 
-    > `$> gcc -g -Wall -pedantic exemplo1.c`
+
+
+<div class="termy">
+
+```console
+$ gcc -g -Wall -pedantic parte1.c -o parte1
+```
+
+</div>
 
 
 Siga os passos abaixo para para carregar um programa usando o *gdb*.
 
 1. Lance o `gdb` e passe para ele seu programa:
 
-    > `$> gdb ./exemplo1`
+<div class="termy">
+
+```console
+$ gdb ./parte1
+```
+
+</div>
 
 2. Isto nos colocará em um prompt esperando comandos. Para rodar o programa até o fim execute
 
-    > `(gdb) run`
+<div class="termy">
+
+```console
+(gdb) run
+```
+
+</div>
 
 3. Para sair,
 
-    > `(gdb) quit`
+<div class="termy">
+
+```console
+(gdb) quit
+```
+
+</div>
 
 !!! tip
     O *gdb* é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser vista em [https://sourceware.org/gdb/current/onlinedocs/gdb/index.html#Top](https://sourceware.org/gdb/current/onlinedocs/gdb/index.html#Top).
