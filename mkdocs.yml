@@ -28,6 +28,8 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js
     #  - http://localhost:9000/plugin-bundle.js
+  - js/termynal.js
+  - js/custom.js
 
 extra:
   ihandout_config:
