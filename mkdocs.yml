@@ -9,15 +9,11 @@ extra:
 theme:
   feature:
     tabs: true
-  name: 'material'
+  name: active-handout
   palette:
     scheme: preference
     primary: brown
     accent: amber
-  font:
-    text: Roboto
-    code: Roboto Mono
-    custom_dir: 'custom_theme'
 
 docs_dir: material
 site_dir: docs
@@ -26,6 +22,66 @@ repo_url: https://github.com/insper/sistemashardwaresoftware
 repo_name: "sistemashardwaresoftware"
 site_url: https://insper.github.io/SistemasHardwareSoftware/
 
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js
+    #  - http://localhost:9000/plugin-bundle.js
+
+extra:
+  ihandout_config:
+#    counter:
+#      - question
+#      - tip
+#      - exercise
+#      - example
+    report:
+      api-base: https://devlife.insper-comp.com.br/api/offerings/1/
+      url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
+
+# Extensions / plugins
+plugins:
+  - git-revision-date-localized
+  - search
+
+extra_css:
+    - css/termynal.css
+
+markdown_extensions:
+  - markdown.extensions.tables
+  - tables
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.snippets:
+      base_path: code
+      check_paths: true
 
 nav:
     - Home: index.md
@@ -63,50 +119,3 @@ nav:
         
     #     - labs/threads.md
 
-extra_javascript:
-    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
-    - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
-    - js/markdown-enhancer.js
-    - js/termynal.js
-    - js/custom.js
-
-extra_css:
-    - css/printing.css
-    - css/termynal.css
-
-markdown_extensions:
-  - markdown.extensions.tables
-  - tables
-  - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: false
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc:
-      permalink: true
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.tilde
-  - pymdownx.snippets:
-      base_path: code
-      check_paths: true
-plugins:
-    - search
