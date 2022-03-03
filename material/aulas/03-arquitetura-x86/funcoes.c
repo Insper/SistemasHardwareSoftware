@@ -19,5 +19,7 @@ int main(int argc, char *argv[]) {
     printf("Resultado: %d\n", funcao1(10, &b));
     printf("funcao2: %d\n", funcao2(10));
     printf("funcao2: %d\n", funcao2(10));
+    int x = 7;
+    printf("Teste: %d\n", funcao1(5, &x));
     printf("times_called: %d\n", times_called);
 }

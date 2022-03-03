@@ -4,15 +4,18 @@ No handout passado usamos o *gdb* para listar variáveis globais, nomes de funç
 
 ## Parando e continuando a execução de um programa.
 
-Compile *funcao1.c* usando as flags:
+Compile *funcoes.c* usando as flags:
 
 <div class="termy">
 
 ```console
-$ gcc -Og -g -Wall -std=c99 funcao1.c -o funcao1
+$ gcc -Og -g -Wall -std=c99 funcoes.c -o funcoes
 ```
 
 </div>
+
+!!! tip
+    Na compilação, `-Og` irá permitir otimizações de código que não interfiram no debugging. Já o parâmetro `-g` irá tornar disponíveis informações úteis para o debugging (como tipos de variáveis e cabeçalhos das funções)
 
 !!!question medium
     Abra o executável com o *gdb* e liste suas funções e suas variáveis globais. **Não rode o programa ainda!** Anote abaixo seus endereços e nomes.
