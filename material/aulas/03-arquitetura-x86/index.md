@@ -37,6 +37,7 @@ $ gcc -Og -g -Wall -std=c99 funcoes.c -o funcoes
 
     **Dicas**:
 
+    1. se a primeira instrução for `endbr64`, execute `stepi` mais uma vez!
     1. use `disas` de novo
     2. verifique novamente o conteúdo de `%edi`
 
