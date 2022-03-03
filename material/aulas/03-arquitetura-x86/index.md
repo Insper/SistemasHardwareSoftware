@@ -84,7 +84,7 @@ Também vimos que ao colocar um registrador entre `( )` estamos fazendo um acess
 O tipo de acesso a memória que estamos realizando se chama `rip relative addressing`. Este tipo de acesso é reservado para variáveis globais e dados somente leitura. Estes dados tem uma característica especial: eles são copiados para a memória seguindo o mesmo layout do arquivo executável. Ou seja, as posições *relativas* entre o código e os dados globais são fixas.
 
 !!! question
-    Anote abaixo o endeço das funções `MOV` que utilizam este acesso. Baseado nos exemplos acima, descubra o endereço das variáveis acessadas.
+    Anote abaixo o endereço das funções `MOV` que utilizam este acesso. Baseado nos exemplos acima, descubra o endereço das variáveis acessadas.
 
 ??? details "Desenho de acesso a memória usando `%rip`"
     A figura abaixo ilustra como funciona o endereçamento usando o registrador `%rip`. Note que os deslocamentos são diferentes pois o endereço da instrução atual é diferente. Porém, o resultado final do endereço calculado em ambas instruções é o mesmo, indicando que ambas se referem ao mesmo local na memória.
