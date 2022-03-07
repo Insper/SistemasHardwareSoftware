@@ -5,7 +5,7 @@
 * SEG 13:30 - 15:30 (presencial)
 * QUI 15:45 - 17:45 (presencial)
 
-* Atendimento: QUA 08:30 - 10:00 (remoto pelo Teams)
+* Atendimento: QUA 09:00 - 10:30 (remoto pelo Teams)
 
 # Entregas de Atividades e Labs
 
