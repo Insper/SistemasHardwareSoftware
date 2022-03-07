@@ -22,7 +22,7 @@ $ ./app < solucao.txt
 
 ## Pontuação
 
-São dez nível e cada um vale **1,0** de nota.
+São dez níveis e cada um vale **1,0** de nota.
 
 ## Prazo
 
