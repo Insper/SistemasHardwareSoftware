@@ -20,6 +20,18 @@ $ ./app < solucao.txt
 
 **Atenção**: o arquivo deve se chamar `solucao.txt`, ser editado no Linux e codificado como UTF-8.
 
+Para que sua solução seja considerada pelo servidor de correção, após subir suas alterações, faça uma tag com o padrão de nomenclatura `lab1.x.y`, substituindo `x` e `y` por qualquer número inteiro! Ex:
+
+<div class="termy">
+
+```console
+$ git tag -a lab1.0.1 -m "lab1.0.1"
+# git push origin lab1.0.1
+```
+
+</div>
+
+
 ## Pontuação
 
 São dez níveis e cada um vale **1,0** de nota.
