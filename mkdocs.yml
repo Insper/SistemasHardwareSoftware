@@ -115,7 +115,8 @@ nav:
         # - aulas/21-semaforos-II/index.md
         # - aulas/22-modelos-de-concorrencia/index.md
         # - aulas/22-questoes-de-revisao/index.md
-    # - Labs:
+    - Labs:
+        - labs/hackerlab.md
         # - labs/processos.md
     #     - labs/bomblab.md
         

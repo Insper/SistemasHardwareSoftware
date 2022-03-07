@@ -13,6 +13,8 @@
 | Data início | Atividade/Lab                     | Como entregar                                                                 | Prazo       |
 |-------------|-----------------------------------|-------------------------------------------------------------------------------|-------------|
 | 21/02 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/JPDpzr6H) e [Configurar webhook](https://insper.blackboard.com/bbcswebdav/pid-980938-dt-content-rid-9706549_2/xid-9706549_2)) | 25/02 |
+| 07/03 | 02-funcoes | Github | 11/03 |
+| 07/03 | 01-hackerlab | Github | 30/03 |
 
 
 # Provas
