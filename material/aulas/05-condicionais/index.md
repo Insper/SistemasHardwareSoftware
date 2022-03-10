@@ -41,7 +41,7 @@ Por exemplo, a instrução `MOVZWQ` converte um `unsigned short` para um `unsign
 
 
 
-Vamos agora praticar. Nos 3 exercícios abaixo temos funções que avaliam uma (ou mais) expressões booleanas entre seus argumentos e retornam o resultado. Mas antes, relembre da aula anterior a os registradores e a ordem em que os parâmetros da função são passados:
+Vamos agora praticar. Mas antes, relembre da aula anterior a os registradores e a ordem em que os parâmetros da função são passados:
 
 1. **Argumentos inteiros ou ponteiros** são passados nos registradores (**nesta ordem**):
     1. `%rdi`
@@ -58,6 +58,8 @@ Registradores:
 ![Registradores de 64 e 32 bits](registradores-grandes.png)
 
 ![Registradores de 32, 16 e 8 bits](registradores-pequenos.png)
+
+Pronto! Nos 3 exercícios abaixo temos funções que avaliam uma (ou mais) expressões booleanas entre seus argumentos e retornam o resultado.
 
 ### Arquivo `ex1`
 Reconstrua a função `ex1` a partir do código assembly abaixo.
