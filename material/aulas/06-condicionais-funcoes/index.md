@@ -46,7 +46,7 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
     - [ ] 6
     - [x] 1
 
-    !!! details "Resposta"
+    ??? details "Resposta"
         A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro.
 
 !!! question short
