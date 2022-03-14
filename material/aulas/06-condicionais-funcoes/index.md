@@ -40,22 +40,22 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
    0x0681 <+41>:	lea    0xa(%rax),%esi
 ```
 
-<!-- !!! question choice
+!!! exercise choice "Pergunta"
     O valor do primeiro argumento da função é
 
     - [ ] 6
     - [x] 1
 
-    ??? details "Resposta"
-        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro. -->
+    !!! answer
+        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro.
 
-!!! question short
+<!-- !!! question short
     O valor do primeiro argumento da função é
 
     ??? details "Resposta"
-        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro. Então o primeiro argumento vale 1.
+        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro. Então o primeiro argumento vale 1. -->
 
-!!! question short
+!!! exercise text short
     A instrução `call` realiza chamadas de função. Traduza a chamada de função acima para *C*.
 
     ??? details "Resposta"
@@ -73,19 +73,19 @@ Dump of assembler code for function exemplo1:
    0x0657 <+13>:	retq
 ```
 
-!!! question short
+!!! exercise text short
     Quantos parâmetros a função acima recebe? Quais seus tipos? Ela retorna algum valor? Se sim, qual seu tipo?
 
-!!! question short
+!!! exercise text short
     Declare a função acima com base na sua resposta anterior.
 
     ??? details "Resposta"
         `int exemplo1(int a, int b, int c, int d, int e, int f);`
 
-!!! question medium
+!!! exercise text long
     O que faz o conjunto de instruções `add` nas linhas `+0` até `+6`? Escreva uma expressão em *C* equivalente.
 
-    ??? details "Resposta"
+    ??? answer
         Ela soma os primeiros 5 argumentos: `a + b + c + e`.
 
 Vemos na linha `exemplo1+9` que colocamos um valor no registrador `%eax` e depois finalizamos a função usando `retq`. Este é o segundo ponto que nunca muda: **o valor de retorno de toda função é colocado no registrador `%rax`** (ou uma de suas partes menores). Neste exemplo, a instrução usada foi o `LEA` que veremos na seção a seguir.
@@ -119,14 +119,14 @@ C(%R1, %R2, S)
 A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca acessa a memória**, apenas move o resultado deste cálculo para o registrador destino. **Qualquer outra operação que use a sintaxa acima está fazendo um acesso a memória. `LEA` é a única exceção!**
 
 
-!!! question short
+!!! exercise text short
     Traduza a operação abaixo para *C*
 
     ```asm
        0x0653 <+9>:	    lea    (%rcx,%r9,1),%eax
     ```
 
-!!! question medium
+!!! exercise text long
     Com estas informações em mãos, traduza `exemplo1` para *C*
 
     ```asm
@@ -139,7 +139,7 @@ A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca ace
        0x0657 <+13>:	retq
     ```
 
-    ??? details "Resposta"
+    ??? answer
         Confira no arquivo `exemplo1.c`
 
 ### Retorno de funções
@@ -161,10 +161,10 @@ Anteriormente já vimos que o `call` e os `mov` s acima fazem a chamada `exemplo
 A linha de baixo realiza uma operação aritmética com `%rax`.
 
 
-!!! question short
+!!! exercise text short
     Considerando que `%rax` armazena o valor de retorno de uma função, qual seria a tradução para *C* do bloco de código acima?
 
-    ??? details "Resposta"
+    ??? answer
         int esi = exemplo1(1, 2, 3, 4, 5, 6) + 10;
 
 
@@ -189,19 +189,19 @@ Dump of assembler code for function ex1:
    0x0616 <+28>:	retq
 ```
 
-!!! question short
+!!! exercise text short
     Quantos argumentos a função acima recebe? Quais seus tipos? Declare a função abaixo.
 
-!!! question short
+!!! exercise text short
     As instruções `LEA` acima representam operações aritméticas ou a operação *endereço de* `&`? Como você fez esta identificação? .
 
-!!! question short
+!!! exercise text short
     Traduza as operações das linhas `ex1+0` até `ex1+12` para *C*
 
-!!! question short
+!!! exercise text short
     Nas linhas `ex1+19` e `ex1+22` é feita uma comparação. Qual e entre quais registradores? Onde é armazenado este resultado?
 
-!!! question short
+!!! exercise text short
     O quê faz a instrução `movzbl` em `ex1+25`? Juntando com a resposta da pergunta acima, traduza as instruções `ex1+19` até `ex1+28` para *C*.
 
 
@@ -226,18 +226,18 @@ Dump of assembler code for function ex2:
    0x0617 <+24>:	retq
 ```
 
-!!! question short
+!!! exercise text short
     Quantos argumentos a função acima recebe? Quais são seus tipos? Declare-a abaixo.
 
 Vamos começar trabalhando na linha `ex2+7`, na instrução `call vezes2` . A chamada necessita usar o registrador `%rdi`, mas ele contém o primeiro argumento de `ex2`.
 
-!!! question short
+!!! exercise text short
     Em qual registrador é guardado o primeiro argumento de `ex2`? Isso é feito antes da chamada `call`.
 
-!!! question short
+!!! exercise text short
     Qual variável é passada como argumento para a função `vezes2` ?
 
-!!! question short
+!!! exercise text short
     Escreva abaixo a invocação de `vezes2`.
 
 
@@ -245,13 +245,13 @@ Você deve ter notado as instruções `push/pop %rbx` no começo/fim da função
 
 Vamos agora olhar a condicional na linha `ex2+12`.
 
-!!! question short
+!!! exercise text short
     Após a chamada `call`, qual o conteúdo de `%rax`?
 
-!!! question short
+!!! exercise text short
     Juntando suas respostas nas questões de cima, qual é a comparação feita nas linhas `ex2+12, ex2+15` ?
 
-!!! question medium
+!!! exercise text medium
     Com essas informações em mãos, faça uma tradução do código acima para *C* usando somente `if+goto`.
 
 !!! example
@@ -275,16 +275,16 @@ Dump of assembler code for function ex3:
    0x0000000000000020 <+32>:	retq
 ```
 
-!!! question short
+!!! exercise text short
     Quantos argumentos a função acima recebe? De quais tipos? Declare-a abaixo.
 
-!!! question short
+!!! exercise text short
     A função acima faz várias comparações. Liste quais e entre quais argumentos.
 
-!!! question short
+!!! exercise text short
     Onde é armazenado o resultado de cada comparação?
 
-!!! question short
+!!! exercise text short
     Com base em suas respostas acima, faça uma tradução linha a linha da função acima.
 
 !!! example
