@@ -40,14 +40,20 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
    0x0681 <+41>:	lea    0xa(%rax),%esi
 ```
 
-!!! question choice
+<!-- !!! question choice
     O valor do primeiro argumento da função é
 
     - [ ] 6
     - [x] 1
 
     ??? details "Resposta"
-        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro.
+        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro. -->
+
+!!! question short
+    O valor do primeiro argumento da função é
+
+    ??? details "Resposta"
+        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](/aulas/04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro. Então o primeiro argumento vale 1.
 
 !!! question short
     A instrução `call` realiza chamadas de função. Traduza a chamada de função acima para *C*.
