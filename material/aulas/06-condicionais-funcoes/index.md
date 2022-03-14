@@ -58,7 +58,7 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
 !!! exercise text short
     A instrução `call` realiza chamadas de função. Traduza a chamada de função acima para *C*.
 
-    ??? details "Resposta"
+    !!! answer
         `exemplo1(1, 2, 3, 4, 5, 6)`
 
 Vamos agora analisar o código de `exemplo1`:
@@ -79,13 +79,13 @@ Dump of assembler code for function exemplo1:
 !!! exercise text short
     Declare a função acima com base na sua resposta anterior.
 
-    ??? details "Resposta"
+    !!! answer
         `int exemplo1(int a, int b, int c, int d, int e, int f);`
 
 !!! exercise text long
     O que faz o conjunto de instruções `add` nas linhas `+0` até `+6`? Escreva uma expressão em *C* equivalente.
 
-    ??? answer
+    !!! answer
         Ela soma os primeiros 5 argumentos: `a + b + c + e`.
 
 Vemos na linha `exemplo1+9` que colocamos um valor no registrador `%eax` e depois finalizamos a função usando `retq`. Este é o segundo ponto que nunca muda: **o valor de retorno de toda função é colocado no registrador `%rax`** (ou uma de suas partes menores). Neste exemplo, a instrução usada foi o `LEA` que veremos na seção a seguir.
