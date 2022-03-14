@@ -71,6 +71,9 @@ Dump of assembler code for function exemplo1:
 !!! exercise text short
     Quantos parâmetros a função acima recebe? Quais seus tipos? Ela retorna algum valor? Se sim, qual seu tipo?
 
+    !!! answer
+        São seis parâmetros, todos `int`
+
 !!! exercise text short
     Declare a função acima com base na sua resposta anterior.
 
