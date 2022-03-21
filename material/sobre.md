@@ -17,6 +17,7 @@
 | 07/03 | 01-hackerlab | Github | 30/03 23h59 |
 | 13/03 | 03-condicionais-funcoes | Github | 18/03 23h59 |
 | 16/03 | 04-loops | Github | 23/03 23h59 |
+| 21/03 | 05-variaveis-locais | Github | 25/03 23h59 |
 
 
 # Provas
