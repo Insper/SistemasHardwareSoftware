@@ -50,7 +50,7 @@ Dump of assembler code for function soma_2n:
     
     !!! answer
         ```C
-        int soma_2n(unsigned int n) {
+        int soma_2n(unsigned int a) {
             int res = 1;
             goto verifica;
             
@@ -69,17 +69,18 @@ Dump of assembler code for function soma_2n:
 
 !!! exercise text long
     Transforme a construção que você fez acima em um código usando `while`.
-
     !!! answer
-```C
-int soma_2n(unsigned int n) {
-    int res = 1;
-    while (a > 1) {
-        a = a/2;
-        res++;
-    }
-}
-```
+        ```C
+        int soma_2n(unsigned int a) {
+            int res = 1;
+            while (a > 1) {
+                a = a/2;
+                res++;
+            }
+
+            return res;
+        }
+        ```
 
 ---------------
 
