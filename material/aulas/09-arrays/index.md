@@ -169,6 +169,7 @@ Dump of assembler code for function func_que_recebe_array:
         }
         ```
 
+
 ## Exercício 3 - função `first_neg`
 
 Veja agora o código abaixo e responda.
