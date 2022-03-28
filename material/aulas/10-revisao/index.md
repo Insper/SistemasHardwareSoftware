@@ -18,8 +18,6 @@ Abra o código-fonte `ex1.c` e confira a função `main`. Compile e execute o ex
         O valor -1 em complemento de 2 é representado como uma sequência de 1's. Ao ser atribuído em uma unsigned short, teremos dezesseis 1's, mas que serão interpretados como unsigned. Somando $2^0 + 2^1 + \dots + 2^{15} = 65535$
 
 
-$\sqrt{k}$
-
 !!! exercise text short
     Qual o maior valor que pode ser armazenado em uma variável **unsigned short**?
 
