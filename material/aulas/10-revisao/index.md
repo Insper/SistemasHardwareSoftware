@@ -337,6 +337,7 @@ Abra o arquivo `ex4` com o **gdb** sem abrir o código-fonte e responda:
 !!! tip
     Observe sempre as chamadas de variáveis globais e strings (relativos a `%rip`) e acessos à stack (relativos a `%rsp`).
 
+
 ## Exemplo de prova
 
 Além dos exercícios de revisão feitos na aula, você encontrará no repositório da disciplina um arquivo `ai_arquivos.zip`. Ele um arquivo semelhante ao que receberão no dia da **AI** de SisHard.
