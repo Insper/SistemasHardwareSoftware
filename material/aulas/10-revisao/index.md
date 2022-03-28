@@ -208,7 +208,7 @@ Abra o arquivo `ex3` com o **gdb** sem abrir o código-fonte e responda:
 !!! tip
     Fique atento a chamadas de variáveis globais. Utilize o comando `x` para imprimir o conteúdo de um endereço. Veja mais em https://sourceware.org/gdb/current/onlinedocs/gdb/Memory.html
 
-    ex:
+    Exemplo:
         ```
         x/d  0x100
 
@@ -338,3 +338,15 @@ Abra o arquivo `ex4` com o **gdb** sem abrir o código-fonte e responda:
 
 !!! tip
     Observe sempre as chamadas de variáveis globais e strings (relativos a `%rip`) e acessos à stack (relativos a `%rsp`).
+
+## Exemplo de prova
+
+Além dos exercícios de revisão feitos na aula, você encontrará no repositório da disciplina um arquivo `ai_arquivos.zip`. Ele um arquivo semelhante ao que receberão no dia da **AI** de SisHard.
+
+No dia da prova, você terá que baixar o zip, descompactar, resolver os exercícios, compactar e anexar no Blackboard.
+
+!!! tip
+    Leia o `README.md` para saber o que é esperado em cada questão!
+
+!!! tip
+    Leia o `README.md` para saber como você será avaliado!
