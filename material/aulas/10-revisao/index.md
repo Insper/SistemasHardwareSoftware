@@ -1,6 +1,7 @@
+# 10 - Revisão
+
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-# 10 - Revisão
 
 Na aula de hoje iremos revisar nossas atividades com Assembly e representação de inteiros.
 
