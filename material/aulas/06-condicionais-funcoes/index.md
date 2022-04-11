@@ -124,6 +124,9 @@ A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca ace
        0x0653 <+9>:	    lea    (%rcx,%r9,1),%eax
     ```
 
+    !!! answer
+        Supondo que `aux = a+b+c+d+e` já foi calculado com o uso das instruções `ADD`, então o `LEA` calcula `aux + f*1`.
+
 !!! exercise text long
     Com estas informações em mãos, traduza `exemplo1` para *C*
 
@@ -137,7 +140,7 @@ A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca ace
        0x0657 <+13>:	retq
     ```
 
-    ??? answer
+    !!! answer
         Confira no arquivo `exemplo1.c`
 
 ### Retorno de funções
@@ -201,7 +204,6 @@ Dump of assembler code for function ex1:
 
 !!! exercise text short
     O quê faz a instrução `movzbl` em `ex1+25`? Juntando com a resposta da pergunta acima, traduza as instruções `ex1+19` até `ex1+28` para *C*.
-
 
 !!! example
     Usando as perguntas acima preencha o arquivo de solução no repositório e execute os testes.

@@ -23,7 +23,7 @@
 # Provas
 
 - **Labs de C**: 18/02 (aula com Hashi).
-- **AI**: a definir
+- **AI**: 04/04/2022 (Segunda-feira) das 16h00 às 19h00 - Sala 114 prédio 2.
 - **AF**: a definir
 - **SUB**: a definir
 - **Delta**: a definir
