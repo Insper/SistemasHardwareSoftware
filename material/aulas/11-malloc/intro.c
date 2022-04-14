@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 100
+#define N 3000000
 
 void atribui(int *vetor, int n) {
     for (int i = 0; i < n; i++) {
