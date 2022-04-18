@@ -253,7 +253,7 @@ A instalação de um *boot loader* é trabalhosa e cheia de possibilidades de er
 Nosso comando de boot terá o formato abaixo:
 
 ```
-#> qemu-system-x86_64 \
+$ sudo qemu-system-x86_64 \
                      -nographic \
                      -kernel linux-X.Y.Z/arch/x86_64/boot/bzImage \
                      -append "quiet init=/hello root=PARTUUID=XXXXXXXX-01 console=ttyS0" \
