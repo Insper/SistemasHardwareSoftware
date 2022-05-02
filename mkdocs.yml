@@ -106,7 +106,7 @@ nav:
         - aulas/13-linux-do-zero/index.md
         - aulas/14-processos/index.md
         - aulas/15-exec/index.md
-        # - aulas/15-linux-do-zero-II/index.md
+        - aulas/16-entrada-saida/index.md
         # - aulas/15-entrada-saida/index.md
         # - aulas/16-sinais-I/index.md
         # - aulas/17-sinais-II/index.md
