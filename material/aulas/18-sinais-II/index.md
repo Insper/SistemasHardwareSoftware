@@ -65,7 +65,7 @@ Vamos agora examinar o que acontece quando trabalhamos com vários sinais sendo 
     1. Envie de novo SIGINT.
 
     !!! answer "Resposta"
-        Envie `kill -s SIGINT <pid>`, `sigkill -s SIGTERM <pid>` e `sigkill -s SIGINT <pid>` e confira o resultado!
+        Envie `kill -s SIGINT <pid>`, `kill -s SIGTERM <pid>` e `kill -s SIGINT <pid>` e confira o resultado!
 
 !!! exercise text medium
     Assumindo que cada função roda do começo ao fim sem interrupção, os valores da variável `status` foram os esperados? Se não, como você explica o ocorrido?
