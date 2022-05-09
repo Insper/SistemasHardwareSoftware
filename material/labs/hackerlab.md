@@ -26,7 +26,7 @@ Para que sua solução seja considerada pelo servidor de correção, após subir
 
 ```console
 $ git tag -a lab1.0.1 -m "lab1.0.1"
-# git push origin lab1.0.1
+$ git push origin lab1.0.1
 ```
 
 </div>

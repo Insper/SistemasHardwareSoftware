@@ -108,7 +108,7 @@ nav:
         - aulas/15-exec/index.md
         - aulas/16-entrada-saida/index.md
         - aulas/17-sinais-I/index.md
-        # - aulas/17-sinais-II/index.md
+        - aulas/18-sinais-II/index.md
         # - aulas/18-threads-I/index.md
         # - aulas/19-sincronizacao/index.md
         # - aulas/20-semaforos/index.md
@@ -117,7 +117,7 @@ nav:
         # - aulas/22-questoes-de-revisao/index.md
     - Labs:
         - labs/hackerlab.md
-        # - labs/processos.md
+        - labs/processos.md
     #     - labs/bomblab.md
         
     #     - labs/threads.md

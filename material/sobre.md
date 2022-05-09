@@ -20,6 +20,7 @@
 | 21/03 | 05-variaveis-locais | Github | 25/03 23h59 |
 | 11/04 | 06-malloc | Github | 15/04 23h59 |
 | 14/04 | 07-tad | Github | 20/04 23h59 |
+| 09/05 | 02-immortal | Github | 22/05 23h59 |
 
 
 # Provas
