@@ -34,7 +34,7 @@ Para fins didáticos, estamos atualizando diretamente a variável `soma_total` d
     Os resultados acima estarão errados. Você consegue explicar por que?
 
     !!! answer "Resposta"
-        Na operação `soma = soma + spa->vetor[i];`, a variável global `soma` está sendo lida, somada e posteriormente atribuída a ela própria. Entretando, entre a leitura e a atribuição, outra thread pode atualizar o valor da `soma`, tornando os resultados inconsistentes.
+        Na operação `soma = soma + spa->vetor[i];` a variável global `soma` está sendo lida, somada e posteriormente atribuída a ela própria. Entretando, entre a leitura e a atribuição, outra thread pode atualizar o valor da `soma`, tornando os resultados inconsistentes e imprevisíveis.
 
 ## Sincronização usando `mutex`
 
