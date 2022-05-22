@@ -106,10 +106,19 @@ O programa será avaliado usando uma rubrica que descreve as funcionalidades imp
 - O programa recebe uma flag `-l` (*L minúsculo*) seguido do path de um arquivo. Você deve gerar um log neste arquivo.
 - Caso o arquivo de log não exista, crie. Se já existir, adicione novos logs no final, sem sobrescrever.
 - As mensagens do log devem seguir o padrão (uma linha por evento):
-    - programa abcd iniciado (pid 1234)
-    - programa def iniciado (pid 1235)
-    - programa abcd (pid 1234) encerrou: (RN=0, RET=0, SIGNALED=1, SIGNAL=15)
-    - programa abcd iniciado (pid 1236)
+
+```
+starting ./infinito (pid=184085)
+starting ./timecrash (pid=184086)
+starting ./timetogo (pid=184088)
+program ./timecrash (pid=184086) finished (EXITED=0, EXITSTATUS=0, SIGNALED=1, SIGNAL=8, SIGNALSTR=Floating point exception)
+restarting ./timecrash (oldpid=184086, newpid=184094)
+program ./timetogo (pid=184088) finished (EXITED=1, EXITSTATUS=0, SIGNALED=0, SIGNAL=0, SIGNALSTR=Unknown signal 0)
+restarting ./timetogo (oldpid=184088, newpid=184129)
+program ./timecrash (pid=184094) finished (EXITED=0, EXITSTATUS=0, SIGNALED=1, SIGNAL=8, SIGNALSTR=Floating point exception)
+restarting ./timecrash (oldpid=184094, newpid=184131)
+```
+- Obs: ao receber um CTRL+C (SIG_INT), ao sair do immortal não precisa incluir no log a finalização dos processos filhos.
 - As funcionalidades das versões anteriores devem continuar disponíveis.
 - Considere que o usuário irá utilizar obrigatoriamente uma das flags `-p` ou `-f` (mas não ambas). Já o uso da flag `-l` será opcional.
 - As flags podem ser utilizadas em qualquer ordem: `./immortal -f programs.imt -l mylog.log` ou `./immortal -l mylog.log -f programs.imt`.
