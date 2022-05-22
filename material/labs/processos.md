@@ -109,7 +109,7 @@ O programa será avaliado usando uma rubrica que descreve as funcionalidades imp
 - As funcionalidades das versões anteriores devem continuar disponíveis.
 - Considere que o usuário irá utilizar obrigatoriamente uma das flags `-p` ou `-f` (mas não ambas). Já o uso da flag `-l` será opcional.
 - As flags podem ser utilizadas em qualquer ordem: `./immortal -f programs.imt -l mylog.log` ou `./immortal -l mylog.log -f programs.imt`.
-- As mensagens do log devem seguir o padrão (uma linha por evento):
+- As mensagens do log devem seguir o padrão (uma linha por evento, mantenha a mesma mensagem - **exatamente igual** - alterando apenas os PIDs e valores retornados após WAIT):
 ```
 starting ./infinito (pid=184085)
 starting ./timecrash (pid=184086)
