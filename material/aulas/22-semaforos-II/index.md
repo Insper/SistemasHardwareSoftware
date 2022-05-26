@@ -83,6 +83,7 @@ Já vimos o uso de semáforos para sincronizar threads, de forma que as threads 
 
 !!! example
     Implemente (do zero) um programa que cria `N` threads, entretanto, apenas `MAX` threads podem executar ao mesmo tempo.
+    Sua thread pode fazer um procedimento qualquer, por exemplo, um loop infinito que simula um processamento de dados!
 
 !!! tip
     Tente pensar no que acontece com `sem_wait` e `sem_post` quando o semáforo é inicializado com valor maior que zero.
