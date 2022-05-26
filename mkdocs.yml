@@ -112,7 +112,7 @@ nav:
         - aulas/19-threads-I/index.md
         - aulas/20-sincronizacao/index.md
         - aulas/21-semaforos/index.md
-        # - aulas/21-semaforos-II/index.md
+        - aulas/22-semaforos-II/index.md
         # - aulas/22-modelos-de-concorrencia/index.md
         # - aulas/22-questoes-de-revisao/index.md
     - Labs:
