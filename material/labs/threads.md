@@ -71,6 +71,12 @@ Quais detalhes de implementação:
 - Explique brevemente (um ou dois parágrafos) como você sincronizou as threads em cada conceito
 - Explique brevemente (um ou dois parágrafos) as chamadas de sistema utilizadas
 
+## Onde baixar os CSVs?
+Estão neste repositório, [Clique Aqui!](csv.tar.xz)
+
+## Como serei avaliado?
+Implemente conforme os seguintes conceitos:
+
 ### Conceito **I**
 
 - O programa não compila
