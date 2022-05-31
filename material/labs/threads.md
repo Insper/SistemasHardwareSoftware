@@ -7,7 +7,10 @@ Fonte: *http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v153
 
 Neste lab, sua tarefa será utilizar os conceitos aprendidos sobre **threads** para acelerar o processo de predição de um programa que implementa o **KNN**.
 
-A implementação do **KNN** já está disponível (ver `knn.h` e compilar com `knn.o`). Veja um exemplo do seu uso.
+!!! tip "Dica!"
+    Este é um laboratório de **threads**. De modo geral, os temas mais utilizados serão a criação e espera de **threads**, semáforos e/ou mutex. A ideia é apenas utilizar a parte de Machine Learning, sem necessidade de se aprofundar no **KNN**. Procure o professor caso tenha dúvidas!
+
+A implementação do **KNN** já está disponível no seu repositório de atividades (`knn.h` e `knn.o`). Veja um exemplo do seu uso:
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,14 +65,16 @@ Para compilar, você pode utilizar:
 </div>
 
 !!! warning "Atenção"
-    Você pode querer alterar a estrutura de seu lab, criar um makefile ou compilar de forma diferente. Considere como obrigatório informar no `README.md` da pasta `lab/03-knn` como seu programa pode ser compilado.
+    Você pode querer alterar a estrutura de seu lab, criar um makefile ou compilar de forma diferente. Considere como **obrigatório** informar no `README.md` da pasta `lab/03-knn` como seu programa deve ser compilado.
 
 ## Como e o que entregar?
-A correção deste lab será manual (pasta ter commit, não precisa fazer tag). Deixe no `README.md` um pequeno relatório explicando como compilar e executar seu programa, detalhes de implementação, além de um vídeo de sua solução funcionando (opcional, ver rubrica A).
+A correção deste lab será manual (basta ter commit, não precisa fazer tag). Deixe no `README.md` um pequeno relatório explicando como compilar e executar seu programa, detalhes de implementação, além de um vídeo de sua solução funcionando (opcional, ver rubrica A).
 
 Quais detalhes de implementação:
 - Explique brevemente (um ou dois parágrafos) como você sincronizou as threads em cada conceito
 - Explique brevemente (um ou dois parágrafos) as chamadas de sistema utilizadas
+
+Escreva pensando em visitas futuras que ocorrerão ao seu repositório, para que outras pessoas entendam seu projeto.
 
 ## Onde baixar os CSVs?
 Estão neste repositório, [Clique Aqui!](csv.tar.xz)
@@ -90,29 +95,29 @@ Implemente conforme os seguintes conceitos:
 ### Conceito **C**
 
 - O programa recebe os seguintes argumentos na linha de comando
-    - `-k n_vizinhos`: informa o argumento do classificador, números de vizinhos a serem considerados
+    - `-k k_vizinhos`: informa o argumento do classificador, números de vizinhos a serem considerados. Este argumento será passado na função ```t_knn_classifier *knn_fit(t_data *data, long k);```
     - `-d path_train_csv`: informa o path para o arquivo CSV de treinamento
     - `-t path_test_csv`: informa o path para o arquivo CSV de teste
-- Seu programa deve treinar o KNN (na main, pode ser sem criar nova thread)
-- Seu programa deve fazer predict do KNN tanto do treino quanto do teste, mostrando a acurácia de cada um deles
-- Na etapa de **predict**, o **predict** deve obrigatoriamente utilizar threads. A thread deve fazer predict de **um** registro e devolver sua classe
+- Seu programa deve treinar (função `fit`) o KNN (na main, pode ser sem criar nova thread)
+- Seu programa deve fazer `predict` do KNN tanto da base de **treino** quanto de **teste**, mostrando a acurácia de cada uma delas
+- Na etapa de **predict**, o **predict** deve obrigatoriamente utilizar threads. A thread deve fazer predict de **um** registro e devolver sua classe (label predito)
 - Implementou a rubrica B, mas o programa compila com warnings ou utiliza variáveis globais sem necessidade
 
 
 ### Conceito **B**
 
 - Modifique o conceito C para considerar que o programa receba um novo argumento na linha de comando
-    - `-n n_threads`: o **predict** deve executar `n_threads` por vez.
+    - `-n n_threads`: o **predict** deve executar `n_threads` por vez (`n_threads` define  a quantidade de threads que devem estar liberadas ao mesmo tempo para fazer `predict` de um registro/linha da base de dados)
 - Implementou a rubrica A, mas o programa compila com warnings ou utiliza variáveis globais sem necessidade
 
 ### Conceito **A**
 
-- Modifique o conceito B para criar uma janela gráfica com uma **barra de progresso** das etapas de **predict**. Após terminar, adicione à janela as informações de acurácia
+- Modifique o conceito B para criar uma janela gráfica com uma **barra de progresso** das etapas de **predict** (uma para a base de treino e outra para a base de testes). Após terminar, adicione à janela as informações de acurácia
 - Criou vídeo de um a três minutos explicando o projeto, mostrando o programa em funcionamento
 
-Neste conceito você pode utilizar qualquer biblioteca que considerar interessante, desde que em C. Sugiro o uso da `raylib`.
+Neste conceito você pode utilizar qualquer biblioteca que considerar interessante para a construção do ambiente gráfico, desde utilize a linguagem C. Sugiro o uso da `raylib`.
 
-Veja um exemplo do uso dela:
+Veja um exemplo:
 
 ```c
 #include "raylib.h"
@@ -134,7 +139,11 @@ int main(void)
     return 0;
 }
 ```
-Para mais detalhes, acesse:
+
+Será necessário clonar o repositório da biblioteca, compilar e fazer a instalação.
+
+Para mais informações, acesse:
+
 - https://github.com/raysan5/raylib
 - https://www.raylib.com/index.html
 - https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux
