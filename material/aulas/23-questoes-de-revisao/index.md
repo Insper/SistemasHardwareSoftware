@@ -78,3 +78,12 @@ Ler um arquivo linha a linha é uma operação comum em programas e é feito de 
 
 !!! example
     Faça agora uma função `main` que usa sua função acima para ler todas as linhas de um arquivo passado como argumento de linha de comando e mostrar somente as que iniciam com uma letra maiúscula. Você não precisa fazer a rubrica "completa" para fazer este item.
+
+## Parte 4
+
+Para completar a revisão, desenvolva soluções para um simulado de prova!
+
+[**Clique Aqui!**](simulado_sishard.zip) e faça o download do arquivo [`simulado_sishard.zip`](simulado_sishard.zip). Desenvolva a prova e aproveite para tirar qualquer dúvida com os professores!
+
+!!! warning "Atenção"
+    Perceba no simulado de prova que o `enunciado.pdf` contém todos os detalhes para resolução das questões, incluindo **critérios de avaliação**.
