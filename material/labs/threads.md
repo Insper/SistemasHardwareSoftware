@@ -147,3 +147,7 @@ Para mais informações, acesse:
 - https://github.com/raysan5/raylib
 - https://www.raylib.com/index.html
 - https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux
+
+### Prazo:
+
+[Clique aqui!](../../sobre).

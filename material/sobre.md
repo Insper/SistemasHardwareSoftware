@@ -22,12 +22,13 @@
 | 14/04 | 07-tad | Github | 20/04 23h59 |
 | 09/05 | 02-immortal | Github | 25/05 23h59 |
 | 19/05 | 08-barrier | Github | 27/05 23h59 |
+| 29/05 | 03-knn | Github | 08/06 23h59 |
 
 
 # Provas
 
 - **Labs de C**: 18/02 (aula com Hashi).
 - **AI**: 04/04/2022 (Segunda-feira) das 16h00 às 19h00 - Sala 114 prédio 2.
-- **AF**: a definir
+- **AF**: 13/06/2022 (Segunda-feira) das 16h00 às 19h00.
 - **SUB**: a definir
 - **Delta**: a definir
