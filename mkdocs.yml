@@ -1,11 +1,11 @@
-site_name: Sistemas Hardware-Software - 2022/1
+site_name: Sistemas Hardware-Software - 2022/2
 site_author: Igor Montagner, Maciel Calebe Vidal
 
 
 extra:
     materia: Sistemas Hardware-Software
     professor: Maciel Vidal
-    semestre: 2022/1
+    semestre: 2022/2
 
 theme:
   feature:
