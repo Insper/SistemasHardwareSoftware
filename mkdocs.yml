@@ -90,7 +90,8 @@ nav:
     - Home: index.md
     - Entregas e Prazos: sobre.md
 
-    # - Aulas:
+    - Aulas:
+        - aulas/01-inteiros/index.md
         
     # - Labs:
         # - labs/hackerlab.md
