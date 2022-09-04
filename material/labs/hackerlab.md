@@ -26,6 +26,7 @@ $ ./app < solucao.txt
 !!! tip "Dica de trabalho!"
     Para não ter que redigitar todas as senhas, você pode trabalhar direto no `solucao.txt` e, enquanto não finaliza todos os níveis, deixe uma a linha a mais propositalmente preenchida com algum lixo (ex: um inteiro), assim conseguirá testar cada nível sempre com `./app < solucao.txt`!
 
+## Como entregar?
 
 Para que sua solução seja considerada pelo servidor de correção, após subir suas alterações, faça uma tag com o padrão de nomenclatura `lab1.x.y`, substituindo `x` e `y` por qualquer número inteiro! Ex:
 
@@ -38,11 +39,13 @@ $ git push origin lab1.0.1
 
 </div>
 
+!!! tip "Entregas contínuas!"
+    Não deixe para entregar no último minuto, faça entregas contínuas conforme for evoluindo nos níveis!
 
-## Pontuação
+## Como serei avaliado?
 
 São dez níveis e cada um vale **1,0** de nota. Sua solução conseguirá ficar com status `pass` apenas quando conseguir passar em todos os níveis, entretanto, mesmo com `fail` a nota parcial será considerada.
 
-## Prazo
+## Qual o prazo?
 
 Veja mais em https://insper.github.io/SistemasHardwareSoftware/sobre/
