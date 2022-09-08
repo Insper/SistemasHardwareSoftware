@@ -176,61 +176,63 @@ A linha de baixo realiza uma operação aritmética com `%rax`.
     Todos os exercícios desta seção são para entrega. Vocês podem se conversar para fazê-los, mas cada um deve criar sua própria solução do zero. Todos os exercícios já estão disponíveis no seu repositório de entregas da disciplina em `atv/03-condicionais-funcoes`. Leia o README dentro da pasta para mais informações.
 
 
-### `ex1`: **Aritmética** e **Expressões booleanas**.
+### `ex1.o`: **Aritmética** e **Expressões booleanas**.
 
 ```asm
-Dump of assembler code for function ex1:
-   0x05fa <+0>:	    lea    (%rdi,%rsi,1),%rax
-   0x05fe <+4>:	    lea    (%rax,%rdx,4),%rcx
-   0x0602 <+8>:	    imul   %rdi,%rdi
-   0x0606 <+12>:	lea    (%rdi,%rsi,2),%rax
-   0x060a <+16>:	add    %rax,%rdx
-   0x060d <+19>:	cmp    %rdx,%rcx
-   0x0610 <+22>:	setge  %al
-   0x0613 <+25>:	movzbl %al,%eax
-   0x0616 <+28>:	retq
+   Dump of assembler code for function ex1:
+   0x000 <+0>:	endbr64 
+   0x004 <+4>:	lea    (%rdi,%rsi,1),%rax
+   0x008 <+8>:	lea    (%rax,%rdx,4),%rcx
+   0x00c <+12>:	imul   %rdi,%rdi
+   0x010 <+16>:	lea    (%rdi,%rsi,2),%rax
+   0x014 <+20>:	add    %rax,%rdx
+   0x017 <+23>:	cmp    %rdx,%rcx
+   0x01a <+26>:	setge  %al
+   0x01d <+29>:	movzbl %al,%eax
+   0x020 <+32>:	ret
 ```
 
-!!! exercise text short
+!!! exercise text long
     Quantos argumentos a função acima recebe? Quais seus tipos? Declare a função abaixo.
 
-!!! exercise text short
+!!! exercise text long
     As instruções `LEA` acima representam operações aritméticas ou a operação *endereço de* `&`? Como você fez esta identificação? .
 
-!!! exercise text short
-    Traduza as operações das linhas `ex1+0` até `ex1+12` para *C*
+!!! exercise text long
+    Traduza as operações das linhas `ex1+0` até `ex1+16` para *C*
 
-!!! exercise text short
-    Nas linhas `ex1+19` e `ex1+22` é feita uma comparação. Qual e entre quais registradores? Onde é armazenado este resultado?
+!!! exercise text long
+    Nas linhas `ex1+23` e `ex1+26` é feita uma comparação. Qual e entre quais registradores? Onde é armazenado este resultado?
 
-!!! exercise text short
-    O quê faz a instrução `movzbl` em `ex1+25`? Juntando com a resposta da pergunta acima, traduza as instruções `ex1+19` até `ex1+28` para *C*.
+!!! exercise text long
+    O quê faz a instrução `movzbl` em `ex1+29`? Juntando com a resposta da pergunta acima, traduza as instruções `ex1+23` até `ex1+32` para *C*.
 
 !!! example
     Usando as perguntas acima preencha o arquivo de solução no repositório e execute os testes.
 
-### `ex2`: **Chamadas de funções** e **Condicionais**.
+### `ex2.o`: **Chamadas de funções** e **Condicionais**.
 
-Quando analisar o código do ex2 no gdb, utilize o arquivo `ex2_ref` para visualizar corretamente as chamadas de funções.
+Quando analisar o código do ex2 no gdb, utilize o arquivo `ex2_ref` para visualizar corretamente as chamadas de funções. Seria uma boa também consultar as *relocation entries* no terminal com `objdump -r ex2.o`.
 
 ```asm
 Dump of assembler code for function ex2:
-   0x05ff <+0>:	    push   %rbx
-   0x0600 <+1>:	    mov    %rdi,%rbx
-   0x0603 <+4>:	    mov    %rsi,%rdi
-   0x0606 <+7>:	    callq  0x5fa <vezes2>
-   0x060b <+12>:	cmp    %rbx,%rax
-   0x060e <+15>:	jle    0x613 <ex2+20>
-   0x0610 <+17>:	add    %rbx,%rbx
-   0x0613 <+20>:	add    %rbx,%rax
-   0x0616 <+23>:	pop    %rbx
-   0x0617 <+24>:	retq
+   0x01132 <+0>:	endbr64 
+   0x01136 <+4>:	push   %rbx
+   0x01137 <+5>:	mov    %rdi,%rbx
+   0x0113a <+8>:	mov    %rsi,%rdi
+   0x0113d <+11>:	call   0x1129 <vezes2>
+   0x01142 <+16>:	cmp    %rbx,%rax
+   0x01145 <+19>:	jle    0x114a <ex2+24>
+   0x01147 <+21>:	add    %rbx,%rbx
+   0x0114a <+24>:	add    %rbx,%rax
+   0x0114d <+27>:	pop    %rbx
+   0x0114e <+28>:	ret 
 ```
 
-!!! exercise text short
+!!! exercise text long
     Quantos argumentos a função acima recebe? Quais são seus tipos? Declare-a abaixo.
 
-Vamos começar trabalhando na linha `ex2+7`, na instrução `call vezes2` . A chamada necessita usar o registrador `%rdi`, mas ele contém o primeiro argumento de `ex2`.
+Vamos começar trabalhando na linha `ex2+11`, na instrução `call vezes2` . A chamada necessita usar o registrador `%rdi`, mas ele contém o primeiro argumento de `ex2`.
 
 !!! exercise text short
     Em qual registrador é guardado o primeiro argumento de `ex2`? Isso é feito antes da chamada `call`.
@@ -244,15 +246,15 @@ Vamos começar trabalhando na linha `ex2+7`, na instrução `call vezes2` . A ch
 
 Você deve ter notado as instruções `push/pop %rbx` no começo/fim da função. Toda função pode usar os registradores de argumentos (vistos na parte 1) e o de valor de retorno como quiserem. Se precisarem mexer nos outros registradores a prática é salvá-los na pilha no começo da função e restaurá-los no fim. Assim não importa o que a função faça, para a função chamadora é como se não houvesse havido nenhuma modificação nos outros registradores.
 
-Vamos agora olhar a condicional na linha `ex2+12`.
+Vamos agora olhar a condicional na linha `ex2+16`.
 
 !!! exercise text short
     Após a chamada `call`, qual o conteúdo de `%rax`?
 
 !!! exercise text short
-    Juntando suas respostas nas questões de cima, qual é a comparação feita nas linhas `ex2+12, ex2+15` ?
+    Juntando suas respostas nas questões de cima, qual é a comparação feita nas linhas `ex2+16, ex2+19` ?
 
-!!! exercise text medium
+!!! exercise text long
     Com essas informações em mãos, faça uma tradução do código acima para *C* usando somente `if+goto`.
 
 !!! example
@@ -262,30 +264,30 @@ Vamos agora olhar a condicional na linha `ex2+12`.
 
 ```asm
 Dump of assembler code for function ex3:
-   0x0000000000000000 <+0>:	endbr64 
-   0x0000000000000004 <+4>:	cmp    %rsi,%rdi
-   0x0000000000000007 <+7>:	setl   %al
-   0x000000000000000a <+10>:	movzbl %al,%eax
-   0x000000000000000d <+13>:	mov    %eax,(%rdx)
-   0x000000000000000f <+15>:	sete   %al
-   0x0000000000000012 <+18>:	movzbl %al,%eax
-   0x0000000000000015 <+21>:	mov    %eax,(%rcx)
-   0x0000000000000017 <+23>:	setg   %al
-   0x000000000000001a <+26>:	movzbl %al,%eax
-   0x000000000000001d <+29>:	mov    %eax,(%r8)
-   0x0000000000000020 <+32>:	retq
+   0x000 <+0>:	endbr64 
+   0x004 <+4>:	cmp    %rsi,%rdi
+   0x007 <+7>:	setl   %al
+   0x00a <+10>:	movzbl %al,%eax
+   0x00d <+13>:	mov    %eax,(%rdx)
+   0x00f <+15>:	sete   %al
+   0x012 <+18>:	movzbl %al,%eax
+   0x015 <+21>:	mov    %eax,(%rcx)
+   0x017 <+23>:	setg   %al
+   0x01a <+26>:	movzbl %al,%eax
+   0x01d <+29>:	mov    %eax,(%r8)
+   0x020 <+32>:	ret
 ```
 
-!!! exercise text short
+!!! exercise text long
     Quantos argumentos a função acima recebe? De quais tipos? Declare-a abaixo.
 
-!!! exercise text short
+!!! exercise text long
     A função acima faz várias comparações. Liste quais e entre quais argumentos.
 
-!!! exercise text short
+!!! exercise text long
     Onde é armazenado o resultado de cada comparação?
 
-!!! exercise text short
+!!! exercise text long
     Com base em suas respostas acima, faça uma tradução linha a linha da função acima.
 
 !!! example
