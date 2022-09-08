@@ -176,11 +176,11 @@ A linha de baixo realiza uma operação aritmética com `%rax`.
     Todos os exercícios desta seção são para entrega. Vocês podem se conversar para fazê-los, mas cada um deve criar sua própria solução do zero. Todos os exercícios já estão disponíveis no seu repositório de entregas da disciplina em `atv/03-condicionais-funcoes`. Leia o README dentro da pasta para mais informações.
 
 
-### `ex1.o`: **Aritmética** e **Expressões booleanas**.
+### Função `ex1`: **Aritmética** e **Expressões booleanas**.
 
 ```asm
    Dump of assembler code for function ex1:
-   0x000 <+0>:	endbr64 
+   0x000 <+0>:	endbr64
    0x004 <+4>:	lea    (%rdi,%rsi,1),%rax
    0x008 <+8>:	lea    (%rax,%rdx,4),%rcx
    0x00c <+12>:	imul   %rdi,%rdi
@@ -210,7 +210,7 @@ A linha de baixo realiza uma operação aritmética com `%rax`.
 !!! example
     Usando as perguntas acima preencha o arquivo de solução no repositório e execute os testes.
 
-### `ex2.o`: **Chamadas de funções** e **Condicionais**.
+### Função `ex2`: **Chamadas de funções** e **Condicionais**.
 
 Quando analisar o código do ex2 no gdb, utilize o arquivo `ex2_ref` para visualizar corretamente as chamadas de funções. Seria uma boa também consultar as *relocation entries* no terminal com `objdump -r ex2.o`.
 
@@ -260,11 +260,11 @@ Vamos agora olhar a condicional na linha `ex2+16`.
 !!! example
     Usando as perguntas acima preencha o arquivo de solução no repositório e execute os testes.
 
-### `ex3`: **Ponteiros** e **Expressões booleanas**.
+### Função `ex3`: **Ponteiros** e **Expressões booleanas**.
 
 ```asm
 Dump of assembler code for function ex3:
-   0x000 <+0>:	endbr64 
+   0x000 <+0>:	endbr64
    0x004 <+4>:	cmp    %rsi,%rdi
    0x007 <+7>:	setl   %al
    0x00a <+10>:	movzbl %al,%eax
