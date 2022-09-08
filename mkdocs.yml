@@ -102,4 +102,7 @@ nav:
         - labs/hackerlab.md
         # - labs/processos.md      
         # - labs/threads.md
+    - Dicas:
+        - outros/github.md
+        - outros/vbox.md
 
