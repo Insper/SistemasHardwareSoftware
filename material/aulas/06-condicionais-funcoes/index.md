@@ -216,7 +216,7 @@ Quando analisar o código do ex2 no gdb, utilize o arquivo `ex2_ref` para visual
 
 ```asm
 Dump of assembler code for function ex2:
-   0x01132 <+0>:	endbr64 
+   0x01132 <+0>:	endbr64
    0x01136 <+4>:	push   %rbx
    0x01137 <+5>:	mov    %rdi,%rbx
    0x0113a <+8>:	mov    %rsi,%rdi
