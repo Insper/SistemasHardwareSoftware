@@ -96,6 +96,7 @@ nav:
         - aulas/03-arquitetura-x86/index.md
         - aulas/04-funcoes-mov/index.md
         - aulas/05-condicionais/index.md
+        - aulas/06-condicionais-funcoes/index.md
         
     - Labs:
         - labs/hackerlab.md
