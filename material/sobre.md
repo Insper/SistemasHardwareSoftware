@@ -17,6 +17,7 @@
 | 04/09 | 01-hackerlab | Github | 26/09 23h59 |
 | 08/09 | 03-condicionais-funcoes | Github | 13/09 23h59 |
 | 12/09 | 04-loops | Github | 16/09 23h59 |
+| 15/09 | 05-variaveis-locais | Github | 20/09 23h59 |
 
 
 # Provas
