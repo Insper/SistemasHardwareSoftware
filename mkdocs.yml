@@ -100,6 +100,7 @@ nav:
         - aulas/07-loops/index.md
         - aulas/08-variaveis-locais/index.md
         - aulas/09-arrays/index.md
+        - aulas/10-revisao/index.md
         
     - Labs:
         - labs/hackerlab.md

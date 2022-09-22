@@ -23,7 +23,7 @@
 # Provas
 
 - **Labs de C**: 19/08 (aula com Hashi)
-- **AI**: a definir
+- **AI**: 28/09 (Quarta-feira) das 16h00 às 1900
 - **AF**: a definir
 - **SUB**: a definir
 - **Delta**: a definir
