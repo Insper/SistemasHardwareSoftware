@@ -61,7 +61,8 @@ Considerando um vetor `short *vec` e que o endereço do primeiro elemento de `ve
     **Dica**: como você implementava o operador `&` com variáveis locais?
 
     !!! answer
-        `lea (%rdi, %rsi, 2), %eax`
+        `lea (%rdi, %rsi, 2), %rax`
+        Atenção: instrução utilizada apenas de forma pedagógica para diferenciar `MOV` e `LEA`.
 
 ## Exercício 1 - função `soma`
 

@@ -115,7 +115,7 @@ C(%R1, %R2, S)
 * `%R2` é um registrador (pode ser igual a `%R1`)
 * `S` é `1, 2, 4`  ou `8` (todos os tamanhos possíveis de registradores inteiros)
 
-A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca acessa a memória**, apenas move o resultado deste cálculo para o registrador destino. **Qualquer outra operação que use a sintaxa acima está fazendo um acesso a memória. `LEA` é a única exceção!**
+A operação acima calcula `C + %R1 + (%R2 * S)`. A operação `LEA` **nunca acessa a memória**, apenas move o resultado deste cálculo para o registrador destino. **Qualquer outra operação que use a sintaxe acima está fazendo um acesso a memória. `LEA` é a única exceção!**
 
 
 !!! exercise text short

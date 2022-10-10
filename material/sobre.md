@@ -18,6 +18,7 @@
 | 08/09 | 03-condicionais-funcoes | Github | 13/09 23h59 |
 | 12/09 | 04-loops | Github | 17/09 23h59 |
 | 15/09 | 05-variaveis-locais | Github | 20/09 23h59 |
+| 09/10 | 06-malloc | Github | 15/10 23h59 |
 
 
 # Provas

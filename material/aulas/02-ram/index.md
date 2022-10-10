@@ -35,7 +35,7 @@ $ gcc -Wall -pedantic experimento0.c -o e0
 A utilização de `struct` junta tudo que já vimos sobre representação de todos os tipos de dados na memória. Não se esqueça de levar em conta as questões de alinhamento mostradas na parte expositiva da aula.
 
 
-!!! warning
+!!! warning "Atenção!"
     Você **não** deverá abrir o código de `parte1.c`. Ele está no repositório para você poder conferir suas respostas.
 
 
@@ -54,7 +54,8 @@ A utilização de `struct` junta tudo que já vimos sobre representação de tod
 !!! exercise text medium
     Baseado nas respostas acima, declare abaixo o `struct`. Escreva-o da mesma maneira que usaria em um programa em *C*.
 
-!!! warning "Confira suas respostas com _parte1.c_. "
+!!! warning "Atenção!"
+    Confira suas respostas no arquivo _parte1.c_.
 
 ## Examinando a execução de programas usando `gdb`
 
