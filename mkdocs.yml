@@ -102,6 +102,7 @@ nav:
         - aulas/09-arrays/index.md
         - aulas/10-revisao/index.md
         - aulas/11-malloc/index.md
+        - aulas/12-tipos-de-dados/index.md
         
     - Labs:
         - labs/hackerlab.md
