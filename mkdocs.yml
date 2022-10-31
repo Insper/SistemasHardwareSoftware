@@ -107,6 +107,7 @@ nav:
         - aulas/14-exec/index.md
         - aulas/15-entrada-saida/index.md
         - aulas/16-sinais-I/index.md
+        - aulas/17-sinais-II/index.md
         
     - Labs:
         - labs/hackerlab.md
