@@ -20,7 +20,8 @@
 | 15/09 | 05-variaveis-locais | Github | 20/09 23h59 |
 | 09/10 | 06-malloc | Github | 21/10 23h59 |
 | 09/10 | 07-tad | Github | 21/10 23h59 |
-| 24/10 | 02-lab-processos | Github | 12/11 23h59 |
+| 24/10 | 02-lab-processos | Github | 18/11 23h59 |
+| 16/11 | 08-barrier | Github | 27/11 23h59 |
 
 
 # Provas
