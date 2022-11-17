@@ -95,6 +95,11 @@ Como estamos usando threads, estamos interessados em **unnamed semaphores**. Use
 
 Se até aqui foi tranquilo, vamos misturar as duas aulas? Uma barreira é a generalização do Rendez-vous, em que `N` threads rodando o mesmo código precisam esperar umas pelas outras para continuar.
 
+Nesta tarefa, você deve lançar quatro *threads* e utilizar uma barreira para sincronizar as *threads*, de modo que elas esperem todas terem chegado na barreira para liberar a impressão de qualquer `printf("Depois da barreira\n");`.
+
+!!! warning "Atenção!"
+    Não altere os `printf`, eles representam uma tarefa a ser executada. Faça a implementação da barreira sem alterá-los, nem adicione novos.
+
 Vamos implementar nossa barreira usando a seguinte estratégia:
 
 1. uma variável compartilhada `num_barrier` irá contar quantas threads já chegaram e estão esperando na barreira.
