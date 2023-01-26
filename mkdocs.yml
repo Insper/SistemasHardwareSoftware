@@ -1,4 +1,4 @@
-site_name: Sistemas Hardware-Software - 2022/2
+site_name: Sistemas Hardware-Software - 2023/1
 site_author: Igor Montagner, Maciel Calebe Vidal
 
 
@@ -90,33 +90,33 @@ nav:
     - Home: index.md
     - Entregas e Prazos: sobre.md
 
-    - Aulas:
-        - aulas/01-inteiros/index.md
-        - aulas/02-ram/index.md
-        - aulas/03-arquitetura-x86/index.md
-        - aulas/04-funcoes-mov/index.md
-        - aulas/05-condicionais/index.md
-        - aulas/06-condicionais-funcoes/index.md
-        - aulas/07-loops/index.md
-        - aulas/08-variaveis-locais/index.md
-        - aulas/09-arrays/index.md
-        - aulas/10-revisao/index.md
-        - aulas/11-malloc/index.md
-        - aulas/12-tipos-de-dados/index.md
-        - aulas/13-processos/index.md
-        - aulas/14-exec/index.md
-        - aulas/15-entrada-saida/index.md
-        - aulas/16-sinais-I/index.md
-        - aulas/17-sinais-II/index.md
-        - aulas/18-threads-I/index.md
-        - aulas/19-sincronizacao/index.md
-        - aulas/20-semaforos/index.md
-        - aulas/21-semaforos-II/index.md
-        - aulas/22-questoes-de-revisao/index.md
+    # - Aulas:
+        # - aulas/01-inteiros/index.md
+        # - aulas/02-ram/index.md
+        # - aulas/03-arquitetura-x86/index.md
+        # - aulas/04-funcoes-mov/index.md
+        # - aulas/05-condicionais/index.md
+        # - aulas/06-condicionais-funcoes/index.md
+        # - aulas/07-loops/index.md
+        # - aulas/08-variaveis-locais/index.md
+        # - aulas/09-arrays/index.md
+        # - aulas/10-revisao/index.md
+        # - aulas/11-malloc/index.md
+        # - aulas/12-tipos-de-dados/index.md
+        # - aulas/13-processos/index.md
+        # - aulas/14-exec/index.md
+        # - aulas/15-entrada-saida/index.md
+        # - aulas/16-sinais-I/index.md
+        # - aulas/17-sinais-II/index.md
+        # - aulas/18-threads-I/index.md
+        # - aulas/19-sincronizacao/index.md
+        # - aulas/20-semaforos/index.md
+        # - aulas/21-semaforos-II/index.md
+        # - aulas/22-questoes-de-revisao/index.md
         
-    - Labs:
-        - labs/hackerlab.md
-        - labs/processos.md      
+    # - Labs:
+    #     - labs/hackerlab.md
+    #     - labs/processos.md      
         # - labs/threads.md
     - Dicas:
         - outros/github.md
