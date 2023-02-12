@@ -2,7 +2,7 @@
 
 Bem vindo ao curso de Sistemas Hardware-Software 2022/2. 
 
-* **Professor**: Maciel Calebe Vidal
+* **Professorres**: Maciel Calebe Vidal, Fabio Aparecido Gamarra Lubacheski, Carlos Eduardo Dantas de Menezes
 
 <!-- * **Professores convidados**: Fabio Lubacheski e Carlos Menezes -->
 
