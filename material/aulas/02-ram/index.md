@@ -54,7 +54,7 @@ A utilização de `struct` junta tudo que já vimos sobre representação de tod
 !!! exercise text long
     Baseado nas respostas acima, declare abaixo o `struct`. Escreva-o da mesma maneira que usaria em um programa em *C*.
 
-!!! warning "Atenção!"
+!!! example "Hora de conferir!"
     Agora confira suas respostas no arquivo _parte1.c_.
 
 ## Examinando a execução de programas usando `gdb`
@@ -87,7 +87,17 @@ Siga os passos para para carregar um programa usando o *gdb*:
 
     </div>
 
-2. Isto nos colocará em um prompt esperando comandos. Para **rodar** o programa até o fim execute
+2. Para sair, utilize:
+
+    <div class="termy">
+
+    ```console
+    (gdb) quit
+    ```
+
+    </div>
+
+<!-- 2. Isto nos colocará em um prompt esperando comandos. Para **rodar** o programa até o fim execute
 
     <div class="termy">
 
@@ -98,7 +108,7 @@ Siga os passos para para carregar um programa usando o *gdb*:
     </div>
 
 
-3. Após rodar, saia do gdb e abra-o novamente com o executável `parte2` mas não faça `run`. Para sair, utilize `quit`:
+3. Após rodar, saia do gdb (utilize `quit` para sair) e abra-o novamente com o executável `parte2` **mas não faça** `run`:
 
     <div class="termy">
 
@@ -107,24 +117,36 @@ Siga os passos para para carregar um programa usando o *gdb*:
     $ gdb ./parte2
     ```
 
-    </div>
+    </div> -->
 
 !!! tip
-    O *gdb* é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser vista em [https://sourceware.org/gdb/current/onlinedocs/gdb/index.html#Top](https://sourceware.org/gdb/current/onlinedocs/gdb/index.html#Top).
+    O *gdb* é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser vista em [https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top).
 
 Nesta primeira parte iremos abrir o arquivo *parte2.c* e olhar seu conteúdo. Também executaremos o programa compilado *parte2*.
 
 !!! exercise text long
     Abra o código *parte2.c* e liste os nomes das variáveis globais declaradas e seus tamanhos. Anote também as funções declaradas.
 
+!!! warning "Atenção, tarefa dupla!"
+    Para os próximos exercícios, compile o arquivo `parte2.c` **com** e **sem debugging** e repita cada exercício com ambas as versões do executável. Exemplo de compilação:
+
+<div class="termy">
+
+```console
+$ gcc -g -Wall -pedantic parte2.c -o parte2_debug
+$ gcc -Wall -pedantic parte2.c -o parte2_semdebug
+```
+
+</div>
+
 !!! exercise text
     O comando *info* mostra informações que podem ser obtidas a partir de um executável. Execute-o e veja o que acontece.
 
-!!! example
-    Use `info` para mostrar as funções e variáveis globais que existem em `parte2`.
+!!! exercise
+    Use `info` para mostrar as **funções** e **variáveis globais** que existem em `parte2`. Lembre de fazer tanto na versão **com** quanto na **sem debugging**!
 
 !!! warning "Muita informação!"
-    Muitos dos nomes são estranhos. Eles fazem parte do padrão de arquivos executáveis *ELF*, que contém informações específicas do sistema operacional usado. Você não precisa se preocupar com estes nomes.
+    Muitos nomes são estranhos. Eles fazem parte do padrão de arquivos executáveis *ELF*, que contém informações específicas do sistema operacional usado. Você não precisa se preocupar com estes nomes.
 
 !!! exercise text short
     Qual é o significado da primeira coluna do comando *info variables*?
@@ -141,7 +163,9 @@ Nesta primeira parte iremos abrir o arquivo *parte2.c* e olhar seu conteúdo. Ta
 
 
 !!! exercise text short
-    Podemos usar o *gdb* também para **examinar a memória** de um executável. Acesse esta [página da documentação](https://sourceware.org/gdb/current/onlinedocs/gdb/Memory.html), entenda como usar o comando `x` e escreva abaixo qual o comando usado para mostrar o conteúdo do segundo item do vetor `global_array`. Em seguida, teste-o e verifique que ele funcionou corretamente.
+    Podemos usar o *gdb* também para **examinar a memória** de um executável. Acesse esta [página da documentação](https://sourceware.org/gdb/onlinedocs/gdb/Memory.html), entenda como usar o comando `x` e escreva abaixo qual o comando usado para mostrar o conteúdo do segundo item do vetor `global_array`. Em seguida, teste-o e garanta que funcionou corretamente.
+
+    Link: https://sourceware.org/gdb/onlinedocs/gdb/Memory.html
 
 
     **Dicas**:
