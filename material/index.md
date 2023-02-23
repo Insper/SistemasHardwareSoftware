@@ -4,8 +4,6 @@ Bem vindo ao curso de Sistemas Hardware-Software 2023/1.
 
 * **Professorres**: Maciel Calebe Vidal, Fabio Aparecido Gamarra Lubacheski, Carlos Eduardo Dantas de Menezes
 
-<!-- * **Professores convidados**: Fabio Lubacheski e Carlos Menezes -->
-
 ## Avaliação
 
 A avaliação da disciplina será composta por provas, projetos e atividades de acompanhamento:
