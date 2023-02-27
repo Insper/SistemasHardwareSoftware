@@ -15,6 +15,8 @@
 | 01/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 06/02 13h30 |
 | 13/02 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/XuVO6cKi) e [Configurar webhook](https://insper.blackboard.com/bbcswebdav/pid-1122467-dt-content-rid-11885055_2/xid-11885055_2)) | 17/02 23h59 |
 | 23/02 | 02-intro-gdb | Github | 26/02 23h59 |
+| 27/02 | 03-funcoes | Github | 03/03 23h59 |
+| 27/02 | 01-hackerlab | Github | 25/03 23h59 |
 <!-- | 22/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/hPQpWuCt) e [Configurar webhook](https://insper.blackboard.com/webapps/blackboard/content/listContentEditable.jsp?content_id=_918517_1&course_id=_38898_1&mode=reset)) | 26/08 23h59 |
 | 04/09 | 02-funcoes | Github | 09/09 23h59 |
 | 04/09 | 01-hackerlab | Github | 26/09 23h59 |
@@ -29,7 +31,7 @@
 
 # Provas
 
-- **Labs de C**: a definir
+- **Labs de C**: final da primeira semana
 - **AI**: a definir
 - **AF**: a definir
 - **SUB**: a definir

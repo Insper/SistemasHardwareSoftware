@@ -94,7 +94,7 @@ nav:
         - aulas/01-inteiros/index.md
         - aulas/02-ram/index.md
         - aulas/03-arquitetura-x86/index.md
-        # - aulas/04-funcoes-mov/index.md
+        - aulas/04-funcoes-mov/index.md
         # - aulas/05-condicionais/index.md
         # - aulas/06-condicionais-funcoes/index.md
         # - aulas/07-loops/index.md
@@ -114,8 +114,8 @@ nav:
         # - aulas/21-semaforos-II/index.md
         # - aulas/22-questoes-de-revisao/index.md
         
-    # - Labs:
-    #     - labs/hackerlab.md
+    - Labs:
+        - labs/hackerlab.md
     #     - labs/processos.md      
         # - labs/threads.md
     - Dicas:
