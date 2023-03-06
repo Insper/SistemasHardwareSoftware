@@ -2,7 +2,15 @@
 
 ## Expressões booleanas
 
-Vimos na expositiva que toda operação aritmética preenche as flags `CF`, `ZF`, `SF` e `OF` e que podemos usar estas flags para montar expressões booleanas com as instruções `set*`. A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.
+Vimos na expositiva que toda operação aritmética preenche as flags `CF`, `ZF`, `SF` e `OF` e que podemos usar estas flags para montar expressões booleanas com as instruções `set*`.
+
+!!! bug "Simulador!"
+    Links para o simulador utilizado em aula:
+    
+    * Direto: https://users.dickinson.edu/~braught/kands/KandS2/datapath.html
+    * Geral: https://weinman.cs.grinnell.edu/courses/CSC211/2018F/labs/mini-datapath/
+
+A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.
 
 ![Tabela de set para operações booleanas](tabela-set.png)
 
