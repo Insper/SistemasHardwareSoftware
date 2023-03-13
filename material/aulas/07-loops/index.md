@@ -90,7 +90,7 @@ Dump of assembler code for function soma_2n:
 Vamos agora exercitar o que vimos na aula expositiva. Os exercícios abaixo estão no repositório de atividades e as perguntas no handout tem o objetivo de ajudar a compreender códigos cada vez mais complexos.
 
 !!! warning "Atenção!"
-    Antes de continuar, dê um `git pull` em seu repositório e **leia o README** disponível dentro da pasta da atividade!
+    Antes de continuar, dê um `git pull` em seu repositório de atividades e **leia o README** disponível dentro da pasta da atividade!
 
 !!! tip "Dicas!"
     Antes de fazer `disas`, sempre dê um `info functions` e `info variables` para conhecer o que temos em cada arquivo. Nem sempre encontrará algo muito valioso, mas é bom verificar!
