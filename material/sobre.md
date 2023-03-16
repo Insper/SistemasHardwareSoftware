@@ -20,6 +20,7 @@
 | 06/03 | 04-condicionais-funcoes | Github | 12/03 23h59 |
 | 07/03 | 05-loops | Github | 13/03 13h15 |
 | 13/03 | 06-variaveis-locais | Github | 17/03 23h59 |
+| 16/03 | 07-arrays | Github | 19/03 23h59 |
 <!-- | 22/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/hPQpWuCt) e [Configurar webhook](https://insper.blackboard.com/webapps/blackboard/content/listContentEditable.jsp?content_id=_918517_1&course_id=_38898_1&mode=reset)) | 26/08 23h59 |
 | 04/09 | 02-funcoes | Github | 09/09 23h59 |
 | 04/09 | 01-hackerlab | Github | 26/09 23h59 |
