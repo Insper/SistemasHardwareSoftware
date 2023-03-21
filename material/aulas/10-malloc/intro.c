@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 3000000
+// Tente aumentar este valor, o que acontece quando testa 2 milhões, 3 milhões?
+#define N 100
 
 int *cria_vec() {
     int vec[100];
