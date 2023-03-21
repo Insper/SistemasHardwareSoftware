@@ -21,7 +21,7 @@
 | 07/03 | 05-loops | Github | 13/03 13h15 |
 | 13/03 | 06-variaveis-locais | Github | 17/03 23h59 |
 | 16/03 | 07-arrays | Github | 19/03 23h59 |
-| 20/10 | 08-malloc | Github | 24/10 23h59 |
+| 20/10 | 08-malloc | Github | 26/10 23h59 |
 
 <!--| 09/10 | 07-tad | Github | 21/10 23h59 |
 | 24/10 | 02-lab-processos | Github | 18/11 23h59 |

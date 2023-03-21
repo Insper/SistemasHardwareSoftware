@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 100
+#define N 3000000
+
+int *cria_vec() {
+    int vec[100];
+    return vec;
+}
 
 void atribui(int *vetor, int n) {
     for (int i = 0; i < n; i++) {
