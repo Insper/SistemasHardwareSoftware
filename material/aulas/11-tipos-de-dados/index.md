@@ -1,4 +1,4 @@
-# 12 - Tipos abstratos de dados
+# 11 - Tipos abstratos de dados
 
 ## A estrutura `Point2D`
 
@@ -83,7 +83,7 @@ Note que no exemplo acima a definição do `struct` `Point2D` não está inclusa
 ## Vetores dinâmicos
 
 !!! warning "Atividade para Entrega"
-    Os arquivos estão na pasta `09-tad` do repositório de entregas."
+    Os arquivos estão na pasta `09-tad` do repositório de entregas.
 
 !!! tip "Dica!"
     Não se esqueça de ler o `README.md` dentro da pasta `09-tad`!
