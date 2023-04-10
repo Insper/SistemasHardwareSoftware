@@ -103,6 +103,7 @@ nav:
         - aulas/10-malloc/index.md
         - aulas/11-tipos-de-dados/index.md
         - aulas/12-revisao/index.md
+        - aulas/13-linux-do-zero/index.md
         # - aulas/13-processos/index.md
         # - aulas/14-exec/index.md
         # - aulas/15-entrada-saida/index.md
