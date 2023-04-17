@@ -1,18 +1,22 @@
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <stdlib.h>
 
 int main() {
-    pid_t filho;
 
-    filho = fork();
+    pid_t filho = fork();
 
     if (filho == 0) {
-        sleep(3);
-        printf("Acabei filho %d\n", 1);        
-        return 2;
+        char prog[] = "./processa";
+        // a lista de argumentos sempre começa com o nome do
+        // programa e termina com NULL
+        char *args[] = {"./processa", "quero ferias por favor nao sou idiota blz", NULL};
+
+        execvp(prog, args);
+
+        printf("Fim do exec!\n");
     } else {
         int wstatus;
 
@@ -24,7 +28,8 @@ int main() {
         if (WIFEXITED(wstatus)) { // se terminou normalmente
             printf("Valor de retorno: %d\n", WEXITSTATUS(wstatus)); // lê o byte menos significativo do return do filho
         }
-        
     }
+
+
     return 0;
 }
