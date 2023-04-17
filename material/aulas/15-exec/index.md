@@ -102,7 +102,7 @@ execvp(prog, args);
     <div class="termy">
 
     ```console
-    $ man 2 execvp
+    $ man 3 execvp
     ```
 
     </div>
