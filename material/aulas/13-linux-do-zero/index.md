@@ -325,6 +325,21 @@ Atualmente nosso sistema só tem um único arquivo: o executável `hello`. Clara
 
 Claramente nosso sistema não obedece ao padrão acima.
 
+!!! warning
+    Antes de fazer o próximo passo, lembre-se de:
+
+    - Garantir que o `qemu` não está mais rodando.
+    - Montar novamente o *device* que aponta para `raiz.img`, senão você estará criando as pastas dentro de `raiz_linux`, mas não dentro de `raiz.img`:
+
+    <div class="termy">
+
+    ```console
+    $ sudo mount -t ext4 /dev/loopXXp1 raiz_linux
+    ```
+
+    </div>
+
+
 !!! example
     Crie manualmente as pastas mostradas acima usando `mkdir`. Ao dar `ls -l` você deverá ver o seguinte:
 
@@ -348,8 +363,26 @@ Claramente nosso sistema não obedece ao padrão acima.
 
 Uma outra parte do padrão corresponde a qual é lugar padrão do `init`. Tradicionalmente este programa está localizado no caminho `/sbin/init`. O parâmetro `init=/hello` que passamos para o Qemu sobrescreve este comportamento, porém ele não é normalmente usado em sistemas Linux.
 
-!!! example
+!!! warning "Perigo real!"
+    No próximo passo, quando falamos `/sbin/init`, estamos falando da raiz (`/`) do **linux da aula** que está em **raiz.img**.
+    
+    Cuidado para não sobrescrever o `/sbin/init` do linux da sua máquina, caso contrário não conseguirá mais fazer boot!
+
+    Perceba que o comando de mover/renomear não terá uma barra antes de `sbin`.
+
+!!! example "Mova com cuidado!"
     Mova `hello` para `/sbin/init` e execute novamente o Qemu, desta vez sem o parâmetro `init=...` no kernel.
+
+    **Obs**: `init` será o novo nome do `hello`, ou seja, movemos `hello` para a pasta `sbin` do **linux da aula** e o renomeamos para `init`.
+
+    Este passo pode ser feito com apenas um comando. Estando na pasta `raiz_linux` onde `raiz.img` está montada, faça:
+    <div class="termy">
+
+    ```console
+    $ sudo mv hello sbin/init
+    ```
+
+    </div>
 
 !!! done
     Agora que temos nosso sistema Linux minimamente funcional construído inteiramente do zero estamos prontos para começar a explorar seus recursos e possibilidades.
