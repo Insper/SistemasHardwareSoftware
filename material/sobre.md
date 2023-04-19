@@ -23,6 +23,8 @@
 | 16/03 | 07-arrays | Github | 19/03 23h59 |
 | 20/03 | 08-malloc | Github | 26/03 23h59 |
 | 23/03 | 09-tad | Github | 10/04 12h00 |
+| 19/04 | 10-processos | Github | 25/04 23h59 |
+| 19/04 | 11-mini-immortal | Github | 23/04 23h59 |
 
 <!--| 09/10 | 07-tad | Github | 21/10 23h59 |
 | 24/10 | 02-lab-processos | Github | 18/11 23h59 |
