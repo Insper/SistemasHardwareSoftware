@@ -1,4 +1,4 @@
-# 16 - Enviando sinais
+# 17 - Enviando sinais
 
 Na aula de hoje falamos sobre sinais e vimos que grande parte deles indica que algo excepcional aconteceu. Veremos neste handout as chamadas usadas para consultar o status de um processo quando ele acaba com erro e como enviar sinais para outros processos.
 
