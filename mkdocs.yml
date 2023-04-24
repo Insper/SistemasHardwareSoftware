@@ -117,7 +117,7 @@ nav:
         
     - Labs:
         - labs/hackerlab.md
-    #     - labs/processos.md      
+        - labs/processos.md
         # - labs/threads.md
     - Dicas:
         - outros/github.md
