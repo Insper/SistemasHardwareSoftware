@@ -2,4 +2,4 @@
 
 ## Introdução
 
-Por enquanto, veja a API que iremos consumir em http://3.142.157.80/inspercoin/docs
+Por enquanto, veja a API que iremos consumir em http://sishard.insper-comp.com.br/inspercoin/docs
