@@ -95,9 +95,22 @@ Para manter um maior controle no escopo da atividade, implementamos uma API que 
 
 Veja a documentação das rotas em http://sishard.insper-comp.com.br/inspercoin/docs
 
+
+## Onde desenvolver?
+Foi criado uma pasta `lab/02-inspercoin` em seu repositório de entregas da disciplina. Edite o arquivo `inspercoin.c` e comece!
+
+Para compilar, utilize obrigatoriamente:
+<div class="termy">
+
+    ```console
+    $ make rebuild
+    ```
+
+</div>
+
 ## Como começar?
 
-Faça `git pull` no seu repositório de atividades e leia o `README.md` na pasta do lab. Ainda, copie códigos deste repositório http://www.github.com e implemente as funções faltantes (caso queira, pode copiar todos os arquivos para dentro da sua pasta do lab).
+Faça `git pull` no seu repositório de atividades e leia o `README.md` na pasta do lab. Ainda, copie códigos deste repositório https://github.com/macielcalebe/api_lab_proc_blockchain e implemente as funções faltantes (caso queira, pode copiar todos os arquivos para dentro da sua pasta do lab). Não precisa começar do zero!
 
 ## Avaliação
 
@@ -212,7 +225,7 @@ Além dos comandos da versão anterior, o programa pode ser chamado pela linha d
 ```
 
 Requisitos:
-- O programa realiza requisições de transações e mantém `<qtde_proc>` processos rodando concorrentemente tentando minerar transações. Aqui, para cada filho que retornar, um novo filho é criado para minerar uma transação diferente. Caso não existam transações, o pai deve tentar subir novamente um filho em `5` segundos (buscar por nova transação, iniciando a mineração no filho caso exista). A ideia é manter <qtde_t>` processos rodando sempre que possível. Observe que a API de GET transações precisará ser chamada múltiplas vezes.
+- O programa realiza requisições de transações e mantém `<qtde_proc>` processos rodando concorrentemente tentando minerar transações. Aqui, para cada filho que retornar, um novo filho é criado para minerar uma transação diferente. Caso não existam transações, o pai deve tentar subir novamente um filho em `5` segundos (buscar por nova transação, iniciando a mineração no filho, caso exista transação esperando mineração). A ideia é manter <qtde_proc>` processos rodando sempre que possível. Observe que a API de GET transações precisará ser chamada múltiplas vezes.
 - Ao receber CTRL+C, o programa pai encerra todos os filhos e sai com sinal adequado. Ao sair, apenas o programa pai deve exibir a mensagem na saída padrão `Encerrando mineração!\n`.
 
 **NOTA desta versão**: 10.0
