@@ -110,7 +110,7 @@ Para compilar, utilize obrigatoriamente:
 
 ## Como começar?
 
-Faça `git pull` no seu repositório de atividades e leia o `README.md` na pasta do lab. Ainda, copie códigos deste repositório https://github.com/macielcalebe/api_lab_proc_blockchain e implemente as funções faltantes (caso queira, pode copiar todos os arquivos para dentro da sua pasta do lab). Não precisa começar do zero!
+Faça `git pull` no seu repositório de atividades e leia o `README.md` na pasta do lab. Ainda, copie códigos deste repositório https://github.com/macielcalebe/inspercoin e implemente as funções faltantes (caso queira, pode copiar todos os arquivos para dentro da sua pasta do lab). Não precisa começar do zero!
 
 ## Avaliação
 
