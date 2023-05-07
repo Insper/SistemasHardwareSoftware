@@ -148,6 +148,19 @@ DEFAULT_WALLET=to_rico
 Conforme o exemplo, todas as chamadas de API devem ser feitas a partir desta origem contida em `INSPER_COIN_URL`. Então, para ler a blockchain, o programa deve automaticamente utilizar:
 `http://sishard.insper-comp.com.br/inspercoin/blockchain`
 
+Para testar, utilizem estas possíveis APIs como `INSPER_COIN_URL`:
+
+- http://sishard.insper-comp.com.br/inspercoin/
+- http://sishard.insper-comp.com.br/lubacoin/
+- http://sishard.insper-comp.com.br/menezescoin/
+
+Se quiser fazer testes (ex: ver a blockchain), todas tem a rota `/docs` para abrir no navegador:
+
+- http://sishard.insper-comp.com.br/inspercoin/docs
+- http://sishard.insper-comp.com.br/lubacoin/docs
+- http://sishard.insper-comp.com.br/menezescoin/docs
+
+As duas últimas funcionam como forks da blockchain, ou seja, cada uma será uma blockchain diferente após o bloco gênesis.
 
 O programa pode ser chamado pela linha de comando, utilizando as seguintes sintaxes:
 
@@ -210,6 +223,7 @@ Além dos comandos da versão anterior, o programa pode ser chamado pela linha d
 ```
 
 Requisitos:
+
 - O programa faz requisições à API e mantém em execução `<qtde_proc>` processos rodando concorrentemente minerando transações. Se a mineração de algum bloco falhar porque o bloco foi minerado primeiro por outra pessoa na rede, apenas ignore (não precisa subir nova execução).
 - Caso faça uma chamada à API e não consiga transações suficientes para iniciar pelo menos <qtde_proc> processos, ignore e suba apenas o que conseguir! Observe que até aqui a API de GET transações deverá ser chamada apenas uma vez.
 
@@ -225,6 +239,7 @@ Além dos comandos da versão anterior, o programa pode ser chamado pela linha d
 ```
 
 Requisitos:
+
 - O programa realiza requisições de transações e mantém `<qtde_proc>` processos rodando concorrentemente tentando minerar transações. Aqui, para cada filho que retornar, um novo filho é criado para minerar uma transação diferente. Caso não existam transações, o pai deve tentar subir novamente um filho em `5` segundos (buscar por nova transação, iniciando a mineração no filho, caso exista transação esperando mineração). A ideia é manter <qtde_proc>` processos rodando sempre que possível. Observe que a API de GET transações precisará ser chamada múltiplas vezes.
 - Ao receber CTRL+C, o programa pai encerra todos os filhos e sai com sinal adequado. Ao sair, apenas o programa pai deve exibir a mensagem na saída padrão `Encerrando mineração!\n`.
 
