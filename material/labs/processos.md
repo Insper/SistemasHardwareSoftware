@@ -152,7 +152,15 @@ Para testar, utilizem estas possíveis APIs como `INSPER_COIN_URL`:
 
 - http://sishard.insper-comp.com.br/inspercoin/
 - http://sishard.insper-comp.com.br/lubacoin/
+- http://sishard.insper-comp.com.br/lc/
 - http://sishard.insper-comp.com.br/menezescoin/
+- http://sishard.insper-comp.com.br/inspercoin_so_que_com_url_grande/
+- http://3.142.157.80/inspercoin/
+- http://3.142.157.80/lubacoin/
+- http://3.142.157.80/lc/
+- http://3.142.157.80/menezescoin/
+- http://3.142.157.80/inspercoin_so_que_com_url_grande/
+
 
 Se quiser fazer testes (ex: ver a blockchain), todas tem a rota `/docs` para abrir no navegador:
 
