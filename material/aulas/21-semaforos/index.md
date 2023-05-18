@@ -134,6 +134,6 @@ Seguiremos o seguinte algoritmo:
     Implemente as ideias acima no arquivo `barrier.c`.
 
 !!! done
-    Acabou? Garanta que seu resultado está na pasta `08-barrier` do repositório de atividades e faça a submissão da tag!
+    Acabou? Garanta que seu resultado está na pasta `14-barrier` do repositório de atividades e faça a submissão da tag!
 
 
