@@ -29,6 +29,7 @@
 | 26/04 | 02-inspercoin | Github | 18/05 15h30 |
 | 08/05 | 13-threads | Github | 18/05 15h30 |
 | 17/05 | 14-barrier | Github | 22/05 23h59 |
+| 22/05 | 03-lab threads | Github | 31/05 23h59 |
 <!--| 09/10 | 07-tad | Github | 21/10 23h59 |
 | 24/10 | 02-lab-processos | Github | 18/11 23h59 |
 | 16/11 | 14-barrier | Github | 27/11 23h59 | -->
