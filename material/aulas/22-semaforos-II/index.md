@@ -82,7 +82,7 @@ As partes A e B podem ser feitas em qualquer ordem, mas ambas obrigatoriamente d
     Os semáforos poderiam ser inicializados com `1`?
 
     !!! answer "Resposta"
-    Não! Qualquer um deles que for inicializado com `1` fará com que a thread que espera por ele passe direto na barreira, um resultado indesejado. Recomendo que teste e rode várias vezes!
+        Não! Qualquer um deles que for inicializado com `1` fará com que a thread que espera por ele passe direto na barreira, um resultado indesejado. Recomendo que teste e rode várias vezes!
 
 !!! exercise text short
     Dentro das threads, podemos inverter e fazer o `sem_wait` antes do `sem_post`?
