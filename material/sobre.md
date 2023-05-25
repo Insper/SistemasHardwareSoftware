@@ -35,7 +35,7 @@
 # Provas
 
 - **Labs de C**: final da primeira semana
-- **AI**: a definir
-- **AF**: 05/06
-- **SUB**: a definir
-- **Delta**: a definir
+- **AI**: https://www.insper.edu.br/portaldoprofessor/engenharias/
+- **AF**: https://www.insper.edu.br/portaldoprofessor/engenharias/
+- **SUB**: https://www.insper.edu.br/portaldoprofessor/engenharias/
+- **Delta**: no dia e horário da SUB
