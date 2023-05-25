@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 
     /* TODO: criar thread_t e soma_parcial_args aqui */
-
+    
     for (int i = 0; i < 4; i++) {
         /* TODO: preencher args e lançar thread */
     }
