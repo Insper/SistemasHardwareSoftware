@@ -211,6 +211,8 @@ O programa será avaliado usando uma rubrica que descreve as duas fases implemen
 
 Entregue cada versão utilizando o padrão já conhecido. Exemplo da versão `lab3.0.x`:
 
+**IMPORTANTE**: Os arquivos fontes disponilizados são para vocês entenderem como são realizadas as chamadas das threads, não gere novamente os arquivos **`sort.o`** e **`sort-merge.o`**.
+
 ```
 $ git tag -a lab3.0.55 -m "lab3.0.55"
 $ git push origin lab3.0.55
