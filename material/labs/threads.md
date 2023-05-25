@@ -145,7 +145,9 @@ para realizar essa fase você deverá ter finalizado a fase de **`Sort`**, pois 
 
 * As threads nessa fase terão como entrada os ponteiros dos arquivos gerados na fase anterior. No programa   **`sort-merge.o`** poderá ver que os arquivos são passadas para as threads através de uma estrutura (`struct`).
 
-* Cada thread receberá dois ponteiro de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (**`main()`**) que usará esse arquivo para próxima iteração.
+* Cada thread receberá dois ponteiro de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (**`main()`**),  que usará esse arquivo para próxima iteração.
+
+* O **nome** do arquivo criado nessa fase deverá ter o seguinte formato = quantidade de threads que estão executanto simultanamente concatenado com o número da thread (veja a Figura 2). Por exemplo se tiverem  `2` threads executando simultaneamente a `Thread 0` gerará o arquivo `20.txt` e a `Thread 1 ` gerará o arquivo `21.txt`
 
 * Note na função  (**`main()`**) que a cada iteração o número de threads será reduzida pela metada, até que reste somente uma thread e assim é finalizada o merge.
 
