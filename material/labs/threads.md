@@ -19,8 +19,17 @@ Na segunda fase, denominada **fase de Merge** (junção), pares de arquivos temp
 
 Sua tarefa é criar um programa que implemente o **algoritmo Sort-Merge** utilizando threads. Serão disponibilizados dois programas (**`sort.o`** e **`sort-merge.o`**) já compilados que auxiliarão no desenvolvimento da sua solução.
 
-O programa **`sort.o`** contem a implementação da criação das threads para **fase de Sort**, veja a seguir:
+O programa **`sort.o`** contem a implementação da criação das threads para **fase de Sort**, veja a seguir.
 ```
+#include <stdlib.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include "sort-merge.h"
+
+void * sort(void *args);
+
 int main(int nArgs, char **argv)
 {   
     int nThreads, nItens;
@@ -70,9 +79,6 @@ int main(int nArgs, char **argv)
     return 0;
 }
 ```
-Se quiser você pode ver o código fonte do programa  digite diretamente no terminal **`gdb sort.o`** e dentro do **`gdb`** digite **`list`** para listar o código fonte:
-
-![](img/gdb.png)
 
 Você precisará implementar a função **`void * sort(void * args)`** que representa a thread responsável em ler concorrentemente o arquivo de entrada no arquivo **`solucao.c`**, esse arquivo conterá as soluções das **fase de Sort** e **fase de Sort-Merge**. Para compilar a sua solução use o comando:
 
@@ -94,6 +100,95 @@ Considere que quantidade de itens  dividido pela quantidade de  threads terá se
 
 O programa **`sort-merge.o`** contem a implementação completa da criação das threads para **fase de Sort** e para **fase de Merge**, e após resolver a fase anterior você pode compilar esse programa junto com a sua solução no arquivo **`solucao.c`**. 
 
+```
+#include <stdlib.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include "sort-merge.h"
+
+void * sort(void *args);
+
+void * merge(void *args);
+
+int main(int nArgs, char **argv)
+{   
+    int nThreads, nItens;
+    FILE *fp;
+    if(nArgs != 4)
+        return -1;
+    
+    nThreads = atoi(argv[1]);
+    nItens   = atoi(argv[2]);
+
+    fp = fopen(argv[3],"r");
+    if( !fp ){
+        printf("Erro ao abrir arquivo: %s\n",argv[3]);
+        return -1;
+    }
+    printf("Serao criadas %d threads.\n",nThreads);
+    fflush(stdout);
+    
+    pthread_t *tids = malloc(nThreads * sizeof(pthread_t));
+    
+    struct sort_args *vet_sort = malloc(nThreads * sizeof(struct sort_args));
+    pthread_mutex_t mutex_file = PTHREAD_MUTEX_INITIALIZER;
+
+    for (int i = 0; i < nThreads; i++) {
+        vet_sort[i].idxThread = i;
+        vet_sort[i].nThreads = nThreads;
+        vet_sort[i].lineFiles = nItens;
+        vet_sort[i].mutex_file = &mutex_file;
+        vet_sort[i].fp = fp;
+        pthread_create(&tids[i], NULL, sort, &vet_sort[i]);
+        printf("Criou thread:%d fase sort\n", i);
+    }
+    
+    printf("Funcao main() espera as threads sort finalizarem...\n");
+    fflush(stdout);
+    FILE **fpOut = malloc(nThreads*sizeof(FILE));
+    for (int i = 0; i < nThreads; i++) {
+        pthread_join(tids[i], (void**)&fpOut[i]);
+    }
+    fclose(fp);
+    free(vet_sort);
+    free(tids);
+
+    while( nThreads > 1){
+
+        nThreads = nThreads/2;
+        tids = malloc(nThreads * sizeof(pthread_t));
+        
+        struct merge_args *vet_merge = malloc(nThreads * sizeof(struct merge_args));
+
+        for (int i = 0; i < nThreads; i++) {
+            vet_merge[i].idxThread = i;
+            vet_merge[i].nThreads = nThreads;
+            vet_merge[i].fp1 = fpOut[i*2];
+            vet_merge[i].fp2 = fpOut[(i*2)+1];
+            pthread_create(&tids[i], NULL, merge, &vet_merge[i]);
+            printf("Criou thread:%d fase merge nThread:%d \n", i,nThreads);
+        }
+
+        for (int i = 0; i < nThreads; i++) {
+            pthread_join(tids[i], (void**)&fpOut[i]);
+        } 
+        free(tids);
+        free(vet_merge);
+    }  
+    fclose(fpOut[0]);     
+    free(fpOut);
+    printf("Funcao main() finalizando normalmente...\n");
+
+    return 0;
+}
+```
+Para compilar a sua solução (`solucao.c`) com o programa **`sort-merge.o`**  use o comando:
+
+```
+$ gcc -g -Og -Wall sort-merge.o solucao.c -o sort-merge -pthread
+```
 
 ## Como começar?
 
