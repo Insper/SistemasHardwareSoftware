@@ -20,6 +20,8 @@ Na segunda fase, denominada **fase de Merge** (junção), pares de arquivos temp
 Sua tarefa é criar um programa que implemente o **algoritmo Sort-Merge** utilizando threads. Serão disponibilizados dois programas (**`sort.o`** e **`sort-merge.o`**) já compilados que auxiliarão no desenvolvimento da sua solução.
 
 O programa **`sort.o`** contem a implementação da criação das threads para **fase de Sort**, veja a seguir.
+
+
 ```
 #include <stdlib.h>
 #include <pthread.h>
