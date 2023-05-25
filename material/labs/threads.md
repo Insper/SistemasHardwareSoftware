@@ -122,22 +122,34 @@ $ git push origin lab3.0.55
 ### Tag `lab3.0.x`: fase Sort
 
 Na fase de **Sort** cada thread deverá alocar um espaçao na memória para armazenar os itens de sua região, para tanto considere as seguintes observações:
-* No arquivo de entrada cada item no arquivo de entrada será uma sequência de caracteres (por exemplo um nome de um animal), considere que os itens terão no máximo 20 caracteres (mas podem ter somente um caracteres) e cada um deles  estará armazenado em uma linha do arquivo, além disso podemos ter itens repetidos no arquivo. 
+
+* No arquivo de entrada cada item no arquivo de entrada será uma sequência de caracteres (por exemplo um nome de um animal), considere que os itens terão no máximo 20 caracteres (mas podem ter somente um caracteres) e cada um deles  estará armazenado em uma linha do arquivo, além disso podemos ter itens repetidos no arquivo.
+
 * O arquivo de entrada será um recurso compartilhado que precisará tem seu acesso controlado, de forma que cada thread acesse o arquivo uma por vez. Além disso você também deve resolver como fazer com que a thread  faça a leitura correta de sua região no arquivo de entrada.
-* Serão criadas nThreads, conforme informado por linha de comando, e cada thread deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.
+
+* Serão criadas nThreads (Thread 0, 1, ... n), informado por linha de linha de comando, e cada thread deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.
+
 * Nessa fase você cada thread pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.
-* Ao final da ordenação a thread escrever o seu resultado em um arquivo e retornar para função principal (**`main()`**) o ponteiro do arquivo que foi criado para armazenar os seus itens ordenados.
+
+
+* Nessa fase você cada thread pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.
+
+
+* Ao final da ordenação a thread deve escrever o seu resultado em um arquivo, a `Thread 0` cria e escreve no arquivo `0.txt`, a `Thread 1` cria e escreve no arquivo `1.txt` e assim por dianto. E por fim retorna para função principal (**`main()`**) o ponteiro (`FILE *`) do arquivo que foi criado para armazenar os seus itens ordenados.
 
 **NOTA desta fase**: 6.0
 
 ### Tag `lab3.1.x`: fase Sort-Merge
 
 para realizar essa fase você deverá ter finalizado a fase de **`Sort`**, pois esta fase tem como entrada os arquivos gerados na fase anterior (veja Figura 2). Por conta disso considere as seguintes observações:
+
 * As threads nessa fase terão como entrada os ponteiros dos arquivos gerados na fase anterior. No programa   **`sort-merge.o`** poderá ver que os arquivos são passadas para as threads através de uma estrutura (`struct`).
-* Cada thread receberá dois ponteiro de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (**`main()`**) que usará esse arquivo para próxima iteração.
+
+* Cada thread receberá dois ponteiro de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (**`main()`**),  que usará esse arquivo para próxima iteração.
+
+* O **nome** do arquivo criado nessa fase deverá ter o seguinte formato = quantidade de threads que estão executanto simultanamente concatenado com o número da thread (veja a Figura 2). Por exemplo se tiverem  `2` threads executando simultaneamente a `Thread 0` gerará o arquivo `20.txt` e a `Thread 1 ` gerará o arquivo `21.txt`
 
 * Note na função  (**`main()`**) que a cada iteração o número de threads será reduzida pela metada, até que reste somente uma thread e assim é finalizada o merge.
-
 
 **NOTA desta versão**: 10.0
 
