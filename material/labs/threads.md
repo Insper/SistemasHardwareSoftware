@@ -127,11 +127,15 @@ Na fase de **Sort** cada thread deverá alocar um espaçao na memória para arma
 
 * O arquivo de entrada será um recurso compartilhado que precisará tem seu acesso controlado, de forma que cada thread acesse o arquivo uma por vez. Além disso você também deve resolver como fazer com que a thread  faça a leitura correta de sua região no arquivo de entrada.
 
-* Serão criadas nThreads, conforme informado por linha de comando, e cada thread deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.
+* Serão criadas nThreads (Thread 0, 1, ... n), informado por linha de linha de comando, e cada thread deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.
 
 * Nessa fase você cada thread pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.
 
-* Ao final da ordenação a thread escrever o seu resultado em um arquivo e retornar para função principal (**`main()`**) o ponteiro do arquivo que foi criado para armazenar os seus itens ordenados.
+
+* Nessa fase você cada thread pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.
+
+
+* Ao final da ordenação a thread deve escrever o seu resultado em um arquivo, a `Thread 0` cria e escreve no arquivo `0.txt`, a `Thread 1` cria e escreve no arquivo `1.txt` e assim por dianto. E por fim retorna para função principal (**`main()`**) o ponteiro (`FILE *`) do arquivo que foi criado para armazenar os seus itens ordenados.
 
 **NOTA desta fase**: 6.0
 
@@ -144,7 +148,6 @@ para realizar essa fase você deverá ter finalizado a fase de **`Sort`**, pois 
 * Cada thread receberá dois ponteiro de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (**`main()`**) que usará esse arquivo para próxima iteração.
 
 * Note na função  (**`main()`**) que a cada iteração o número de threads será reduzida pela metada, até que reste somente uma thread e assim é finalizada o merge.
-
 
 **NOTA desta versão**: 10.0
 
