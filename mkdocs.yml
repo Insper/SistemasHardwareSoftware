@@ -1,11 +1,11 @@
-site_name: Sistemas Hardware-Software - 2023/1
-site_author: Igor Montagner, Maciel Calebe Vidal
+site_name: Sistemas Hardware-Software - 2023/2
+site_author: Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski
 
 
 extra:
     materia: Sistemas Hardware-Software
-    professor: Maciel Vidal
-    semestre: 2022/2
+    professor: Fabio Lubacheski
+    semestre: 2023/2
 
 theme:
   feature:
