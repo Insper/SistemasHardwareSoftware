@@ -2,7 +2,7 @@
 
 Bem vindo ao curso de Sistemas Hardware-Software 2023/2. 
 
-* **Professor**: Fabio Lubacheski
+* **Professor**: Fabio Lubacheski 
 
 ## Avaliação
 
