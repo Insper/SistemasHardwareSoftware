@@ -115,7 +115,7 @@ nav:
         #- aulas/22-semaforos-II/index.md
         #- aulas/23-questoes-de-revisao/index.md
         
-    - Labs:
+    #- Labs:
         #- labs/hackerlab.md
         #- labs/processos.md
         #- labs/threads.md
