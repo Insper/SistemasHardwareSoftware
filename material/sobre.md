@@ -2,8 +2,8 @@
 
 # Aulas
 
-* SEG 15:45 - 17:45 (Ágil 2)
-* QUI 15:45 - 17:45 (Ágil 2)
+* SEG 15:45 - 17:45 (Lab Ágil 2)
+* QUI 15:45 - 17:45 (Lab gil 2)
 
 * Atendimento: QUI 14:15 - 15:45 (Ágil 1)
 
