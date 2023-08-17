@@ -13,7 +13,7 @@
 | Data início | Atividade/Lab                     | Como entregar                                                         | Prazo              |
 |-------------|-----------------------------------|-----------------------------------------------------------------------|--------------------|
 | 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 15/08 13h30 |
-| 21/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/7SeUdlap) e [Configurar webhook](https://insper.blackboard.com/bbcswebdav/pid-1122467-dt-content-rid-11885055_2/xid-11885055_2)) | 15/08 23h59 |\
+| 21/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/7SeUdlap) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 25/08 23h59 |\
 
 
 # Provas
