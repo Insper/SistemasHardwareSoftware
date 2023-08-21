@@ -4,6 +4,8 @@ Bem vindo ao curso de Sistemas Hardware-Software 2023/2.
 
 * **Professor**: Fabio Lubacheski 
 
+* **Ninjas**: Arthur Cisotto Machado / Diego Saragoza da Silva  
+
 ## Avaliação
 
 A avaliação da disciplina será composta por provas, projetos e atividades de acompanhamento:
