@@ -14,6 +14,7 @@
 |-------------|-----------------------------------|-----------------------------------------------------------------------|--------------------|
 | 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 15/08 13h30 |
 | 21/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/7SeUdlap) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 25/08 23h59 |\
+| 28/08 | 02-intro-gdb | Github | 01/09 23h59 |
 
 
 # Provas
