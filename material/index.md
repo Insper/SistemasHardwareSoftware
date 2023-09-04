@@ -13,4 +13,4 @@ A avaliação da disciplina será composta por provas, projetos e atividades de 
 * Avaliações Intermediária (AI) e Final (AF) serão compostas por exercícios práticos a serem feitos durante o tempo de prova;
 * Os Laboratórios serão disponibilizados neste site
 
-Ver critérios de avaliação na [aula 01](aulas/01-inteiros/slides.pdf)
+Ver critérios de avaliação na [aula 01](./aulas/01-inteiros/slides.pdf)

@@ -258,11 +258,11 @@ Aula com **atividade** para **entrega**. Confira seu repositório de entregas do
     Leia o `README.md` disponível **na pasta da atividade** para descobrir como resolver e entregar.
 
 !!! tip "Prazo!"
-    Confira o **prazo** de entrega no menu [Entregas e Prazos](../../sobre/)
+    Confira o **prazo** de entrega no menu [Entregas e Prazos](../../sobre.md)
 
 ## Hackerlab
 
-Foi liberado o enunciado do primeiro lab! Confira em [Hackerlab](../../labs/hackerlab/) no menu **Labs**!
+Foi liberado o enunciado do primeiro lab! Confira em [Hackerlab](../../labs/hackerlab.md) no menu **Labs**!
 
 !!! warning "Atenção!"
     Faça `git pull` no seu repositório de entregas que irá aparecer uma nova pasta dentro de `lab`.
