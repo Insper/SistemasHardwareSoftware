@@ -17,7 +17,8 @@
 | 28/08 | 02-intro-gdb | Github | 01/09 23h59 |
 | 31/08 | 03-funcoes  | Github | 05/09 23h59 |
 | 04/09 | 01-hackerlab  | Github | 29/09 23h59 |
-| 11/03 | 04-condicionais-funcoes | Github | 17/09 23h59 |
+| 11/09 | 04-condicionais-funcoes | Github | 17/09 23h59 |
+| 14/09 | 05-loops | Github | 18/09 23h59 |
 
 # Provas
 
