@@ -3,7 +3,7 @@
 # Aulas
 
 * SEG 15:45 - 17:45 (Lab Ágil 2)
-* QUI 15:45 - 17:45 (Lab gil 2)
+* QUI 15:45 - 17:45 (Lab Ágil 2)
 
 * Atendimento: QUI 14:15 - 15:45 (Ágil 1)
 
@@ -20,10 +20,7 @@
 | 11/09 | 04-condicionais-funcoes | Github | 17/09 23h59 |
 | 14/09 | 05-loops | Github | 18/09 23h59 |
 | 18/09 | 06-variaveis-locais | Github | 22/09 23h59 |
-<<<<<<< HEAD
 | 21/09 | 07-arrays | Github | 24/09 23h59 |
-=======
->>>>>>> 2dd8bf7fcd0b617bfea429915c84a0ad9b7a85c9
 
 # Provas
 
