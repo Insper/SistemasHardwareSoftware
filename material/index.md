@@ -2,7 +2,7 @@
 
 Bem vindo ao curso de Sistemas Hardware-Software 2023/2.
 
-* **Professor**: Fabio Lubacheski 
+* **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
 * **Ninjas**: Arthur Cisotto Machado / Diego Saragoza da Silva  
 
