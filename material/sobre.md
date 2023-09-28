@@ -22,11 +22,12 @@
 | 18/09 | 06-variaveis-locais | Github | 22/09 23h59 |
 | 21/09 | 07-arrays | Github | 26/09 23h59 |
 | 25/09 | 08-malloc | Github | 29/09 23h59 |
+| 28/09 | 09-tad | Github | 02/10 23h59 |
 
 # Provas
 
 - **Labs de C**: final da primeira semana
-- **AI**: https://www.insper.edu.br/portaldoprofessor/engenharias/
+- **AI**: **09/10 (Segunda-feira) das 13:30 às 16:30** https://www.insper.edu.br/portaldoprofessor/engenharias/  
 - **AF**: https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **SUB**: https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **Delta**: no dia e horário da SUB
