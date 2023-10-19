@@ -23,6 +23,7 @@
 | 21/09 | 07-arrays | Github | 26/09 23h59 |
 | 25/09 | 08-malloc | Github | 29/09 23h59 |
 | 28/09 | 09-tad | Github | 02/10 23h59 |
+| 19/10 | 10-processos | Github | 23/10 23h59 |
 
 # Provas
 
