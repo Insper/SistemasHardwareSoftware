@@ -24,6 +24,7 @@
 | 25/09 | 08-malloc | Github | 29/09 23h59 |
 | 28/09 | 09-tad | Github | 02/10 23h59 |
 | 19/10 | 10-processos | Github | 23/10 23h59 |
+| 25/10 | 11-entrada-saida | Github | 30/10 23h59 |
 
 # Provas
 
