@@ -25,6 +25,7 @@
 | 28/09 | 09-tad | Github | 02/10 23h59 |
 | 19/10 | 10-processos | Github | 23/10 23h59 |
 | 25/10 | 11-entrada-saida | Github | 30/10 23h59 |
+| 30/10 | 02-processos  | Github | 17/11 23h59 |
 
 # Provas
 
