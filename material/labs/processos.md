@@ -13,7 +13,7 @@ Este exercício serve como avaliação dos conceitos vistos na disciplina. Porta
 
 ## Entrega
 
-Você deverá colocar sua entrega na pasta `lab/02-lab-processos` em seu repositório de atividades, na branch principal. Não precisa soltar release/tag.
+Você deverá colocar sua entrega na pasta `lab/02-lab-processos` em seu repositório de atividades, na branch principal. Não precisa soltar release/tag. Além disso, grave um vídeo mostrando a tela do funcionamento do seu programa apresentando cada uma das fases desenvolvidas, e por fim, preencha o arquivo `README.md` informando até qual fase você conseguiu chegar e o link do vídeo do funcionamento da sua entrega.
 
 ## Avaliação
 
@@ -22,6 +22,7 @@ O programa será avaliado de forma manual usando uma rubrica que descreve as fun
 ### **Fase 0**
 
 - O programa não compila
+- Não preencheu o arquivo `README.md`
 - O programa não implementa algum dos requisitos da rubrica da fase  **1**.
 
 **NOTA desta fase**: 0.0
@@ -39,6 +40,7 @@ O programa será avaliado de forma manual usando uma rubrica que descreve as fun
 
 - O programa compila sem warnings.
 - O programa recebe uma flag `-f` seguida pelo nome de um arquivo. Seu programa deverá ler o arquivo e fazer o download de cada url dentro do arquivo. Você pode supor que cada linha do arquivo contém exatamente uma URL. As regras para o nome do arquivo correspondente são as mesmas do item anterior.
+- Não entregou o video explicando o funcionamento do programa.
 
 `$> web_downloader -f lista_download.txt`
 
