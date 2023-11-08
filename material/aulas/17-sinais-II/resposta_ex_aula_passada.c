@@ -16,7 +16,7 @@ int main() {
 
     int ws;
 
-    sleep(10);
+    sleep(1);
     int wait_return = waitpid(filho, &ws, WNOHANG);
     printf("wait_return: %d\n", wait_return);
 
