@@ -125,10 +125,10 @@ Seguiremos o seguinte algoritmo:
 
     - [ ] 1
     - [ ] 4
-    - [x] `N - 1` : Onde `N` é o número de threads criadas
+    - [x] `N - 1` : onde `N` é o número de threads criadas
 
     !!! answer "Resposta"
-        Cada `sem_post` libera exatamente uma thread que estava bloqueada no `sem_wait`. Como teremos `N - 1` bloqueadas, basta 1 thread realizar  `N - 1` chamadas de `sem_post` para liberar cada uma das threads bloqueadas.
+        Cada `sem_post` libera exatamente uma thread que estava bloqueada no `sem_wait`. Como teremos `N - 1` bloqueadas, basta uma (=1) thread realizar  `N - 1` chamadas de `sem_post` para liberar cada uma das threads bloqueadas.
 
 !!! example
     Implemente as ideias acima no arquivo `barrier.c`.
