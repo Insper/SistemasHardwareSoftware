@@ -32,6 +32,6 @@
 
 - **Labs de C**: final da primeira semana
 - **AI**: **09/10 (Segunda-feira) das 13:30 às 16:30** https://www.insper.edu.br/portaldoprofessor/engenharias/  
-- **AF**: https://www.insper.edu.br/portaldoprofessor/engenharias/
+- **AF**: **04/12 (Segunda-feira) das 13:30 às 16:30 - Lab Ágil 2** https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **SUB**: https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **Delta**: no dia e horário da SUB

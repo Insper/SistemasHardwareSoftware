@@ -1,4 +1,4 @@
-# 20 - Semáforos
+# 21 - Semáforos
 
 Nas últimas aulas aprendemos as APIs da biblioteca `pthread` para criar e esperar a finalização de threads. Também aprendemos a passar argumentos e receber de volta valores usando um `struct` alocado dinamicamente.
 
@@ -86,15 +86,16 @@ Como estamos usando threads, estamos interessados em **unnamed semaphores**. Use
         `sem_init`, `sem_destroy`, `sem_post` e `sem_wait`.
 
 !!! example
-    Implemente (do zero) um programa que cria duas threads e as sincroniza usando *RDV*. Ambas deverão fazer um `print` antes e um depois do ponto de encontro. Use a imagem do começo da aula como guia.
+    Implemente (do zero) um programa que cria duas threads e as sincroniza usando *RDV*. Ambas deverão fazer um `printf` qualquer antes e um depois do ponto de encontro. Use a imagem do começo da aula como guia. 
 
-## Barreiras 
+## Barreiras - Exercício para Entrega
 
-
+!!! tip
+    Esta aula contém atividade para entrega! Trabalhe na pasta `atv/14-barrier` que está no seu repositório de entregas! Leia o `README.md`!
 
 Se até aqui foi tranquilo, vamos misturar as duas aulas? Uma barreira é a generalização do Rendez-vous, em que `N` threads rodando o mesmo código precisam esperar umas pelas outras para continuar.
 
-Nesta tarefa, você deve lançar quatro *threads* e utilizar uma barreira para sincronizar as *threads*, de modo que elas esperem todas terem chegado na barreira para liberar a impressão de qualquer `printf("Depois da barreira\n");`. Veja o arquivo `barrier.c` no repositório da disciplina.
+Nesta tarefa, você deve lançar quatro *threads* e utilizar uma barreira para sincronizar as *threads*, de modo que elas esperem todas terem chegado na barreira para liberar a impressão de qualquer `printf("Depois da barreira\n");`.
 
 !!! warning "Atenção!"
     Não altere os `printf`, eles representam uma tarefa a ser executada. Faça a implementação da barreira sem alterá-los, nem adicione novos.
@@ -124,14 +125,15 @@ Seguiremos o seguinte algoritmo:
 
     - [ ] 1
     - [ ] 4
-    - [x] `N - 1` - `N` é o número de threads criadas
+    - [x] `N - 1` : Onde `N` é o número de threads criadas
 
     !!! answer "Resposta"
-        Cada `sem_post` libera exatamente um thread que estava no `sem_wait`. Logo, preciso de um `sem_post` para cada thread esperando.
+        Cada `sem_post` libera exatamente uma thread que estava bloqueada no `sem_wait`. Como teremos `N - 1` bloqueadas, basta 1 thread realizar  `N - 1` chamadas de `sem_post` para liberar cada uma das threads bloqueadas.
 
 !!! example
     Implemente as ideias acima no arquivo `barrier.c`.
 
-
+!!! done
+    Acabou? Garanta que seu resultado está na pasta `14-barrier` do repositório de atividades e faça a submissão da tag!
 
 
