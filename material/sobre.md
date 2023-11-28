@@ -26,7 +26,7 @@
 | 19/10 | 10-processos | Github | 23/10 23h59 |
 | 25/10 | 11-entrada-saida | Github | 30/10 23h59 |
 | 30/10 | 02-processos (LAB)  | Github | 20/11 23h59 |
-| 16/11 | 03-sort-merge (LAB)  | Github | 29/11 23h59 |
+| 16/11 | 03-sort-merge (LAB)  | Github | 30/11 23h59 |
 
 # Provas
 
