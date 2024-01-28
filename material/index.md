@@ -1,6 +1,6 @@
 # Sistemas Hardware-Software
 
-Bem vindo ao curso de Sistemas Hardware-Software 2023/2.
+Bem vindo ao curso de Sistemas Hardware-Software 2024/1.
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
