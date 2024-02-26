@@ -17,7 +17,7 @@ int main() {
      * mandamos mostrar os bytes **guardados na memória**.
      */
 
-    int num1 = 42;
+    int num1 = 0x0a0c0b0d;
     printf("Valor guardado na memória para num1 = %d:\n", num1);
     show_bytes((unsigned char *) &num1, sizeof(num1));
     
