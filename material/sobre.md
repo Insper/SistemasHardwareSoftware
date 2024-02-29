@@ -15,7 +15,7 @@
 | 05/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 15/02 13h30 |
 | 19/02 | Atv01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/SQd1o1D9) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 23/02 23h59 |
 | 26/02 |Atv02-intro-gdb | Github | 01/03 23h59 |
-| 26/02 | Atv03-funcoes | Github | 03/03 23h59 |
+| 26/02 | Atv03-funcoes | Github | 04/03 23h59 |
 
 
 
