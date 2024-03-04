@@ -2,9 +2,7 @@
 
 ## Expressões booleanas
 
-Vimos na expositiva que toda operação aritmética preenche as flags `CF`, `ZF`, `SF` e `OF` e que podemos usar estas flags para montar expressões booleanas com as instruções `set*`.
-
-A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.
+Vimos na expositiva que toda operação aritmética preenche as flags `CF`, `ZF`, `SF` e `OF` e que podemos usar estas flags para montar expressões booleanas com as instruções `set*`. A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.
 
 ![Tabela de set para operações booleanas](tabela-set.png)
 
@@ -190,10 +188,10 @@ Tiramos então o `goto` e levando em conta sua resposta no item anterior, ficamo
 
 ```c
 int eh_par(long a) {
-    if (a % 2 != 0) {
+    if (a % 2 != 0) 
         return 0;
-    }
-    return 1;
+    else 
+        return 1;
 }
 ```
 
