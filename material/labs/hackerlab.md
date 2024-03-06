@@ -22,7 +22,7 @@ Level1:
 
 </div>
 
-Para descrobrir a senha, você terá que abrir o `gdb` no `gdb` e fazer engenharia reversa para entender seu código. Quando você tiver descoberto uma senha que destrava o nível, teste se funciona! Vamos supor que você desconfia que a senha seja `lasanha`. 
+Para descrobrir a senha, você terá que abrir o `app` no `gdb` e fazer engenharia reversa para entender seu código. Quando você tiver descoberto uma senha que destrava o nível, teste se funciona! Vamos supor que você desconfia que a senha seja `lasanha`. 
 
 <div class="termy">
 

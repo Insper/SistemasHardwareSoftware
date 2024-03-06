@@ -175,7 +175,7 @@ Vamos agora traduzir a função `eh_par` para **gotoC**. As linhas `0-4` são tr
 
 ```c
 int eh_par(long a) {
-    if (a & 1 == 0) goto if1;
+    if ((a & 1) == 0) goto if1;
 
     return 0;
 
