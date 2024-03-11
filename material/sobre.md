@@ -18,6 +18,7 @@
 | 26/02 | Atv03-funcoes | Github | 04/03 23h59 |
 | 04/03 | Lab01-hackerlab  | Github | 26/03 23h59 |
 | 07/03 | Atv04-condicionais-funcoes | Github | 14/03 23h59 |
+| 11/03 | Atv05-loops | Github | 17/03 23h59 |
 
 
 
