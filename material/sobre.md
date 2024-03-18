@@ -19,14 +19,15 @@
 | 04/03 | Lab01-hackerlab  | Github | 26/03 23h59 |
 | 07/03 | Atv04-condicionais-funcoes | Github | 14/03 23h59 |
 | 11/03 | Atv05-loops | Github | 17/03 23h59 |
-| 13/03 | Atv06-variaveis-locais | Github | 19/03 23h59 |
+| 14/03 | Atv06-variaveis-locais | Github | 19/03 23h59 |
+| 18/03 | Atv07-arrays | Github | 22/03 23h59 |
 
 
 
 # Provas
 
 - **Labs de C**: final da primeira semana
-- **AI**:  https://www.insper.edu.br/portaldoprofessor/engenharias/  
+- **AI**:  01/abril (segunda-feira) das 13:30 às 16:30. Local Lab Ágil II [Link com grade horária de AI Engenharias](https://www.insper.edu.br/portaldoprofessor/wp-content/uploads/2015/02/GRADE_AVAL_INTER_2024-1_ENGENHARIA_DOCENTE_V2.pdf)  
 - **AF**:  https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **SUB**: https://www.insper.edu.br/portaldoprofessor/engenharias/
 - **Delta**: no dia e horário da SUB
