@@ -21,7 +21,7 @@
 | 11/03 | Atv05-loops | Github | 17/03 23h59 |
 | 14/03 | Atv06-variaveis-locais | Github | 19/03 23h59 |
 | 18/03 | Atv07-arrays | Github | 22/03 23h59 |
-| 21/03 | Atv08-malloc  | Github | 24/03 23h59 |
+| 21/03 | Atv08-malloc  | Github | 25/03 23h59 |
 
 
 
