@@ -19,7 +19,7 @@ Compiler Explorer, também chamado de godbolt.org, é um site interativo de expl
 Para utilizá-lo [acesse o LINK](https://godbolt.org/), a configuação do godbolt está nos slides da aula [04 - Funções-mov](https://insper.github.io/SistemasHardwareSoftware/aulas/04-funcoes-mov/slides.pdf).
 
 
-## Resumo Assembly/GDB Universidade Stanford - godbolt.org
+## Guide to x86-64 - Resumo Assembly/GDB Universidade Stanford
 
 No link abaixo está uma visão geral dos assuntos abordados na primeira parte da disciplina de Sistemas Hardware-Software elaborado na Universidade de Stanford. 
 
