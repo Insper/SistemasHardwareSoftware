@@ -36,7 +36,7 @@ Este exercício serve como avaliação dos conceitos vistos na disciplina. Porta
 
 ## Entrega
 
-Você deverá colocar sua entrega na pasta `lab/02-lab-processos` em seu repositório de atividades, na branch principal. Não precisa soltar release/tag. Além disso, grave um vídeo mostrando a tela do funcionamento do seu programa apresentando cada uma das fases desenvolvidas, e por fim, **preencha o arquivo `README.md` informando até qual fase você conseguiu chegar e o link do vídeo do funcionamento da sua entrega**. Lembre-se de se atentar ao prazo de entrega definido [aqui!](../../sobre).
+Você deverá colocar sua entrega na pasta `lab/02-lab-processos` em seu repositório de atividades, na branch principal. Não precisa soltar release/tag. Além disso, grave um vídeo mostrando a tela do funcionamento do seu programa apresentando cada uma das fases desenvolvidas, e por fim, **preencha o arquivo `README.md` informando até qual fase você conseguiu chegar e o link do vídeo do funcionamento da sua entrega**. Lembre-se de se atentar ao prazo de entrega definido [aqui!](../../sobre.md).
 
 ## Avaliação
 
