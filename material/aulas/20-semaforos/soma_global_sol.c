@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
     struct soma_parcial_args aa_trheads[4];
+    
     scanf("%d", &n);
 
     vetor = malloc(sizeof(double) * n);
@@ -68,6 +69,7 @@ int main(int argc, char *argv[]) {
     aa.end = n;
     soma_parcial(&aa);
     printf("Sequencial: %lf\n", soma);
+    free(vetor);
 
     return 0;
 }
