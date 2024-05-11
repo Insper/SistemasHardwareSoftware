@@ -6,11 +6,11 @@ No Laboratório de Threads, iremos implementar um algoritmo de ordenação de gr
 
 O algoritmo Sort-Merge possui duas fases distintas, com cada fase consistindo em vários passos. Na primeira fase, chamada **fase de Sort** (ordenação), os dados são divididos em partes que caibam na memória disponível, e são então ordenados e armazenados em arquivos temporários. Essa fase resulta na criação de um conjunto de arquivos temporários, cada um contendo partes (regiões) do arquivo original ordenados. A Figura 1 abaixo ilustra a **fase de Sort**.
 
-![](img/fase-sort.png)
+![](img/sort.png)
 
 Na segunda fase, denominada **fase de Merge** (junção), pares de arquivos temporários criados na fase anterior são lidos dos arquivos temporários e ordenados, intercalando em ordem crescente os elementos lidos, de modo a resultar em um novo conjunto de arquivos temporários ordenados. Os itens de dois arquivos da etapa anterior são intercalados até que se obtenha um arquivo com todos os dados ordenados. A Figura 2 abaixo ilustra a **fase de Merge**
 
-![](img/fase-merge.png)
+![](img/sort-merge.png)
 
 
 ## O que precisa ser feito
