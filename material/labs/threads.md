@@ -218,7 +218,7 @@ Na fase de **Sort** cada thread deverá alocar um espaçao na memória para arma
 * Nessa fase você cada thread pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.
 
 
-* Ao final da ordenação a thread deve escrever o seu resultado em um arquivo, a `Thread 0` cria e escreve no arquivo `0.txt`, a `Thread 1` cria e escreve no arquivo `1.txt` e assim por dianto. E por fim retorna para função principal (**`main()`**) o ponteiro (`FILE *`) do arquivo que foi criado para armazenar os seus itens ordenados. O arquivo ordenado tem o mesmo formato do arquivo de entrada, ou seja, cada linha separada por `\n` com exceção a última linha que não tem `\n`.
+* Ao final da ordenação a thread deve escrever o seu resultado em um arquivo, a `Thread 0` cria e escreve no arquivo `0.txt`, a `Thread 1` cria e escreve no arquivo `1.txt` e assim por dianto. E por fim retorna para função principal (**`main()`**) o descritor do arquivo, que foi criado para armazenar os seus itens ordenados, no campo `fdOut` da estrutura `struct sort_args`. **Importante**: o arquivo criado não precisa ser fechado, pode deixar isso para função `main()`. O arquivo ordenado tem o mesmo formato do arquivo de entrada, ou seja, cada linha separada por `\n` com exceção a última linha que não tem `\n`.
 
 * Para entregar **fase de Sort** a **envie para o github suas alterações** e suba uma tag com o padrão de nomenclatura `lab3.0.x`, substituindo `x` por qualquer número inteiro! Ex:
 
