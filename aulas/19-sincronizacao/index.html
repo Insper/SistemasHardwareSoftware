@@ -1,0 +1,1344 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/19-sincronizacao/">
+      
+      
+        <link rel="prev" href="../18-threads-I/">
+      
+      
+        <link rel="next" href="../20-semaforos/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>19 - Sincronização com Mutex - Sistemas Hardware-Software - 2024/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#19-sincronizacao-com-mutex" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              19 - Sincronização com Mutex
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-entrada-saida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-sinais-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-sinais-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-threads-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    18 - Concorrência e Threads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aquecimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aquecimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sincronizacao-usando-mutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sincronização usando mutex
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#economizando-mutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Economizando mutex
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-semaforos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20 - Semáforos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21-semaforos-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    21 - Semáforos II e Modelos de concorrência
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22-questoes-de-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    22 - Questões de revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/threads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aquecimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aquecimento
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sincronizacao-usando-mutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sincronização usando mutex
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#economizando-mutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Economizando mutex
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="19-sincronizacao-com-mutex">19 - Sincronização com Mutex<a class="headerlink" href="#19-sincronizacao-com-mutex" title="Permanent link">&para;</a></h1>
+<p>Na última aula aprendemos as APIs da biblioteca <code>pthread</code> para criar e esperar a finalização de threads. Também aprendemos a passar argumentos e receber de volta valores usando um <code>struct</code> alocado dinamicamente.</p>
+<h2 id="aquecimento">Aquecimento<a class="headerlink" href="#aquecimento" title="Permanent link">&para;</a></h2>
+<p>Vamos iniciar uma revisão trabalhando em cima do arquivo <code>soma_global.c</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Abra o arquivo e analise seu conteúdo.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual o papel da função <code>soma_parcial</code>?  Explique o papel de cada atributo de <code>struct soma_parcial_args</code>.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Soma parte de um array (alguns elementos). Nos argumentos, o <code>*vetor</code> representa um ponteiro para todos os elementos do array. Já <code>start</code> e <code>end</code> representam o range de posições as quais queremos somar. </p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Como você setaria os atributos de <code>struct soma_partical_args</code> para obter a soma do vetor todo? E para obter somente a soma da primeira metade do vetor?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<div class="highlight"><pre><span></span><code>args-&gt;vetor = vetor;
+args-&gt;start = 0;
+args-&gt;end = n;
+</code></pre></div>
+</div>
+</div>
+<p>Para fins didáticos, estamos atualizando diretamente a variável <code>soma_total</code> dentro do <code>for</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Complete as partes faltantes e rode o programa e compile o programa <code>soma_global.c</code>: </p>
+<p><code>gcc soma_global.c -o soma_global -pthread</code> </p>
+<p>Execute dois testes com entrada dos arquivos <code>in1.txt</code> e <code>in2.txt</code>.</p>
+<p><code>./soma_global &lt; in1.txt</code></p>
+<p><code>./soma_global &lt; in1.txt</code></p>
+<p>Eles dão os resultados esperados?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Os resultados acima estarão errados. Você consegue explicar por que?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Na operação <code>soma = soma + spa-&gt;vetor[i];</code> a variável global <code>soma</code> está sendo lida, somada e posteriormente atribuída a ela própria. Entretando, entre a leitura e a atribuição, outra thread pode atualizar o valor da <code>soma</code>, tornando os resultados inconsistentes e imprevisíveis.</p>
+</div>
+</div>
+<h2 id="sincronizacao-usando-mutex">Sincronização usando <code>mutex</code><a class="headerlink" href="#sincronizacao-usando-mutex" title="Permanent link">&para;</a></h2>
+<p>Vamos agora trabalhar agora para corrigir este erro! Lembrando da aula, as operações possíveis são as seguintes:</p>
+<ul>
+<li><code>lock</code> - se tiver destravado, trava e continua; se não estiver espera.</li>
+<li><code>unlock</code> - se tiver a trava, a destrava e permite que outras tarefas travem.</li>
+</ul>
+<p>Note que não existe garantia de ordem! Ou seja, se tiverem vários processos esperando por um <code>mutex</code> qualquer um deles pode receber o acesso. Inclusive, uma thread pode esperar "para sempre" e nunca receber o acesso. Não é provável, mas é possível.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você pode precisar instalar o pacote <code>manpages-posix-dev</code> para obter as páginas do manual usadas neste roteiro.</p>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>manpages-posix-dev
+</code></pre></div>
+
+</div>
+
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Identifique no seu código quais linhas compõe a região crítica e onde deveriam estar as diretivas <code>lock</code> e <code>unlock</code>. Escreva abaixo suas concluões.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Onde a <code>soma</code> está sendo atualizada. Damos lock antes e unlock depois da linha <code>soma = soma + spa-&gt;vetor[i];</code></p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Coloque um comentário nas linhas identificadas acima.</p>
+</div>
+<p>Já sabemos onde iremos colocar as operações de <code>lock</code> e <code>unlock</code> do mutex. Agora falta só criá-lo.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>O mutex precisa ser criado e inicializado. Onde isto deve ser feito? Como ele pode ser recebido pela função da thread?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Podemos fazer isto na função <code>main</code>, antes da criação das threads. Para que ele seja recebido pela função, podemos criar um outro argumento na nossa <code>struct soma_parcial_args</code>!</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Consulte o manual de <code>pthread_mutex_init</code> e escreva abaixo como criar e inicializar um mutex.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Podemos fazer, por exemplo:
+<div class="highlight"><pre><span></span><code><span class="n">pthread_mutex_t</span><span class="w"> </span><span class="n">mutex_soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+</code></pre></div></p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Consulte o manual de <code>pthread_mutex_lock</code> e <code>pthread_mutex_unlock</code> e escreva abaixo como usá-las.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<div class="highlight"><pre><span></span><code><span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&lt;</span><span class="n">mutex_address</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="c1">// Faça sua operação!</span>
+<span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&lt;</span><span class="n">mutex_address</span><span class="o">&gt;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Com base nas suas respostas acima, conserte seu programa <code>soma_global.c</code> e verifique que ele retorna os resultados corretos.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Agora meça o tempo de execução e anote abaixo. Compare com o original (que não funcionava) e explique a diferença.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Podemos conferir utilizando o comando <code>time</code> no terminal. Percebemos um aumento no tempo com o uso do mutex. Isto ocorre devido a necessidade de sincronizar o acesso à variável global <code>soma</code>.</p>
+</div>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nb">time</span><span class="w"> </span>soma_global_v1<span class="w"> </span>&lt;<span class="w"> </span>in2.txt
+<span class="gp">$ </span><span class="nb">time</span><span class="w"> </span>soma_global_v2<span class="w"> </span>&lt;<span class="w"> </span>in2.txt
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Usar <code>mutex</code> é muito caro! Além de acabar com o paralelismo, as operações <code>lock</code> e <code>unlock</code> também são custosas.</p>
+</div>
+<h2 id="economizando-mutex">Economizando <code>mutex</code><a class="headerlink" href="#economizando-mutex" title="Permanent link">&para;</a></h2>
+<p>Nesta parte final iremos ver como diminuir o número de chamadas ao <code>mutex</code>.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>É necessário atualizar a variável global <code>soma</code> a cada iteração do <code>for</code>? E é possível atualizá-la somente uma vez por thread?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Podemos criar uma variável local que acumula a soma e só atualiza <code>soma_global</code> no fim. Seria uma variável por thread!</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente a ideia acima e veja se houve melhora. Salve como <code>soma-global2.c</code>.</p>
+</div>
+<p>O exercício acima deverá ter desempenho bom, já que limitamos a quantidade de vezes que usamos o <code>mutex</code>. Vamos tentar outra ideia agora.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Precisamos da variável global? E se cada thread retornasse sua soma parcial? Como o programa poderia ser organizado para que essa ideia funcione?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Cada thread poderia retornar na struct de argumentos o resultado de sua soma. Na função main, após cada reposta de conclusão da thread (retorno da <code>pthread_join</code>), poderíamos somar os resultados.</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>A ideia acima precisou de <code>mutex</code>? Por que?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Não, pois na função <code>main</code> a execução da soma seria sequencial.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente a ideia acima e confira os resultados. Houve melhora no desempenho?</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">May 22, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
