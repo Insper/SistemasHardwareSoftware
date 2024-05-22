@@ -151,7 +151,6 @@ int main(int nArgs, char **argv)
         tids = malloc(nThreads * sizeof(pthread_t));
         struct merge_args *vet_merge = malloc(nThreads * sizeof(struct merge_args));
 
-        nThreads=%d\n",qtdItensRegiao,nItens,nThreads);
         for (int i = 0; i < nThreads; i++) {
             vet_merge[i].idxThread = i;
             vet_merge[i].nThreads = nThreads;
