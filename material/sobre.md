@@ -12,7 +12,7 @@
 
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
-| 05/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 15/02 13h30 |
+| 05/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 12/08 15:45 |
 
 
 # Provas
