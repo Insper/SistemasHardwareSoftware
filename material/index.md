@@ -4,7 +4,8 @@ Bem vindo ao curso de Sistemas Hardware-Software 2024/2.
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
-<!--* **Professor**: Diego Saragoza da Silva  -->
+* **Professor**: Diego Saragoza da Silva 
+
 
 ## Avaliação
 
