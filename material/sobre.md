@@ -13,7 +13,7 @@
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
 | 05/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 12/08 15:45 |
-| 12/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/i2GRg023) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 18/08 23h59 
+| 12/08 | 01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/i2GRg023) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 19/08 23h59 
 
 
 # Provas
