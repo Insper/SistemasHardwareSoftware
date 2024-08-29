@@ -2,7 +2,9 @@
 
 ## Referência para as instruções do Assembly x86 e amd64
 
-Este [guia de referência](https://www.felixcloutier.com/x86/) sobre as intruções da linguagem Assembly é um resumo da referência oficial da [Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). Acredito que para nossos propositos na disciplina de SisHard seja suficiente.
+Este [guia de referência](https://www.felixcloutier.com/x86/) sobre as intruções da linguagem Assembly é um resumo da referência oficial da [Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). 
+
+Acredito que para nossos propositos na disciplina de SisHard seja suficiente.
 
 ## GDB - referência completa
 
