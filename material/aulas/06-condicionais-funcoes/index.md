@@ -47,7 +47,7 @@ As chamadas de função são feitas usando a seguinte ordem para os argumentos i
     - [x] 1
 
     !!! answer
-        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](../04-funcoes-mov). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro.
+        A ordem dos parâmetros segue é sempre a mesma vista na [aula 04](../04-funcoes-mov/index.md). Mesmo que as instruções estejam em ordem diferente, `%edi` (ou uma de suas partes) é sempre o primeiro parâmetro.
 
 
 !!! exercise text short
