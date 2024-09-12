@@ -24,7 +24,7 @@
 # Provas
 
 - **Multirão C**: final da primeira semana
-- **AI**: semana da AI
+- **AI**: 30/09 segunda-feira das 13:30 às 16:30 - laboratório Ágil II
 - **AF**:  semana da AF
 - **SUB**: semana da SUB
 
