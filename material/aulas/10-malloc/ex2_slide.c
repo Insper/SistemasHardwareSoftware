@@ -1,22 +1,21 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-char big_array[1L<<24];  /* 16 MB */
-char huge_array[1L<<31]; /*  2 GB */
+int main() {
+  int i, n, *p;
+  
+  scanf("%d",&n);
 
-int global = 0;
-
-int useless() { return 0; }
-
-int main()
-{
-    void *p1, *p2, *p3, *p4;
-    int local = 0;
-    p1 = malloc(1L << 28); /* 256 MB */
-    p2 = malloc(1L << 8);  /* 256  B */
-    p3 = malloc(1L << 32); /*   4 GB */
-    //p4 = malloc(1L << 8);  /* 256  B */
-    /* Some print statements ... */
-    printf("programa terminado normalmente.\n");
-    return 0;
+  /* Allocate a block of n ints */
+  p = (int *) malloc(n * sizeof(int));
+  if (p == NULL) {
+    perror("malloc");
+    exit(0);
+  }
+  /* Initialize allocated block */
+  for (i = 0; i < n; i++) {
+    p[i] = i;
+  }
+  /* Return allocated block to the heap */
+  free(p);
 }

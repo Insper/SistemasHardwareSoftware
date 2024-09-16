@@ -21,12 +21,23 @@ Compiler Explorer, também chamado de godbolt.org, é um site interativo de expl
 Para utilizá-lo [acesse o LINK](https://godbolt.org/), a configuação do godbolt está nos slides da aula [04 - Funções-mov](https://insper.github.io/SistemasHardwareSoftware/aulas/04-funcoes-mov/slides.pdf).
 
 
-## Guide to x86-64 - Resumo Assembly/GDB Universidade Stanford
+## Resumo SisHard da Universidade Stanford
 
 No link abaixo está uma visão geral dos assuntos abordados na primeira parte da disciplina de Sistemas Hardware-Software elaborado na Universidade de Stanford. 
 
 [acesse o LINK](https://web.stanford.edu/class/cs107/guide/x86-64.html)
 
+## Dicas ponteiros e alocação de memória na Linguagem C
 
+Alguns links que podem ajuda-los a entender ponteiros e alocação de memória na Linguagem C.
 
+Os links abaixo são do material desenvolvido pelo professor Paulo Feofiloff:
 
+* [Endereços e ponteiros](https://www.ime.usp.br/~pf/algoritmos/aulas/pont.html)
+* [Alocação dinâmica de memória](https://www.ime.usp.br/~pf/algoritmos/aulas/aloca.html)
+
+Os links abaixo são do material desenvolvido pelo professor Carlos Maziero:
+
+* [Ponteiros](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:ponteiros)
+* [Alocação de memória](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_de_memoria)
+* [Alocação dinâmica de matrizes](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_dinamica_de_matrizes)
