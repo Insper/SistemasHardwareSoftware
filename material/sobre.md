@@ -20,7 +20,7 @@
 | 02/09 | Atv04-condicionais-funcoes | Github | 08/09 23h59 |
 | 09/09 | Atv05-loops | Github | 13/09 23h59 |
 | 10/09 | Atv06-variaveis-locais | Github | 16/09 23h59 |
-| 16/09 | Atv07-arrays | Github | 20/09 23h59 |
+| 16/09 | Atv07-arrays | Github | 23/09 23h59 |
 | 19/09 | Atv08-malloc | Github | 26/09 23h59 |
 
 
