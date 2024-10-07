@@ -22,6 +22,7 @@
 | 10/09 | Atv06-variaveis-locais | Github | 16/09 23h59 |
 | 16/09 | Atv07-arrays | Github | 23/09 23h59 |
 | 19/09 | Atv08-malloc | Github | 26/09 23h59 |
+| 07/10 | Atv09-TAD  | Github | 11/10 23h59 |
 
 
 # Provas
