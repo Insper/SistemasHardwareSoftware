@@ -1,0 +1,1394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/05-condicionais/">
+      
+      
+        <link rel="prev" href="../04-funcoes-mov/">
+      
+      
+        <link rel="next" href="../06-condicionais-funcoes/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>05 - Condicionais - Sistemas Hardware-Software - 2024/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#05-condicionais" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              05 - Condicionais
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expressoes-booleanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressões booleanas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expressões booleanas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex1o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex1.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex2o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex2.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex3o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex3.o
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condicionais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Condicionais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-guiado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex4o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex4.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex5o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex5.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-guiado-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado II
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex6o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex6.o
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expressoes-booleanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expressões booleanas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expressões booleanas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex1o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex1.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex2o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex2.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex3o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex3.o
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condicionais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Condicionais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-guiado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex4o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex4.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex5o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex5.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-guiado-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado II
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex6o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex6.o
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="05-condicionais">05 - Condicionais<a class="headerlink" href="#05-condicionais" title="Permanent link">&para;</a></h1>
+<h2 id="expressoes-booleanas">Expressões booleanas<a class="headerlink" href="#expressoes-booleanas" title="Permanent link">&para;</a></h2>
+<p>Vimos na expositiva que toda operação aritmética preenche as flags <code>CF</code>, <code>ZF</code>, <code>SF</code> e <code>OF</code> e que podemos usar estas flags para montar expressões booleanas com as instruções <code>set*</code>. A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.</p>
+<p><img alt="Tabela de set para operações booleanas" src="tabela-set.png" /></p>
+<p>Também vimos que podemos preencher estas flags usando as instruções <code>cmp</code> e <code>test</code>, que executam operações aritméticas (subtração e E bit a bit) mas não guardam o resultado.</p>
+<p>Vamos analisar o código assembly da função <code>igual</code>. Por enquanto não precisa abrir o <strong>gdb</strong> nem código algum, apenas faça a análise direto neste material!</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">igual</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">igual</span><span class="err">&gt;</span><span class="p">:</span>
+<span class="err">0:</span><span class="w">   </span><span class="err">39</span><span class="w"> </span><span class="nf">f7</span><span class="w">                   </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%edi</span>
+<span class="err">2:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">94</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">sete</span><span class="w">   </span><span class="nv">%al</span>
+<span class="err">5:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="no">b6</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="err">8:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<p>A comparação <code>a == b</code> é feita primeiro executando <code>cmp</code> entre os argumentos <code>%edi</code> e <code>%esi</code> e depois usando <code>sete</code> (<em>set equal</em>) para atribuir <strong>1</strong> em <code>%al</code> se <code>%edi == %esi</code> e <strong>0</strong> caso contrário.</p>
+<p>Por fim, temos a instrução <code>movzbl</code>, que faz o cast de <code>char</code> (<code>%al</code>) para <code>int</code> (<code>%eax</code>). Lembre-se que as instruções <code>set*</code> só modificam os primeiros 8 bits de <code>%eax</code>. O restante continua com o valor antigo. Usamos <code>movzbl</code> para extender o número em <code>%al</code> para ocupar todo <code>%eax</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As instruções de conversão de tipos são bastante frequentes em Assembly, principalmente para expandir valores colocados em registradores menores para registradores maiores. Elas seguem a seguinte regra:</p>
+<p><code>MOVtsd</code></p>
+<ul>
+<li><code>t</code> pode ser <code>z</code> para tipos unsigned (completando com **z**eros) e <code>s</code> para tipos signed (completando com o bit de **s**inal).</li>
+<li><code>s</code> é o tamanho do registrador fonte seguindo a notação <code>b</code> para 1 byte, <code>w</code> para 2 bytes, <code>l</code> para 4 bytes e <code>q</code> para 8 bytes.</li>
+<li><code>d</code> é o tamanho do registrador destino, seguinto a mesma notação acima.</li>
+</ul>
+</div>
+<p>Por exemplo, a instrução <code>MOVZWQ</code> converte um <code>unsigned short</code> para um <code>unsigned long</code>. Conversões de 4 para 8 bytes muitas vezes são feitas com a instrução <code>cltq</code>, que extende (com sinal) <code>%eax</code> para <code>%rax</code>. Uma boa referência é este <a href="https://docs.oracle.com/cd/E19120-01/open.solaris/817-5477/eoizm/index.html">site da Oracle</a>.</p>
+<p>Vamos agora praticar. Mas antes, relembre da aula anterior a os registradores e a ordem em que os parâmetros da função são passados:</p>
+<ol>
+<li><strong>Argumentos inteiros ou ponteiros</strong> são passados nos registradores (<strong>nesta ordem</strong>):<ol>
+<li><code>%rdi</code></li>
+<li><code>%rsi</code></li>
+<li><code>%rdx</code></li>
+<li><code>%rcx</code></li>
+<li><code>%r8</code></li>
+<li><code>%r9</code></li>
+</ol>
+</li>
+</ol>
+<p>Para retornar usamos a instrução <code>ret</code>. Ela é equivalente ao comando <code>return</code> de <em>C</em> e devolverá o valor armazenado no <code>%rax</code>.</p>
+<p>Registradores:</p>
+<p><img alt="Registradores de 64 e 32 bits" src="registradores-grandes.png" /></p>
+<p><img alt="Registradores de 32, 16 e 8 bits" src="registradores-pequenos.png" /></p>
+<p>Pronto! Nos 3 exercícios abaixo temos funções que avaliam uma (ou mais) expressões booleanas entre seus argumentos e retornam o resultado.</p>
+<h3 id="arquivo-ex1o">Arquivo <code>ex1.o</code><a class="headerlink" href="#arquivo-ex1o" title="Permanent link">&para;</a></h3>
+<p>Reconstrua a função <code>ex1</code> a partir do código assembly abaixo.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex1</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">cmp</span><span class="w">    </span><span class="no">$0xa</span><span class="p">,</span><span class="nv">%edi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">setg</span><span class="w">   </span><span class="nv">%al</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">retq</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual é o tamanho do argumento de <code>ex1</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Coloque sua tradução em um arquivo <code>.c</code>. Valide sua solução com o professor ou com algum colega que já validou sua solução, ou utilize o gdb, conforme a próxima dica!</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Uma outra maneira de conferir se sua solução está correta é compilar e conferir no <strong>gdb</strong> se a sua solução produz o mesmo ASM que o compilado disponibilizado pelo professor. Caso seu código não possua função main, gere um <code>.o</code> utilizando a flag <code>-c</code>. Veja o Exemplo de compilação sem função main:</p>
+</div>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-std<span class="o">=</span>c99<span class="w"> </span>-c<span class="w"> </span>ex_resposta.c<span class="w"> </span>-o<span class="w"> </span>ex1_resp.o
+</code></pre></div>
+
+</div>
+
+<p>Então, abra o <strong>gdb</strong> e confira se o ASM gerado confere com o disponibilizado pelo professor!</p>
+<h3 id="arquivo-ex2o">Arquivo <code>ex2.o</code><a class="headerlink" href="#arquivo-ex2o" title="Permanent link">&para;</a></h3>
+<p>Reconstrua a função <code>ex2</code> a partir do código assembly abaixo</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex2</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">setbe</span><span class="w">  </span><span class="nv">%al</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">retq</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual é o tamanho dos argumentos de <code>ex2</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Coloque sua tradução abaixo. Valide sua solução utilizando comparação do ASM (dica nesta aula), com o professor ou com algum colega que já validou sua solução.</p>
+</div>
+<h3 id="arquivo-ex3o">Arquivo <code>ex3.o</code><a class="headerlink" href="#arquivo-ex3o" title="Permanent link">&para;</a></h3>
+<p>Reconstrua a função <code>ex3</code> a partir do código assembly abaixo.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex3</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%al</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">and</span><span class="w">    </span><span class="nv">%edx</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000011</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">17</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual é o tamanho dos argumentos de <code>ex3</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Coloque sua tradução abaixo. Valide sua solução com o professor ou com algum colega.</p>
+</div>
+<h2 id="condicionais">Condicionais<a class="headerlink" href="#condicionais" title="Permanent link">&para;</a></h2>
+<p>Vimos na segunda parte expositiva que Assembly possui apenas instruções de pulos condicionais (<code>j*</code> onde <code>*</code> representa uma comparação usando as mesmas abreviações de <code>set*</code>) e não condicionais (<code>jmp</code>). Vimos também que a combinação destas instruções com <code>cmp</code> e <code>test</code> é equivalente à dupla de comandos</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cond</span><span class="o">-</span><span class="n">booleana</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">label</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A tabela abaixo mostra as operações de saltos condicionais.</p>
+<p><img alt="Tabela de set para saltos condicionais" src="tabela-jmp.png" /></p>
+<h3 id="exemplo-guiado">Exemplo guiado<a class="headerlink" href="#exemplo-guiado" title="Permanent link">&para;</a></h3>
+<p>Vamos agora fazer um exemplo guiado. Analisaremos o seguinte código:</p>
+<div class="highlight"><pre><span></span><code><span class="mo">0000000000000000</span><span class="w"> </span><span class="o">&lt;</span><span class="n">eh_par</span><span class="o">&gt;:</span>
+<span class="mi">0</span><span class="o">:</span><span class="w">   </span><span class="mi">40</span><span class="w"> </span><span class="n">f6</span><span class="w"> </span><span class="n">c7</span><span class="w"> </span><span class="mo">01</span><span class="w">             </span><span class="n">test</span><span class="w">   </span><span class="n">$0x1</span><span class="p">,</span><span class="o">%</span><span class="n">dil</span>
+<span class="mi">4</span><span class="o">:</span><span class="w">   </span><span class="mi">74</span><span class="w"> </span><span class="mo">06</span><span class="w">                   </span><span class="n">je</span><span class="w">     </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="n">eh_par</span><span class="o">+</span><span class="mh">0xc</span><span class="o">&gt;</span>
+<span class="mi">6</span><span class="o">:</span><span class="w">   </span><span class="n">b8</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w">          </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x0</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+<span class="nl">b</span><span class="p">:</span><span class="w">   </span><span class="n">c3</span><span class="w">                      </span><span class="n">retq</span>
+<span class="nl">c</span><span class="p">:</span><span class="w">   </span><span class="n">b8</span><span class="w"> </span><span class="mo">01</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w">          </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x1</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+<span class="mi">11</span><span class="o">:</span><span class="w">  </span><span class="n">c3</span><span class="w">                      </span><span class="n">retq</span>
+</code></pre></div>
+<p>Pares de instruções <code>test-j*</code> ou <code>cmp-j*</code> são comumente usadas para representar a construção <code>if-goto</code>.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>O nome da função dá uma dica de seu valor de retorno. Você consegue entender o porquê <code>test $1, %dil</code> faz isto?</p>
+<p><strong>Dica:</strong> Escreva o teste exato que a função faz.</p>
+</div>
+<p>Vamos agora traduzir a função <code>eh_par</code> para <strong>gotoC</strong>. As linhas <code>0-4</code> são transformadas em um par <code>if-goto</code>. O restante são instruções que já conhecemos.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">eh_par</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">if1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nl">if1</span><span class="p">:</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Tiramos então o <code>goto</code> e levando em conta sua resposta no item anterior, ficamos com o seguinte código. Note que precisamos negar a comparação feita no código anterior!</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">eh_par</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Podemos observar duas coisas no código assembly gerado:</p>
+<ol>
+<li>O código que estava dentro do <code>if</code> foi colocado após o código que estava fora do if! O compilador pode mudar a ordem dos nossos blocos de código se for conveniente (para ele, não para nós).</li>
+<li>A construção <code>test-j*</code> e <code>cmp-j*</code> pode ser mapeada diretamente para <code>if-goto</code>. Porém, reconstruir um código legível requer, muitas vezes, mudar código de lugar.</li>
+</ol>
+<p>Vamos agora praticar com alguns exercícios simples:</p>
+<h3 id="arquivo-ex4o">Arquivo <code>ex4.o</code><a class="headerlink" href="#arquivo-ex4o" title="Permanent link">&para;</a></h3>
+<p>Veja o código abaixo</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">fun4</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">jle</span><span class="w">    </span><span class="mh">0xf</span> <span class="p">&lt;</span><span class="no">fun4</span><span class="p">+</span><span class="mi">15</span><span class="p">&gt;</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x2</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000a</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">10</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">imul</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000f</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">15</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x1</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000014</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">20</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jmp</span><span class="w">    </span><span class="mh">0xa</span> <span class="p">&lt;</span><span class="no">fun4</span><span class="p">+</span><span class="mi">10</span><span class="p">&gt;</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual expressão booleana é testada?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Faça a tradução desta função para <strong>gotoC</strong>.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Transforme o código acima em <em>C</em> legível.</p>
+</div>
+<h3 id="arquivo-ex5o">Arquivo <code>ex5.o</code><a class="headerlink" href="#arquivo-ex5o" title="Permanent link">&para;</a></h3>
+<p>Veja o código da função abaixo.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex5</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setle</span><span class="w">  </span><span class="nv">%al</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">test</span><span class="w">   </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%dl</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jne</span><span class="w">    </span><span class="mh">0x15</span> <span class="p">&lt;</span><span class="no">ex5</span><span class="p">+</span><span class="mi">21</span><span class="p">&gt;</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000010</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">16</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">lea</span><span class="w">    </span><span class="mi">-0</span><span class="no">x2</span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="nv">%rax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000014</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">20</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000015</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">21</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">lea</span><span class="w">    </span><span class="mi">0x5</span><span class="p">(</span><span class="nv">%rdi</span><span class="p">),</span><span class="nv">%rax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000019</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">25</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Qual são as expressões booleanas testadas? (Dica: são 3, assim como no exercício 3).</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Faça uma tradução para <strong>gotoC</strong>.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Transforme seu código acima para <em>C</em> legível.</p>
+</div>
+<h3 id="exemplo-guiado-ii">Exemplo guiado II<a class="headerlink" href="#exemplo-guiado-ii" title="Permanent link">&para;</a></h3>
+<p>Veremos agora um exemplo <code>if/else</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Seu assembly correspondente, quando compilado com <code>gcc -Og -c</code> é</p>
+<div class="highlight"><pre><span></span><code><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">exemplo2</span><span class="err">&gt;</span><span class="p">:</span>
+<span class="err">0:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">83</span><span class="w"> </span><span class="nf">ff</span><span class="w"> </span><span class="mi">04</span><span class="w">             </span><span class="no">cmp</span><span class="w">    </span><span class="no">$0x4</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="err">4:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">9</span><span class="no">f</span><span class="w"> </span><span class="no">c2</span><span class="w">                </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<span class="err">7:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">85</span><span class="w"> </span><span class="nf">f6</span><span class="w">                </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<span class="nl">a:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">9</span><span class="no">e</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">setle</span><span class="w">  </span><span class="nv">%al</span>
+<span class="nl">d:</span><span class="w">   </span><span class="err">84</span><span class="w"> </span><span class="nf">c2</span><span class="w">                   </span><span class="no">test</span><span class="w">   </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%dl</span>
+<span class="nl">f:</span><span class="w">   </span><span class="err">75</span><span class="w"> </span><span class="err">07</span><span class="w">                   </span><span class="nf">jne</span><span class="w">    </span><span class="mh">18</span> <span class="p">&lt;</span><span class="no">exemplo2</span><span class="p">+</span><span class="mi">0x18</span><span class="p">&gt;</span>
+<span class="err">11:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">89</span><span class="w"> </span><span class="nf">f8</span><span class="w">                </span><span class="no">mov</span><span class="w">    </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rax</span>
+<span class="err">14:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">29</span><span class="w"> </span><span class="nf">f0</span><span class="w">                </span><span class="no">sub</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rax</span>
+<span class="err">17:</span><span class="w">  </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+<span class="err">18:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">8</span><span class="nf">d</span><span class="w"> </span><span class="mi">04</span><span class="w"> </span><span class="mi">37</span><span class="w">             </span><span class="no">lea</span><span class="w">    </span><span class="p">(</span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="nv">%rax</span>
+<span class="err">1</span><span class="nl">c:</span><span class="w">  </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<p>Primeiramente, notamos que a função recebe dois argumentos (pois só utiliza <code>%rdi</code> e <code>%rsi</code>) e que ambos são tratados como <code>long</code>. Vamos então às expressões booleanas. Existem três expressões boolenas:</p>
+<ol>
+<li><code>cmp</code>-<code>setg</code>(linhas <code>0-4</code>) compara <code>%rdi</code> com <code>4</code> e seta <code>%dl=1</code> se <code>%rdi&gt;4</code> (**g**reater)</li>
+<li><code>test-setle</code> (linhas <code>7-a</code>) compara <code>%rsi</code> com <code>0</code> e seta <code>%al=1</code> se <code>%rsi&lt;=0</code> (**l**ess or **e**qual).</li>
+<li><code>test</code>(linha <code>d</code>) entre <code>%dl</code> e <code>%al</code>. O resultado não é armazenado.</li>
+</ol>
+<p>Logo abaixo do último <code>test</code> temos um <code>jne</code> (linha <code>f</code>), acrônimo para **j**ump if **n**ot **e**qual. Ou seja, fazemos o jump se <code>%dl &amp;&amp; %al</code> for verdadeiro.</p>
+<p>Logo em seguida temos instruções aritméticas, que já estudamos nos últimos handouts. Assim como vimos nos slides, vamos converter este código para <strong>gotoC</strong> primeiro.</p>
+<p>Assim como fizemos nos exercícios de 1 a 3, criaremos uma variável para as expressões booleanas 1 e 2 e substituiremos as instruções <code>test-jne</code> (linhas <code>d-f</code>) por um par <code>if-goto</code>. Veja abaixo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">expr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">expr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">expr1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">expr2</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">if1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nl">if1</span><span class="p">:</span>
+<span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Podemos então melhorar tornar este código mais legível, resultando no seguinte:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Duas coisas importantes podem ser vistas neste código</p>
+<ol>
+<li>As comparações não são exatamente iguais (<code>a&gt;4</code> e <code>a&gt;=5</code>), mas são equivalentes.</li>
+<li>O compilador pode trocar a ordem do <code>if/else</code> e colocar o <code>else</code> primeiro no Assembly gerado. Isto não altera o resultado da função, mas pode ser confuso de início.</li>
+</ol>
+<h3 id="arquivo-ex6o">Arquivo <code>ex6.o</code><a class="headerlink" href="#arquivo-ex6o" title="Permanent link">&para;</a></h3>
+<p>O exercício abaixo usa <code>if-else</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex6</span><span class="p">:</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">jle</span><span class="w">    </span><span class="mh">0x8</span> <span class="p">&lt;</span><span class="no">ex6</span><span class="p">+</span><span class="mi">8</span><span class="p">&gt;</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">mov</span><span class="w">    </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rsi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000008</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000b</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">11</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jle</span><span class="w">    </span><span class="mh">0x10</span> <span class="p">&lt;</span><span class="no">ex6</span><span class="p">+</span><span class="mi">16</span><span class="p">&gt;</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000d</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">13</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">neg</span><span class="w">    </span><span class="nv">%rsi</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000010</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">16</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">mov</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%eax</span>
+<span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000012</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">18</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Traduza o código acima para <strong>gotoC</strong>.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Faça uma versão legível do código acima.</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 10, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
