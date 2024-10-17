@@ -105,6 +105,7 @@ nav:
         - aulas/12-tipos-de-dados/index.md
         - aulas/13-processos/index.md
         - aulas/14-exec/index.md
+        - aulas/15-entrada-saida/index.md
     - Labs:
         - labs/hackerlab.md
         #- labs/processos.md
