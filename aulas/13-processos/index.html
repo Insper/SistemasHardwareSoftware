@@ -1,0 +1,1183 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/13-processos/">
+      
+      
+        <link rel="prev" href="../12-tipos-de-dados/">
+      
+      
+        <link rel="next" href="../14-exec/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
+    
+    
+      
+        <title>13 - Processos - Sistemas Hardware-Software - 2024/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13-processos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              13 - Processos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-chamada-fork" class="md-nav__link">
+    <span class="md-ellipsis">
+      A chamada fork
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#as-chamadas-waitwaitpid" class="md-nav__link">
+    <span class="md-ellipsis">
+      As chamadas wait/waitpid
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios Extras
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-entrada-saida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-chamada-fork" class="md-nav__link">
+    <span class="md-ellipsis">
+      A chamada fork
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#as-chamadas-waitwaitpid" class="md-nav__link">
+    <span class="md-ellipsis">
+      As chamadas wait/waitpid
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios Extras
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="13-processos">13 - Processos<a class="headerlink" href="#13-processos" title="Permanent link">&para;</a></h1>
+<h2 id="a-chamada-fork">A chamada <code>fork</code><a class="headerlink" href="#a-chamada-fork" title="Permanent link">&para;</a></h2>
+<p>A chamada <code>fork</code> cria um clone do processo atual e retorna duas vezes: uma vez no processo original (pai) e uma vez no processo novo (filho). Cada processo segue executando o programa linha a linha, porém cada um possui áreas de memória separadas. Ou seja, mudar uma variável no processo pai não muda seu valor no filho (e vice-versa). Todo processo é identificado por um número chamado de <code>pid</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>O <code>pid</code> é incrementado conforme novos processos vão sendo iniciados.</p>
+</div>
+<p>Considerando o código abaixo (arquivo <em>exemplo1-fork.c</em>), responda.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">pid_t</span><span class="w"> </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">filho</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">variavel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">filho</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// processo filho aqui</span>
+<span class="w">    </span><span class="n">pai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getppid</span><span class="p">();</span>
+<span class="w">    </span><span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpid</span><span class="p">();</span>
+<span class="w">    </span><span class="n">variavel</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;eu sou o processo filho %d, meu pai é %d</span><span class="se">\n</span><span class="s">variavel %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">filho</span><span class="p">,</span><span class="w"> </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">variavel</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// processo pai aqui!</span>
+<span class="w">    </span><span class="n">pai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpid</span><span class="p">();</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;eu sou o processo pai %d, meu filho é %d</span><span class="se">\n</span><span class="s">variavel %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">filho</span><span class="p">,</span><span class="w"> </span><span class="n">variavel</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<p>Responda os primeiros dois exercícios <strong>sem rodar o programa</strong>!</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual seria o valor de <code>variavel</code> no print do pai? e do filho?</p>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>No pai <code>variavel</code> vale <code>5</code>.
+No filho <code>variavel</code> vale <code>10</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Esse valor mudaria conforme o pai (ou o filho) executam primeiro?</p>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>Não, isto mudaria apenas a ordem dos textos na tela. Uma vez realizado o <code>fork</code>, passamos a ter dois processos independentes em memória e execução.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Compile e execute o programa acima. As suas respostas estão corretas?</p>
+<div class="termy">
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-Wall<span class="w"> </span>-g<span class="w"> </span>exemplo1-fork.c<span class="w"> </span>-o<span class="w"> </span>exemplo1-fork
+<span class="gp">$ </span>./exemplo1-fork
+</code></pre></div>
+</div>
+</div>
+<hr />
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Em um arquivo novo <code>.c</code> criado do zero, faça um programa que cria 8 processos filhos (numerados de 1 a 8) e faz cada um imprimir na tela seu seu identificador. O processo pai deve imprimir 0, enquanto o primeiro filho imprime 1, o segundo 2 e assim em diante. A saída de seu programa deverá seguir o modelo abaixo:</p>
+<div class="highlight"><pre><span></span><code>Eu sou o processo pai, pid=%d, meu id do programa é %d\n
+Eu sou um processo filho, pid=%d, ppid=%d, meu id do programa é %d\n
+</code></pre></div>
+<p>A primeira linha só deve ser mostrada uma vez pelo processo pai. Para verificar que seu programa funciona corretamente não se esqueça de contar quantos <code>printf</code> foram feitos. Se houver mais que 9 houve algum problema na sua solução.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>O programa abaixo termina? Explique sua resposta.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">rodando</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">pid_t</span><span class="w"> </span><span class="n">filho</span><span class="p">;</span>
+
+<span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">filho</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Acabei filho</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rodando</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">rodando</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Esperando o filho acabar!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>Não.
+Uma vez realizado o <code>fork</code>, passamos a ter dois processo independentes em memória e execução.
+Como o código <code>rodando = 0</code> é executado apenas no processo filho, esta ação não tem efeito no processo pai, que é onde será executado o <code>while</code>.
+Se ficou com dúvidas por que o bloco verdadeiro do <code>if</code> é executado apenas no filho e o bloco falso apenas no pai, peça ajuda ao professor!</p>
+</div>
+</div>
+<!-- !!! progress
+    Próxima seção -->
+
+<h2 id="as-chamadas-waitwaitpid">As chamadas <code>wait/waitpid</code><a class="headerlink" href="#as-chamadas-waitwaitpid" title="Permanent link">&para;</a></h2>
+<p>Um processo pode esperar seus filhos acabarem usando uma das chamadas <code>wait</code> ou <code>waitpid</code>. Esta chamada retorna um código numérico que representa a saída do programa (o que foi retornado pelo <code>main</code>) e um conjunto de flags que indica se houve término anormal. O código <strong>errado</strong> do último exercício tentava simular estas chamadas usando uma variável <code>rodando</code> e checando seu valor. A maneira correta de esperar um processo filho terminar é usando <code>wait</code> ou <code>waitpid</code>.</p>
+<div class="admonition exercise text medium">
+<p class="admonition-title">Exercise</p>
+<p>Pesquise como usar <code>wait</code> no manual. Escreva abaixo a assinatura da função. Qual é o valor retornado? O que é retornado na varíavel passada como ponteiro?</p>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>Aqui está a saída do <code>man wait</code>. <strong>Execute em seu terminal</strong> para ver a saída completa!
+<div class="termy"></p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="nb">wait</span>
+<span class="go">        WAIT(2)                                                                                   Linux Programmer&#39;s Manual                                                                                   WAIT(2)</span>
+
+<span class="go">NAME</span>
+<span class="go">    wait, waitpid, waitid - wait for process to change state</span>
+
+<span class="go">SYNOPSIS</span>
+<span class="gp">    #</span>include<span class="w"> </span>&lt;sys/types.h&gt;
+<span class="gp">    #</span>include<span class="w"> </span>&lt;sys/wait.h&gt;
+
+<span class="go">    pid_t wait(int *wstatus);</span>
+
+<span class="go">    pid_t waitpid(pid_t pid, int *wstatus, int options);</span>
+
+<span class="go">    int waitid(idtype_t idtype, id_t id, siginfo_t *infop, int options);</span>
+<span class="go">                    /* This is the glibc and POSIX interface; see</span>
+<span class="go">                        NOTES for information on the raw system call. */</span>
+
+<span class="go">Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o programa <code>exemplo2-errado.c</code> para usar <code>wait</code> para esperar o processo filho terminar. Após o filho terminar o pai deve mostrar uma mensagem na tela indicando este fato. Salve este arquivo como <code>exemplo2-certo.c</code></p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>É possível obter o valor retornado pelo <code>main</code> de um processo usando <code>wait</code>. Pesquise no manual como fazê-lo.</p>
+<p><strong>Dica</strong>: procure por <em>exit status</em>.</p>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>Confira com o professor!</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o <code>exemplo2-certo.c</code> para que o filho retorne <code>2</code> e modifique o pai para que ele obtenha esta informação a partir dos valores retornados pelo <code>wait</code>. Você precisará ler o manual de <code>wait</code> para fazer este exercício.</p>
+</div>
+<h2 id="exercicios-extras">Exercícios Extras<a class="headerlink" href="#exercicios-extras" title="Permanent link">&para;</a></h2>
+<p>Estes exercícios não são para entrega. Utilize esta lista para praticar os assuntos aprendidos na aula.</p>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Faça um programa que lê um número inteiro. Em dois processos filhos, deve ser calculado e impresso o dobro e a metade desse número.</p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Faça um programa em que o processo pai lê dois valores inteiros (<code>n1</code> e <code>n2</code>). Em seguida, são criados 4 processos filhos. Com os valores lidos pelo pai, os filhos devem calcular e imprimir em paralelo as seguintes operações.
+<div class="highlight"><pre><span></span><code>n1 – n2 
+n1 + n2 
+n1 / n2 
+n1 * n2 
+</code></pre></div></p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Faça um programa que crie um grupo de processos conforme a hierarquia apresentado abaixo, cada filho deve imprimir o seu PID e o PID do processo que o criou.</p>
+<p><img alt="" src="img/proc_tree.png" /></p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Faça um programa que lê um número inteiro indicando o número de filhos que o pai terá que criar. Ou seja, todos os processos filhos são do mesmo pai. Crie o número de processos solicitado.</p>
+<p>Cada filho deve:</p>
+<ul>
+<li>Esperar por 5 segundos assim que for criado</li>
+<li>Imprimir:<ul>
+<li>O seu número de ordem de criação</li>
+<li>O seu PID</li>
+<li>O PID do processo pai. </li>
+</ul>
+</li>
+<li>Sair retornando <code>0</code>.</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Super importante!</p>
+<p>Caso ainda não tenha feito, reescreva os exercícios anteriores para que o pai só seja finalizado quando todos os seus filhos já tenham terminado sua execução.</p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Dado um vetor <code>A</code> de <code>n</code> elementos e uma variável <code>c</code>, faça um programa paralelo para determinar a quantidade de elementos de <code>A</code> que são menores que <code>c</code>.</p>
+<p>Cada filho deve imprimir a quantidade de elementos de <code>A</code> que são menores que <code>c</code>.</p>
+<p><strong>Obs</strong>:</p>
+<ul>
+<li>Você pode escolher o tipo do vetor (int, char, long, short)</li>
+<li>Leia o <code>n</code>, aloque o vetor dinamicamente e então leia todos os elementos do vetor</li>
+<li>Suponha que <code>n</code> é múltiplo do número de filhos criados pelo processo pai</li>
+<li>Você pode escolher o número de filhos criados pelo pai.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 17, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
