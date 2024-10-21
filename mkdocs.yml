@@ -106,9 +106,10 @@ nav:
         - aulas/13-processos/index.md
         - aulas/14-exec/index.md
         - aulas/15-entrada-saida/index.md
+        - aulas/16-sinais-I/index.md
     - Labs:
         - labs/hackerlab.md
-        #- labs/processos.md
+        - labs/processos.md
         #- labs/threads.md
     - Dicas:
         - outros/github.md
