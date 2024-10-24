@@ -55,8 +55,10 @@ Vamos agora trabalhar com a chamada `write`. Um exemplo de seu uso está mostrad
     Em um novo arquivo `copy_file.c`, crie um programa `copy_file` que recebe dois nomes de arquivos como argumentos no terminal e copia o conteúdo do primeiro para o segundo. Ou seja, você deverá
     
     1. abrir ambos arquivos (cada um terá seu próprio *file descriptor*) 
-    2. ler do primeiro para um buffer
-    3. escrever este buffer no segundo
+    2. enquanto não chegar ao final do primeiro arquivo
+        1. ler do primeiro para um buffer
+        2. escrever este buffer no segundo
+    3. fecha os dois arquivos
 
 !!! tip "Validando"
     Após compilar, teste sua solução com um arquivo qualquer e utilize `diff` ou `cmp` para comparar os arquivos.

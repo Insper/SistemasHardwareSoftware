@@ -42,7 +42,7 @@ Todo término inesperado de um programa em execução (processo) é feito usando
 
 
 !!! example "To-Do"
-    Mostrar o número do sinal não é muito útil. Pesquise sobre a chamada `strsignal` e use-a para mostrar uma mensagem descritiva de qual sinal foi recebido no exercício acima.
+    Mostrar o número do sinal não é muito útil. Pesquise sobre a chamada `strsignal` (`man strsignal`) e use-a para mostrar uma mensagem descritiva de qual sinal foi recebido no exercício acima.
 
 !!! tip
     Após cada modificação no código, compile e execute para conferir os resultados!
@@ -55,7 +55,7 @@ Além de erros e exceções, sinais também são usados para avisar de mudanças
 !!! example
     Faça uma cópia do arquivo *parte1.c* e salve como *parte2.c*. No novo arquivo, altere para que o processo filho mostre seu pid e entre em loop infinito.
 
-Claramente nem o pai nem o filho terminam no exemplo acima. Porém, se o filho terminar o pai termina também! O sinal **SIGKILL** é usado para terminar forçadamente um processo e ele pode ser enviado por qualquer outro processo do mesmo usuário (ou o *root*, que pode mandar sinais para qualquer processo do sistema).
+Claramente **nem o pai nem o filho terminam** no exemplo acima, para ver isso use no terminal o comando `ps -C parte2`, ele mostrará os processos em execução. Porém, se o filho terminar o pai termina também! O sinal **SIGKILL** é usado para terminar forçadamente um processo e ele pode ser enviado por qualquer outro processo do mesmo usuário (ou o *root*, que pode mandar sinais para qualquer processo do sistema).
 
 O envio de sinais é feito usando a chamada `kill`. Assim como outras chamadas de sistema, `kill` possui também um programa de linha de comando.
 
