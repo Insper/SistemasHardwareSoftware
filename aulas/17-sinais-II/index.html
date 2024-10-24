@@ -1,0 +1,1373 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/17-sinais-II/">
+      
+      
+        <link rel="prev" href="../16-sinais-I/">
+      
+      
+        <link rel="next" href="../../labs/hackerlab/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>17 - Capturando sinais - Sistemas Hardware-Software - 2024/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#17-capturando-sinais" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              17 - Capturando sinais
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-entrada-saida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-sinais-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#capturando-sinais-a-chamada-sigaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capturando sinais - a chamada sigaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sinais-e-concorrencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sinais e concorrência
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueio-de-sinais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloqueio de sinais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-para-praticar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios para praticar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#capturando-sinais-a-chamada-sigaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capturando sinais - a chamada sigaction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sinais-e-concorrencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sinais e concorrência
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueio-de-sinais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloqueio de sinais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-para-praticar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios para praticar
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="17-capturando-sinais">17 - Capturando sinais<a class="headerlink" href="#17-capturando-sinais" title="Permanent link">&para;</a></h1>
+<p>Na aula de hoje iremos criar programas que <em>reagem</em> a sinais recebidos. Já vimos que o sistema tem uma série de comportamentos padrão para cada sinal, então hoje aprenderemos a customizar esse comportamento.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Apesar de muitos recursos mostrarem o uso da chamada <code>signal</code> para a captura de sinais, ela é considerada obsoleta e o recomendado é usar <code>sigaction</code>, que é um pouco mais complicada de usar mas permite maior flexibilidade ao definir o comportamento do processo.</p>
+</div>
+<h2 id="capturando-sinais-a-chamada-sigaction">Capturando sinais - a chamada <code>sigaction</code><a class="headerlink" href="#capturando-sinais-a-chamada-sigaction" title="Permanent link">&para;</a></h2>
+<p>O exemplo abaixo cria um <code>struct sigaction</code> e o seta para executar um <strong>handler</strong> quando o processo receber <code>SIGINT</code> (Ctrl+C).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Fora da main, criamos a função que será nosso handler</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">sig_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// faz algo aqui</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span><span class="cm">/* Dentro da main, uma das primeiras coisas que fazemos é</span>
+<span class="cm">    registrar nosso handler */</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig_handler</span><span class="p">;</span><span class="w"> </span><span class="c1">// aqui vai a função a ser executada</span>
+<span class="w">    </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+<span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Usando como exemplo o código acima, modifique o arquivo <em>sinal1.c</em> para que o programa só termine após apertar Ctrl+C três vezes. Você pode usar <code>exit</code> para sair na terceira vez. Não se esqueça de consultar <code>man sigaction</code> para verificar quais <code>include</code>s devem ser usados.</p>
+</div>
+<details class="details">
+<summary>Clique para ver uma proposta de solução do exercício!</summary>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;signal.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">sig_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">contador</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Chamou Ctrl+C</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">contador</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig_handler</span><span class="p">;</span>
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handler</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Meu pid: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getpid</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>Provavelmente sua solução para o exercício acima funciona, mas seu término não é condizente com a ação do usuário. Ao sair com <code>exit</code> o processo pai (no caso o shell) não consegue saber que o programa foi interrompido pelo usuário e acha que ele terminou normalmente. Podemos resetar o comportamento padrão de um sinal atribuindo a constante <code>SIG_DFL</code> (<em>signal default</em>) a <code>sigaction.sa_handler</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Restaure o comportamento original no segundo <em>Ctrl+C</em>, fazendo com que o processo realmente termine com o sinal.</p>
+</div>
+<details class="details">
+<summary>Clique para ver uma proposta de solução do exercício!</summary>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;signal.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">sig_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">contador</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Chamou Ctrl+C</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">contador</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SIG_DFL</span><span class="p">;</span>
+<span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handler</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig_handler</span><span class="p">;</span>
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handler</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Meu pid: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getpid</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Podemos verificar o sinal de encerramento do último processo finalizado usando o comando<code>kill -l "$?"</code>. Execute-o e veja que realmente é <code>SIGINT</code>.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>você deve receber no terminal uma string identificando o sinal.</p>
+</div>
+</div>
+<p>Um dos problemas da solução proposta é que o último CTRL+C fica sem printf de mensagem! Para resolver o problema, vamos alterar a linha <code>if (contador == 3)</code> e fazer o processo enviar um <code>SIGINT</code> para si próprio.</p>
+<details class="details">
+<summary>Clique para ver uma proposta de solução do exercício!</summary>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;signal.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;signal.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">sig_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">contador</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Chamou Ctrl+C</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">contador</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SIG_DFL</span><span class="p">;</span>
+<span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handler</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/*</span>
+<span class="cm">        Envia o sinal para si mesmo.</span>
+<span class="cm">        Outra forma: raise(SIGINT);</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="n">kill</span><span class="p">(</span><span class="n">getpid</span><span class="p">(),</span><span class="w"> </span><span class="n">SIGINT</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sigaction</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig_handler</span><span class="p">;</span>
+<span class="w">    </span><span class="n">handler</span><span class="p">.</span><span class="n">sa_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">handler</span><span class="p">.</span><span class="n">sa_mask</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sigaction</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handler</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Meu pid: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getpid</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h2 id="sinais-e-concorrencia">Sinais e concorrência<a class="headerlink" href="#sinais-e-concorrencia" title="Permanent link">&para;</a></h2>
+<p>Nesta parte vamos trabalhar com o arquivo <code>sinais-concorrentes.c</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Leia o conteúdo do arquivo acima e complete as partes faltantes.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Teste sua implementação enviando sinais <code>SIGINT</code>e <code>SIGTERM</code> para seu processo. Os resultados foram os esperados?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Os handlers foram corretamente chamados. Mas precisamos conferir melhor o valor da variável status.</p>
+</div>
+</div>
+<p>Vamos agora examinar o que acontece quando trabalhamos com vários sinais sendo recebidos ao mesmo tempo.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Abra dois terminais. No primeiro execute <code>sinais-concorrentes</code>.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>No segundo terminal, realize <strong>rapidamente</strong> a seguinte sequência de comandos. Para cada comando, anote o que é mostrado no terminal.</p>
+<ol>
+<li>Envie o sinal SIGINT para o programa.</li>
+<li>Envie o sinal SIGTERM para o programa.</li>
+<li>Envie de novo SIGINT.</li>
+</ol>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Envie <code>kill -s SIGINT &lt;pid&gt;</code>, <code>kill -s SIGTERM &lt;pid&gt;</code> e <code>kill -s SIGINT &lt;pid&gt;</code> e confira o resultado!</p>
+</div>
+</div>
+<div class="admonition exercise text medium">
+<p class="admonition-title">Exercise</p>
+<p>Assumindo que cada função roda do começo ao fim sem interrupção, os valores da variável <code>status</code> foram os esperados? Se não, como você explica o ocorrido?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Não! Podemos perceber que o valor do status foi modificado sem que o primeiro handler fosse finalizado, tornando inconsistente a nossa tratativa. Isto ocorre porque a chegada de um novo sinal faz com que o handler que está executando seja interrompido e o novo handler do novo sinal passa a executar. Apenas quando este segundo handler finalizar é que o anterior continuará sua execução.</p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Valide sua resposta com o professor antes de prosseguir. Se quiser, poderá esperar pela correção do exercício.</p>
+</div>
+<h2 id="bloqueio-de-sinais">Bloqueio de sinais<a class="headerlink" href="#bloqueio-de-sinais" title="Permanent link">&para;</a></h2>
+<p>A principal vantagem de usarmos <code>sigaction</code> é que esta chamada permite configurar sinais a serem <strong>bloqueados</strong> durante a execução da função <code>sa_handler</code>. Ou seja, se um sinal bloqueado for recebido durante sua execução ele é colocado "em espera" até que <code>sa_handler</code> acabe de rodar!</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Bloquear sinais evita o problema detectado na parte anterior?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Sim! Desta forma, garantimos consistência no valor da variável <code>status</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text">
+<p class="admonition-title">Exercise</p>
+<p>Quais sinais deverão ser bloqueados durante a execução do handler <code>SIGINT</code>? E durante a execução do handler <code>SIGTERM</code>?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>No registro do handler de <code>SIGINT</code>, bloqueamos <code>SIGTERM</code>. No registro do handler de <code>SIGTERM</code>, bloqueamos <code>SIGINT</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>O campo <code>sa_mask</code> permite bloquear sinais enquanto os handlers executam. Consulte <code>man sigsetops</code> para ver como preenchê-lo. Escreva 
+abaixo os comandos para tal.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Podemos fazer, por exemplo, <code>sigaddset(&amp;handler_sigterm.sa_mask, SIGINT);</code></p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique <code>sinais-concorrentes.c</code> para que <em>SIGTERM</em> seja bloqueado enquanto o handler de <em>SIGINT</em> roda. Repita então o experiemento acima e veja que não há mais conflito na variável global compartilhada.</p>
+</div>
+<p>!!! example O que fizemos não permite que <code>SIGINT</code> seja interrompido por um <code>SIGTERM</code>, mas permite que um <code>SIGTERM</code> seja interrompido por um <code>SIGINT</code>! Corrija esta situação.</p>
+<h2 id="exercicios-para-praticar">Exercícios para praticar<a class="headerlink" href="#exercicios-para-praticar" title="Permanent link">&para;</a></h2>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Modifique <code>sinal1.c</code> para que, ao ser colocado em background usando Ctrl+Z (SIGTSTP), imprima uma mensagem antes de parar de executar.</p>
+<p><strong>Dicas</strong>:</p>
+<ul>
+<li>Você precisa retornar o comportamento padrão do sinal depois de dar o print.</li>
+<li>Pesquise como usar <code>raise</code> para (re)enviar um sinal para o próprio processo.</li>
+</ul>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Complete o programa acima com uma outra função que imprime a mensagem <em>Continuando!</em> quando o programa voltar a rodar (sinal <code>SIGCONT</code>).</p>
+</div>
+<hr />
+<p>Uma parte importante de sinais em sistemas POSIX é que, ao interromper um processo, eles podem cancelar operações que estavam ocorrendo. Em especial, chamadas de sistema que deixam um processo bloqueado (como <code>wait</code> e <code>sleep</code>) ou que fazem operações de entrada/saída (como <code>read</code> e <code>write</code>).</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Compile e rode o programa <code>sleep_longo.c</code>. O quê foi mostrado na tela?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Rode novamente o programa. Abra um novo terminal e envie um sinal <code>SIGTERM</code> para este processo. O quê é mostrado na tela? Você consegue interpretar este resultado?</p>
+<p><strong>Dicas</strong>:</p>
+<ul>
+<li>Será útil exibir na saída padrão o <strong>PID</strong> do processo!</li>
+<li>Repita a execução múltiplas vezes. Vai te ajudar a entender o que acontece. Em algumas envie o sinal <code>SIGTERM</code> rapidamente, em outras, aguarde mais alguns segundos!</li>
+</ul>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Como checamos que <code>sleep</code> realmente parou o processo por todo o tempo?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>A resposta está no manual. Leia em especial o RETURN VALUE!
+<div class="termy"></p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span><span class="m">3</span><span class="w"> </span>sleep
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Modifique o programa para que ele chame <code>sleep</code> tanto quanto for necessário para que o processo durma o tempo especificado. Salve este arquivo como <code>sleep_longo_while.c</code>.</p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Troque o código de <code>sleep_longo.c</code> para ignorar o sinal <code>SIGTERM</code>. O programa agora funciona como esperado? Por que?</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 24, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
