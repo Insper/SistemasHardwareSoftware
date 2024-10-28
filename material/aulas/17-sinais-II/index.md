@@ -233,7 +233,7 @@ A principal vantagem de usarmos `sigaction` é que esta chamada permite configur
         No registro do handler de `SIGINT`, bloqueamos `SIGTERM`. No registro do handler de `SIGTERM`, bloqueamos `SIGINT`.
 
 !!! exercise text short
-    O campo `sa_mask` permite bloquear sinais enquanto os handlers executam. Consulte `man sigsetops` para ver como preenchê-lo. Escreva 
+    O campo `sa_mask`, da estrutura `struct sigaction`, permite bloquear sinais enquanto os handlers executam. Veja nos slides da aula como acessar esse campo e use `man sigaddset` para ver como preenchê-lo. Escreva 
     abaixo os comandos para tal.
 
     !!! answer "Resposta"
@@ -242,7 +242,7 @@ A principal vantagem de usarmos `sigaction` é que esta chamada permite configur
 !!! example
     Modifique `sinais-concorrentes.c` para que *SIGTERM* seja bloqueado enquanto o handler de *SIGINT* roda. Repita então o experiemento acima e veja que não há mais conflito na variável global compartilhada.
 
-!!! example O que fizemos não permite que `SIGINT` seja interrompido por um `SIGTERM`, mas permite que um `SIGTERM` seja interrompido por um `SIGINT`! Corrija esta situação.
+    O que fizemos não permite que `SIGINT` seja interrompido por um `SIGTERM`, mas permite que um `SIGTERM` seja interrompido por um `SIGINT`! Corrija esta situação.
 
 ## Exercícios para praticar
 

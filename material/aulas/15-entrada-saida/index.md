@@ -82,6 +82,24 @@ Até agora trabalhamos com um buffer com somente um caractere. Isso facilita a p
 
 !!! example
     Modifique o `copy_file` para usar um buffer de 100 caracteres. Meça o tempo de execução para a cópia de um arquivo grande (~100Mb) usando o comando `time`. Não se esqueça de verificar que os resultados ficaram iguais com o comando `diff`.
+    
+O comando `time` tem como saída três informações sobre o processo executado:
+
+- Tempo Real (**real**): O tempo que real que levou para executar o comando, do início ao fim.
+- Tempo do usuário (**user**): O tempo que a CPU gastou na tarefa em si.
+- Tempo do sistema (**sys**): O tempo que a CPU gastou em tarefas de nível de sistema relacionadas ao comando. 
+    
+!!! tip
+    Para saber mais como o  `time` ou `diff` funcionam use o comando `man` conforme abaixo.
+
+<div class="termy">
+
+    ```console
+    $ man time
+    $ man diff
+    ```
+
+</div>
 
 !!! tip
     Você pode utilizar o comando `dd` para gerar um arquivo aleatório de tamanho arbitrário. Por exemplo, para gerar um arquivo de 100MB, podemos fazer:
@@ -96,17 +114,6 @@ $ dd if=/dev/urandom of=ex.bin bs=1M count=100 iflag=fullblock
 </div>
 
 
-!!! warning
-    Não sabe como usar `time` ou `diff`? Use o comando `man` visto acima.
-
-<div class="termy">
-
-    ```console
-    $ man time
-    $ man diff
-    ```
-
-</div>
 
 !!! exercise text short
     Você consegue explicar a diferença de desempenho entre as duas versões?
