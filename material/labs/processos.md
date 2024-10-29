@@ -83,7 +83,9 @@ O programa `recupera_senha.c` será avaliado de forma manual usando uma rubrica 
     ```
     falha na recuperacao da senha do usuario {fabio}
     ```
+
 - Para inibir os prints gerados pelo executável `criptInsper`, você pode utilizar o trecho de código abaixo antes da chamada da função `exec`. 
+
 
     ```c
     //descarte padrão linux, dados enviados para o arquivo são completamente descartados
