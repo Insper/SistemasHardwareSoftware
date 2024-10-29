@@ -88,12 +88,14 @@ O programa `recupera_senha.c` será avaliado de forma manual usando uma rubrica 
 
 
     ```c
+    ....
     //descarte padrão linux, dados enviados para o arquivo são completamente descartados
     int fd_null = open("/dev/null", O_WRONLY);
     //Redireciona a saida padrao (stdout) para /dev/null 
     dup2(fd_null, STDOUT_FILENO);
     close(fd_null);
     execvp(prog, args);
+    ....
     ```
 
 **NOTA desta fase**: 2.5
