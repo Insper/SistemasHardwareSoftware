@@ -78,10 +78,20 @@ O programa `recupera_senha.c` será avaliado de forma manual usando uma rubrica 
     ```
     senha do usuario {fabio} recuperada {helloaac}
     ```
-Se a recuperacao falhar o seu programa deverá mostrar a mensagem:
+    Se a recuperacao falhar o seu programa deverá mostrar a mensagem:
 
     ```
     falha na recuperacao da senha do usuario {fabio}
+    ```
+- Para inibir os prints gerados pelo executável `criptInsper`, você pode utilizar o trecho de código abaixo antes da chamada da função `exec`. 
+
+    ```c
+    //descarte padrão linux, dados enviados para o arquivo são completamente descartados
+    int fd_null = open("/dev/null", O_WRONLY);
+    //Redireciona a saida padrao (stdout) para /dev/null 
+    dup2(fd_null, STDOUT_FILENO);
+    close(fd_null);
+    execvp(prog, args);
     ```
 
 **NOTA desta fase**: 2.5
