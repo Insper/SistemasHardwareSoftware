@@ -1,3 +1,13 @@
+/*
+Para compilar use:
+gcc -g sinais-concorrentes_aula_passada.c -o sinais
+
+para ver o código dos sinais
+man 7 signal
+SIGINT - 2
+SIGTERM - 15
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
@@ -31,7 +41,7 @@ int main() {
     handler_sigint.sa_handler = sigint_handler;
     handler_sigint.sa_flags = 0;
     sigemptyset(&handler_sigint.sa_mask);
-    // bloqueia o SIGTERM
+    //bloqueia o SIGTERM
     sigaddset(&handler_sigint.sa_mask, SIGTERM);
 
     sigaction(SIGINT, &handler_sigint, NULL);
