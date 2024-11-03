@@ -85,6 +85,7 @@ markdown_extensions:
   - pymdownx.snippets:
       base_path: code
       check_paths: true
+  - extra
 
 nav:
     - Home: index.md
@@ -109,10 +110,11 @@ nav:
         - aulas/16-sinais-I/index.md
         - aulas/17-sinais-II/index.md
         - aulas/18-threads-I/index.md
+        - aulas/19-sincronizacao/index.md
     - Labs:
         - labs/hackerlab.md
         - labs/processos.md
-        #- labs/threads.md
+        - labs/threads.md
     - Dicas:
         - outros/github.md
         - outros/vbox.md
