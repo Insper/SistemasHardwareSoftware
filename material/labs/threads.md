@@ -47,14 +47,8 @@ A maneira trivial de combinar dois arquivos previamente ordenados é, carregar t
 
 A maneira "menos trivial", apesar de simples, que melhora consideravelmente o desempenho da sua solução, é aproveitar que arquivos já estão ordenados, e carregar todos os itens dos dois arquivos em arrays separados, percorrer ambos arrays, ao mesmo tempo, e formar um novo array que posteriormente será armazenado em um arquivo temporário. Veja as imagens abaixo para ter uma boa ideia do algoritmo:
 
-<p float="middle">
-  <img src="img/image02-0.png" width="49%" />
-  <img src="img/image02-1.png" width="49%" /> 
-  <img src="img/image02-2.png" width="49%" />
-  <img src="img/image02-3.png" width="49%" />
-  <img src="img/image02-4.png" width="49%" /> 
-  <img src="img/image02-5.png" width="49%" />
-</p>
+![alt text](img/combina01.png "combina01")
+![alt text](img/combina02.png "combina02")
 
 
 *Exemplo 03: Organização do array utilizando complexidade `O(n)`*
