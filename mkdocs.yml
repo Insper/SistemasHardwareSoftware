@@ -110,6 +110,7 @@ nav:
         - aulas/17-sinais-II/index.md
         - aulas/18-threads-I/index.md
         - aulas/19-sincronizacao/index.md
+        - aulas/20-semaforos/index.md
     - Labs:
         - labs/hackerlab.md
         - labs/processos.md
