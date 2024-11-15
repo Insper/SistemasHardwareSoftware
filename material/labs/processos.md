@@ -42,9 +42,11 @@ $./criptInsper xxq5aBqiB66j2 xz.... 1
 
 Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:
 
-- todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. **Não é permitido o uso de funções da** `Standard I/O` para manipulação de arquivos, como por exemplo `fopen()`, `fread()` e `fclose()`. 
+- todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. **Não é permitido o uso de funções da** `Standard I/O` para manipulação de arquivos, como por exemplo `fopen()`, `fdopen()`, `fread()` e `fclose()`. 
 - se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.
 - **Fica proibido** o uso de ferramentas de **geração de código automático por IA**, como por exemplo o **ChatGPT**.
+
+**O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.**
 
 ## Entrega
 
@@ -83,19 +85,15 @@ O programa `recupera_senha.c` será avaliado de forma manual usando uma rubrica 
     ```
     falha na recuperacao da senha do usuario {fabio}
     ```
-
 - Para inibir os prints gerados pelo executável `criptInsper`, você pode utilizar o trecho de código abaixo antes da chamada da função `exec`. 
 
-
     ```c
-    ....
     //descarte padrão linux, dados enviados para o arquivo são completamente descartados
     int fd_null = open("/dev/null", O_WRONLY);
     //Redireciona a saida padrao (stdout) para /dev/null 
     dup2(fd_null, STDOUT_FILENO);
     close(fd_null);
     execvp(prog, args);
-    ....
     ```
 
 **NOTA desta fase**: 2.5

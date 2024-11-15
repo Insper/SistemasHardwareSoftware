@@ -76,11 +76,12 @@ Lembrando que, utilizaremos os mesmos comandos apresentados acima para compilaç
 
 Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:
 
-- todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. **Não é permitido o uso de funções da** `Standard I/O` para manipulação de arquivos, como por exemplo `fopen()`, `fread()` e `fclose()`. 
+- todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. **Não é permitido o uso de funções da** `Standard I/O` para manipulação de arquivos, como por exemplo `fopen()`, `fdopen()`,  `fread()` e `fclose()`. 
 - se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.
 - **Fica proibido** o uso de ferramentas de **geração de código automático por IA**, como por exemplo o **ChatGPT**.
 
- 
+**O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.**
+
 ## Avaliação
 
 A avaliação, além de se basear nas rubricas descritas abaixo, precisará que você escreva um `README.md` em seu repositório contendo a fase e a nota que alcançou. Além disso, é necessário enviar um vídeo de seu programa rodando e com comentários explicativos seus. O link do vídeo deve estar disponível no `README.md`.
