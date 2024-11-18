@@ -1,0 +1,1458 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/processos/">
+      
+      
+        <link rel="prev" href="../hackerlab/">
+      
+      
+        <link rel="next" href="../threads/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Lab de Processos - Sistemas Hardware-Software - 2024/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-de-processos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab de Processos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-entrada-saida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/16-sinais-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/17-sinais-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/18-threads-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    18 - Concorrência e Threads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-sincronizacao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/20-semaforos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20 - Semáforos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/21-semaforos-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    21 - Semáforos II e Modelos de concorrência
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/22-questoes-de-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    22 - Questões de revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 0
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 0
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="lab-de-processos">Lab de Processos<a class="headerlink" href="#lab-de-processos" title="Permanent link">&para;</a></h1>
+<p>Em um Sistema Operacional, por razões de segurança, as senhas dos usuários não são armazenadas em texto simples e sim o seu hash. Quando um usuário tenta fazer login a senha digitada é criptografada (gerando um hash) para ser comparado com o hash armazenado. Dessa forma, não há necessidade de armazenar sua senha real.</p>
+<p>Caso o usuário tenha utilizado letras maiúsculas e minúsculas, caracteres especiais e numeros é praticamente impossível reconstruir a senha a partir do hash.  No entanto, se a senha for simples, e estivermos dispostos a gastar algum tempo de CPU, é possível tentar todas as combinações de caracteres possíveis em uma senha (ataque de força bruta) até gerar um hash igual ao hash armazenado.</p>
+<p>Nesse lab você deve implementar o programa <strong><code>recupera_senha.c</code></strong> que recupera a(s) senha(s) perdida(s) de usuário(s) a partir de uma parte conhecida da senha. Para tanto, utilizaremos a ferramenta <code>criptInsper</code> que é um executável de linha de comando, que tem como entrada um hash e a parte de uma senha, em seguida, a ferramenta tenta recuperar a senha original. Abaixo um exemplo de chamada do <code>criptInsper</code>:</p>
+<p><div class="highlight"><pre><span></span><code>$./criptInsper xxC4UjY9eNri6 hello...
+</code></pre></div>
+No exemplo acima é informado o valor do hash <code>"xxsczBXm6z4zA"</code>, associado a uma senha, e a parte conhecida da senha <code>"hello"</code> seguida de pontos <code>.</code>, representando os caracteres desconhecidos. O programa <code>criptInsper</code> tentar gerar um hash igual ao informado, a partir de várias combinações de caracteres, começando com a parte conhecida. Para a entrada acima o <code>criptInsper</code> tem a seguinte saída no terminal.</p>
+<p><div class="highlight"><pre><span></span><code>./criptInsper: senha [helloaac] recuperada.
+</code></pre></div>
+Além disso, o <code>criptInsper</code> salva a senha recuperada no arquivo com do hash informado <code>xxC4UjY9eNri6.txt</code> e retorna <code>0</code> para o terminal. O executável pode ter outros valores como retorno em sua execução:</p>
+<ul>
+<li>
+<p>Quando a <strong>quantidade de parâmetros está incorreta ou errada</strong>, o executável <strong>retorna -2</strong>;</p>
+</li>
+<li>
+<p>Quando não é possível quebrar a senha a partir do hash informado, o executável <strong>retorna -1</strong>; e</p>
+</li>
+<li>
+<p>Quando consegue recuperar a senha, o executável <strong>retorna 0</strong>. </p>
+</li>
+</ul>
+<p>Ultimamente o executável <code>criptInsper</code> está um pouco instável, com um comportamento estranho, culpa talvez do último programador que deu manutenção no código. Essa manutenção fez com que, as vezes, a ferramenta demore um tempo excessivo para recuperar a senha ou seja finalizado por conta de acesso indevido a memória (segmentation fault).</p>
+<p>O programador que fez a manutenção disse que quando o <code>criptInsper</code> falhar por acesso à memória, o usuário pode executar novamente a ferramenta informando o número da tentiva, incrementando esse número a cada nova tentativa, até que a recuperação da senha seja bem sucedida, e acreditem, essa gambiarra funciona. Veja um exemplo desse tipo de erro:</p>
+<p><div class="highlight"><pre><span></span><code>$./criptInsper xxq5aBqiB66j2 xz....
+Falha de segmentação (imagem do núcleo gravada)
+</code></pre></div>
+Mas se passar o número da tentativa igual a <code>1</code> no último parâmetro da chamada do <code>criptInsper</code>, o executável consegue recurar a senha:</p>
+<div class="highlight"><pre><span></span><code>$./criptInsper xxq5aBqiB66j2 xz.... 1
+./criptInsper: senha [xzzzzy] recuperada.
+</code></pre></div>
+<h2 id="restricoes">Restrições<a class="headerlink" href="#restricoes" title="Permanent link">&para;</a></h2>
+<p>Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>, <code>fread()</code> e <code>fclose()</code>. </li>
+<li>se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</li>
+<li><strong>Fica proibido</strong> o uso de ferramentas de <strong>geração de código automático por IA</strong>, como por exemplo o <strong>ChatGPT</strong>.</li>
+</ul>
+<p><strong>O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.</strong></p>
+<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<p>Você deverá colocar o programa fonte <code>recupera_senha.c</code> na pasta <code>lab/02-lab-processos</code> em seu repositório de atividades (github), na branch principal, e fazer <strong>upload (push) do arquivo fonte no seu repositório</strong>,  não precisa soltar tag. Além disso, grave um vídeo mostrando a tela do funcionamento do seu programa apresentando cada uma das fases desenvolvidas, e por fim, <strong>preencha o arquivo <code>README.md</code> informando até qual fase você conseguiu chegar e o link do vídeo do funcionamento da sua entrega</strong>. Lembre-se de se atentar ao prazo de entrega definido <a href="../../sobre/">aqui!</a>.</p>
+<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
+<p>O programa <code>recupera_senha.c</code> será avaliado de forma manual usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. </p>
+<h3 id="fase-0"><strong>Fase 0</strong><a class="headerlink" href="#fase-0" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa <code>recupera_senha.c</code> não compila</li>
+<li><strong>Não preencheu</strong> o arquivo <code>README.md</code></li>
+<li>O programa não implementa algum dos requisitos da rubrica da <strong>fase 1</strong>.</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 0.0</p>
+<h3 id="fase-1"><strong>Fase 1</strong><a class="headerlink" href="#fase-1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Preencheu</strong> o arquivo <code>README.md</code></li>
+<li>O programa <code>recupera_senha.c</code> compila com warnings.</li>
+<li>
+<p>O programa roda na linha de comando como abaixo:</p>
+<div class="highlight"><pre><span></span><code>$./recupera_senha fabio xxC4UjY9eNri6 hello...
+</code></pre></div>
+</li>
+<li>
+<p>Para recuperar a senha do usuário <code>fabio</code> o seu programa <code>recupera_senha.c</code> deve fazer uma chamada do excutável <code>criptInsper</code> utilizando a função <code>exec</code> conforme visto em aula, você não pode, por exemplo, usar a chamada da função <strong>system</strong>.</p>
+</li>
+<li>
+<p>Caso o <code>criptInsper</code> tenha sucesso, ou seja, <strong>retorne 0</strong> ao seu programa, você deverá mostrar,  <strong>obrigatoriamente</strong>, a mensagem abaixo:</p>
+<p><div class="highlight"><pre><span></span><code>senha do usuario {fabio} recuperada {helloaac}
+</code></pre></div>
+Se a recuperacao falhar o seu programa deverá mostrar a mensagem:</p>
+<p><div class="highlight"><pre><span></span><code>falha na recuperacao da senha do usuario {fabio}
+</code></pre></div>
+- Para inibir os prints gerados pelo executável <code>criptInsper</code>, você pode utilizar o trecho de código abaixo antes da chamada da função <code>exec</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="c1">//descarte padrão linux, dados enviados para o arquivo são completamente descartados</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">fd_null</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/null&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">O_WRONLY</span><span class="p">);</span>
+<span class="c1">//Redireciona a saida padrao (stdout) para /dev/null </span>
+<span class="n">dup2</span><span class="p">(</span><span class="n">fd_null</span><span class="p">,</span><span class="w"> </span><span class="n">STDOUT_FILENO</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd_null</span><span class="p">);</span>
+<span class="n">execvp</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+</code></pre></div>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 2.5</p>
+<h3 id="fase-2"><strong>Fase 2</strong><a class="headerlink" href="#fase-2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa  <code>recupera_senha.c</code> compila sem warnings.</li>
+<li><strong>Não entregou o video</strong> explicando o funcionamento do programa.</li>
+<li>O programa <code>recupera_senha.c</code> recebe uma flag <code>-f</code> seguida pelo nome de um arquivo de senhas. Seu programa deverá ler o arquivo e recuperar as senhas dos usuários armazenados dentro do arquivo. </li>
+<li>
+<p>Nessa fase cada linha do arquivo deve ser tratado como um processo independente, e a recuperação das senhas pode ser realizada de forma sequencial, assim seu programa pode ler uma linha do arquivo de entrada, chamar o executável <code>criptInsper</code>, receber a resposta e imprimir no terminal. Cada linha do arquivo conterá:</p>
+<ul>
+<li>Nome de usuário (1 a 8 caracteres)</li>
+<li>Hash de senha (13 caracteres)</li>
+<li>Parte conhecida da senha (mais pontos que representam caracteres desconhecidos) (1 a 8 caracteres, contém de 0 a 8 letras minúsculas seguidas de 0 a 8 pontos) </li>
+</ul>
+</li>
+<li>
+<p>Esses três campos são separados por um único espaço. Não se preocupe com nomes de usuário duplicados ou prefixos duplicados. Todas as informações que fornecemos estão garantidas neste formato. Exemplo de arquivo de entrada (<code>senhas1.in</code>):
+    <div class="highlight"><pre><span></span><code>fabio xxC4UjY9eNri6 hello...
+ana xxq5aBqiB66j2 xz....
+diego xxhx0AsVpMTMU sysx....
+jose xxGGPN89YLcGY cham....
+</code></pre></div>
+  Abaixo um exemplo da chamada do seu programa com o flat <code>-f</code> para o arquivo <code>senhas1.in</code> com a respectiva saída.<br />
+  <div class="highlight"><pre><span></span><code>$./recupera_senha -f senhas1.in
+Processo 1: recuperando senha de {fabio}
+Processo 1: senha do usuario {fabio} recuperada {helloaac}
+Processo 2: recuperando senha de {ana}
+Processo 2: falha na recuperacao da senha do usuario {ana}
+Processo 3: recuperando senha de {diego}
+Processo 3: senha do usuario {diego} recuperada {sysxpert}
+Processo 4: recuperando senha de {jose}
+Processo 4: falha na recuperacao da senha do usuario {jose} 
+2 senhas recuperadas, 2 falhas.
+</code></pre></div></p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 5.0</p>
+<h3 id="fase-3"><strong>Fase 3</strong><a class="headerlink" href="#fase-3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Entregou video explicando e mostrando a execução do programa.</li>
+<li>Programa <code>recupera_senha.c</code> roda <strong>sem erros no valgrind</strong>.</li>
+<li>Nessa fase cada linha do arquivo deve ser tratado como um processo independente, e a recuperação das senhas <strong>deve</strong> ser realizada em <strong>paralelo</strong>. Assim no início da execução o seu programa deverá carregar todos os processos do executável <code>criptInsper</code>, e somente depois aguardar a finalização dos processos criados.</li>
+<li>
+<p>Se o executável <code>criptInsper</code> finalizar por segmentation fault, o seu programa deve realizar pelo menos mais duas tentativas de chamadas do executável <code>criptInper</code>, informando o número da tentativa na chamada do executável. A cada nova tentativa deve ser informado se conseguiu ou não recuperar a senha.</p>
+</li>
+<li>
+<p>Abaixo um exemplo da chamada do seu programa para o arquivo <code>senhas1.in</code> com <strong>uma possível saída</strong>.<br />
+  <div class="highlight"><pre><span></span><code>$./recupera_senha -f senhas1.in
+Processo 1: recuperando senha de {fabio}
+Processo 2: recuperando senha de {ana}
+Processo 3: recuperando senha de {diego}
+Processo 4: recuperando senha de {jose}
+Processo 1: senha do usuario {fabio} recuperada {helloaac}
+Processo 2: falha na recuperacao da senha do usuario {ana}
+Processo 3: senha do usuario {diego} recuperada {sysxpert}
+Processo 4: falha na recuperacao da senha do usuario {jose}
+Processo 5: recuperando senha de {ana}
+Processo 5: senha do usuario {ana} recuperada {xzzzzy}
+3 senhas recuperadas, 1 falhas.
+</code></pre></div></p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 7.5</p>
+<h3 id="fase-4"><strong>Fase 4</strong><a class="headerlink" href="#fase-4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>O programa <code>recupera_senha.c</code> abre até <code>N</code> processos do executável <code>criptInsper</code> <strong>em paralelo</strong> para recuperar as senhas no arquivo de entrada. Considere que nos testes sempre utilizaremos um arquivo com número de linhas maior que <code>N</code>. Esse valor é passado pela linha de comando via flag <code>-N</code>, conforme abaixo: 
+    <div class="highlight"><pre><span></span><code>./recurera_senha -f senhas1.in -N 2
+</code></pre></div></p>
+<p>Se nada for passado assuma <code>N=4</code>, por exemplo:</p>
+<div class="highlight"><pre><span></span><code>./recurera_senha -f senhas1.in -N
+</code></pre></div>
+</li>
+<li>
+<p>E por fim, ao apertar <code>Ctrl+C</code> no terminal, o programa <code>recupera_senha.c</code> finaliza os processos do <code>criptInsper</code> que ainda estão executando e apaga todos os arquivos de senhas que foram geradas.</p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 10.0</p>
+<p><strong>IMPORTANTE:</strong> Considere as <strong>fases como cumulativas</strong>, ou seja, cada versão deve <strong>manter as funcionalidades da fase anterior</strong> e acrescentar novas. Por exemplo, a versão da <strong>Fase  2</strong>, além de ler o arquivo com várias senhas, também deve ser possível recuperar uma senha passada por linha de comando  (sem <code>-f arquivo</code>). </p>
+<p>Caso você não implemente alguma funcionalidade de uma determinada fase a nota atribuída será a da fase anterior.</p>
+<h3 id="prazo">Prazo:<a class="headerlink" href="#prazo" title="Permanent link">&para;</a></h3>
+<p><a href="../../sobre/">Clique aqui!</a>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 18, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

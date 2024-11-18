@@ -1,0 +1,1360 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/threads/">
+      
+      
+        <link rel="prev" href="../processos/">
+      
+      
+        <link rel="next" href="../../outros/github/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Lab de Threads - Sistemas Hardware-Software - 2024/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-de-threads" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2024/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab de Threads
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2024/2" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2024/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2024/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    07 - Loops
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-malloc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13 - Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-entrada-saida/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/16-sinais-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/17-sinais-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/18-threads-I/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    18 - Concorrência e Threads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-sincronizacao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/20-semaforos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20 - Semáforos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/21-semaforos-II/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    21 - Semáforos II e Modelos de concorrência
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/22-questoes-de-revisao/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    22 - Questões de revisão
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ideia-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ideia principal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complexidade-da-etapa-de-combinacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complexidade da etapa de combinação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilacao-e-testes-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e testes de memória
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrega">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ideia-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ideia principal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complexidade-da-etapa-de-combinacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complexidade da etapa de combinação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilacao-e-testes-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e testes de memória
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrega">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="lab-de-threads">Lab de Threads<a class="headerlink" href="#lab-de-threads" title="Permanent link">&para;</a></h1>
+<p>Este laboratório testará suas habiliades com threads, fazendo com que você crie e gerencie um programa que ordena números armazenados em arquivos. Você deverá implementar um programa (<strong><code>ordena_combina.c</code></strong>) que organize uma série de arquivos de maneira paralelizada utilizando-se das threads que biblioteca POSIX da linguagem C te disponibiliza.</p>
+<h2 id="ideia-principal">Ideia principal<a class="headerlink" href="#ideia-principal" title="Permanent link">&para;</a></h2>
+<p>A ideia principal a ser seguida é a de particionamento do trabalho de ordenação e combinação dos arquivos. Os arquivos possuirão uma série de números inteiros separados por quebras de linhas, inclusive na última linha. Assim cada linha no arquivo terá somente um inteiro, por exemplo:</p>
+<p><div class="highlight"><pre><span></span><code>4
+1
+10
+9
+...
+</code></pre></div>
+Cada arquivo possuirá uma quantidade aleatória de números, dessa forma, o seu trabalho inicial será alocar para cada arquivo lido, uma thread <strong>"worker"</strong> que terá a função de organizar os items presentes no arquivo, e gerar como saída um <strong>arquivo intermediário</strong> contendo os itens em ordem crescente (ordenados). Siga o exemplo:</p>
+<p><img alt="alt text" src="../img/image00.png" title="Organização Inicial" /></p>
+<p><em>Exemplo 01: Organização paralelizada inicial dos arquivos</em></p>
+<p>Cada thread <strong>"worker"</strong> deve carregar todos os itens do seu arquivo em memória, em um array por exemplo, e utilizar a função <code>qsort()</code> da biblioteca <code>stdlib</code> para fazer a ordenação dos números. Essa função opera utilizando um algoritmo de complexidade <code>O(n log(n))</code>. Em caso de dúvida, utilize o manual para encontrar a assinatura da função e uma explicação de como utiliza-la.</p>
+<p>Os <strong>arquivos intermediários</strong> devem seguir o padrão de nome <code>X.txt.sorted</code> onde <code>X</code> é o nome original do arquivo.</p>
+<p>Após a ordenação inicial dos elementos dos arquivos entrada, você passará para uma etapa de combinação onde, cada thread <strong>"worker"</strong> terá como entrada dois arquivos intermediários (ordenados) que deverão ser combinados em um único arquivo temporário ordenado. Este fase deve ser feita por uma thread <strong>"worker"</strong> para cada combinação.</p>
+<p>Essa etapa de combinação deverá ser repetida até que reste um único arquivo com todos os números ordenados. Cada combinação entre dois arquivos é salva em um arquivo temporário que deve seguir o padrão de nome <code>tempN.T.txt</code>: onde <code>N</code> é o número do arquivo temporário (começando em <code>0</code>) e <code>T</code> é a quantidade de threads <strong>"worker"</strong> naquela fase de combinação.</p>
+<p>Assim, seguindo a regra para nomes de arquivos temporários, a última combinação (combinação final) terá o arquivo <code>temp0.1.txt</code> como saída.</p>
+<p>Siga o exemplo na imagem abaixo para ter uma ideia melhor dos processos de organização e combinação:</p>
+<p><img alt="alt text" src="../img/image01.png" title="Processo completo" /></p>
+<p><em>Exemplo 02: Organização e combinação paralelizadas</em></p>
+<h2 id="complexidade-da-etapa-de-combinacao">Complexidade da etapa de combinação<a class="headerlink" href="#complexidade-da-etapa-de-combinacao" title="Permanent link">&para;</a></h2>
+<p>Como visto antes, a função <code>qsort()</code> trabalha utilizando um algoritmo de complexidade <code>O(n log(n))</code>, assim, no pior caso, a etapa de organização trabalhará na mesma complexidade.</p>
+<p>Contudo, a etapa de combinação tem a possibilidade de trabalhar em uma complexidade melhor que <code>O(n log(n))</code>, no caso, <code>O(n)</code>.</p>
+<p>A maneira trivial de combinar dois arquivos previamente ordenados é, carregar todos os itens dos dois arquivos em arrays separados, concatenar os dois arrays e utilizando a mesma função de organização (<code>qsort()</code>) usada anteriormente para organizar os arrays. </p>
+<p><strong>Você acha que essa solução é boa? Ela pode ser melhorada?</strong></p>
+<p>A maneira "menos trivial", apesar de simples, que melhora consideravelmente o desempenho da sua solução, é aproveitar que arquivos já estão ordenados, e carregar todos os itens dos dois arquivos em arrays separados, percorrer ambos arrays, ao mesmo tempo, e formar um novo array que posteriormente será armazenado em um arquivo temporário. Veja as imagens abaixo para ter uma boa ideia do algoritmo:</p>
+<p><img alt="alt text" src="../img/combina01.png" title="combina01" />
+<img alt="alt text" src="../img/combina02.png" title="combina02" /></p>
+<p><em>Exemplo 03: Organização do array utilizando complexidade <code>O(n)</code></em></p>
+<h2 id="compilacao-e-testes-de-memoria">Compilação e testes de memória<a class="headerlink" href="#compilacao-e-testes-de-memoria" title="Permanent link">&para;</a></h2>
+<p>A compilação deve ser sempre feita utilizando o comando abaixo:</p>
+<div class="highlight"><pre><span></span><code>gcc -Wall -pedantic ordena_combina.c -o ordena_combina -lpthread
+</code></pre></div>
+<p>Para checar problemas de memória, utilize o comando abaixo:</p>
+<div class="highlight"><pre><span></span><code>valgrind --leak-check=yes ./ordena_combina file0.txt file1.txt 
+</code></pre></div>
+<p>Lembrando que, utilizaremos os mesmos comandos apresentados acima para compilação e os testes de memória, portanto, use-os para evitar problemas. </p>
+<p><strong>Importante</strong>: Considere que sempre testaremos o seu programa passando pelo <strong>menos 2 arquivos</strong> na entrada.</p>
+<h2 id="restricoes">Restrições<a class="headerlink" href="#restricoes" title="Permanent link">&para;</a></h2>
+<p>Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>,  <code>fread()</code> e <code>fclose()</code>. </li>
+<li>se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</li>
+<li><strong>Fica proibido</strong> o uso de ferramentas de <strong>geração de código automático por IA</strong>, como por exemplo o <strong>ChatGPT</strong>.</li>
+</ul>
+<p><strong>O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.</strong></p>
+<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
+<p>A avaliação, além de se basear nas rubricas descritas abaixo, precisará que você escreva um <code>README.md</code> em seu repositório contendo a fase e a nota que alcançou. Além disso, é necessário enviar um vídeo de seu programa rodando e com comentários explicativos seus. O link do vídeo deve estar disponível no <code>README.md</code>.</p>
+<p>A avaliação funcionará de modo cumulativo e manual, sendo assim, uma fase só será aceita como completa caso <strong>TODOS</strong> os requisitos da fase anterior forem completos sem problemas.</p>
+<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<p>Você deverá colocar o programa fonte <code>ordena_combina.c</code> na pasta <code>lab/03-lab-threads</code> em seu repositório de atividades (github), na branch principal, e fazer <strong>upload (push) do arquivo fonte no seu repositório</strong>,  não precisa soltar tag.</p>
+<p>Lembre-se de se atentar ao prazo de entrega definido <a href="../../sobre/">aqui!</a>.</p>
+<p><strong>Fase 0</strong></p>
+<ul>
+<li>Não entregou;</li>
+<li>Programa não compila;</li>
+<li>Não preencheu o README com a nota que alcançou;</li>
+<li>Não entregou o vídeo explicativo;</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 0.0</p>
+<p><strong>Fase 1</strong></p>
+<ul>
+<li>Programa compila com warnings;</li>
+<li>Código fonte escrito de maneira limpa e concisa, evitando trechos de codigo inúteis e não performáticos.</li>
+<li>
+<p>Programa roda na linha de comando como mostrado abaixo:</p>
+<div class="highlight"><pre><span></span><code>./ordena_combina file0.txt file1.txt file2.txt ...
+</code></pre></div>
+</li>
+<li>
+<p>Programa abre e organiza os arquivos recebidos pela linha de comando utilizando threads, salvando os resultados em <strong>arquivos intermediários</strong>, com seguinte nome <code>X.txt.sorted</code> onde <code>X</code> é o nome original do arquivo.;</p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 2.0</p>
+<p><strong>Fase 2</strong></p>
+<ul>
+<li>Programa compila sem warnings;</li>
+<li>Programa combina os arquivos intermediários ordenados em arquivos temporários utilizando threads, <strong>com cada thread responsável em combinar dois arquivos</strong>. Ao final, quando tivermos somente uma thread, o resultado da última combinação, deverá estar armazendo em um <strong>arquivo final</strong> com o seguinte nome <code>temp0.1.txt</code>;</li>
+<li>Considere que nessa fase que que número de arquivos informado por linha de comando será sempre potência de <code>2</code> ( 2, 4, 8, 16,...).</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 5.0</p>
+<p><strong>Fase 3</strong></p>
+<ul>
+<li>Programa passa pela análise do Valgrind <strong>sem erros</strong>;</li>
+<li>Programa funciona para qualquer quantidade de arquivos de entrada informado por linha de comando, sem a necessidade da quantidade ser potência de <code>2</code>, mas como informado acima, sempre passaremos pelo menos 2 arquivos na entrada;</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 8.0</p>
+<p><strong>Fase 4</strong></p>
+<ul>
+<li>Programa executa a etapa de combinação em <strong>O(n)</strong>;</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 10.0</p>
+<p><strong>IMPORTANTE:</strong> Considere as <strong>fases como cumulativas</strong>, ou seja, cada versão deve <strong>manter as funcionalidades da fase anterior</strong> e acrescentar novas, mesmo porque,  para realizar a próxima fase, a fase anterior deve estar pronta. </p>
+<p>Caso você não implemente alguma funcionalidade de uma determinada fase a nota atribuída será a da fase anterior.</p>
+<h3 id="prazo">Prazo:<a class="headerlink" href="#prazo" title="Permanent link">&para;</a></h3>
+<p><a href="../../sobre/">Clique aqui!</a>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 18, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
