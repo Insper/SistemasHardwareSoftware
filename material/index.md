@@ -1,6 +1,6 @@
 # Sistemas Hardware-Software
 
-Bem vindo ao curso de [Sistemas Hardware-Software](./outros/sistemas-hardware-software.html) 2025/1.
+Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target="_blank">Sistemas Hardware-Software</a> 2025/1.
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 <!-- * **Ninja**: xxx -->
