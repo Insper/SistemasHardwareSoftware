@@ -6,7 +6,7 @@ Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target=
 
 * **Ninja**: 
 
-# Aulas
+## Aulas
 
 * SEG 15:45 - 17:45 (Lab Ágil 2)
 * QUI 15:45 - 17:45 (Lab Ágil 2)
