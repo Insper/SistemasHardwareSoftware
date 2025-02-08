@@ -4,12 +4,7 @@ Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target=
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
-<<<<<<< HEAD
 * **Ninja**: 
-=======
-* **Ninja**:  
->>>>>>> 0148d81792111ff9b5a85e97bf620fcf0fb31abd
-
 
 ## Avaliação
 
