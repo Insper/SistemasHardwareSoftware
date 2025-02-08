@@ -4,7 +4,7 @@ Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target=
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
-* **Professor**: Diego Saragoza da Silva 
+* **Ninja**: 
 
 
 ## Avaliação
@@ -16,4 +16,4 @@ A avaliação da disciplina será composta por provas, projetos e atividades de 
 
 Ver critérios de avaliação na [aula 01](./aulas/01-inteiros/slides.pdf)
 
-Para consultar informações detalhadas sobre a disciplina acesse o [Plano de Aula](2024_02_PlanoDeAula.pdf)
+Para consultar informações detalhadas sobre a disciplina acesse o [Plano de Aula](PlanoDeAula_25_1.pdf)
