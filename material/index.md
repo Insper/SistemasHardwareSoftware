@@ -11,7 +11,7 @@ Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target=
 * SEG 15:45 - 17:45 (Lab Ágil 2)
 * QUI 15:45 - 17:45 (Lab Ágil 2)
 
-* Atendimento: QUI 14:00 - 15:30 (######)
+* Atendimento: QUI 14:00 - 15:30 (Lab Ágil 1)
 
 ## Avaliação
 
