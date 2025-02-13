@@ -10,9 +10,13 @@ Acredito que para nossos propositos na disciplina de SisHard seja suficiente.
 
 O GNU Debugger, mais conhecido por GDB, é um depurador do GNU. Ele pode ser usado para depuração em sistemas Unix-like, como por exemplo o Ubuntu 22.04, na nossa disciplina usaremos o GDB para entender os códigos em assemblye de atividades e do Lab01
 
-Acesse [este LINK](https://sourceware.org/gdb/current/onlinedocs/gdb) para mais informações.
+Para aprender como depurar código com GDB acesse [este LINK](https://diveintosystems.org/book/C3-C_debug/gdb.html) e [este LINK](https://diveintosystems.org/book/C3-C_debug/gdb_commands.html) para conhecer os princiipais comandos.
+ 
+Acesse [este LINK](https://sourceware.org/gdb/current/onlinedocs/gdb) documentação completa do GDB.
 
 [Neste LINK](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html) tem as explicações do comando `x` (`x/nfu addr`) que permite examinar a memória de um programa Assembly.
+
+
 
 ## Compiler Explorer - godbolt.org
 

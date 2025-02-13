@@ -120,7 +120,11 @@ Siga os passos para para carregar um programa usando o *gdb*:
     </div> -->
 
 !!! tip
-    O *gdb* é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser vista em [https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top).
+    O [*gdb*](https://diveintosystems.org/book/C3-C_debug/gdb.html) é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser acessada em:
+    [https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top](https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top).
+
+    Uma explicação detalhadas dos comandos do *gdb* pode ser encontrada nesse link:
+    [https://diveintosystems.org/book/C3-C_debug/gdb_commands.html](https://diveintosystems.org/book/C3-C_debug/gdb_commands.html).
 
 Nesta primeira parte iremos abrir o arquivo *parte2.c* e olhar seu conteúdo. Também executaremos o programa compilado *parte2*.
 
