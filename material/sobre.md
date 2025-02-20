@@ -6,8 +6,8 @@
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
 | 03/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 10/02 15:45 |
 | 10/02 | Atv01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/kza8G2K0) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 19/02 23h59 |
-<!-- | 22/08 | Atv02-intro-gdb | Github | 29/08 23h59 |
-| 26/08 | Atv03-funcoes | Github | 01/09 23h59 |
+| 20/08 | Atv02-intro-gdb | Github | 27/02 23h59 |
+<!--| 26/08 | Atv03-funcoes | Github | 01/09 23h59 |
 | 02/09 | Lab01-hackerlab  | Github | 25/09 23h59 |
 | 02/09 | Atv04-condicionais-funcoes | Github | 08/09 23h59 |
 | 09/09 | Atv05-loops | Github | 13/09 23h59 |
