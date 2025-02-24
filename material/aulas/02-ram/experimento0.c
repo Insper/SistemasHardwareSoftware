@@ -7,7 +7,7 @@ typedef union {
 
 int main() {
     char_ou_int variavel;
-    variavel.num = 66;
+    variavel.num = 130;
     
     
     printf("%d\n", variavel.num);
