@@ -40,8 +40,8 @@ extra:
 #      - exercise
 #      - example
 #    report:
-#      api-base: https://devlife.insper-comp.com.br/api/offerings/1/
-#      url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
+      api-base: https://devlife.insper-comp.com.br/api/offerings/1/
+      url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
 
 # Extensions / plugins
 plugins:
