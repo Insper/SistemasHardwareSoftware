@@ -39,7 +39,7 @@ extra:
 #      - tip
 #      - exercise
 #      - example
-#    report:
+    report:
       api-base: https://devlife.insper-comp.com.br/api/offerings/1/
       url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
 
