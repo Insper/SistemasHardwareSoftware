@@ -8,8 +8,8 @@
 | 10/02 | Atv01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/kza8G2K0) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 19/02 23h59 |
 | 20/02 | Atv02-intro-gdb | Github | 27/02 23h59 |
 | 24/02 | Atv03-funcoes | Github | 06/03 23h59 |
-<!--| 02/09 | Lab01-hackerlab  | Github | 25/09 23h59 |
-| 02/09 | Atv04-condicionais-funcoes | Github | 08/09 23h59 |
+| 27/02 | Lab01-hackerlab  | Github | 27/03 23h59 |
+<!--| 06/03 | Atv04-condicionais-funcoes | Github | 13/03 23h59 |
 | 09/09 | Atv05-loops | Github | 13/09 23h59 |
 | 10/09 | Atv06-variaveis-locais | Github | 16/09 23h59 |
 | 16/09 | Atv07-arrays | Github | 23/09 23h59 |
