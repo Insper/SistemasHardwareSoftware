@@ -154,8 +154,12 @@ Vamos agora exercitar. Cada exercício faz um cálculo diferente. Se houver algu
 !!! exercise text long
     Use o `gdb` para listar as funções definidas em `ex2.o` e escreva-as abaixo.
 
+
+
 !!! exercise text long
     Faça a tradução das funções acima para *C*
+
+
 
 ### Arquivo *ex3.o*
 
