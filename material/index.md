@@ -5,9 +5,8 @@ Bem vindo ao curso de <a href="./outros/sistemas-hardware-software.html" target=
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
 * **Ninjas**:  
-    Tales de Freitas
-    
-    Verônica Lima
+    - Tales de Freitas
+    - Verônica Lima
 
 ## Aulas
 
