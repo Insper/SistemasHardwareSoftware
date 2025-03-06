@@ -1,0 +1,961 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/03-arquitetura-x86/">
+      
+      
+        <link rel="prev" href="../02-ram/">
+      
+      
+        <link rel="next" href="../04-funcoes-mov/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>03 - Arquitetura x86-64 - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#03-arquitetura-x86-64" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              03 - Arquitetura x86-64
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parando-e-continuando-a-execucao-de-um-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parando e continuando a execução de um programa.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enderecamento-relativo-e-variaveis-globais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endereçamento relativo e variáveis globais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade-para-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atividade para entrega!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parando-e-continuando-a-execucao-de-um-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parando e continuando a execução de um programa.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enderecamento-relativo-e-variaveis-globais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endereçamento relativo e variáveis globais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade-para-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atividade para entrega!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="03-arquitetura-x86-64">03 - Arquitetura x86-64<a class="headerlink" href="#03-arquitetura-x86-64" title="Permanent link">&para;</a></h1>
+<p>No handout passado usamos o <em>gdb</em> para listar variáveis globais, nomes de funções e examinar endereços de memória. Neste handout vamos começar a usar o <em>gdb</em> também para examinar nossos programas <em>durante sua execução</em>.</p>
+<h2 id="parando-e-continuando-a-execucao-de-um-programa">Parando e continuando a execução de um programa.<a class="headerlink" href="#parando-e-continuando-a-execucao-de-um-programa" title="Permanent link">&para;</a></h2>
+<p>Compile <em>funcoes.c</em> usando as flags:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-std<span class="o">=</span>c99<span class="w"> </span>funcoes.c<span class="w"> </span>-o<span class="w"> </span>funcoes
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Na compilação, <code>-Og</code> irá permitir otimizações de código que não interfiram no debugging. Já o parâmetro <code>-g</code> irá tornar disponíveis informações úteis para o debugging (como tipos de variáveis e cabeçalhos das funções)</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Abra o executável com o <em>gdb</em> e liste suas funções e suas variáveis globais. <strong>Não rode o programa ainda!</strong> Anote abaixo seus endereços e nomes.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>O comando <code>disas</code> é usado para mostrar as instruções de máquina de uma função. Use-o para ver o código de máquina da função <code>funcao1</code>. Liste abaixo quais registradores foram usados nesta função e qual o tamanho dos dados guardados neles.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Com base nos tamanhos identificados, você consegue associar os registradores acima com as variáveis no código de <code>funcao1</code>?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Use o comando <code>break funcao1</code> para parar a execução do programa quando a função <code>funcao1</code> começar a executar. Execute o programa usando <code>run</code>. O quê ocorre?</p>
+</div>
+<p>Após executar o <code>run</code>, utilize <code>disas funcao1</code> e observe no código da função uma seta indicando o próximo comando a ser executado, que representa o breakpoint no início da função.</p>
+<div class="admonition tip">
+<p class="admonition-title">Dica</p>
+<p>Os comandos <code>info breakpoints</code>, <code>info b</code> ou ainda <code>i b</code> podem ser utilizados para listar os breakpoints inseridos no código!</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Podemos usar o comando <code>info registers edi</code> para ver o conteúdo atual do registrador <code>%edi</code>. Qual é este valor? Verifique quais argumentos são passados para <code>funcao1</code> no código <em>C</em> e, com estas informações em mãos, verifique sua resposta do Exercício 2 e escreva abaixo suas novas conclusões.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>O comando <code>stepi</code> executa exatamente uma instrução de máquina. Use-o uma vez e execute novamente <code>disas funcao1</code>. O que aconteceu? É possível saber em qual instrução o programa está parado?</p>
+<p><strong>Dicas</strong>:</p>
+<ol>
+<li>se a primeira instrução for <code>endbr64</code>, execute <code>stepi</code> mais uma vez!</li>
+<li>use <code>disas</code> de novo</li>
+<li>verifique novamente o conteúdo de <code>%edi</code></li>
+</ol>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Cheque novamente o valor de <code>%edi</code>. Este valor condiz com a instrução executada? O que ela faz, exatamente?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Use <code>stepi</code> para parar logo antes do retorno da função. Verifique o conteúdo do registrador <code>%eax</code> e compare-o com os prints feitos pelo program. Você consegue dizer seu uso?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Vamos agora analisar o registrador <code>%rsi</code>. Toda vez que um registrador aparece entre <code>( )</code> estamos fazendo um acesso a memória. Ao mostrar seu conteúdo usando <code>info registers rsi</code> recebemos o endereço de memória que contém o dado que queremos acessar.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Use o comando <code>x</code> para mostrar, em decimal, o <code>int</code> que está armazenado no endereço descoberto no exercício anterior. Confira seu resultado com o código.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Execute o comando <code>continue</code> para continuar rodando o programa. Ele irá rodar até que o próximo <em>breakpoint</em> seja alcançado ou até que o programa termine.</p>
+</div>
+<h2 id="enderecamento-relativo-e-variaveis-globais">Endereçamento relativo e variáveis globais<a class="headerlink" href="#enderecamento-relativo-e-variaveis-globais" title="Permanent link">&para;</a></h2>
+<p>Na parte anterior analisamos o código Assembly de nossa primeira função e vimos como</p>
+<ul>
+<li>mostrar o código fonte de uma função usando <code>disas</code></li>
+<li>mostrar o conteúdo de um registrador usando <code>info registers</code></li>
+<li>executar exatamente uma instrução usando <code>stepi</code></li>
+</ul>
+<p>Também vimos que ao colocar um registrador entre <code>( )</code> estamos fazendo um acesso a memória. Esta operação é equivalente a desreferenciar um ponteiro usando <code>*p</code>. Neste roteiro iremos adicionar um detalhe importante: podemos fazer contas com endereços usando esta notação. Nos exemplo abaixo nos referimos a memória como um grande vetor de bytes <code>unsigned char M[]</code>. Ou seja, ao acessar <code>M[%rax]</code>, por exemplo, estamos acessando o lugar na memória cujo endereço está escrito em <code>%rax</code>.</p>
+<ol>
+<li><code>10(%rax)</code>: acessa a memória <code>M[%rax + 10]</code>.</li>
+<li><code>(%rax, %rdi, 4)</code>: acessa a memória <code>M[%rax + 4 * % rdi]</code>. Note que isto se parece com aritmética de ponteiros cujo tipo apontado seja inteiro, pois os endereços pulam de 4 em 4 bytes.</li>
+</ol>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Saia e abra o <em>gdb</em> novamente. Mostre o código de máquina da função <code>funcao2</code> e coloque um breakpoint em sua primeira instrução.</p>
+</div>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Execute agora o programa. A execução deve ter parado no início de <code>funcao2</code>. Rode <code>disas funcao2</code>.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Você consegue identificar acessos a memória em <code>funcao2</code>? Quais são de leitura e quais são de escrita? Qual o tamanho dos dados lidos/escritos?</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual o significado do registrador <code>%rip</code>? Se não se lembrar reveja os slides.</p>
+</div>
+<p>O tipo de acesso a memória que estamos realizando se chama <code>rip relative addressing</code>. Este tipo de acesso é reservado para variáveis globais e dados somente leitura. Estes dados tem uma característica especial: eles são copiados para a memória seguindo o mesmo layout do arquivo executável. Ou seja, as posições <em>relativas</em> entre o código e os dados globais são fixas.</p>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Anote abaixo o endereço das funções <code>MOV</code> que utilizam este acesso. Baseado nos exemplos acima, descubra o endereço das variáveis acessadas.</p>
+</div>
+<details class="details">
+<summary>Desenho de acesso a memória usando <code>%rip</code></summary>
+<p>A figura abaixo ilustra como funciona o endereçamento usando o registrador <code>%rip</code>. Note que os deslocamentos são diferentes pois o endereço da instrução atual é diferente. Porém, o resultado final do endereço calculado em ambas instruções é o mesmo, indicando que ambas se referem ao mesmo local na memória.</p>
+<p><img alt="" src="pilha-rip.png" /></p>
+</details>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Confira se o valor identificado na questão anterior é o mesmo mostrado a direita das instruções <code>MOV</code> na saída do <code>disas</code>. O <em>gdb</em> já calcula este endereço para facilitar nossa vida, mas é interessante calcular isto manualmente uma vez para entender melhor o processo.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Use o comando <code>continue</code> para continuar o programa. Você deve estar agora na segunda execução de <code>funcao2</code>. Use o comando <code>x</code> para mostrar o valor armazenado na memória calculada acima. Lendo o código do programa, você consegue dizer qual variável é armazenada neste endereço? O valor atual é o esperado para a segunda execução de <code>funcao2</code>?</p>
+</div>
+<p>Além de poder mostrar valores na memória podemos <strong>escrever</strong> valores também. A sintaxe usada é a seguinte:</p>
+<blockquote>
+<p><code>set *( (tipo *) 0x.....) = valor</code></p>
+</blockquote>
+<p>onde devemos substituir <code>tipo</code> por um tipo básico de <em>C</em>, <code>0x...</code> pelo endereço desejado e <code>valor</code> pelo valor que queremos escrever. Note que o que estamos fazendo é um <em>cast</em> do endereço <code>0x....</code> para um ponteiro de <code>tipo</code> e depois estamos acessando o valor apontado usando <code>*</code>!</p>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Escreva o valor <code>-10</code> na memória da variável global usada em <code>funcao2</code>. Rode o programa até o fim. O resultado foi o esperado? Escreva abaixo os comandos utilizados.</p>
+</div>
+<div class="admonition bug">
+<p class="admonition-title">Desafio</p>
+<p>Localize na função <code>main</code> as chamadas ao comando <code>printf</code>, analise as chamadas para responder o próximo exercício!</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Encontre os endereço das strings de formatação do <code>printf</code> e use o comando <code>x</code> para mostrá-las no gdb. Escreva os comandos usados abaixo.</p>
+</div>
+<h2 id="atividade-para-entrega">Atividade para entrega!<a class="headerlink" href="#atividade-para-entrega" title="Permanent link">&para;</a></h2>
+<p>Aula com <strong>atividade</strong> para <strong>entrega</strong>. Confira seu repositório de entregas do classroom!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>atv</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Dica</p>
+<p>Leia o <code>README.md</code> disponível <strong>na pasta da atividade</strong> para descobrir como resolver e entregar.</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 6, 2025 19:17:28">March 6, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

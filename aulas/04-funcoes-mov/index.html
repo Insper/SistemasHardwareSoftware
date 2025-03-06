@@ -1,0 +1,1234 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/04-funcoes-mov/">
+      
+      
+        <link rel="prev" href="../03-arquitetura-x86/">
+      
+      
+        <link rel="next" href="../05-condicionais/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>04 - Funções - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#04-funcoes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              04 - Funções
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funcoes-e-seus-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções e seus argumentos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-guiado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo guiado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assinatura-da-funcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assinatura da função
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      O código
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prática
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex1o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex1.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex2o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex2.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex3o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex3.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex5-desafio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex5 (desafio)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade-para-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atividade para entrega!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hackerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hackerlab
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funcoes-e-seus-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções e seus argumentos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-guiado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo guiado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo guiado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assinatura-da-funcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assinatura da função
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      O código
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prática
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex1o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex1.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex2o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex2.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex3o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex3.o
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-ex5-desafio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo ex5 (desafio)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade-para-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atividade para entrega!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hackerlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hackerlab
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="04-funcoes">04 -  Funções<a class="headerlink" href="#04-funcoes" title="Permanent link">&para;</a></h1>
+<!-- TODO: ano que vem esse precisa de um exercício com correção automatizada. -->
+
+<p>Neste handout vamos trabalhar pela primeira vez na tradução reversa de programas em Assembly para <em>C</em>. Nas últimas aulas vimos as instruções <code>mov</code> e <code>add</code> e na aula de hoje vimos uma tabela grande com as instruções aritméticas (<code>add</code>, <code>sub</code>, <code>mul</code>, <code>imul</code>, <code>div</code>, etc).</p>
+<p>Como em todas as aulas, veremos hoje um detalhe a mais sobre arquitetura <em>x64</em>: chamadas de funções e argumentos.</p>
+<h2 id="funcoes-e-seus-argumentos">Funções e seus argumentos<a class="headerlink" href="#funcoes-e-seus-argumentos" title="Permanent link">&para;</a></h2>
+<p>Em <em>x64</em> os argumentos das funções são passados nos registradores e o valor de retorno é colocado também em um registrador.</p>
+<ol>
+<li><strong>Argumentos inteiros ou ponteiros</strong> são passados nos registradores (<strong>nesta ordem</strong>):<ol>
+<li><code>%rdi</code></li>
+<li><code>%rsi</code></li>
+<li><code>%rdx</code></li>
+<li><code>%rcx</code></li>
+<li><code>%r8</code></li>
+<li><code>%r9</code></li>
+</ol>
+</li>
+<li><strong>Argumentos ponto flutuante</strong> são passados nos registradores <code>%xmm0</code> até <code>%xmm7</code>.</li>
+<li><strong>Valores de retorno inteiros ou ponteiros</strong> são colocados no registrador <code>%rax</code>.</li>
+<li><strong>Valores de retorno ponto flutuante</strong> são colocados no registrador <code>%xmm0</code>.</li>
+</ol>
+<p>Para chamar funções usamos a instrução <code>call</code> seguido do endereço de memória da função. O <code>gdb</code> cria um "apelido" para estes endereços de memória usando o nome original da função no arquivo <em>.c</em>. Assim, estas instruções são mostradas, normalmente, como <code>call func1</code>, por exemplo. Note que antes de cada <code>call</code> devemos preencher os argumentos nos registradores corretos.</p>
+<p>Para retornar usamos a instrução <code>ret</code>. Ela é equivalente ao comando <code>return</code> de <em>C</em> e devolverá o valor armazenado no <code>%rax</code> (ou <code>%xmm0</code> para ponto flutuante).</p>
+<p><img alt="Registradores de 64 e 32 bits" src="registradores-grandes.png" /></p>
+<p><img alt="Registradores de 32, 16 e 8 bits" src="registradores-pequenos.png" /></p>
+<p>Não se esqueça da equivalência entre o tamanhos dos registradores e os tipos inteiros em <em>C</em>. Um resumo gráfico pode ser visto nas figuras acima.</p>
+<ol>
+<li><strong>64 bits</strong> (<code>%rax</code>, <code>%rdi</code> e outros que começam com <code>r</code>): <code>long</code>, <code>unsigned long</code> ou ponteiro;</li>
+<li><strong>32 bits</strong> (<code>%eax</code>, <code>%edi</code> e outros que começa com <code>e</code> e os que terminam em <code>d</code> como <code>r10d</code>): <code>int</code> ou <code>unsigned int</code>;</li>
+<li><strong>16 bits</strong> (<code>%ax</code>, <code>%di</code> e outros com duas letras somente terminando em <code>x</code>): <code>short</code> ou <code>unsigned short</code></li>
+<li><strong>8 bits</strong> (<code>%al</code>, <code>%ah</code> e outros com duas letras terminando em <code>h</code> ou <code>l</code>): <code>char</code> ou <code>unsigned char</code>.</li>
+</ol>
+<p>Vamos agora praticar fazendo a tradução de funções que fazem aritmética simples entre inteiros (usando ou não ponteiros). O exemplo abaixo mostra todas as etapas que precisamos seguir para fazer a tradução Assembly -&gt; C.</p>
+<h2 id="exemplo-guiado">Exemplo guiado<a class="headerlink" href="#exemplo-guiado" title="Permanent link">&para;</a></h2>
+<p>Dado o código Assembly abaixo, faça sua tradução para <em>C</em></p>
+<div class="highlight"><pre><span></span><code>0000000000000000 &lt;misterio1&gt;:
+0:   48 01 f7                add    %rsi,%rdi
+3:   48 8d 04 57             lea    (%rdi,%rdx,2),%rax
+7:   c3                      retq
+</code></pre></div>
+<h3 id="assinatura-da-funcao">Assinatura da função<a class="headerlink" href="#assinatura-da-funcao" title="Permanent link">&para;</a></h3>
+<p>Vamos começar pela assinatura da função. É sempre útil identificar quais registradores são lidos antes de serem escritos. Isso nos ajuda a entender se um registrador é um argumento da função ou se ele é apenas usado como variável local. Faremos isso escrevendo todos os registradores que podem ser argumentos em ordem e vendo se são lidos ou escritos primeiro:</p>
+<ul>
+<li><code>%rdi</code> - lido primeiro (<code>add</code> faz a operação <code>+=</code>)</li>
+<li><code>%rsi</code> - lido primeiro (no lado esquerdo do <code>add</code>)</li>
+<li><code>%rdx</code> - lido primeiro (no lado esquerdo do <code>lea</code>)</li>
+<li><code>%rcx</code> - não usado</li>
+<li><code>%r8</code> - não usado</li>
+<li><code>%r9</code> - não usado</li>
+</ul>
+<p>Logo, os registradores <code>%rdi</code>, <code>%rsi</code> e <code>%rdx</code> são argumentos da função. Consultando o box de arquitetura de computadores, vemos que a função recebe três argumentos do tipo <code>long</code> (pois usa os registradores de 64 bits).</p>
+<p>Note que o resultado das computações é guardado em <code>%rax</code>, que guarda sempre o retorno da função. Por usar a porção de 64 bits do registrador, o tipo de retorno também é <code>long</code>. A assinatura da função é, portanto</p>
+<p><code>long misterio1(long a, long b, long c);</code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ponteiros também usam os registradores de 64 bits. Porém, olhando rapidamente o código notamos que não há nenhum acesso a memória. Logo, se trata realmente de <code>long</code>.</p>
+</div>
+<h3 id="o-codigo">O código<a class="headerlink" href="#o-codigo" title="Permanent link">&para;</a></h3>
+<p>Vamos agora para o código. Nossa primeira estratégia é atribuir um nome para cada registrador. Os três registradores de argumentos já receberam os nomes <code>a</code>, <code>b</code> e <code>c</code>. Para deixar explícito o papel do <code>%rax</code> vamos nomeá-lo de <code>retval</code>.</p>
+<p>A primeira instrução <code>add %rsi, %rdi</code> realiza a adição dos dois registradores e armazena em <code>%rdi</code>. Logo, sua tradução direta seria:</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</code></pre></div>
+<p>A instrução <code>lea (%rdi, %rdx, 2), %rax</code> é usada tanto para calcular endereços de memória quanto para aritmética simples. Vemos que é o segundo caso pois, no código seguinte, não acessamos a memória com o valor calculado. Logo, podemos traduzir este trecho como</p>
+<div class="highlight"><pre><span></span><code><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+</code></pre></div>
+<p>Logo após temos o <code>ret</code>, que é traduzido como</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+</code></pre></div>
+<p>Logo, nossa função é traduzida como</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="nf">misterio1</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Finalmente, podemos deixar nosso código legível e escrevê-lo como</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="nf">misterio1</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Você pode verificar o código original no arquivo <code>exemplo1.c</code>.</p>
+<hr />
+<p>O processo acima pode ser formalizado no seguinte algoritmo:</p>
+<ol>
+<li>Identifique quantos argumentos a função recebe</li>
+<li>Identifique os tipos de cada argumento (pode ser necessário olhar o código assembly da função)</li>
+<li>Dê um nome para cada registrador. Se um mesmo registrador é usado com tamanhos diferentes (<code>%rdi</code> e <code>%edi</code> são usados no código), dê um nome diferente para cada tamanho.</li>
+<li>Faça a tradução de cada instrução separadamente.</li>
+<li>Fique atento aos valores colocados em <code>%rax</code> e <code>%eax</code> perto do fim do código. Esses valores serão retornados pela função.</li>
+<li>O código gerado costuma ser ilegível. Refatore-o para melhorar sua legibilidade.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>A instrução <code>lea</code> pode ser usada tanto para aritmética quanto para cálculo de endereços. Para tirar a dúvida basta olhar se as próximas instruções fazem acesso à memória com o endereço calculado ou apenas usam o valor diretamente (aritmética).</li>
+<li>Os registradores de tamanhos menores são virtuais. Quanto escrevo em <code>%ax</code> estou escrevendo nos 16 bits menos significativos de <code>%rax</code> e de <code>%eax</code> também.</li>
+<li>Muitas instruções com operadores de 32bits zeram os 32bits superiores. Assim, vemos por exemplo a instrução <code>mov $0, %eax</code> sendo usada para zerar um <code>long</code>. Nesses casos é necessário verificar se a função continua usando <code>%eax</code> (é <code>int</code> mesmo) ou se ela magicamente passa a usar <code>%rax</code> (o tipo era <code>long</code>).</li>
+</ul>
+</div>
+<h2 id="pratica">Prática<a class="headerlink" href="#pratica" title="Permanent link">&para;</a></h2>
+<p>Vamos agora exercitar. Cada exercício faz um cálculo diferente. Se houver alguma instrução desconhecida, pesquise-a no google para encontrar seu significado. Normalmente algo como "asm x64 instruction" + a instrução desconhecida dá respostas corretas.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Usaremos o <code>gdb</code> para abrir os arquivos <code>.o</code> nesta aula. Este tipo de arquivo contém funções compiladas, mas não é um executável completo por não ter uma função <code>main</code>.</p>
+</div>
+<h3 id="arquivo-ex1o">Arquivo <em>ex1.o</em><a class="headerlink" href="#arquivo-ex1o" title="Permanent link">&para;</a></h3>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>O código abaixo foi retirado do arquivo <code>ex1.o</code>. Faça sua tradução para <em>C</em>.</p>
+<div class="highlight"><pre><span></span><code>0000000000000000 &lt;ex1&gt;:
+0:   89 f8                   mov    %edi,%eax
+2:   29 f0                   sub    %esi,%eax
+4:   c3                      retq
+</code></pre></div>
+</div>
+<h3 id="arquivo-ex2o">Arquivo <em>ex2.o</em><a class="headerlink" href="#arquivo-ex2o" title="Permanent link">&para;</a></h3>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Use o <code>gdb</code> para listar as funções definidas em <code>ex2.o</code> e escreva-as abaixo.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Faça a tradução das funções acima para <em>C</em></p>
+</div>
+<h3 id="arquivo-ex3o">Arquivo <em>ex3.o</em><a class="headerlink" href="#arquivo-ex3o" title="Permanent link">&para;</a></h3>
+<p>A função abaixo foi obtida de <code>ex3.o</code>.</p>
+<div class="highlight"><pre><span></span><code>0000000000000000 &lt;ex3&gt;:
+0:   8b 06                   mov    (%rsi),%eax
+2:   0f af c0                imul   %eax,%eax
+5:   89 07                   mov    %eax,(%rdi)
+7:   c3                      retq
+</code></pre></div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>O quê faz a instrução <code>imul</code>?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Traduza esta função para <em>C</em>. Fique atento ao tamanho dos registradores usados para identificar o tamanho dos variáveis inteiras.</p>
+</div>
+<hr />
+<p>Antes de prosseguir, valide suas soluções da seção anterior com o professor.</p>
+<p>Vamos agora trabalhar com executáveis "completos". Vamos analisar não somente o código das funções mas também sua chamada.</p>
+<h3 id="arquivo-ex4">Arquivo <em>ex4</em><a class="headerlink" href="#arquivo-ex4" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Para começar!</p>
+<p>Use o <code>gdb</code> para obter o conteúdo das funções <code>main</code> e <code>ex4</code>.</p>
+<p><strong>Dica</strong>: lembre-se do comando <code>disas</code></p>
+</div>
+<p>Localize a chamada da função <code>ex4</code> no main. As intruções acima do <code>call</code> colocam os argumentos nos lugares corretos para <code>ex4</code> rodar.</p>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Quantos argumentos a função recebe? Quais são seus valores?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Traduza a função <code>ex4</code> para <em>C</em>.</p>
+</div>
+<h3 id="arquivo-ex5-desafio">Arquivo <em>ex5</em> (desafio)<a class="headerlink" href="#arquivo-ex5-desafio" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Este exercício é avançado e necessita de pesquisa para ser realizado. Faça-o somente após validar suas soluções dos anteriores com os professores.</p>
+</div>
+<p>Neste exercício vamos nos aprofundar no uso de ponteiros. Vimos no <em>ex3.o</em> um exemplo de função que armazenava um valor calculado em um ponteiro. Agora veremos um exemplo completo que inclui a chamada de uma função recebendo um endereço.</p>
+<p>O trecho abaixo copia os argumentos para os registradores corretos e chama a função.</p>
+<div class="highlight"><pre><span></span><code>60b:   48 8d 4c 24 08          lea    0x8(%rsp),%rcx
+610:   48 8d 54 24 0c          lea    0xc(%rsp),%rdx
+615:   be 03 00 00 00          mov    $0x3,%esi
+61a:   bf 0a 00 00 00          mov    $0xa,%edi
+61f:   e8 d6 ff ff ff          callq  5fa &lt;ex5&gt;
+</code></pre></div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Identifique a partir dos tipos de dados colocados nos registradores qual o tipo dos argumentos da função.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Qual são os endereços passados para a função <code>ex5</code>? Escreva-os em função do registrador <code>%rsp</code>.</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Os endereços acima são passados em quais registradores?</p>
+</div>
+<p>Vamos agora ao código de <code>ex5</code>:</p>
+<div class="highlight"><pre><span></span><code>00000000000005fa &lt;ex5&gt;:
+5fa:   89 f8                   mov    %edi,%eax
+5fc:   48 89 d7                mov    %rdx,%rdi
+5ff:   99                      cltd
+600:   f7 fe                   idiv   %esi
+602:   89 07                   mov    %eax,(%rdi)
+604:   89 11                   mov    %edx,(%rcx)
+606:   c3                      retq
+</code></pre></div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Como a instrução <code>idiv</code> funciona? Em quais registradores ela posiciona seu resultado? Em quais registradores ela espera a entrada?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>O quê faz a instrução <code>cltd</code>? Por quê ela é necessária?</p>
+</div>
+<div class="admonition exercise text long">
+<p class="admonition-title">Exercise</p>
+<p>Faça a tradução de <code>ex5</code> para <em>C</em>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Conferindo tudo!</p>
+<p>Agora que terminou todos os exercícios, confira suas traduções com os gabaritos disponíveis no arquivo <code>fontes.zip</code>.</p>
+</div>
+<h2 id="atividade-para-entrega">Atividade para entrega!<a class="headerlink" href="#atividade-para-entrega" title="Permanent link">&para;</a></h2>
+<p>Aula com <strong>atividade</strong> para <strong>entrega</strong>. Confira seu repositório de entregas do classroom!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>atv</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Como começar?</p>
+<p>Leia o <code>README.md</code> disponível <strong>na pasta da atividade</strong> para descobrir como resolver e entregar.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Prazo!</p>
+<p>Confira o <strong>prazo</strong> de entrega no menu <a href="../../sobre/">Entregas e Prazos</a></p>
+</div>
+<h2 id="hackerlab">Hackerlab<a class="headerlink" href="#hackerlab" title="Permanent link">&para;</a></h2>
+<p>Nesse final de semana será liberado o enunciado do primeiro lab! Confira em <a href="../../labs/hackerlab/">Hackerlab</a> no menu <strong>Labs</strong>!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>lab</code>.</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 6, 2025 19:17:28">March 6, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
