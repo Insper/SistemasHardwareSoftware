@@ -32,13 +32,16 @@ extra_javascript:
   - js/termynal.js
   - js/custom.js
 
+  # - https://polyfill.io/v3/polyfill.min.js?features=es6
+  # - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 extra:
   ihandout_config:
-#    counter:
-#      - question
-#      - tip
-#      - exercise
-#      - example
+    # counter:
+    #    - question
+    #    - tip
+    #    - exercise
+    #    - example
     report:
       api-base: https://devlife.insper-comp.com.br/api/offerings/1/
       url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
@@ -97,7 +100,7 @@ nav:
         - aulas/04-funcoes-mov/index.md
         - aulas/05-condicionais/index.md
         - aulas/06-condicionais-funcoes/index.md
-        # - aulas/07-loops/index.md
+        - aulas/07-loops/index.md
         # - aulas/08-variaveis-locais/index.md
         # - aulas/09-arrays/index.md
         # - aulas/10-malloc/index.md

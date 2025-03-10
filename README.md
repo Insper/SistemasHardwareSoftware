@@ -4,8 +4,8 @@ Este repositório contém os materiais de aula usados na disciplina *Sistemas Ha
 
 Baseado no 
 
-Active handout - repositorio
-https://github.com/insper-education/active-handout/https://github.com/insper-education/active-handout/
+Active handout - repositorio - repo_url
+https://github.com/insper-education/active-handout/
 
-Active handout - gitpages
+Active handout - gitpages - site_url
 https://insper-education.github.io/active-handout/
