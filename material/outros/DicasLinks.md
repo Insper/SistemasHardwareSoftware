@@ -2,7 +2,7 @@
 
 ## Referência para as instruções do Assembly x86 e amd64
 
-Este [guia de referência](https://www.felixcloutier.com/x86/) sobre as intruções da linguagem Assembly é um resumo da referência oficial da [Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). 
+Este guia de referência [https://www.felixcloutier.com/x86/](https://www.felixcloutier.com/x86/) sobre as intruções da linguagem Assembly é um resumo da referência oficial da [Intel](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html). 
 
 Acredito que para nossos propositos na disciplina de SisHard seja suficiente.
 
@@ -10,11 +10,11 @@ Acredito que para nossos propositos na disciplina de SisHard seja suficiente.
 
 O GNU Debugger, mais conhecido por GDB, é um depurador do GNU. Ele pode ser usado para depuração em sistemas Unix-like, como por exemplo o Ubuntu 22.04, na nossa disciplina usaremos o GDB para entender os códigos em assemblye de atividades e do Lab01
 
-Para aprender como depurar código com GDB acesse [este LINK](https://diveintosystems.org/book/C3-C_debug/gdb.html) e [este LINK](https://diveintosystems.org/book/C3-C_debug/gdb_commands.html) para conhecer os princiipais comandos.
+Para aprender como depurar código com GDB acesse este link [https://diveintosystems.org/book/C3-C_debug/gdb.html](https://diveintosystems.org/book/C3-C_debug/gdb.html) e nesse link [https://diveintosystems.org/book/C3-C_debug/gdb_commands.html](https://diveintosystems.org/book/C3-C_debug/gdb_commands.html) você poderá conhecer o os principais comandos do gdb.
  
-Acesse [este LINK](https://sourceware.org/gdb/current/onlinedocs/gdb) documentação completa do GDB.
+Nesse link você terá a  [https://sourceware.org/gdb/current/onlinedocs/gdb](https://sourceware.org/gdb/current/onlinedocs/gdb) documentação completa do GDB.
 
-[Neste LINK](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html) tem as explicações do comando `x` (`x/nfu addr`) que permite examinar a memória de um programa Assembly.
+Aqui [https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html) tem as explicações do comando `x` (`x/nfu addr`) que permite examinar a memória de um programa Assembly.
 
 
 
