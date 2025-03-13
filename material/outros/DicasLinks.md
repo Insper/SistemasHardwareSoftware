@@ -12,7 +12,7 @@ O GNU Debugger, mais conhecido por GDB, é um depurador do GNU. Ele pode ser usa
 
 Para aprender como depurar código com GDB acesse este link [https://diveintosystems.org/book/C3-C_debug/gdb.html](https://diveintosystems.org/book/C3-C_debug/gdb.html) e nesse link [https://diveintosystems.org/book/C3-C_debug/gdb_commands.html](https://diveintosystems.org/book/C3-C_debug/gdb_commands.html) você poderá conhecer o os principais comandos do gdb.
  
-Nesse link você terá a  [https://sourceware.org/gdb/current/onlinedocs/gdb](https://sourceware.org/gdb/current/onlinedocs/gdb) documentação completa do GDB.
+Nesse link [https://sourceware.org/gdb/current/onlinedocs/gdb] (https://sourceware.org/gdb/current/onlinedocs/gdb) você terá a documentação completa do GDB.
 
 Aqui [https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html) tem as explicações do comando `x` (`x/nfu addr`) que permite examinar a memória de um programa Assembly.
 
