@@ -12,8 +12,8 @@
 | 06/03 | Atv04-condicionais-funcoes | Github | 13/03 23h59 |
 | 10/03 | Atv05-loops | Github | 16/03 23h59 |
 | 13/03 | Atv06-variaveis-locais | Github | 20/03 23h59 |
-<!--| 16/09 | Atv07-arrays | Github | 23/09 23h59 |
-| 19/09 | Atv08-malloc | Github | 26/09 23h59 |
+| 17/03 | Atv07-arrays | Github | 23/03 23h59 |
+<!--| 19/09 | Atv08-malloc | Github | 26/09 23h59 |
 | 07/10 | Atv09-TAD  | Github | 11/10 23h59 |
 | 10/10 | Atv10-processos | Github | 20/10 23h59 |
 | 14/10 | Atv11-exec | Github | 21/10 23h59 |
@@ -24,7 +24,7 @@
 # Provas
 
 - **Multirão C**: final da primeira semana
-- **AI**: Semana da Avaliaçao Intermediária
+- **AI**: 27/03 - quinta-feira - horário: 16h00 às 19:00
 - **AF**: Semana da Avaliação Final
 - **SUB**: semana da SUB 
 
