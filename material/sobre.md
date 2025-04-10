@@ -15,12 +15,12 @@
 | 17/03 | Atv07-arrays | Github | 23/03 23h59 |
 | 20/03 | Atv08-malloc | Github | 27/03 23h59 |
 | 07/04 | Atv09-TAD  | Github | 11/04 23h59 |
-<!--| 10/10 | Atv10-processos | Github | 20/10 23h59 |
-| 14/10 | Atv11-exec | Github | 21/10 23h59 |
+| 10/04 | Atv10-processos | Github | 14/04 23h59 |
+<!-- | 14/10 | Atv11-exec | Github | 21/10 23h59 |
 | 17/10 | Atv12-entrada-saida | Github | 25/10 23h59 |
 | 21/10 | Lab02-processos | Github | 08/11  23h59 |
-| 04/11 | Lab03-threads | Github | 24/11  23h59 | -->
-
+| 04/11 | Lab03-threads | Github | 24/11  23h59 | 
+ -->
 # Provas
 
 - **Multirão C**: final da primeira semana
