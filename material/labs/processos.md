@@ -49,7 +49,7 @@ O `inspersh` será avaliado de forma manual usando uma rubrica que descreve as f
 + O programa  `inspersh.c` compila sem *warnings*. Para compilar use: 
 
     ```
-    gcc inspersh.c -Wall -Wno-unused-result -g -Og -o inspersh`
+    gcc inspersh.c -Wall -Wno-unused-result -g -Og -o inspersh
     ```
     
 + O programa printa o *prompt* do *shell*, a partir do diretório onde foi carregado o programa no formato `(pid=<pid>)<path>$ `, como por exemplo:
