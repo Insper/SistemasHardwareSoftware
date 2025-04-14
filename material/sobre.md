@@ -17,8 +17,8 @@
 | 07/04 | Atv09-TAD  | Github | 11/04 23h59 |
 | 10/04 | Atv10-processos | Github | 14/04 23h59 |
 | 10/04 | Lab02-processos | Github | 10/05  23h59 |
-<!-- | 14/10 | Atv11-exec | Github | 21/10 23h59 |
-| 17/10 | Atv12-entrada-saida | Github | 25/10 23h59 |
+<!--| 14/04 | Atv11-exec | Github | 18/04 23h59 |  -->
+<!--| 17/10 | Atv12-entrada-saida | Github | 25/10 23h59 |
 | 04/11 | Lab03-threads | Github | 24/11  23h59 | 
  -->
 # Provas
