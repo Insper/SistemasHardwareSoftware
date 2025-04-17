@@ -1,0 +1,1608 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/processos/">
+      
+      
+        <link rel="prev" href="../hackerlab/">
+      
+      
+        <link rel="next" href="../../outros/github/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Lab de Processos - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-de-processos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab de Processos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-malloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13 - Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-entrada-saida/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iniciando-seu-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iniciando seu shell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-desta-fase-00" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA desta fase: 0.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 1:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 1:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 3.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 5.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 3
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 8.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 4
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 10.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas-de-programacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notas de programação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iniciando-seu-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iniciando seu shell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 0
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-desta-fase-00" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA desta fase: 0.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 1:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 1:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 3.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 5.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 3
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 8.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      FASE 4
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FASE 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nota-ate-essa-fase-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      NOTA até essa fase: 10.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas-de-programacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notas de programação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="lab-de-processos">Lab de Processos<a class="headerlink" href="#lab-de-processos" title="Permanent link">&para;</a></h1>
+<p>Neste laboratório, você implementará um <em>shell Unix</em> simples (como tantos outros que existem, <em>bash</em>, <em>csh</em> etc.) chamado <code>inspersh</code>. A função básica de um <em>shell</em> é aceitar comandos como entradas na linha de comando e executar os programas correspondentes em resposta.</p>
+<p>O propósito deste laboratório é ajudar você a aprender os fundamentos das chamadas de sistema para criar e gerenciar processos conforme você implementa seu programa. </p>
+<p>Você escreverá o código para seu programa <em>shell</em> no arquivo <code>inspersh.c</code>, que estará em branco sem nenhuma função, isto desafiará suas habilidades de desenvolvedor, pois terá que aprender a usar diversas funções das bibliotecas da linguagem C, uma sugestão é que para cada função que for utilizar, teste o seu funcionamento (entrada e saída) em um programa separado para depois utilizar na implementação do <code>inspersh.c</code>, e lembre-se, é muito importante que você leia com atenção as especificações das funções no manual da função, para isso você pode usar o comando <code>man</code> no terminal. A seguir seguem algumas boas boas práticas de programação que poderão lhe ajudar:</p>
+<ul>
+<li><strong>Planeje a totalidade da sua tarefa</strong>: Crie um esqueleto de como todo o seu código ficará. Isso evitará que você precise reestruturar todo o seu código para adicionar um único recurso novo;</li>
+<li><strong>Estruture seu código em funções modulares</strong>: Você não quer depurar um <code>while</code> de <code>1500</code> linhas dentro de <code>main</code>;</li>
+<li><strong>Trabalhe incrementalmente</strong>: Implemente um recurso, teste, depure, siga em frente; e</li>
+<li><strong>Faça o código legível</strong>: Uma boa nomenclatura e espaçamento tornarão seu código muito mais legível.</li>
+</ul>
+<h2 id="iniciando-seu-shell">Iniciando seu <em>shell</em><a class="headerlink" href="#iniciando-seu-shell" title="Permanent link">&para;</a></h2>
+<p>O <em>shell</em> de ser iniciado a partir do diretório onde foi carregado o programa, em seguida deve ficar executando um <code>loop</code> como o trecho abaixo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">enquanto</span><span class="w"> </span><span class="n">comando</span><span class="w"> </span><span class="n">diferente</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exit</span>
+<span class="w">   </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Imprima</span><span class="w"> </span><span class="n">um</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">comando</span>
+<span class="w">   </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Leia</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">comando</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">entrada</span><span class="w"> </span><span class="n">padrão</span>
+<span class="w">   </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Executa</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">comando</span>
+</code></pre></div>
+O <em>shell</em> suporta dois tipos de comandos: <strong>internos</strong> e <strong>externos</strong>. Os comandos <strong>internos</strong> são parte do código do <em>shell</em> e são executados sem criar um novo processo. Os comandos <strong>externos</strong> devem ser executados por um novo processo, com a chamada das funções <code>fork/execvp/waitpid</code>. Para identificar um <strong>comando externo</strong>, considere que se o comando não for um dos <strong>comandos  internos</strong> listados a seguir, ele é um comando <strong>externo</strong>.</p>
+<p>Os argumentos de comando serão separados por espaços em branco, não se preocupe com espaçamento irregular em entradas de comando (ou seja, espaço em branco extra antes e depois de cada <em>token</em>). Isso é considerado comportamento indefinido e não será testado. Você é livre para tornar seu código tão robusto quanto quiser, mas testaremos apenas os casos básicos com <strong>um espaço</strong> entre os <em>tokens</em>.</p>
+<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
+<p>O <code>inspersh</code> será avaliado de forma manual usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. </p>
+<h3 id="fase-0"><strong>FASE 0</strong><a class="headerlink" href="#fase-0" title="Permanent link">&para;</a></h3>
+<ul>
+<li>O programa <code>inspersh.c</code> <strong>não compila</strong> ou compila com <em>warnings</em>.</li>
+<li><strong>Não preencheu</strong> o arquivo <code>README.md</code></li>
+<li><strong>Não entregou</strong> o vídeo explicativo;</li>
+<li>O programa não implementa algum dos requisitos da rubrica da <strong>fase 1</strong>.</li>
+</ul>
+<h4 id="nota-desta-fase-00">NOTA desta fase: <code>0.0</code><a class="headerlink" href="#nota-desta-fase-00" title="Permanent link">&para;</a></h4>
+<h3 id="fase-1"><strong>FASE 1:</strong><a class="headerlink" href="#fase-1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Video explicativo</strong> com áudio e a tela de visível com a execução da implamentação, comentando as informações colocadas no arquivo <code>README.md</code>.</li>
+<li>
+<p><strong>Preencheu</strong> o arquivo <code>README.md</code> com as seguintes informações:</p>
+<ul>
+<li>Seu nome e uma descrição de qual fase do laboratório você conseguiu completar;</li>
+<li>Relate também quaisquer <em>bugs</em> ou erros identificados no seu <em>shell</em>;e</li>
+<li>Alguma decisão de <em>design</em> interessante que você gostaria de compartilhar.</li>
+</ul>
+</li>
+<li>
+<p>O programa  <code>inspersh.c</code> compila sem <em>warnings</em>. Para compilar use: </p>
+<div class="highlight"><pre><span></span><code>gcc inspersh.c -Wall -Wno-unused-result -g -Og -o inspersh
+</code></pre></div>
+</li>
+<li>
+<p>O programa printa o <em>prompt</em> do <em>shell</em>, a partir do diretório onde foi carregado o programa no formato <code>(pid=&lt;pid&gt;)&lt;path&gt;$</code>, como por exemplo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+Sendo que o <code>&lt;pid&gt;</code> é o ID do processo atual e <code>&lt;path&gt;</code> é o caminho completo para o diretório de trabalho atual. </p>
+</li>
+<li>
+<p>O programa lê e interpreta uma linha com o comando que será executado, pela entrada padrão (<code>stdin</code>), para isso será necessário dividir a entrada com base nos espaços. Um <em>token</em> é qualquer sequẽncia de caracteres delimitado pelo início e fim da linha, ou por espaços. O primeiro <em>token</em> é considerado o <strong>comando</strong>, e todos os <em>tokens</em> seguintes são referidos como <strong>argumentos</strong>. </p>
+</li>
+<li>
+<p>Implmenta os <strong>comandos internos</strong>: </p>
+<p><strong><code>exit</code></strong>: encerra o <code>inspersh</code> elibera todos os recursos.</p>
+<p><strong><code>cd &lt;dir&gt;</code></strong>: o diretorio atual é alterado para o diretório informado  <code>&lt;dir&gt;</code>.  Se o diretório informado começar com <code>/</code> o diretorio deve ser atualizado a partir da raiz do sistema de arquivo, caso contrário deve ser atualizado em relação ao diretório atual. Caso o argumento  <code>&lt;dir&gt;</code> não seja informado o <em>shell</em> deve regressar ao diretório inicial onde foi carregado o programa. Se por algum motivo <code>&lt;dir&gt;</code> não for um diretório válido, o <code>inspersh</code> deverá manter seu diretório de trabalho atual e deverá imprimir: <code>dir: : diretorio nao existe.</code>, veja abaixo um trecho de execução do comando <code>cd</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>testes
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02/testes$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+dir_imaginario:<span class="w"> </span>diretorio<span class="w"> </span>nao<span class="w"> </span>existe.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02/testes$<span class="w"> </span><span class="nb">cd</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+<p><strong><code>ls</code></strong>: lista conteúdo de um diretório (arquivos e outros diretórios), informando se um elemento é um diretório ou arquivo. Se for um arquivo deve ser impresso o tamanho do arquivo em <em>bytes</em>, e por fim o nome do elemento no sistema de arquivos, ignorem os arquivos e diretórios que comecem com caractere <code>.</code> (ponto), este não deve ser listado, abaixo um exemplo da execução do comando <code>ls</code>:</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>ls
+d<span class="w"> </span>-<span class="w">          </span>-<span class="w"> </span>um_diretorio
+a<span class="w"> </span>-<span class="w">     </span><span class="m">7566</span><span class="w"> </span>-<span class="w"> </span>inspersh.c
+a<span class="w"> </span>-<span class="w">    </span><span class="m">16526</span><span class="w"> </span>-<span class="w"> </span>processos.md
+a<span class="w"> </span>-<span class="w">    </span><span class="m">19064</span><span class="w"> </span>-<span class="w"> </span>processo.html
+a<span class="w"> </span>-<span class="w">   </span><span class="m">332496</span><span class="w"> </span>-<span class="w"> </span>inspersh
+d<span class="w"> </span>-<span class="w">          </span>-<span class="w"> </span>testes
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+Não se preocupe aqui com a ordem em que aparecem os elementos que estão no diretório, o importante é informar corretamente as informaçoes dos elementos.</p>
+</li>
+<li>
+<p><strong>Dica de implementação</strong>: leia atentamente os manuais (<code>man</code>) das funções a seguir, elas poderão lhe ajudar a atender os requisitos dessa fase. <code>getpid</code>, <code>getcwd</code>,<code>fgets/getline</code>,<code>chdir</code>,<code>opendir</code>, <code>readdir</code>, <code>closedir</code> e <code>stat</code>(<code>man 2 stat</code>)-</p>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-30">NOTA até essa fase: <code>3.0</code><a class="headerlink" href="#nota-ate-essa-fase-30" title="Permanent link">&para;</a></h4>
+<h3 id="fase-2"><strong>FASE 2</strong><a class="headerlink" href="#fase-2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Programa <code>inspersh.c</code>roda <strong>sem erros no valgrind</strong>. Para testar o seu program use: </p>
+<div class="highlight"><pre><span></span><code>valgrind --leak-check=yes ./inspersh
+</code></pre></div>
+</li>
+<li>
+<p>Implementa os <strong>comandos externos</strong>: se o comando não for um comando interno do <code>inspersh.c</code> (ou seja, qualquer comando diferente de <code>cd</code>, <code>ls</code>, <code>exit</code>), o <code>inspersh</code> deve considerar o nome do comando como o nome de um arquivo executável, como por exemplos os comandos:  </p>
+<div class="highlight"><pre><span></span><code>cat, top, pwd, ps, bin/ls -l, echo hello, sleep 5, telnet towel.blinkenlights.nl, lscpu, ...
+</code></pre></div>
+<p>O código desses comandos deve ser executado em um processo diferente daquele que executa o <code>inspersh.c</code>, para tanto você deve usar <code>fork()</code>, <code>execvp()</code> e <code>waitpid()</code>. Caso tenha sucesso na execução do <strong>comando externo</strong> deve ser impressa a seguinte mensagem: <code>(pid=&lt;pid&gt;):comando externo [&lt;cmd&gt;] executado com sucesso.</code>, se o <strong>comando externo</strong> falhar no momento da chamada do <code>execvp</code> o <code>inspersh</code> deve enviar uma mensagem apropriadas, como por exemplo:<code>(pid=&lt;pid&gt;):falha na execucao do comando externo [&lt;cmd&gt;]</code>. Considere que  <code>&lt;pid&gt;</code> é o valor do pid do executável e <code>&lt;cmd&gt;</code> é o nome do comando.  Veja um exemplo de execução dos comandos externos:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>sleep<span class="w"> </span><span class="m">5</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4321</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>sleep<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>SLEEP<span class="w"> </span><span class="m">5</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4322</span><span class="o">)</span>:falha<span class="w"> </span>na<span class="w"> </span>execução<span class="w"> </span><span class="k">do</span><span class="w"> </span>comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>SLEEP<span class="o">]</span>.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Ola<span class="w"> </span>mundo<span class="w"> </span>!!
+Ola<span class="w"> </span>Mundo<span class="w"> </span>!!
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">pwd</span>
+/home/lab02
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4327</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>pwd<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>
+</code></pre></div>
+<p><strong>IMPORTANTE</strong>: Não é permitido o uso da função <strong><code>system()</code></strong> nesse lab, caso use será atribuído a nota da <strong>FASE 0</strong>. </p>
+</li>
+<li>
+<p>Programa captura <code>Ctrl+C</code>: geralmente quando pressionamos <code>Ctrl+C</code>, o programa em execução no primeiro plano é finalizado, no entanto, o <code>inspersh.c</code> deve verificar se há outro programa em primeiro plano em execução no momento e, se houver, ele deve finalizar esse processo usando o sinal <code>SIGINT</code>, e apresentar uma mensagem apropriado como <code>(pid=&lt;pid&gt;):comando externo [&lt;cmd&gt;] finalizado com Ctrl+C.</code>, caso contrário o <code>inspersh.c</code> ignora o <code>Ctrl+C</code>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>sleep<span class="w"> </span><span class="m">5</span>
+^C
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4323</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>sleep<span class="o">]</span><span class="w"> </span>finalizado<span class="w"> </span>com<span class="w"> </span>Ctrl+C.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
++ <strong>Dica de implementação</strong>: para aguardar os comandos externos finalizados com <code>Ctrl+C</code> utilize a função <code>waitpid()</code> com argumento  não bloqueante, para tanto leia atentamente o manual dessa função (<code>man waitpid</code>).</p>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-50">NOTA até essa fase: <code>5.0</code><a class="headerlink" href="#nota-ate-essa-fase-50" title="Permanent link">&para;</a></h4>
+<h3 id="fase-3"><strong>FASE 3</strong><a class="headerlink" href="#fase-3" title="Permanent link">&para;</a></h3>
+<p>Nessa fase o seu shell deve suportar o armazenamento do histórico de comandos executados, por conta disso o executável <code>inspersh</code> deverá ser inicializado da seguinte forma:</p>
+<div class="highlight"><pre><span></span><code>$./inspersh  &lt;arquivo_historico&gt;
+</code></pre></div>
+<p>Se o arquivo não existir, você deve tratá-lo como um arquivo vazio, o formato do arquivo de histórico deve ser uma lista comandos executados. Ao sair, o <code>inspersh</code> deve anexar os comandos da sessão atual no arquivo de histórico fornecido, no mesmo arquivo informado no início da execução do <em>shell</em>. Exemplo do arquivo <code>historico.txt</code>:</p>
+<div class="highlight"><pre><span></span><code>cd testes
+echo Ola Mundo!
+</code></pre></div>
+<p>Considere o <code>inspersh</code> executando carregando o arquivo <code>historico.txt</code>:</p>
+<div class="highlight"><pre><span></span><code>$./inspersh<span class="w">  </span>historico.txt
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+dir_imaginario:<span class="w"> </span>diretório<span class="w"> </span>nao<span class="w"> </span>existe.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+<p>Exemplo como ficaria o arquivo de  <code>historico.txt</code> após a execução do <code>inspersh</code>:</p>
+<div class="highlight"><pre><span></span><code>cd testes
+echo Ola Mundo!
+cd dir_imaginario
+</code></pre></div>
+<p>Note que comando tanto os comandos executados com sucesso e com falha são armazenados no histórico, e o comando <code>exit</code> não é armazenado no arquivo de histórico. </p>
+<ul>
+<li>
+<p>Implementa comandos para acessar o histórico do <em>shell</em> a partir do <em>prompt</em> do <code>inspersh</code>:</p>
+<p><strong><code>!</code></strong>: Imprime para cada comando (em ordem cronológica) seu número de linha (indexado a partir do <code>0</code>), uma tabulação, o comando em si e uma nova linha, e é claro, o comando <strong><code>!</code></strong> não é armazenado no histórico.</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<span class="m">0</span><span class="w">   </span><span class="nb">cd</span><span class="w"> </span>testes
+<span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Ola<span class="w"> </span>Mundo!
+<span class="m">2</span><span class="w">   </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>
+</code></pre></div>
+<p><strong><code>!#</code></strong>: Reexecuta o <em>#ésimo</em> comando no histórico e armazena a nova execução do comando no histórico, antes de executar o <em>#ésimo</em> comando de ser impresso na tela. Se <strong><code>#</code></strong>  não for um índice válido, imprima <code>indice invalido</code> (essa mensagem não deve ser armazenado no histórico). E por fim o comando <strong><code>!#</code></strong> não é armazenado no histórico, o exemplo abaixo assume que o <strong>histórico está vazio</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+Echo<span class="w"> </span>Algo!
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1237</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1239</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!1
+<span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">2230</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!4
+indice<span class="w"> </span>invalido
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="m">2</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+<p><strong><code>!&lt;prefixo&gt;</code></strong>: Imprime e executa o <strong>último comando</strong> que tem o prefixo especificado. Se nenhuma correspondência for encontrada, imprima a mensagem de erro <code>comando nao encontrado</code> e não armazene nada no histórico. Caso encontre alguma correspondência, imprima o comando antes de executá-lo. Importante, comando <strong><code>!&lt;prefixo&gt;</code></strong> não é armazenado no histórico, mas o comando que está sendo executado (se houver) é, o exemplo a seguir assume um <strong>histórico vazio</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+Echo<span class="w"> </span>Algo!
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1237</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1239</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!echo
+<span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">2230</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!eco
+comando<span class="w"> </span>nao<span class="w"> </span>encontrado
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="m">2</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-80">NOTA até essa fase: 8.0<a class="headerlink" href="#nota-ate-essa-fase-80" title="Permanent link">&para;</a></h4>
+<h3 id="fase-4"><strong>FASE 4</strong><a class="headerlink" href="#fase-4" title="Permanent link">&para;</a></h3>
+<p>Nessa fase o <strong>comando interno</strong> <code>ls</code> deve ser incrementado. Considera a  <em>Figura 1</em> que apresenta uma de árvore de diretórios e arquivos de um sistema de arquivos. O seu programa <code>inspersh.c</code> deve implementar as seguintes funcionalidades:</p>
+<p><img alt="Árvore de diretórios" src="../img/tree.png" /></p>
+<p><em>Figura 1</em>: Exemplo de árvore de diretórios e arquivos</p>
+<ul>
+<li>
+<p>Implementa o argumento <code>-o</code> para o comando <code>ls</code>, o argumento indica ao comando ao comando <code>ls</code> que conteúdo do diretorio corrente deve ser impressa em ordem alfabética, colocando os diretórios antes dos arquivos. 
+Considere que o executável <code>inspersh</code> está na raiz da árvore acima, a saída para o comando <code>ls -o</code> seria:</p>
+<div class="highlight"><pre><span></span><code>./dirA
+./dirC
+./temp.txt
+</code></pre></div>
+</li>
+<li>
+<p>Implementa o argumento <code>-n</code> que percorre, a partir do diretório corrente, toda a árvore de diretório por <strong>nível</strong>, considere que o executável <code>inspersh</code> está na raiz da árvore apresentada na <em>Figura 1</em>, a saída para o comando <code>ls -n</code> seria:</p>
+<div class="highlight"><pre><span></span><code>./dirA
+./dirC
+./temp.txt
+./dirA/dirB
+./dirA/my1.dat
+./dirC/my2.dat
+./dirC/temp.txt
+./dirA/dirB/my3.dat
+</code></pre></div>
+</li>
+<li>
+<p>Implementa o argumento <code>-h</code> que faz com que o comando <code>ls</code> percorra toda árvore de diretório a partir do diretório corrente <strong>explorando o primeiro diretório completamente</strong> antes de voltar e explorar o próximo diretório no mesmo nível, repetindo esse processo para cada diretório que será percorrido. Considere que o executável <code>inspersh</code> está na raiz da árvore apresentada na <em>Figura 1</em>, a saída para o comando <code>ls -h</code> seria:</p>
+<div class="highlight"><pre><span></span><code>./dirA
+./dirA/dirB
+./dirA/dirB/my3.dat
+./dirA/my1.dat
+./dirC
+./dirC/my2.dat
+./dirC/temp.txt
+./temp.txt
+</code></pre></div>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-100">NOTA até essa fase: 10.0<a class="headerlink" href="#nota-ate-essa-fase-100" title="Permanent link">&para;</a></h4>
+<p><strong>IMPORTANTE:</strong> Considere as <strong>fases como cumulativas</strong>, ou seja, cada versão deve <strong>manter as funcionalidades da fase anterior</strong> e acrescentar novas. Por exemplo, a versão da <strong>Fase  2</strong>, além de executar os <strong>comandos externos</strong> deve continuar os <strong>comandos internos</strong> implementado na <strong>Fase 1</strong>, e assim por diante. </p>
+<h3 id="notas-de-programacao"><strong>Notas de programação</strong><a class="headerlink" href="#notas-de-programacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A linha de comando do seu programa precisa manipular linhas de entrada de até <strong>1024 caracteres</strong>;</li>
+<li>Um comando não ultrapassará 8 <em>tokens</em>; e</li>
+<li>Em diretório teremos no máximo <strong>128 elementos</strong> (diretórios e arquivos).</li>
+<li>Considere que o tamanho máximo de um <code>&lt;path&gt;</code> será de <code>1024</code> caracteres.</li>
+</ul>
+<h2 id="restricoes">Restrições<a class="headerlink" href="#restricoes" title="Permanent link">&para;</a></h2>
+<p>Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>, <code>fread()</code>, <code>fclose()</code>, entre outras . </li>
+<li>se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</li>
+<li><strong>Fica proibido</strong> o uso de ferramentas de <strong>geração de código automático por IA</strong>, como por exemplo o <strong>ChatGPT</strong>.</li>
+</ul>
+<p><strong>O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.</strong></p>
+<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<p>Você deverá colocar o programa fonte <code>inspersh.c</code> na pasta <code>lab/02-lab-processos</code> em seu repositório de atividades (github), na branch principal, e fazer <strong>upload (push) do arquivo fonte no seu repositório</strong>, não precisa soltar tag.  Lembre-se de se atentar ao prazo de entrega definido <a href="../../sobre/">aqui!</a>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 12:07:37">April 17, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

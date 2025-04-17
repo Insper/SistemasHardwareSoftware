@@ -1,0 +1,1185 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/12-tipos-de-dados/">
+      
+      
+        <link rel="prev" href="../11-revisao/">
+      
+      
+        <link rel="next" href="../13-processos/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>12 - Tipos abstratos de dados - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12-tipos-abstratos-de-dados" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12 - Tipos abstratos de dados
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-estrutura-point2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      A estrutura Point2D
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acessando-as-informacoes-do-tipo-abstrato-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acessando as informações do Tipo Abstrato de Dados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vetores-dinamicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vetores dinâmicos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13 - Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-entrada-saida/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-estrutura-point2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      A estrutura Point2D
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acessando-as-informacoes-do-tipo-abstrato-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acessando as informações do Tipo Abstrato de Dados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vetores-dinamicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vetores dinâmicos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="12-tipos-abstratos-de-dados">12 - Tipos abstratos de dados<a class="headerlink" href="#12-tipos-abstratos-de-dados" title="Permanent link">&para;</a></h1>
+<h2 id="a-estrutura-point2d">A estrutura <code>Point2D</code><a class="headerlink" href="#a-estrutura-point2d" title="Permanent link">&para;</a></h2>
+<p>Vamos considerar primeiro uma estrutura usada para guardar um ponto 2D. Este tipo de estrutura seria útil ao trabalhar com algoritmos de Geometria Computacional ou mesmo em aplicações de física.</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Point2D</span><span class="p">;</span>
+</code></pre></div>
+<p>Vamos listar algumas operações que podem ser feitas com um ponto:</p>
+<ol>
+<li>Inicialização e finalização - todo ponto deve ser inicializado com algum valor para x e y.</li>
+<li>Somar dois pontos (e obter um terceiro);</li>
+<li>Calcular o coeficiente angular de uma reta que passe pelos dois pontos;</li>
+<li>Multiplicar ambas as coordenadas de um ponto (recebendo um novo em troca) - esta operação equivale a mudanças de escala</li>
+<li>Retornar os valores das componentes x e y do ponto;</li>
+</ol>
+<p>A ideia de um <em>Tipo Abstrato de Dados</em> é formalizar um "contrato" que lista quais operações podem ser feitas com este dado. Estas operações não dependem de nenhuma implementação em particular do tipo. Por exemplo, declarar o ponto com contendo um <code>double coords[2]</code> não muda os resultados de nenhuma das operações acima mas mudaria o código de acesso a coordenada <code>x</code> (<code>p.x</code> vs <code>p.coords[0]</code>). Veja um exemplo concreto de como fazer isto abaixo (arquivo <em>point2d.h</em>).</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __POINT2D__</span>
+<span class="cp">#define __POINT2D__</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span><span class="n">Point2D</span><span class="p">;</span>
+
+<span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="nf">point2D_new</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">point2D_destroy</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">point2D_get_x</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">point2D_get_y</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+
+<span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="nf">point2D_add</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">point2D_theta</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="p">);</span>
+<span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="nf">point2D_scale</span><span class="p">(</span><span class="n">Point2D</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Em <em>C</em> declaramos os <strong>tipos abstratos de dados</strong> e as <strong>funções</strong>  que podem ser usadas por outras partes do código em arquivos <code>.h</code> e implementamos essas funções em arquivos <code>.c</code> (de mesmo nome, muitas vezes). Assim conseguimos organizar nosso código em vários módulos e depois juntá-los no momento da compilação. </p>
+</div>
+<p>Notem que essa lista de operações "toma conta" da alocação e liberação de memória. Ou seja, o usuário de nosso <code>Point2D</code> não precisa se preocupar com malloc ou free. Basta que ele chame nossas funções.</p>
+<div class="admonition tip">
+<p class="admonition-title">Por que todas as funções começam com <code>point2D_</code>?</p>
+<p>Em <em>C</em> não existe o conceito de módulo, namespace ou qualquer outro tipo de mecanismo de importar código. Toda função, a princípio, é declarada no escopo global de nomes. Isso significa que se nomeássemos <code>point2D_add</code> simplesmente como <code>add</code> nenhuma outra função escrita, por nós ou de nenhuma outra biblioteca usada no nosso programa, poderia ter esse nome.</p>
+<p>A estratégia usada nesse caso, é usar um prefixo que indique a qual biblioteca a função pertence. No nosso caso, usamos <code>point2D_</code> em todas as funções para evitar colisões de nomes. </p>
+</div>
+<h2 id="acessando-as-informacoes-do-tipo-abstrato-de-dados">Acessando as informações do Tipo Abstrato de Dados<a class="headerlink" href="#acessando-as-informacoes-do-tipo-abstrato-de-dados" title="Permanent link">&para;</a></h2>
+<p>Note que na declaração das funções, algumas retornam um ponteiro para o Tipo Abstrato de Dados <code>Point2D</code> ou recebem como parâmetro um ponteiro para esse tipo, em ambos os casos o ponteiro foi <strong>alocado dinamicamente na memória</strong>. Para acessar as variáveis do tipo <code>Point2D</code>  (<code>x</code> ou <code>y</code>) devemos usar o operador <code>-&gt;</code>. Por exemplo se temos uma variável <code>Point2D *p</code>, o acesso à <code>x</code> deve ser da seguinte forma <code>p-&gt;x</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Abra o arquivo <code>test_point2d.c</code>. Você consegue entender seu conteúdo? Examine o código e entenda como <code>Point2D</code> deve ser usado.</p>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Compile o arquivo <code>test_point2d.c</code> usando a seguinte linha de comando. Rode-o logo em seguida. O que significa sua saída?</p>
+<div class="termy">
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-Wall<span class="w"> </span>-g<span class="w"> </span>test_point2d.c<span class="w"> </span>point2d.c<span class="w"> </span>-o<span class="w"> </span>teste_ponto
+</code></pre></div>
+</div>
+<p>Responda aqui:</p>
+<div class="admonition answer">
+<p class="admonition-title">Answer</p>
+<p>São realizadas chamadas de testes automáticos que tentam utilizar as funcionalidade de <code>Point2D</code>. Os testes falham porque as implementações não foram realizadas.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Abra o arquivo <code>point2d.c</code> e complete as partes faltantes. Verifique se tudo funciona corretamente usando <code>test_point2d.c</code>. Você deve aproveitar ao máximo as funções já criadas (ou seja, pode usar <code>point2d_new</code> nas outras funções).</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Agora que sua implementação do <em>TAD</em> <code>Point2D</code> está completa, compile o arquivo <code>test_point2d.c</code> e execute-o usando o <em>Valgrind</em>. Seu programa deverá rodar sem erros.</p>
+</div>
+<h2 id="vetores-dinamicos">Vetores dinâmicos<a class="headerlink" href="#vetores-dinamicos" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Atividade para Entrega</p>
+<p>Os arquivos estão na pasta <code>09-tad</code> do repositório de entregas.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Dica!</p>
+<p>Não se esqueça de ler o <code>README.md</code> dentro da pasta <code>09-tad</code>!</p>
+</div>
+<p>Agora que já vimos vetores dinâmicos em aula, vamos implementá-los. Nosso vetor tem a seguinte interface:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef __VECINT_H__</span>
+<span class="cp">#define __VECINT_H__</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">capacity</span><span class="p">;</span>
+<span class="p">}</span><span class="n">vec_int</span><span class="p">;</span>
+
+<span class="n">vec_int</span><span class="w"> </span><span class="o">*</span><span class="nf">vec_int_create</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">vec_int_destroy</span><span class="p">(</span><span class="n">vec_int</span><span class="w"> </span><span class="o">**</span><span class="n">v</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">vec_int_size</span><span class="p">(</span><span class="n">vec_int</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="p">);</span>
+
+<span class="cm">/* As seguinte operações devolvem</span>
+<span class="cm"> * 1 se pos é uma posição válida e a operação foi bem sucedida</span>
+<span class="cm"> * 0 caso contrário</span>
+<span class="cm"> *</span>
+<span class="cm"> * No caso de at, o valor é retornado na variável apontada por vi.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">vec_int_at</span><span class="p">(</span><span class="n">vec_int</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">vi</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">vec_int_insert</span><span class="p">(</span><span class="n">vec_int</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">vec_int_remove</span><span class="p">(</span><span class="n">vec_int</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="p">);</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><strong>Entrega</strong>: implemente a estrutura <em>vetor dinâmico</em> no arquivo <em>vec_int.c</em> e compile o programa de forma semelhante como foi feito na parte anterior. Para sua entrega estar 100% seu programa de testes deverá rodar sem erros no <em>valgrind</em>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Dica!</p>
+<p>Leia os testes para entender as operações realizadas e os resultados esperados!</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 12:07:37">April 17, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
