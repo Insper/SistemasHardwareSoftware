@@ -108,7 +108,7 @@ nav:
         - aulas/12-tipos-de-dados/index.md
         - aulas/13-processos/index.md
         - aulas/14-exec/index.md
-        # - aulas/15-entrada-saida/index.md
+        - aulas/15-entrada-saida/index.md
         # - aulas/16-sinais-I/index.md
         # - aulas/17-sinais-II/index.md
         # - aulas/18-threads-I/index.md
