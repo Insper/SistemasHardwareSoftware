@@ -1,4 +1,5 @@
 //gcc ex1_slide.c -o ex1
+//man 7 signal
 #include <stdio.h>     
 
 int main() {
