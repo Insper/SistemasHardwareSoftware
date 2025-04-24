@@ -201,5 +201,5 @@ Estes exercícios trabalham com o conceito de posse de arquivos e de sobrescrita
         Confira com o professor
 
 !!! example
-    O `copy_file` sobrescreve arquivos sem dó. Use o manual para encontrar a flag que faz `open` falhar caso o arquivo de destino já exista e conserte seu programa para perguntar se o usuário deseja sobrescrever o arquivo. Note que isto conflita com seu exercício 6. Entenda como usar `errno` para que você consiga diferenciar os dois tipos de erros.
+    O `copy_file` sobrescreve arquivos sem considerar se arquivo existe ou não. Use o manual (`man 2 open`) para encontrar a flag que faz `open` falhar caso o arquivo de destino já exista e conserte seu programa para perguntar se o usuário deseja sobrescrever o arquivo. Entenda como usar `errno` para que você consiga diferenciar os dois tipos de erros.
 
