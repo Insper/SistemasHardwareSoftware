@@ -69,7 +69,7 @@ int main() {
     }
 
     ```
-Provavelmente sua solução para o exercício acima funciona, mas seu término não é condizente com a ação do usuário. Ao sair com `exit` o processo pai (no caso o shell) não consegue saber que o programa foi interrompido pelo usuário e acha que ele terminou normalmente. Podemos resetar o comportamento padrão de um sinal atribuindo a constante `SIG_DFL` (*signal default*) a `sigaction.sa_handler`. Uma outra alternativa para restaurar o comportamento padrão é utilizar a função **`raise`** da biblioteca `<signal.h>`, para isso acesse **`man raise`**.
+Provavelmente sua solução para o exercício acima funciona, mas seu término não é condizente com a ação do usuário. Ao sair com `exit` o processo pai (no caso o shell) não consegue saber que o programa foi interrompido pelo usuário e acha que ele terminou normalmente. Podemos resetar o comportamento padrão de um sinal atribuindo a constante `SIG_DFL` (*signal default*) a `sigaction.sa_handler`. 
 
 !!! example
     Restaure o comportamento original no segundo *Ctrl+C*, fazendo com que o processo realmente termine com o sinal.
