@@ -67,13 +67,14 @@ O `inspersh` será avaliado de forma manual usando uma rubrica que descreve as f
     **`exit`**: encerra o `inspersh` elibera todos os recursos.
 
 
-    **`cd <dir>`**: o diretorio atual é alterado para o diretório informado  `<dir>`.  Se o diretório informado começar com `/` o diretorio deve ser atualizado a partir da raiz do sistema de arquivo, caso contrário deve ser atualizado em relação ao diretório atual. Caso o argumento  `<dir>` não seja informado o *shell* deve regressar ao diretório inicial onde foi carregado o programa. Se por algum motivo `<dir>` não for um diretório válido, o `inspersh` deverá manter seu diretório de trabalho atual e deverá imprimir: `dir: : diretorio nao existe.`, veja abaixo um trecho de execução do comando `cd`:
+    **`cd <dir>`**: o diretorio atual é alterado para o diretório informado  `<dir>`.  Se o diretório informado começar com `/` o diretorio deve ser atualizado a partir da raiz do sistema de arquivo, caso contrário deve ser atualizado em relação ao diretório atual. Caso o argumento  `<dir>` não seja informado o *shell* deve regressar ao diretório inicial onde foi carregado o programa. Se por algum motivo `<dir>` não for um diretório válido, o `inspersh` deverá manter seu diretório de trabalho atual e deverá imprimir: `dir: diretorio nao existe.`, além disso não é necessário tratar o comando `cd ..`, veja abaixo um trecho de execução do comando `cd`:
 
     ```Shell
     (pid=1234)/home/lab02$ cd testes
     (pid=1234)/home/lab02/testes$ cd dir_imaginario
     dir_imaginario: diretorio nao existe.
-    (pid=1234)/home/lab02/testes$ cd
+    (pid=1234)/home/lab02/testes$ cd teste2
+    (pid=1234)/home/lab02/testes/teste2$ cd 
     (pid=1234)/home/lab02$
     ``` 
 
@@ -107,7 +108,7 @@ O `inspersh` será avaliado de forma manual usando uma rubrica que descreve as f
 + Implementa os **comandos externos**: se o comando não for um comando interno do `inspersh.c` (ou seja, qualquer comando diferente de `cd`, `ls`, `exit`), o `inspersh` deve considerar o nome do comando como o nome de um arquivo executável, como por exemplos os comandos:  
 
     ```
-    cat, top, pwd, ps, bin/ls -l, echo hello, sleep 5, telnet towel.blinkenlights.nl, lscpu, ...
+    cat, top, pwd, ps, /usr/bin/ls -l, echo hello, sleep 5, lscpu, ...
     ```
 
     O código desses comandos deve ser executado em um processo diferente daquele que executa o `inspersh.c`, para tanto você deve usar `fork()`, `execvp()` e `waitpid()`. Caso tenha sucesso na execução do **comando externo** deve ser impressa a seguinte mensagem: `(pid=<pid>):comando externo [<cmd>] executado com sucesso.`, se o **comando externo** falhar no momento da chamada do `execvp` o `inspersh` deve enviar uma mensagem apropriadas, como por exemplo:`(pid=<pid>):falha na execucao do comando externo [<cmd>]`. Considere que  `<pid>` é o valor do pid do executável e `<cmd>` é o nome do comando.  Veja um exemplo de execução dos comandos externos:
@@ -119,6 +120,7 @@ O `inspersh` será avaliado de forma manual usando uma rubrica que descreve as f
     (pid=4322):falha na execução do comando externo [SLEEP].
     (pid=1234)/home/lab02$ echo Ola mundo !!
     Ola Mundo !!
+    (pid=4327):comando externo [echo] executado com sucesso.
     (pid=1234)/home/lab02$ pwd
     /home/lab02
     (pid=4327):comando externo [pwd] executado com sucesso.
