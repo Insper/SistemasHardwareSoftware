@@ -91,10 +91,10 @@ Vimos na parte 1 que o último argumento de `pthread_create` é um ponteiro para
 Nosso primeiro exercício será feito passo a passo. Siga cada um dos passos a risca e depois responda as questões. Vamos trabalhar a partir de um arquivo vazio.
 
 !!! example
-    Crie um programa simples com uma função `main` que aloca (usando malloc) um vetor `vi` com 4 `int`s  e um vetor `tids` com 4 `pthread_t`s.
+    Crie um programa simples com uma função `main` que aloca (usando malloc) um vetor `*vi` com 4 `int`s  e um vetor `*tids` com 4 `pthread_t`s.
 
 !!! example
-    Adicione ao seu programa um `for` que cria 4 threads (colocando seus ids no vetor `tids`). Passe como último argumento o endereço do elemento correspondente de `vi`.
+    Adicione ao seu programa um `for` que cria 4 threads, use o vetor `*vi` para armazenar, em cada posição do vetor, os valores do índice do `for`, e no vetor `*tids` na na chamada da função `pthread_create`. Passe como último argumento da função `pthread_create` o endereço do elemento correspondente de `vi`.
 
 !!! example
     Espere pelo fim desta thread.

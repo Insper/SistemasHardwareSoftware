@@ -92,7 +92,7 @@ O `inspersh` será avaliado de forma manual usando uma rubrica que descreve as f
     ```
     Não se preocupe aqui com a ordem em que aparecem os elementos que estão no diretório, o importante é informar corretamente as informaçoes dos elementos.
 
-+ **Dica de implementação**: leia atentamente os manuais (`man`) das funções a seguir, elas poderão lhe ajudar a atender os requisitos dessa fase. `getpid`, `getcwd`,`fgets/getline`,`chdir`,`opendir`, `readdir`, `closedir` e `stat`(`man 2 stat`)-
++ **Dica de implementação**: leia atentamente os manuais (`man`) das funções a seguir, elas poderão lhe ajudar a atender os requisitos dessa fase. `getpid`, `getcwd`,`fgets`,`chdir`,`opendir`, `readdir`, `closedir` e `stat`(`man 2 stat`)-
 
 
 #### NOTA até essa fase: `3.0`
