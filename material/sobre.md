@@ -16,7 +16,7 @@
 | 20/03 | Atv08-malloc | Github | 27/03 23h59 |
 | 07/04 | Atv09-TAD  | Github | 11/04 23h59 |
 | 10/04 | Atv10-processos | Github | 17/04 23h59 |
-| 10/04 | Lab02-processos | Github | 10/05  23h59 |
+| 10/04 | **Lab02-processos** | Github | **11/05  23h59** |
 | 17/04 | Atv11-entrada-saida | Github | 24/04 23h59 |
 | 08/05 | Atv12-threads | Github | 15/05 15h30 |
 <!-- 
