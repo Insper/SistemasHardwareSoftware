@@ -18,12 +18,17 @@
 | 10/04 | Atv10-processos | Github | 17/04 23h59 |
 | 10/04 | Lab02-processos | Github | 10/05  23h59 |
 | 17/04 | Atv11-entrada-saida | Github | 24/04 23h59 |
-<!-- | 04/11 | Lab03-threads | Github | 24/11  23h59 |  -->
+| 08/05 | Atv12-threads | Github | 15/05 15h30 |
+<!-- 
+| 04/11 | Lab03-threads | Github | 24/11  23h59 |  
+| 17/05 | 14-barrier | Github | 22/05 23h59 |
+| 22/05 | 03-sort-merge | Github | 31/05 23h59 |
+-->
 
 # Provas
 
 - **Multirão C**: final da primeira semana
 - **AI**: 27/03 - quinta-feira - horário: 16h00 às 19:00
-- **AF**: Semana da Avaliação Final
+- **AF**: 29/05 - quinta-feira - horário: 16h00 às 19:00
 - **SUB**: semana da SUB 
 
