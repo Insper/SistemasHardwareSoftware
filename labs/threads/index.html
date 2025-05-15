@@ -1,0 +1,1548 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/labs/threads/">
+      
+      
+        <link rel="prev" href="../processos/">
+      
+      
+        <link rel="next" href="../../outros/github/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Lab de Threads - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-de-threads" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab de Threads
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/01-inteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/02-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/04-funcoes-mov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/05-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/07-loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/08-variaveis-locais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/09-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/10-malloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/11-revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/13-processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13 - Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/14-exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/15-entrada-saida/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/16-sinais-I/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/17-sinais-II/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/18-threads-I/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18 - Concorrência e Threads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-sincronizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/20-semaforos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20 - Semáforos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackerlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introdução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-precisa-ser-feito" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que precisa ser feito
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-comecar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como começar?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-lab30x-fase-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tag lab3.0.x: fase Sort
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag-lab31x-fase-sort-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tag lab3.1.x: fase Sort-Merge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introdução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restrições
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-precisa-ser-feito" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que precisa ser feito
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-comecar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como começar?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avaliação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avaliação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-lab30x-fase-sort" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tag lab3.0.x: fase Sort
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag-lab31x-fase-sort-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tag lab3.1.x: fase Sort-Merge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prazo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="lab-de-threads">Lab de Threads<a class="headerlink" href="#lab-de-threads" title="Permanent link">&para;</a></h1>
+<h2 id="introducao">Introdução<a class="headerlink" href="#introducao" title="Permanent link">&para;</a></h2>
+<p>No Laboratório de <em>Threads</em>, iremos implementar um algoritmo de ordenação de grandes volumes de dados utilizando <strong>Threads</strong>  para ganhar  desempenho. O algoritmo, chamado <strong>Sort-Merge</strong> (ordenação-junção), é utilizado para ordenar dados em situações nas quais não é possível carregar todos os dados na memória do computador. No caso dos algoritmos de ordenação tradicionais, como InsertionSort ou BubbleSort, os dados são carregados na memória da máquina e ordenados.</p>
+<p>O algoritmo Sort-Merge possui duas fases distintas, com cada fase consistindo em vários passos. Na primeira fase, chamada <strong>fase de Sort</strong> (ordenação), os dados são divididos em partes que caibam na memória disponível, e são então ordenados e armazenados em arquivos temporários. Essa fase resulta na criação de um conjunto de arquivos temporários, cada um contendo partes (regiões) do arquivo original ordenados. A Figura 1 abaixo ilustra a <strong>fase de Sort</strong>.</p>
+<p><img alt="" src="../img/sort.png" /></p>
+<p>Na segunda fase, denominada <strong>fase de Merge</strong> (junção), pares de arquivos temporários criados na fase anterior são lidos dos arquivos temporários e ordenados, intercalando em ordem crescente os elementos lidos, de modo a resultar em um novo conjunto de arquivos temporários ordenados. Os itens de dois arquivos da etapa anterior são intercalados até que se obtenha um arquivo com todos os dados ordenados. A Figura 2 abaixo ilustra a <strong>fase de Merge</strong></p>
+<p><img alt="" src="../img/sort-merge.png" /></p>
+<h2 id="restricoes">Restrições<a class="headerlink" href="#restricoes" title="Permanent link">&para;</a></h2>
+<p>Este exercício serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>
+<p>Todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>, <code>fscanf()</code>, <code>fprintf()</code> <code>fread()</code> e <code>fclose()</code>. Tambén não é permitido o uso de variáveis globais na sua solução.</p>
+</li>
+<li>
+<p>Se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</p>
+</li>
+<li>
+<p>Fica proibido o uso de ferramentas de geração de código automático por IA, como por exemplo o ChatGPT.</p>
+</li>
+</ul>
+<h2 id="o-que-precisa-ser-feito">O que precisa ser feito<a class="headerlink" href="#o-que-precisa-ser-feito" title="Permanent link">&para;</a></h2>
+<p>Sua tarefa é completar a implementação do  <strong>algoritmo Sort-Merge</strong>, estão disponibilizados no sue repositório de entregas na pasta <code>lab/03-lab-threads</code> o código binário de dois programas (<strong><code>sort.o</code></strong> e <strong><code>sort-merge.o</code></strong>) que auxiliarão no desenvolvimento da sua solução.</p>
+<p>O programa <strong><code>sort.o</code></strong> contem a implementação da criação das <em>threads</em> para <strong>fase de Sort</strong>, veja a seguir.</p>
+<div class="highlight"><pre><span></span><code>#include ....
+
+void * sort(void *args);
+
+int main(int nArgs, char **argv)
+{   
+    int nThreads, nItens;
+    int fdIn;
+    if (nArgs &lt; 4){
+        printf(&quot;USAGE:\n&quot;);
+        printf(&quot;./sort &lt;qtd threads&gt; &lt;qtd itens&gt; &lt;arquivo com itens&gt;\n&quot;);
+        return -1;
+    }
+    nThreads = atoi(argv[1]);
+    nItens   = atoi(argv[2]);
+    fdIn=open(argv[3],O_RDONLY) ;
+    if( fdIn &lt; 0 )
+    {
+        fprintf(stderr,&quot;./sort: Erro falha na abertura do arquivo %s \n&quot;, argv[3]);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;Serao criadas %d threads.\n&quot;,nThreads);
+    pthread_t *tids = malloc(nThreads * sizeof(pthread_t));
+
+    struct sort_args *vet_sort = malloc(nThreads * sizeof(struct sort_args));
+    pthread_mutex_t mutex_file = PTHREAD_MUTEX_INITIALIZER;
+
+    for (int i = 0; i &lt; nThreads; i++) {
+        vet_sort[i].idxThread = i;
+        vet_sort[i].nThreads = nThreads;
+        vet_sort[i].lineFiles = nItens;
+        vet_sort[i].mutex_file = &amp;mutex_file;
+        vet_sort[i].fdIn = fdIn;
+        pthread_create(&amp;tids[i], NULL, sort, &amp;vet_sort[i]);
+        printf(&quot;Criou thread:%d fase sort\n&quot;, i);
+    }
+
+    printf(&quot;Funcao main() espera as threads sort finalizarem...\n&quot;);
+    for (int i = 0; i &lt; nThreads; i++) {
+        pthread_join(tids[i], NULL);
+        close(vet_sort[i].fdOut);   
+    }
+    close(fdIn);
+    free(vet_sort);
+    free(tids);
+    printf(&quot;Funcao main() FASE Sort finalizando normalmente...\n&quot;);
+    return 0;
+}
+</code></pre></div>
+<p>Você deve implementar a função <strong><code>void * sort(void * args)</code></strong> que representa a <em>thread</em> responsável em ler concorrentemente o arquivo de entrada no arquivo <strong><code>solucao.c</code></strong>, esse arquivo conterá as soluções das <strong>fase de Sort</strong> e <strong>fase de Sort-Merge</strong>. Para compilar a sua solução use o comando:</p>
+<div class="highlight"><pre><span></span><code>$ gcc -g -Og -Wall sort.o solucao.c -o sort -pthread
+</code></pre></div>
+<p>Para executar o programa e testar sua solução, informe por linha de comando o número de <em>threads</em> (<strong><code>nThreads</code></strong>) que o programa deverá criar e o quantidade de itens (<strong><code>nItens</code></strong>) no arquivo que será ordenado e o nome do arquivo, por exemplo:</p>
+<div class="highlight"><pre><span></span><code>./sort nThreads nItens arqIn
+
+./sort 4 16 in16.txt
+</code></pre></div>
+<p>Considere que o número de <em>Threads</em> <strong><code>nThreads</code></strong> sempre será maior igual a 2 e é uma potência de 2, mas nem sempre a divisão do  número de itens no arquivo <strong><code>nItens</code></strong> por <strong><code>nThreads</code></strong> terá resto 0. Por exemplo se <strong><code>nThreads=4</code></strong> e <strong><code>nItens=19</code></strong> 
+As 3 primeiras <em>Threads</em> trabalharam com 4 itens e a última com 7 itens na <strong>fase de Sort</strong></p>
+<p>O programa <strong><code>sort-merge.o</code></strong> contem a implementação completa da criação das <em>threads</em> para <strong>fase de Sort</strong> e para <strong>fase de Merge</strong>, e após resolver a fase anterior você pode compilar esse programa junto com a sua solução no arquivo <strong><code>solucao.c</code></strong>. </p>
+<p><div class="highlight"><pre><span></span><code>#include ..
+
+void * sort(void *args);
+void * merge(void *args);
+
+int main(int nArgs, char **argv)
+{   
+    int nThreads, nItens;
+    int fdIn;
+    int *vet_fdOut;
+
+    if (nArgs &lt; 4){
+        printf(&quot;USAGE:\n&quot;);
+        printf(&quot;./sort-merge  &lt;qtd threads&gt; &lt;qtd itens&gt; &lt;arquivo com itens&gt;\n&quot;);
+        return -1;
+    }
+
+    nThreads = atoi(argv[1]);
+    nItens   = atoi(argv[2]);
+    fdIn=open(argv[3],O_RDONLY) ;
+    if( fdIn &lt; 0 )
+    {
+        fprintf(stderr,&quot;./sort-merge: Erro falha na abertura do arquivo %s \n&quot;, argv[3]);
+        exit(EXIT_FAILURE);
+    }
+    printf(&quot;Serao criadas %d threads.\n&quot;,nThreads);
+    pthread_t *tids = malloc(nThreads * sizeof(pthread_t));
+
+    struct sort_args *vet_sort = malloc(nThreads * sizeof(struct sort_args));
+    pthread_mutex_t mutex_file = PTHREAD_MUTEX_INITIALIZER;
+
+    for (int i = 0; i &lt; nThreads; i++) {
+        vet_sort[i].idxThread = i;
+        vet_sort[i].nThreads = nThreads;
+        vet_sort[i].lineFiles = nItens;
+        vet_sort[i].mutex_file = &amp;mutex_file;
+        vet_sort[i].fdIn = fdIn;
+        pthread_create(&amp;tids[i], NULL, sort, &amp;vet_sort[i]);
+        printf(&quot;Criou thread:%d fase sort\n&quot;, i);
+    }
+
+    printf(&quot;Funcao main() espera as threads sort finalizarem...\n&quot;);
+    vet_fdOut = malloc(nThreads*sizeof(int));
+    for (int i = 0; i &lt; nThreads; i++) {
+        pthread_join(tids[i], NULL);
+        vet_fdOut[i]=vet_sort[i].fdOut;   
+    }
+    close(fdIn);
+    free(vet_sort);
+    free(tids);
+    while( nThreads &gt; 1){
+
+        nThreads = nThreads/2;
+        tids = malloc(nThreads * sizeof(pthread_t));
+        struct merge_args *vet_merge = malloc(nThreads * sizeof(struct merge_args));
+
+        for (int i = 0; i &lt; nThreads; i++) {
+            vet_merge[i].idxThread = i;
+            vet_merge[i].nThreads = nThreads;
+            vet_merge[i].fdIn1 = vet_fdOut[i*2];
+            vet_merge[i].fdIn2 = vet_fdOut[(i*2)+1];
+            pthread_create(&amp;tids[i], NULL, merge, &amp;vet_merge[i]);
+            printf(&quot;Criou thread:%d fase merge nThread:%d \n&quot;, i,nThreads);
+        }
+
+        for (int i = 0; i &lt; nThreads; i++) {
+            pthread_join(tids[i], NULL);
+            vet_fdOut[i]=vet_merge[i].fdOut;
+        }
+
+        free(tids);
+        free(vet_merge);
+    }  
+    close(vet_fdOut[0]);
+    free(vet_fdOut);   
+    printf(&quot;Funcao main() FASE Sort-Merge finalizando normalmente...\n&quot;);
+    return 0;
+}
+</code></pre></div>
+Para compilar a sua solução (<code>solucao.c</code>) com o programa <strong><code>sort-merge.o</code></strong>  use o comando:</p>
+<div class="highlight"><pre><span></span><code>$ gcc -g -Og -Wall sort-merge.o solucao.c -o sort-merge -pthread
+</code></pre></div>
+<h2 id="como-comecar">Como começar?<a class="headerlink" href="#como-comecar" title="Permanent link">&para;</a></h2>
+<p>Faça <code>git pull</code> no seu repositório entregas e verifique na pasta lab se você recebeu os seguintes arquivos: </p>
+<ul>
+<li>
+<p><strong><code>sort.o</code></strong> contem o código binário que cria as <em>threads</em> na <strong><code>fase de Sort</code></strong>. </p>
+</li>
+<li>
+<p><strong><code>sort-merge.o</code></strong> contem o código binário que cria as <em>threads</em> na <strong><code>fase de Sort</code></strong> e <strong><code>fase de Merge</code></strong>. </p>
+</li>
+<li>
+<p><strong><code>sort-merge.h</code></strong> arquivo com a declaração das estrutas e as funções usadas nas duas fases.</p>
+</li>
+<li>
+<p><strong><code>in16.txt</code></strong> e outros arquivos de testes para você começar a implementar as suas soluções.</p>
+</li>
+<li>
+<p><strong><code>solucao.c</code></strong> programa fonte que deverá ser entrega com a sua implementação das <em>threads</em> nas fases  <strong><code>Sort</code></strong> e  <strong><code>Merge</code></strong>. </p>
+</li>
+</ul>
+<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
+<p>O programa será avaliado usando uma rubrica que descreve as duas fases implementadas. </p>
+<p><strong>Atenção:</strong> Os testes automáticos serão nossa forma principal de avaliação. Entretanto, o professor poderá utilizar processos extras de avaliação, como: entrevistas, revisão manual de código.</p>
+<p><strong>IMPORTANTE</strong>: Os arquivos fontes disponilizados são para vocês entenderem como são realizadas as chamadas das <em>threads</em>, não gere novamente os arquivos <strong><code>sort.o</code></strong> e <strong><code>sort-merge.o</code></strong>.</p>
+<h3 id="tag-lab30x-fase-sort">Tag <code>lab3.0.x</code>: fase Sort<a class="headerlink" href="#tag-lab30x-fase-sort" title="Permanent link">&para;</a></h3>
+<p>Na fase de <strong>Sort</strong> cada <em>thread</em> deverá alocar um espaçao na memória para armazenar os itens de sua região, para tanto considere as seguintes observações:</p>
+<ul>
+<li>
+<p>No arquivo de entrada cada item no arquivo de entrada será uma sequência de caracteres (por exemplo um nome de um animal), considere que os itens terão no <strong>máximo 20 caracteres</strong> (somente letras em minúsculo) e cada um deles  estará armazenado em uma linha do arquivo finalizada por <code>\n</code>, a exceção é a última linha que não tem <code>\n</code>, além disso considere que podemos ter itens repetidos no arquivo.</p>
+</li>
+<li>
+<p>O arquivo de entrada será um recurso compartilhado que precisará tem seu acesso controlado, a <em>thread</em> principal informa para as <em>threads</em> criadas o descritor do arquivo de entrada e cada <em>thread</em> filha deve acessar o arquivo em modo exclusivo. Um detalhe importante que você deve resolver é como fazer com que as <em>threads</em> fihas façam a leitura correta de sua região no arquivo de entrada.</p>
+</li>
+<li>
+<p>Serão criadas <code>nThreads</code> (Thread 0, 1, ... n), informado por linha de linha de comando, e cada <em>thread</em> deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.</p>
+</li>
+<li>
+<p>Nessa fase você cada <em>thread</em> pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.</p>
+</li>
+<li>
+<p>Ao final da ordenação a <em>thread</em> deve escrever o seu resultado em um arquivo, a <code>Thread 0</code> cria e escreve no arquivo <code>0.txt</code>, a <code>Thread 1</code> cria e escreve no arquivo <code>1.txt</code> e assim por dianto. E por fim retorna para função principal (<strong><code>main()</code></strong>) o descritor do arquivo, que foi criado para armazenar os seus itens ordenados, no campo <code>fdOut</code> da estrutura <code>struct sort_args</code>. <strong>Importante</strong>: o arquivo criado não precisa ser fechado, pode deixar isso para função <code>main()</code>. O arquivo ordenado tem o mesmo formato do arquivo de entrada, ou seja, cada linha separada por <code>\n</code> com exceção a última linha que não tem <code>\n</code>.</p>
+</li>
+<li>
+<p>Para entregar <strong>fase de Sort</strong> a <strong>envie para o github suas alterações</strong> e suba uma tag com o padrão de nomenclatura <code>lab3.0.x</code>, substituindo <code>x</code> por qualquer número inteiro! Ex:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ git tag -a lab3.0.0 -m &quot;lab3.0.0&quot;
+$ git push origin lab3.0.0
+</code></pre></div>
+<p><strong>NOTA desta fase</strong>: 6.0</p>
+<h3 id="tag-lab31x-fase-sort-merge">Tag <code>lab3.1.x</code>: fase Sort-Merge<a class="headerlink" href="#tag-lab31x-fase-sort-merge" title="Permanent link">&para;</a></h3>
+<p>para realizar essa fase você deverá ter finalizado a fase de <strong><code>Sort</code></strong>, pois esta fase tem como entrada os arquivos gerados na fase anterior (veja Figura 2). Por conta disso considere as seguintes observações:</p>
+<ul>
+<li>
+<p>As <em>threads</em> nessa fase terão como entrada os descritores de arquivos gerados na fase anterior. No programa   <strong><code>sort-merge.o</code></strong> poderá ver que os descritores de arquivos são passados para as <em>threads</em> através de uma estrutura (<code>struct</code>).</p>
+</li>
+<li>
+<p>Cada <em>thread</em> receberá dois descritores de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (<strong><code>main()</code></strong>),  que usará esse arquivo para próxima iteração.</p>
+</li>
+<li>
+<p>O <strong>nome</strong> do arquivo criado nessa fase deverá ter o seguinte formato = quantidade de <em>threads</em> que estão executanto simultanamente concatenado com o número da <em>thread</em> (veja a Figura 2). Por exemplo se tiverem  <code>2</code> <em>threads</em> executando simultaneamente a <code>Thread 0</code> gerará o arquivo <code>20.txt</code> e a <code>Thread 1</code> gerará o arquivo <code>21.txt</code></p>
+</li>
+<li>
+<p>Note na função  (<strong><code>main()</code></strong>) que a cada iteração o número de <em>threads</em> será reduzida pela metada, até que reste somente uma <em>thread</em> e assim é finalizada o merge.</p>
+</li>
+<li>
+<p>Para entregar <strong>fase de Merge</strong> a <strong>envie para o github suas alterações</strong> e suba uma tag com o padrão de nomenclatura <code>lab3.1.x</code>, substituindo <code>x</code> por qualquer número inteiro! Ex:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ git tag -a lab3.1.0 -m &quot;lab3.1.0&quot;
+$ git push origin lab3.1.0
+</code></pre></div>
+<p><strong>NOTA desta versão</strong>: 10.0</p>
+<h3 id="prazo">Prazo<a class="headerlink" href="#prazo" title="Permanent link">&para;</a></h3>
+<p><a href="../../sobre">Clique Aqui</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 15, 2025 18:52:46">May 15, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>

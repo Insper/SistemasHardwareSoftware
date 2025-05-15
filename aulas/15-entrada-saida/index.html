@@ -1,0 +1,1459 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Igor Montagner, Maciel Calebe Vidal, Fabio Lubacheski">
+      
+      
+        <link rel="canonical" href="https://insper.github.io/SistemasHardwareSoftware/aulas/15-entrada-saida/">
+      
+      
+        <link rel="prev" href="../14-exec/">
+      
+      
+        <link rel="next" href="../16-sinais-I/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>15 - Entrada/Saída - Sistemas Hardware-Software - 2025/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+
+
+    <script>
+        window.ihandout_config = JSON.parse(`{"report": {"api-base": "https://devlife.insper-comp.com.br/api/offerings/1/", "url": "https://devlife.insper-comp.com.br/api/offerings/1/exercises/"}}`);
+    </script>
+
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="brown" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#15-entradasaida" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-header__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas Hardware-Software - 2025/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              15 - Entrada/Saída
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas Hardware-Software - 2025/1" class="md-nav__button md-logo" aria-label="Sistemas Hardware-Software - 2025/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistemas Hardware-Software - 2025/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Insper/SistemasHardwareSoftware/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sistemashardwaresoftware
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entregas e Prazos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-inteiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Inteiros na CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Representação de dados em RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitetura-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Arquitetura x86-64
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-funcoes-mov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Condicionais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-condicionais-funcoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Condicionais e funções
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Loops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-variaveis-locais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Variáveis locais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Array em Assembly
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-malloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10 - Alocação Dinâmica de Memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-revisao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11 - Revisão
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-tipos-de-dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12 - Tipos abstratos de dados
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13 - Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14 - Carregamento de programas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    15 - Entrada/Saída
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trabalhando-com-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trabalhando com arquivos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trabalhando com arquivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissoes-e-posse-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissões e posse de arquivos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissões e posse de arquivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extra_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-sinais-I/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16 - Enviando sinais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-sinais-II/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17 - Capturando sinais
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-threads-I/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18 - Concorrência e Threads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-sincronizacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19 - Sincronização com Mutex
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-semaforos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20 - Semáforos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Labs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/hackerlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackerlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/processos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Processos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs/threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab de Threads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dicas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Github Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/vbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Virtualbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outros/DicasLinks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dicas e links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trabalhando-com-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trabalhando com arquivos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trabalhando com arquivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissoes-e-posse-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissões e posse de arquivos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissões e posse de arquivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extra_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="15-entradasaida">15 - Entrada/Saída<a class="headerlink" href="#15-entradasaida" title="Permanent link">&para;</a></h1>
+<h2 id="trabalhando-com-arquivos">Trabalhando com arquivos<a class="headerlink" href="#trabalhando-com-arquivos" title="Permanent link">&para;</a></h2>
+<p>Nesta seção trabalharemos com as chamadas <code>open</code>, <code>close</code>, <code>read</code> e <code>write</code>.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Leia o código do arquivo <code>exemplo_io1.c</code>. O quê ele faz?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Lê os 5 primeiros caracteres de um arquivo. O arquivo lido é passado via terminal.</p>
+</div>
+</div>
+<p>Vamos agora usar o comando <code>man</code> para ver a documentação das chamadas de sistema do Linux. Digite no terminal <code>man read</code>. A tela mostrada contém a documentação da função <code>read</code>, incluindo sua assinatura e quais cabeçalhos devem ser incluídos para que ela possa ser usada.</p>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span><span class="nb">read</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Usando como apoio a documentação aberta pelo comando <code>man</code>, como saber que um arquivo foi lido até o fim?</p>
+<p><strong>Dica</strong>: a seção <code>RETURN VALUE</code> pode te ajudar.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>A função <code>read</code> retorna o número de caracteres efetivamente lidos. Ela retorna 0 quando o arquivo acabou. A função só retorna quando os caracteres forem lidos, então ela pode bloquear o programa.</p>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para acelerar suas buscas no <code>man</code> você pode ativar a busca pressionando <code>/</code>. Aí basta digitar o termo procurado. Para avançar para as próximas ocorrências de um termo basta apertar <code>/</code> + <code>Enter</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Baseado em sua resposta acima, modifique <code>exemplo_io1.c</code> para que ele mostre o todo o conteúdo do arquivo. </p>
+</div>
+<p>Vamos agora trabalhar com a chamada <code>write</code>. Um exemplo de seu uso está mostrado no arquivo <code>exemplo_io2.c</code>.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Abra o arquivo <code>exemplo_io2.c</code> e explique abaixo como usar <code>write</code>. Se ficar em dúvida use o manual (<code>man write</code>).</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p><code>write</code> recebe o identificador do arquivo, um endereço de memória e o número de bytes que devem ser copiados deste endereço para o arquivo.</p>
+</div>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span>write
+</code></pre></div>
+
+</div>
+
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Em um novo arquivo <code>copy_file.c</code>, crie um programa <code>copy_file</code> que recebe dois nomes de arquivos como argumentos no terminal e copia o conteúdo do primeiro para o segundo. Ou seja, você deverá</p>
+<ol>
+<li>abrir ambos arquivos (cada um terá seu próprio <em>file descriptor</em>) </li>
+<li>enquanto não chegar ao final do primeiro arquivo<ol>
+<li>ler do primeiro para um buffer</li>
+<li>escrever este buffer no segundo</li>
+</ol>
+</li>
+<li>fecha os dois arquivos</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Validando</p>
+<p>Após compilar, teste sua solução com um arquivo qualquer e utilize <code>diff</code> ou <code>cmp</code> para comparar os arquivos.</p>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>./copy_file<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+<span class="gp">$ </span>diff<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+<span class="gp">$ </span>cmp<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+</code></pre></div>
+
+</div>
+
+<h3 id="extra">Extra<a class="headerlink" href="#extra" title="Permanent link">&para;</a></h3>
+<p>Estes exercícios não terão correção durante a aula e devem ser checados no atendimento. Faça-os se você já acabou os anteriores e a correção/discussão ainda não começou.</p>
+<p>Até agora trabalhamos com um buffer com somente um caractere. Isso facilita a programação, mas deixa nosso código muito lento.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o <code>copy_file</code> para usar um buffer de 100 caracteres. Meça o tempo de execução para a cópia de um arquivo grande (~100Mb) usando o comando <code>time</code>. Não se esqueça de verificar que os resultados ficaram iguais com o comando <code>diff</code>.</p>
+</div>
+<p>O comando <code>time</code> tem como saída três informações sobre o processo executado:</p>
+<ul>
+<li>Tempo Real (<strong>real</strong>): O tempo que real que levou para executar o comando, do início ao fim.</li>
+<li>Tempo do usuário (<strong>user</strong>): O tempo que a CPU gastou na tarefa em si.</li>
+<li>Tempo do sistema (<strong>sys</strong>): O tempo que a CPU gastou em tarefas de nível de sistema relacionadas ao comando. </li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para saber mais como o  <code>time</code> ou <code>diff</code> funcionam use o comando <code>man</code> conforme abaixo.</p>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span><span class="nb">time</span>
+<span class="gp">$ </span>man<span class="w"> </span>diff
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Você pode utilizar o comando <code>dd</code> para gerar um arquivo aleatório de tamanho arbitrário. Por exemplo, para gerar um arquivo de 100MB, podemos fazer:</p>
+</div>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>ex.bin<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock
+</code></pre></div>
+
+</div>
+
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Você consegue explicar a diferença de desempenho entre as duas versões?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Ter disponível o buffer aumentado faz com que o programa tenha que acessar menos vezes a fila de IO, provendo ganho de performance.</p>
+</div>
+</div>
+<h2 id="permissoes-e-posse-de-arquivos">Permissões e posse de arquivos<a class="headerlink" href="#permissoes-e-posse-de-arquivos" title="Permanent link">&para;</a></h2>
+<p>No <code>exemplo_io2.c</code> passamos algumas opções extras para poder criar o arquivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">fd1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">arq1</span><span class="p">,</span><span class="w"> </span><span class="n">O_WRONLY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_CREAT</span><span class="p">,</span><span class="w"> </span><span class="mo">0700</span><span class="p">);</span>
+</code></pre></div>
+<p>A flag <code>O_CREAT</code> é usada para indicar que o arquivo deve ser criado caso ele não exista. O número <code>0700</code> representa os bits de acesso visto na expositiva. Cada dígito contém 3 dígitos que representam as seguintes permissões</p>
+<ul>
+<li>4 - permissão de leitura</li>
+<li>2 - permissão de escrita</li>
+<li>1 - permissão de execução</li>
+</ul>
+<p>O primeiro dígito contém as permissões do usuário dono do arquivo. O segundo dígito contém as permissões do grupo dono do arquivo. Usuários que pertencem a este grupo possuem estas permissões. O terceiro dígito lista as permissões para todos os outros usuários.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Use <code>ls -l</code> na pasta do arquivo criado por <code>copy_file</code> (ou por <code>exemplo_io2</code>). Onde é possível obter as informações de permissões do arquivo? Qual o usuário e grupo donos do arquivo? As permissões passadas para o <code>open</code> foram corretamente colocadas no arquivo?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>A primeira coluna contém as permissões na ordem leitura (<code>r</code>), escrita (<code>w</code>) e execução (<code>x</code>) para o dono do arquivo, o grupo principal do arquivo e todos os usuários. É usado o caractere <code>-</code> para as permissões não concedidas. A segunda coluna mostra o usuário dono do arquivo. A terceira mostra o grupo dono do arquivo.</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Quais permissões são garantidas pela máscara <code>640</code>? É uma boa ideia usá-la?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Leitura e escrita para o dono, leitura para o grupo e nenhuma permissão para outros usuários. Ela é interessante pois permite edição somente pelo dono, mas permite leitura para alguns usuários que o dono confia. Porém, não permite que qualquer usuário leia nem escreva no arquivo. </p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Qual máscara usaria se quisesse que um arquivo possa ser modificado somente por seu dono, mas possa ser executado por qualquer usuário do sistema (incluindo o dono do arquivo)? Justifique.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>755</p>
+</div>
+</div>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Rode o comando <code>copy_file</code> usando <code>sudo</code>. Use <code>ls -l</code> para listar as informações do arquivo. Escreva abaixo quem é seu dono e suas permissões de acesso.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Confira no output do <code>ls -l</code>. Se ainda restar dúvida, confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Use os comandos <code>chown</code> para mudar o dono do arquivo para seu usuário e <code>chmod</code> para deixar suas permissões como leitura e escrita para você e somente leitura para o restante.</p>
+<p><strong>Dica</strong>: não sabe como usar os comandos acima? Use <code>man</code>.</p>
+</div>
+<div class="termy">
+
+    <div class="highlight"><pre><span></span><code><span class="gp">$ </span>man<span class="w"> </span>chown
+</code></pre></div>
+
+</div>
+
+<h3 id="extra_1">Extra<a class="headerlink" href="#extra_1" title="Permanent link">&para;</a></h3>
+<p>Estes exercícios trabalham com o conceito de posse de arquivos e de sobrescrita de arquivos já existentes.</p>
+<div class="admonition exercise text short">
+<p class="admonition-title">Exercise</p>
+<p>Tente usar <code>copy_file</code> usando como fonte algum arquivo que você não possui acesso de leitura (você pode criá-lo e depois usar <code>chmod</code> para editar os acessos). O quê ocorre? Você consegue explicar este comportamento?</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Conserte o erro ocorrido acima checando a saída de <code>open</code>. Consulte o manual caso necessário. Não se esqueça de fazê-lo para o arquivo fonte e destino.</p>
+</div>
+<div class="admonition exercise text medium">
+<p class="admonition-title">Exercise</p>
+<p>Vamos realizar um experimento neste exercício:</p>
+<ol>
+<li>Crie um arquivo com 100 caracteres <em>a</em> e chame-o de <code>100a</code>;</li>
+<li>Crie um arquivo com 3 caracteres <em>b</em> e chame-o de <code>3b</code>;</li>
+<li>Use <code>copy_file</code> para copiar <code>3b</code> em cima de <code>100a</code>;</li>
+<li>Mostre o conteúdo do arquivo sobrescrito <code>100a</code>.</li>
+</ol>
+<p>Você consegue explicar o que ocorreu? Se sim, busque no manual uma flag que, ao ser passada para o <code>open</code>, evita que isto ocorra.</p>
+<div class="admonition answer">
+<p class="admonition-title">Resposta</p>
+<p>Confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>O <code>copy_file</code> sobrescreve arquivos sem considerar se arquivo existe ou não. Use o manual (<code>man 2 open</code>) para encontrar a flag que faz <code>open</code> falhar caso o arquivo de destino já exista e conserte seu programa para perguntar se o usuário deseja sobrescrever o arquivo. Entenda como usar <code>errno</code> para que você consiga diferenciar os dois tipos de erros.</p>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 15, 2025 18:52:46">May 15, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
