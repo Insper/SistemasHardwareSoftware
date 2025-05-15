@@ -113,9 +113,9 @@ nav:
         - aulas/17-sinais-II/index.md
         - aulas/18-threads-I/index.md
         - aulas/19-sincronizacao/index.md
-        # - aulas/20-semaforos/index.md
-        # - aulas/21-semaforos-II/index.md
-        # - aulas/22-questoes-de-revisao/index.md
+        - aulas/20-semaforos/index.md # 15/05
+        # - aulas/21-semaforos-II/index.md #19/05
+        # - aulas/22-questoes-de-revisao/index.md # 22/05
     - Labs:
          - labs/hackerlab.md
          - labs/processos.md
