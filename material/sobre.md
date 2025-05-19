@@ -18,8 +18,8 @@
 | 10/04 | Atv10-processos | Github | 17/04 23h59 |
 | 10/04 | **Lab02-processos** | Github | **12/05  23h59** |
 | 17/04 | Atv11-entrada-saida | Github | 24/04 23h59 |
-| 08/05 | Atv12-threads | Github | 15/05 15h30 |
-| 05/13 | **Lab03-threads** | Github | **30/11  23h59** |  
+| 08/05 | Atv12-threads | Github | 15/05 23h59 |
+| 05/13 | **Lab03-threads** | Github | **31/05  23h59** |  
 | 15/05 | Atv13-barrier | Github | 22/05 23h59 |
 
 # Provas
