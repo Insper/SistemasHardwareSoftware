@@ -262,5 +262,5 @@ $ git push origin lab3.1.0
 
 
 ### Prazo 
-[Clique Aqui](../../sobre)
+[Clique Aqui](../sobre.md)
 
