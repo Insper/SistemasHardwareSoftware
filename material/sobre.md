@@ -26,6 +26,6 @@
 
 - **Multirão C**: final da primeira semana
 - **AI**: 27/03 - quinta-feira - horário: 16h00 às 19:00
-- **AF**: 29/05 - quinta-feira - horário: 16h00 às 19:00
-- **SUB**: semana da SUB 
+- **AF**: 29/05 - quinta-feira - horário: 16h00 às 19:00 - laboratórioo Ágil I e II
+- **SUB**: 09/06 - segunda-feira - horário: 10h00 às 13h00
 
