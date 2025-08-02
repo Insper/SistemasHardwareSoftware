@@ -8,9 +8,9 @@
 
 ## Aulas
 
-- **segunda-feira**: 15:45 - 17:45 (Lab Ágil 2)
-- **quinta-feira**: 15:45 - 17:45 (Lab Ágil 2)
-- Atendimento **quinta-feira** 14:00 - 15:30 (Lab Ágil 1)
+- **segunda-feira**: 16:30 às 18:30 (Lab Ágil 2)
+- **quinta-feira**:  16:30 às 18:30 (Lab Ágil 2)
+- Atendimento **quinta-feira** 14:45 às 16:15 (Lab Ágil 1)
 
 ## Instrumentos avaliativos
 

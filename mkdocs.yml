@@ -22,14 +22,14 @@ nav:
   - Aulas:
     - "01 - Inteiros na CPU": aulas/01-inteiros/index.md
     - "02 - Representação de dados em RAM": aulas/02-ram/index.md
-    - "03 - Arquitetura x86-64": aulas/03-arquitetura-x86/index.md
-    - "04 - Funções": aulas/04-funcoes-mov/index.md
-    - "05 - Condicionais": aulas/05-condicionais/index.md
-    - "06 - Condicionais e funções": aulas/06-condicionais-funcoes/index.md
-  - Labs:
-    - "Hackerlab": labs/hackerlab.md
-    - "Lab processos": labs/processos.md
-    - "Lab threads": labs/threads.md
+    # - "03 - Arquitetura x86-64": aulas/03-arquitetura-x86/index.md
+    # - "04 - Funções": aulas/04-funcoes-mov/index.md
+    # - "05 - Condicionais": aulas/05-condicionais/index.md
+    # - "06 - Condicionais e funções": aulas/06-condicionais-funcoes/index.md
+  # - Labs:
+  #   - "Hackerlab": labs/hackerlab.md
+  #   - "Lab processos": labs/processos.md
+  #   - "Lab threads": labs/threads.md
   - Referências e links:
     - "Discas e links": dicas/DicasLinks.md
     - "Configuração github": dicas/github.md

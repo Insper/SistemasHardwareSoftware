@@ -32,7 +32,7 @@ Então, quando o executável `bases_e_sinais` for chamado com
 ```
 ./bases_e_sinais < solucao.txt
 ```
-o esperado é que seja obitido na saída o texto **Exercício correto!**. Assim, tudo está Ok e você pode fazer o release!
+o esperado é que seja obtido na saída o texto **Exercício correto!**. Assim, tudo está Ok e você pode fazer o release!
 
 Boa atividade!
 
