@@ -5,7 +5,7 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
-| 03/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 10/02 15:45 |
+| 06/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 18/08 15:45 |
 <!-- | 10/02 | Atv01-inteiros | Github (Lembre de [Criar repo](https://classroom.github.com/a/kza8G2K0) e [Configurar webhook](tutorial_servidor_testes.pdf)) | 19/02 23h59 |
 | 20/02 | Atv02-intro-gdb | Github | 27/02 23h59 |
 | 24/02 | Atv03-funcoes | Github | 07/03 23h59 |
