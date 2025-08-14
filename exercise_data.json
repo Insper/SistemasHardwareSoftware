@@ -633,8 +633,8 @@
   },
   "tags": {
     "text-exercise": "text-exercise",
-    "short-text": "short-text",
     "choice-exercise": "choice-exercise",
-    "long-text": "long-text"
+    "long-text": "long-text",
+    "short-text": "short-text"
   }
 }

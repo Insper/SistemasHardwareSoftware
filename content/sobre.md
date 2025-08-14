@@ -2,9 +2,8 @@
 
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
-* **Ninjas**:  
+* **Ninja**:  
     - Maria Luiza Sevilha Seraphico de Assis Carvalho
-    - Vitor Hideki Pereira Katakura
 
 
 ## Aulas
