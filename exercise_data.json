@@ -46,8 +46,8 @@
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_7"
       },
@@ -75,22 +75,22 @@
       },
       "short_10": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_10"
       },
       "short_11": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_11"
       },
       "short_12": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_12"
       },
@@ -103,8 +103,8 @@
       },
       "short_14": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_14"
       }
@@ -133,8 +133,8 @@
       },
       "short_4": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_4"
       },
@@ -147,36 +147,36 @@
       },
       "short_6": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_6"
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_7"
       },
       "short_8": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_8"
       },
       "short_9": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_9"
       },
       "short_10": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_10"
       },
@@ -197,8 +197,8 @@
       },
       "short_12": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_12"
       },
@@ -215,8 +215,8 @@
       },
       "short_14": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_14"
       },
@@ -331,8 +331,8 @@
     "aulas/05-condicionais/": {
       "short_1": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/05-condicionais/short_1"
       },
@@ -342,8 +342,8 @@
       },
       "short_2": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/05-condicionais/short_2"
       },
@@ -356,8 +356,8 @@
       },
       "short_4": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/05-condicionais/short_4"
       },
@@ -370,15 +370,15 @@
       },
       "short_6": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/05-condicionais/short_6"
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/05-condicionais/short_7"
       },
@@ -442,22 +442,22 @@
       },
       "short_1": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_1"
       },
       "short_2": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_2"
       },
       "short_3": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_3"
       },
@@ -470,8 +470,8 @@
       },
       "short_5": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_5"
       },
@@ -484,8 +484,8 @@
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_7"
       },
@@ -533,36 +533,36 @@
       },
       "short_14": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_14"
       },
       "short_15": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_15"
       },
       "short_16": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_16"
       },
       "short_17": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_17"
       },
       "short_18": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/06-condicionais-funcoes/short_18"
       },
@@ -632,9 +632,9 @@
     }
   },
   "tags": {
+    "short-text": "short-text",
     "text-exercise": "text-exercise",
     "choice-exercise": "choice-exercise",
-    "long-text": "long-text",
-    "short-text": "short-text"
+    "long-text": "long-text"
   }
 }

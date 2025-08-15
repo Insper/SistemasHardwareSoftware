@@ -33,4 +33,4 @@ nav:
   - Referências e links:
     - "Discas e links": dicas/DicasLinks.md
     - "Configuração github": dicas/github.md
-    - "Instalação ambiente": dicas/vbox.md
+    - "Linux: Instalação e configuração": dicas/linux.md

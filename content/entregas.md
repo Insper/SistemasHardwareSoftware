@@ -6,7 +6,7 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
 | 06/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 18/08 15:45 |
-| 18/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/-m-MAIA9)** e **[Configurar webhook](../../dicas/tutorial_servidor_testes.pdf)**) | 25/08 23h59 |
+| 18/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/-m-MAIA9)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 25/08 23h59 |
 <!--| 20/02 | Atv02-intro-gdb | Github | 27/02 23h59 |
 | 24/02 | Atv03-funcoes | Github | 07/03 23h59 |
 | 27/02 | Lab01-hackerlab  | Github | 27/03 23h59 |
