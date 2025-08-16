@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Index - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Discas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="02-representacao-de-dados-em-ram">02 - Representação de dados em RAM</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<h2 id="experimentos">Experimentos</h2>
+<p>Vamos trabalhar com os arquivos <code>experimento0-4.c</code>. Compile e execute cada um deles, execute e analise suas saídas. Comente os resultados comparando os valores das constantes no código em <em>C</em> e a saída dos programas. Tente entender o que está acontecendo.</p>
+<p>Para compilar cada <code>.c</code>, utilize:</p>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-Wall<span class="w"> </span>-pedantic<span class="w"> </span>experimento0.c<span class="w"> </span>-o<span class="w"> </span>e0
+</code></pre></div>
+
+</div>
+
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_1" id="long_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Examine o código <em>C</em> do arquivo <em>experimento0.c</em> e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_2" id="long_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Examine o código <em>C</em> do arquivo <em>experimento1.c</em> e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Examine o código <em>C</em> do arquivo <em>experimento2.c</em> e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_4" id="long_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Examine o código <em>C</em> do arquivo <em>experimento3.c</em> e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_5" id="long_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Examine o código <em>C</em> do arquivo <em>experimento4.c</em> e compare com o resultado de sua execução. Há algo estranho? Se sim, escreva abaixo algumas hipóteses para o comportamento do programa.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h2 id="representacao-de-struct-em-ram">Representação de <code>struct</code> em <em>RAM</em></h2>
+<p>A utilização de <code>struct</code> junta tudo que já vimos sobre representação de todos os tipos de dados na memória. Não se esqueça de levar em conta as questões de alinhamento mostradas na parte expositiva da aula.</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Você <strong>não</strong> deverá abrir o código de <code>parte1.c</code>. Ele está no repositório para você poder conferir suas respostas.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Vamos compilar?!</p>
+<p>Compile e execute <em>parte1.c</em>.</p>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_6" id="long_6_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Os endereços mostrados na saída de <code>parte1</code> pertencem a um só struct declarado como <code>struct player one</code>. Quais são os tamanhos de cada campo?</p>
+<p><strong>Dica</strong>: pode não ser possível identificar <em>exatamente</em> o tamanho de cada campo, mas é esperado que você identifique ao menos o tamanho <strong>máximo</strong> de cada um.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/02-ram/short_7" id="short_7_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>A segunda parte da saída de <code>parte1</code> mostra os endereços de cada campo do struct. Note que <code>&amp;one</code> e <code>&amp;one.icon</code> são iguais. Você consegue explicar por que? Se não, volte na aula expositiva e reveja a parte sobre <code>struct</code> e alinhamento de memória.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_8" id="long_8_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Baseado nas respostas acima, declare abaixo o <code>struct</code>. Escreva-o da mesma maneira que usaria em um programa em <em>C</em>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Hora de conferir!</p>
+<p>Agora confira suas respostas no arquivo <em>parte1.c</em>.</p>
+</div>
+<h2 id="examinando-a-execucao-de-programas-usando-gdb">Examinando a execução de programas usando <code>gdb</code></h2>
+<p>Podemos examinar um programa durante sua execução usando o <em>gdb</em>. Podemos parar em qualquer instrução do programa, examinar conteúdo de registradores e da memória e listar todos os símbolos disponíveis (que podem ser funções ou variáveis globais).</p>
+<div class="admonition tip">
+<p class="admonition-title">Dica! 1</p>
+<p>Para compilar um programa com suporte a <em>debugging</em> usamos a flag <code>-g</code> do <code>gcc</code></p>
+</div>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-pedantic<span class="w"> </span>parte2.c<span class="w"> </span>-o<span class="w"> </span>parte2
+</code></pre></div>
+
+</div>
+
+<p>Siga os passos para para carregar um programa usando o <em>gdb</em>:</p>
+<ol>
+<li>
+<p>Lance o <code>gdb</code> e passe para ele seu programa:</p>
+<div class="termy">
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>gdb<span class="w"> </span>./parte2
+</code></pre></div>
+</div>
+</li>
+<li>
+<p>Para sair, utilize:</p>
+<div class="termy">
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">quit</span>
+</code></pre></div>
+</div>
+</li>
+</ol>
+<!-- 2. Isto nos colocará em um prompt esperando comandos. Para **rodar** o programa até o fim execute
+
+    <div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">run</span>
+</code></pre></div>
+
+    </div>
+
+
+3. Após rodar, saia do gdb (utilize `quit` para sair) e abra-o novamente com o executável `parte2` **mas não faça** `run`:
+
+    <div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp gp-VirtualEnv">(gdb)</span> <span class="go">quit</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="gp">$ </span>gdb<span class="w"> </span>./parte2
+</code></pre></div>
+
+    </div> -->
+
+<div class="admonition tip">
+<p class="admonition-title">Tip 2</p>
+<p>O <a href="https://diveintosystems.org/book/C3-C_debug/gdb.html"><em>gdb</em></a> é uma ferramenta poderosa que possui muitas opções. Sua documentação está online e pode ser acessada em:
+<a href="https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top">https://sourceware.org/gdb/onlinedocs/gdb/index.html#Top</a>.</p>
+<p>Uma explicação detalhadas dos comandos do <em>gdb</em> pode ser encontrada nesse link:
+<a href="https://diveintosystems.org/book/C3-C_debug/gdb_commands.html">https://diveintosystems.org/book/C3-C_debug/gdb_commands.html</a>.</p>
+</div>
+<p>Nesta primeira parte iremos abrir o arquivo <em>parte2.c</em> e olhar seu conteúdo. Também executaremos o programa compilado <em>parte2</em>.</p>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_9" id="long_9_0">
+<p class="admonition-title">Exercise 9<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Abra o código <em>parte2.c</em> e liste os nomes das variáveis globais declaradas e seus tamanhos. Anote também as funções declaradas.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Atenção, tarefa dupla!</p>
+<p>Para os próximos exercícios, compile o arquivo <code>parte2.c</code> <strong>com</strong> e <strong>sem debugging</strong> e repita cada exercício com ambas as versões do executável. Exemplo de compilação:</p>
+</div>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-pedantic<span class="w"> </span>parte2.c<span class="w"> </span>-o<span class="w"> </span>parte2_debug
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="gp">$ </span>gcc<span class="w"> </span>-Wall<span class="w"> </span>-pedantic<span class="w"> </span>parte2.c<span class="w"> </span>-o<span class="w"> </span>parte2_semdebug
+</code></pre></div>
+
+</div>
+
+<div class="admonition exercise text self-progress" data-slug="aulas/02-ram/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise 10</p>
+<form class="exercise-form">
+<p>O comando <em>info</em> mostra informações que podem ser obtidas a partir de um executável. Execute-o e veja o que acontece.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/02-ram/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise 11</p>
+<form class="exercise-form">
+<p>Use <code>info</code> para mostrar as <strong>funções</strong> e <strong>variáveis globais</strong> que existem em <code>parte2</code>. Lembre de fazer tanto na versão <strong>com</strong> quanto na <strong>sem debugging</strong>!</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Muita informação!</p>
+<p>Muitos nomes são estranhos. Eles fazem parte do padrão de arquivos executáveis <em>ELF</em>, que contém informações específicas do sistema operacional usado. Você não precisa se preocupar com estes nomes.</p>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/02-ram/short_10" id="short_10_0">
+<p class="admonition-title">Exercise 12<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual é o significado da primeira coluna do comando <em>info variables</em>?</p>
+<p><strong>Dica</strong>: o valor está em hexadecimal, que usamos na expositiva para mostrar ponteiros.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/02-ram/short_11" id="short_11_0">
+<p class="admonition-title">Exercise 13<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Podemos usar o comando <em>print</em> para mostrar o valor inicial das variáveis globais identificadas. Mostre o valor inicial de <code>global_var</code> usando este comando e compare com o visto no arquivo <em>parte2.c</em>.</p>
+<p><strong>Dicas:</strong></p>
+<ul>
+<li>Pode não funcionar de primeira. O quê a mensagem de erro diz?</li>
+<li>A sintaxe de conversão de tipos de <em>C</em> (<em>casting</em>) pode ser útil aqui.</li>
+</ul>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/02-ram/short_12" id="short_12_0">
+<p class="admonition-title">Exercise 14<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Podemos usar o <em>gdb</em> também para <strong>examinar a memória</strong> de um executável. Acesse esta <a href="https://sourceware.org/gdb/onlinedocs/gdb/Memory.html">página da documentação</a>, entenda como usar o comando <code>x</code> e escreva abaixo qual o comando usado para mostrar o conteúdo do segundo item do vetor <code>global_array</code>. Em seguida, teste-o e garanta que funcionou corretamente.</p>
+<p>Link: <a href="https://sourceware.org/gdb/onlinedocs/gdb/Memory.html">https://sourceware.org/gdb/onlinedocs/gdb/Memory.html</a></p>
+<p><strong>Dicas</strong>:</p>
+<ol>
+<li>volte nos exercícios anteriores e encontre o endereço do início do vetor</li>
+<li>calcule o endereço do segundo elemento manualmente e passe para o comando <code>x</code></li>
+<li>não se esqueça de buscar na memória o tamanho correto do elemento</li>
+</ol>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/02-ram/long_13" id="long_13_0">
+<p class="admonition-title">Exercise 15<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p><code>global_array</code> tem tipo <code>short</code>. Ou seja, é formado por dois bytes. Mostre agora o conteúdo de cada um deles. Ou seja, você deverá dar dois comandos para examinar a memória. Explique como converter esses dois bytes para o valor mostrado no exercício anterior.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/02-ram/short_14" id="short_14_0">
+<p class="admonition-title">Exercise 16<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use agora o comando <code>x</code> para exibir <code>global_str</code> como uma <em>string</em>. Escreva o comando abaixo.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
