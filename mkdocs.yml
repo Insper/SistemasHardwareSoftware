@@ -31,6 +31,6 @@ nav:
   #   - "Lab processos": labs/processos.md
   #   - "Lab threads": labs/threads.md
   - Referências e links:
-    - "Discas e links": dicas/DicasLinks.md
+    - "Dicas e links": dicas/DicasLinks.md
     - "Configuração github": dicas/github.md
     - "Linux: Instalação e configuração": dicas/linux.md

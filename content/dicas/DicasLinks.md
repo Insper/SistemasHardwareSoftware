@@ -46,3 +46,11 @@ Os links abaixo são do material desenvolvido pelo professor Carlos Maziero:
 * [Ponteiros](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:ponteiros)
 * [Alocação de memória](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_de_memoria)
 * [Alocação dinâmica de matrizes](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_dinamica_de_matrizes)
+
+Dicas do livro [Dive Into Systems](https://diveintosystems.org/book/):
+
+* [Ponteiros](https://diveintosystems.org/book/C2-C_depth/pointers.html) e [funções com referências](https://diveintosystems.org/book/C2-C_depth/pointers_functions.html)
+
+* [Alocação de memória](https://diveintosystems.org/book/C2-C_depth/dynamic_memory.html)
+
+* [Alocação dinâmica de matrizes](https://diveintosystems.org/book/C2-C_depth/arrays.html)
