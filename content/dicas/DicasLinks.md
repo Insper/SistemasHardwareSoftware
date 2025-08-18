@@ -32,22 +32,22 @@ No link abaixo está uma visão geral dos assuntos abordados na primeira parte d
 
 [acesse o LINK](https://web.stanford.edu/class/cs107/guide/x86-64.html)
 
-## Dicas ponteiros e alocação de memória na Linguagem C
+## Ponteiros e alocação de memória na Linguagem C
 
 Alguns links que podem ajuda-los a entender ponteiros e alocação de memória na Linguagem C.
 
-Os links abaixo são do material desenvolvido pelo professor Paulo Feofiloff:
+Os links abaixo são do material desenvolvido pelo **professor Paulo Feofiloff**:
 
 * [Endereços e ponteiros](https://www.ime.usp.br/~pf/algoritmos/aulas/pont.html)
 * [Alocação dinâmica de memória](https://www.ime.usp.br/~pf/algoritmos/aulas/aloca.html)
 
-Os links abaixo são do material desenvolvido pelo professor Carlos Maziero:
+Os links abaixo são do material desenvolvido pelo **professor Carlos Maziero**:
 
 * [Ponteiros](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:ponteiros)
 * [Alocação de memória](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_de_memoria)
 * [Alocação dinâmica de matrizes](https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_dinamica_de_matrizes)
 
-Dicas do livro [Dive Into Systems](https://diveintosystems.org/book/):
+Dicas do livro **[Dive Into Systems](https://diveintosystems.org/book/)**:
 
 * [Ponteiros](https://diveintosystems.org/book/C2-C_depth/pointers.html) e [funções com referências](https://diveintosystems.org/book/C2-C_depth/pointers_functions.html)
 
