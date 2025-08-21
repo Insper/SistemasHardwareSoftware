@@ -226,16 +226,6 @@ Nesta primeira parte iremos abrir o arquivo *parte2.c* e olhar seu conteúdo. Ta
 !!! exercise text long
     Abra o código *parte2.c* e liste os nomes das variáveis globais declaradas e seus tamanhos. Anote também as funções declaradas.
 
-    !!! answer
-        ```
-        short global_array[] = {-1, 10, 3, 4, 5};
-
-        char *global_str = "Schiaparelli crater!";
-
-        long global_var = 2L << (33 + 3);
-
-        long global_unused_array[100];
-        ```
 
 !!! warning "Atenção, tarefa dupla!"
     Para os próximos exercícios, compile o arquivo `parte2.c` **com** e **sem debugging** e repita cada exercício com ambas as versões do executável. Exemplo de compilação:
