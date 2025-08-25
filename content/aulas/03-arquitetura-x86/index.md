@@ -58,7 +58,7 @@ $ gcc -Og -g -Wall -std=c99 funcoes.c -o funcoes
         End of assembler dump.
         ```
 
-        Os registradores `%edi`, `%eax` armazenam valores de 4 bytes e o registrado`%rsi` armazena um endereço de 8 bytes.
+        Os registradores `%edi`, `%eax` armazenam valores de 4 bytes e o registrado `%rsi` armazena um endereço de 8 bytes.
 
 !!! exercise text long
     Com base nos tamanhos identificados, você consegue associar os registradores acima com as variáveis no código de `funcao1`?
@@ -168,7 +168,7 @@ Também vimos que ao colocar um registrador entre `( )` estamos fazendo um acess
     Você consegue identificar acessos a memória em `funcao2`? Quais são de leitura e quais são de escrita? Qual o tamanho dos dados lidos/escritos?
     
     !!! answer
-        A instrução `mov 0x2ea1(%rip),%eax` faz **leitura** do valor da variável global `times_called` representado pelo endereço `0x2ea1(%rip)`, a instrução `mov %eax,0x2e98(%rip)` faz a escrita do valor de `%eax` na variável global  `times_called`.
+        A instrução `mov 0x2ea1(%rip),%eax` faz **leitura** do valor da variável global `times_called` representado pelo endereço `0x2ea1(%rip)`, a instrução `mov %eax,0x2e98(%rip)` faz a **escrita** do valor de `%eax` na variável global  `times_called`.
 
 
 !!! exercise text short
