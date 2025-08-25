@@ -108,11 +108,131 @@
         ],
         "slug": "aulas/02-ram/short_14"
       }
+    },
+    "aulas/03-arquitetura-x86/": {
+      "long_1": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_1"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_2"
+      },
+      "long_3": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_3"
+      },
+      "short_4": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_4"
+      },
+      "long_5": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_5"
+      },
+      "short_6": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_6"
+      },
+      "short_7": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_7"
+      },
+      "short_8": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_8"
+      },
+      "exercise_1": {
+        "tags": [],
+        "slug": "aulas/03-arquitetura-x86/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "aulas/03-arquitetura-x86/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "aulas/03-arquitetura-x86/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "aulas/03-arquitetura-x86/exercise_4"
+      },
+      "long_9": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_9"
+      },
+      "short_10": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_10"
+      },
+      "long_11": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_11"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "aulas/03-arquitetura-x86/exercise_5"
+      },
+      "short_12": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/short_12"
+      },
+      "long_13": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_13"
+      },
+      "long_14": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/03-arquitetura-x86/long_14"
+      }
     }
   },
   "tags": {
-    "text-exercise": "text-exercise",
+    "long-text": "long-text",
     "short-text": "short-text",
-    "long-text": "long-text"
+    "text-exercise": "text-exercise"
   }
 }
