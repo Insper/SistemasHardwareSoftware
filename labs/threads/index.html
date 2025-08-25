@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Threads - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../aulas/01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-de-threads">Lab de Threads</h1>
+<h2 id="introducao">Introdução</h2>
+<p>No Laboratório de <em>Threads</em>, iremos implementar um algoritmo de ordenação de grandes volumes de dados utilizando <strong>Threads</strong>  para ganhar  desempenho. O algoritmo, chamado <strong>Sort-Merge</strong> (ordenação-junção), é utilizado para ordenar dados em situações nas quais não é possível carregar todos os dados na memória do computador. No caso dos algoritmos de ordenação tradicionais, como InsertionSort ou BubbleSort, os dados são carregados na memória da máquina e ordenados.</p>
+<p>O algoritmo Sort-Merge possui duas fases distintas, com cada fase consistindo em vários passos. Na primeira fase, chamada <strong>fase de Sort</strong> (ordenação), os dados são divididos em partes que caibam na memória disponível, e são então ordenados e armazenados em arquivos temporários. Essa fase resulta na criação de um conjunto de arquivos temporários, cada um contendo partes (regiões) do arquivo original ordenados. A Figura 1 abaixo ilustra a <strong>fase de Sort</strong>.</p>
+<p><img alt="" src="../img/sort.png" /></p>
+<p>Na segunda fase, denominada <strong>fase de Merge</strong> (junção), pares de arquivos temporários criados na fase anterior são lidos dos arquivos temporários e ordenados, intercalando em ordem crescente os elementos lidos, de modo a resultar em um novo conjunto de arquivos temporários ordenados. Os itens de dois arquivos da etapa anterior são intercalados até que se obtenha um arquivo com todos os dados ordenados. A Figura 2 abaixo ilustra a <strong>fase de Merge</strong></p>
+<p><img alt="" src="../img/sort-merge.png" /></p>
+<h2 id="restricoes">Restrições</h2>
+<p>Este exercício serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>
+<p>Todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>, <code>fscanf()</code>, <code>fprintf()</code> <code>fread()</code> e <code>fclose()</code>. Tambén não é permitido o uso de variáveis globais na sua solução.</p>
+</li>
+<li>
+<p>Se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</p>
+</li>
+<li>
+<p>Fica proibido o uso de ferramentas de geração de código automático por IA, como por exemplo o ChatGPT.</p>
+</li>
+</ul>
+<h2 id="o-que-precisa-ser-feito">O que precisa ser feito</h2>
+<p>Sua tarefa é completar a implementação do  <strong>algoritmo Sort-Merge</strong>, estão disponibilizados no sue repositório de entregas na pasta <code>lab/03-lab-threads</code> o código binário de dois programas (<strong><code>sort.o</code></strong> e <strong><code>sort-merge.o</code></strong>) que auxiliarão no desenvolvimento da sua solução.</p>
+<p>O programa <strong><code>sort.o</code></strong> contem a implementação da criação das <em>threads</em> para <strong>fase de Sort</strong>, veja a seguir.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>#include ....
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>void * sort(void *args);
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>int main(int nArgs, char **argv)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>{   
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    int nThreads, nItens;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    int fdIn;
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    if (nArgs &lt; 4){
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        printf(&quot;USAGE:\n&quot;);
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        printf(&quot;./sort &lt;qtd threads&gt; &lt;qtd itens&gt; &lt;arquivo com itens&gt;\n&quot;);
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        return -1;
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    }
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    nThreads = atoi(argv[1]);
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    nItens   = atoi(argv[2]);
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    fdIn=open(argv[3],O_RDONLY) ;
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    if( fdIn &lt; 0 )
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    {
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        fprintf(stderr,&quot;./sort: Erro falha na abertura do arquivo %s \n&quot;, argv[3]);
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        exit(EXIT_FAILURE);
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    }
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    printf(&quot;Serao criadas %d threads.\n&quot;,nThreads);
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    pthread_t *tids = malloc(nThreads * sizeof(pthread_t));
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    struct sort_args *vet_sort = malloc(nThreads * sizeof(struct sort_args));
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    pthread_mutex_t mutex_file = PTHREAD_MUTEX_INITIALIZER;
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        vet_sort[i].idxThread = i;
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        vet_sort[i].nThreads = nThreads;
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        vet_sort[i].lineFiles = nItens;
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        vet_sort[i].mutex_file = &amp;mutex_file;
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        vet_sort[i].fdIn = fdIn;
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        pthread_create(&amp;tids[i], NULL, sort, &amp;vet_sort[i]);
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        printf(&quot;Criou thread:%d fase sort\n&quot;, i);
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    }
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    printf(&quot;Funcao main() espera as threads sort finalizarem...\n&quot;);
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        pthread_join(tids[i], NULL);
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        close(vet_sort[i].fdOut);   
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    }
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    close(fdIn);
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    free(vet_sort);
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    free(tids);
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    printf(&quot;Funcao main() FASE Sort finalizando normalmente...\n&quot;);
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    return 0;
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>}
+</code></pre></div>
+<p>Você deve implementar a função <strong><code>void * sort(void * args)</code></strong> que representa a <em>thread</em> responsável em ler concorrentemente o arquivo de entrada no arquivo <strong><code>solucao.c</code></strong>, esse arquivo conterá as soluções das <strong>fase de Sort</strong> e <strong>fase de Sort-Merge</strong>. Para compilar a sua solução use o comando:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ gcc -g -Og -Wall sort.o solucao.c -o sort -pthread
+</code></pre></div>
+<p>Para executar o programa e testar sua solução, informe por linha de comando o número de <em>threads</em> (<strong><code>nThreads</code></strong>) que o programa deverá criar e o quantidade de itens (<strong><code>nItens</code></strong>) no arquivo que será ordenado e o nome do arquivo, por exemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./sort nThreads nItens arqIn
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./sort 4 16 in16.txt
+</code></pre></div>
+<p>Considere que o número de <em>Threads</em> <strong><code>nThreads</code></strong> sempre será maior igual a 2 e é uma potência de 2, mas nem sempre a divisão do  número de itens no arquivo <strong><code>nItens</code></strong> por <strong><code>nThreads</code></strong> terá resto 0. Por exemplo se <strong><code>nThreads=4</code></strong> e <strong><code>nItens=19</code></strong> 
+As 3 primeiras <em>Threads</em> trabalharam com 4 itens e a última com 7 itens na <strong>fase de Sort</strong></p>
+<p>O programa <strong><code>sort-merge.o</code></strong> contem a implementação completa da criação das <em>threads</em> para <strong>fase de Sort</strong> e para <strong>fase de Merge</strong>, e após resolver a fase anterior você pode compilar esse programa junto com a sua solução no arquivo <strong><code>solucao.c</code></strong>. </p>
+<p><div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>#include ..
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>void * sort(void *args);
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>void * merge(void *args);
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>int main(int nArgs, char **argv)
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>{   
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    int nThreads, nItens;
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    int fdIn;
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    int *vet_fdOut;
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    if (nArgs &lt; 4){
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        printf(&quot;USAGE:\n&quot;);
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        printf(&quot;./sort-merge  &lt;qtd threads&gt; &lt;qtd itens&gt; &lt;arquivo com itens&gt;\n&quot;);
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        return -1;
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    }
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    nThreads = atoi(argv[1]);
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    nItens   = atoi(argv[2]);
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    fdIn=open(argv[3],O_RDONLY) ;
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    if( fdIn &lt; 0 )
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    {
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        fprintf(stderr,&quot;./sort-merge: Erro falha na abertura do arquivo %s \n&quot;, argv[3]);
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        exit(EXIT_FAILURE);
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    }
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    printf(&quot;Serao criadas %d threads.\n&quot;,nThreads);
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>    pthread_t *tids = malloc(nThreads * sizeof(pthread_t));
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    struct sort_args *vet_sort = malloc(nThreads * sizeof(struct sort_args));
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    pthread_mutex_t mutex_file = PTHREAD_MUTEX_INITIALIZER;
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        vet_sort[i].idxThread = i;
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        vet_sort[i].nThreads = nThreads;
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        vet_sort[i].lineFiles = nItens;
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        vet_sort[i].mutex_file = &amp;mutex_file;
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>        vet_sort[i].fdIn = fdIn;
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        pthread_create(&amp;tids[i], NULL, sort, &amp;vet_sort[i]);
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        printf(&quot;Criou thread:%d fase sort\n&quot;, i);
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>    }
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    printf(&quot;Funcao main() espera as threads sort finalizarem...\n&quot;);
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>    vet_fdOut = malloc(nThreads*sizeof(int));
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>        pthread_join(tids[i], NULL);
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>        vet_fdOut[i]=vet_sort[i].fdOut;   
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    }
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    close(fdIn);
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>    free(vet_sort);
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>    free(tids);
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    while( nThreads &gt; 1){
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>        nThreads = nThreads/2;
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>        tids = malloc(nThreads * sizeof(pthread_t));
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>        struct merge_args *vet_merge = malloc(nThreads * sizeof(struct merge_args));
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>        for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>            vet_merge[i].idxThread = i;
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>            vet_merge[i].nThreads = nThreads;
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>            vet_merge[i].fdIn1 = vet_fdOut[i*2];
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>            vet_merge[i].fdIn2 = vet_fdOut[(i*2)+1];
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>            pthread_create(&amp;tids[i], NULL, merge, &amp;vet_merge[i]);
+<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>            printf(&quot;Criou thread:%d fase merge nThread:%d \n&quot;, i,nThreads);
+<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>        }
+<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>
+<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>        for (int i = 0; i &lt; nThreads; i++) {
+<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>            pthread_join(tids[i], NULL);
+<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>            vet_fdOut[i]=vet_merge[i].fdOut;
+<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>        }
+<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>
+<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>        free(tids);
+<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>        free(vet_merge);
+<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>    }  
+<a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>    close(vet_fdOut[0]);
+<a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>    free(vet_fdOut);   
+<a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>    printf(&quot;Funcao main() FASE Sort-Merge finalizando normalmente...\n&quot;);
+<a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>    return 0;
+<a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>}
+</code></pre></div>
+Para compilar a sua solução (<code>solucao.c</code>) com o programa <strong><code>sort-merge.o</code></strong>  use o comando:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ gcc -g -Og -Wall sort-merge.o solucao.c -o sort-merge -pthread
+</code></pre></div>
+<h2 id="como-comecar">Como começar?</h2>
+<p>Faça <code>git pull</code> no seu repositório entregas e verifique na pasta lab se você recebeu os seguintes arquivos: </p>
+<ul>
+<li>
+<p><strong><code>sort.o</code></strong> contem o código binário que cria as <em>threads</em> na <strong><code>fase de Sort</code></strong>. </p>
+</li>
+<li>
+<p><strong><code>sort-merge.o</code></strong> contem o código binário que cria as <em>threads</em> na <strong><code>fase de Sort</code></strong> e <strong><code>fase de Merge</code></strong>. </p>
+</li>
+<li>
+<p><strong><code>sort-merge.h</code></strong> arquivo com a declaração das estrutas e as funções usadas nas duas fases.</p>
+</li>
+<li>
+<p><strong><code>in16.txt</code></strong> e outros arquivos de testes para você começar a implementar as suas soluções.</p>
+</li>
+<li>
+<p><strong><code>solucao.c</code></strong> programa fonte que deverá ser entrega com a sua implementação das <em>threads</em> nas fases  <strong><code>Sort</code></strong> e  <strong><code>Merge</code></strong>. </p>
+</li>
+</ul>
+<h2 id="avaliacao">Avaliação</h2>
+<p>O programa será avaliado usando uma rubrica que descreve as duas fases implementadas. </p>
+<p><strong>Atenção:</strong> Os testes automáticos serão nossa forma principal de avaliação. Entretanto, o professor poderá utilizar processos extras de avaliação, como: entrevistas, revisão manual de código.</p>
+<p><strong>IMPORTANTE</strong>: Os arquivos fontes disponilizados são para vocês entenderem como são realizadas as chamadas das <em>threads</em>, não gere novamente os arquivos <strong><code>sort.o</code></strong> e <strong><code>sort-merge.o</code></strong>.</p>
+<h3 id="tag-lab30x-fase-sort">Tag <code>lab3.0.x</code>: fase Sort</h3>
+<p>Na fase de <strong>Sort</strong> cada <em>thread</em> deverá alocar um espaçao na memória para armazenar os itens de sua região, para tanto considere as seguintes observações:</p>
+<ul>
+<li>
+<p>No arquivo de entrada cada item no arquivo de entrada será uma sequência de caracteres (por exemplo um nome de um animal), considere que os itens terão no <strong>máximo 20 caracteres</strong> (somente letras em minúsculo) e cada um deles  estará armazenado em uma linha do arquivo finalizada por <code>\n</code>, a exceção é a última linha que não tem <code>\n</code>, além disso considere que podemos ter itens repetidos no arquivo.</p>
+</li>
+<li>
+<p>O arquivo de entrada será um recurso compartilhado que precisará tem seu acesso controlado, a <em>thread</em> principal informa para as <em>threads</em> criadas o descritor do arquivo de entrada e cada <em>thread</em> filha deve acessar o arquivo em modo exclusivo. Um detalhe importante que você deve resolver é como fazer com que as <em>threads</em> fihas façam a leitura correta de sua região no arquivo de entrada.</p>
+</li>
+<li>
+<p>Serão criadas <code>nThreads</code> (Thread 0, 1, ... n), informado por linha de linha de comando, e cada <em>thread</em> deve ler sua região no arquivo de entrada corretamente, ou seja, conforme exemplo da figura 1.</p>
+</li>
+<li>
+<p>Nessa fase você cada <em>thread</em> pode utilizar algoritmos tradicionais de ordenação (InsertionSort ou BubbleSort), para ordem ordenar sua porção do arquivo em memória.</p>
+</li>
+<li>
+<p>Ao final da ordenação a <em>thread</em> deve escrever o seu resultado em um arquivo, a <code>Thread 0</code> cria e escreve no arquivo <code>0.txt</code>, a <code>Thread 1</code> cria e escreve no arquivo <code>1.txt</code> e assim por dianto. E por fim retorna para função principal (<strong><code>main()</code></strong>) o descritor do arquivo, que foi criado para armazenar os seus itens ordenados, no campo <code>fdOut</code> da estrutura <code>struct sort_args</code>. <strong>Importante</strong>: o arquivo criado não precisa ser fechado, pode deixar isso para função <code>main()</code>. O arquivo ordenado tem o mesmo formato do arquivo de entrada, ou seja, cada linha separada por <code>\n</code> com exceção a última linha que não tem <code>\n</code>.</p>
+</li>
+<li>
+<p>Para entregar <strong>fase de Sort</strong> a <strong>envie para o github suas alterações</strong> e suba uma tag com o padrão de nomenclatura <code>lab3.0.x</code>, substituindo <code>x</code> por qualquer número inteiro! Ex:</p>
+</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ git tag -a lab3.0.0 -m &quot;lab3.0.0&quot;
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$ git push origin lab3.0.0
+</code></pre></div>
+<p><strong>NOTA desta fase</strong>: 6.0</p>
+<h3 id="tag-lab31x-fase-sort-merge">Tag <code>lab3.1.x</code>: fase Sort-Merge</h3>
+<p>para realizar essa fase você deverá ter finalizado a fase de <strong><code>Sort</code></strong>, pois esta fase tem como entrada os arquivos gerados na fase anterior (veja Figura 2). Por conta disso considere as seguintes observações:</p>
+<ul>
+<li>
+<p>As <em>threads</em> nessa fase terão como entrada os descritores de arquivos gerados na fase anterior. No programa   <strong><code>sort-merge.o</code></strong> poderá ver que os descritores de arquivos são passados para as <em>threads</em> através de uma estrutura (<code>struct</code>).</p>
+</li>
+<li>
+<p>Cada <em>thread</em> receberá dois descritores de arquivos da fase anterior e fará o merge (intercalação) dos dois arquivos e gerando um terceiro arquivo que será retornado para a função principal (<strong><code>main()</code></strong>),  que usará esse arquivo para próxima iteração.</p>
+</li>
+<li>
+<p>O <strong>nome</strong> do arquivo criado nessa fase deverá ter o seguinte formato = quantidade de <em>threads</em> que estão executanto simultanamente concatenado com o número da <em>thread</em> (veja a Figura 2). Por exemplo se tiverem  <code>2</code> <em>threads</em> executando simultaneamente a <code>Thread 0</code> gerará o arquivo <code>20.txt</code> e a <code>Thread 1</code> gerará o arquivo <code>21.txt</code></p>
+</li>
+<li>
+<p>Note na função  (<strong><code>main()</code></strong>) que a cada iteração o número de <em>threads</em> será reduzida pela metada, até que reste somente uma <em>thread</em> e assim é finalizada o merge.</p>
+</li>
+<li>
+<p>Para entregar <strong>fase de Merge</strong> a <strong>envie para o github suas alterações</strong> e suba uma tag com o padrão de nomenclatura <code>lab3.1.x</code>, substituindo <code>x</code> por qualquer número inteiro! Ex:</p>
+</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ git tag -a lab3.1.0 -m &quot;lab3.1.0&quot;
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>$ git push origin lab3.1.0
+</code></pre></div>
+<p><strong>NOTA desta versão</strong>: 10.0</p>
+<h3 id="prazo">Prazo</h3>
+<p><a href="../../sobre/">Clique Aqui</a></p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
