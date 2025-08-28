@@ -142,6 +142,9 @@ Após executar o `run`, utilize `disas funcao1` e observe no código da função
 !!! exercise text 
     Use o comando `x` para mostrar, em decimal, o `int` que está armazenado no endereço descoberto no exercício anterior. Confira seu resultado com o código.
 
+    Para lembrar como usar o comando `x` acesse esse link: https://sourceware.org/gdb/onlinedocs/gdb/Memory.html
+
+
 !!! tip
     Execute o comando `continue` para continuar rodando o programa. Ele irá rodar até que o próximo *breakpoint* seja alcançado ou até que o programa termine.
 
