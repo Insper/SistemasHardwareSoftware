@@ -276,7 +276,7 @@ Vamos agora ao código de `ex5`:
 !!! exercise text long
     Faça a tradução de `ex5` para *C*.
 
-!!! tip "Conferindo tudo!"
+!!! note "Conferindo tudo!"
     Agora que terminou todos os exercícios, confira suas traduções com os gabaritos disponíveis no arquivo `fontes.zip`.
 
 ## Atividade para entrega!
@@ -286,10 +286,10 @@ Aula com **atividade** para **entrega**. Confira seu repositório de entregas do
 !!! warning "Atenção!"
     Faça `git pull` no seu repositório de entregas que irá aparecer uma nova pasta dentro de `atv`.
 
-!!! tip "Como começar?"
+!!! note "Como começar?"
     Leia o `README.md` disponível **na pasta da atividade** para descobrir como resolver e entregar.
 
-!!! tip "Prazo!"
+!!! note "Prazo!"
     Confira o **prazo** de entrega no menu [Entregas e Prazos](../../sobre.md)
 
 ## Hackerlab
