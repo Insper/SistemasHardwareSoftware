@@ -4,64 +4,64 @@
     "aulas/02-ram/": {
       "long_1": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_1"
       },
       "long_2": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_2"
       },
       "long_3": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_3"
       },
       "long_4": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_4"
       },
       "long_5": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_5"
       },
       "long_6": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_6"
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_7"
       },
       "long_8": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_8"
       },
       "long_9": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_9"
       },
@@ -75,36 +75,36 @@
       },
       "short_10": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_10"
       },
       "short_11": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_11"
       },
       "short_12": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_12"
       },
       "long_13": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/long_13"
       },
       "short_14": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/02-ram/short_14"
       }
@@ -112,57 +112,57 @@
     "aulas/03-arquitetura-x86/": {
       "long_1": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_1"
       },
       "long_2": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_2"
       },
       "long_3": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_3"
       },
       "short_4": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_4"
       },
       "long_5": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_5"
       },
       "short_6": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_6"
       },
       "short_7": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_7"
       },
       "short_8": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_8"
       },
@@ -184,22 +184,22 @@
       },
       "long_9": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_9"
       },
       "short_10": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_10"
       },
       "long_11": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_11"
       },
@@ -209,22 +209,22 @@
       },
       "short_12": {
         "tags": [
-          "text-exercise",
-          "short-text"
+          "short-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/short_12"
       },
       "long_13": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_13"
       },
       "long_14": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/03-arquitetura-x86/long_14"
       }
@@ -232,100 +232,100 @@
     "aulas/04-funcoes-mov/": {
       "long_1": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_1"
       },
       "long_2": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_2"
       },
       "long_3": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_3"
       },
       "long_4": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_4"
       },
       "long_5": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_5"
       },
       "long_6": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_6"
       },
       "long_7": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_7"
       },
       "long_8": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_8"
       },
       "long_9": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_9"
       },
       "long_10": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_10"
       },
       "long_11": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_11"
       },
       "long_12": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_12"
       },
       "long_13": {
         "tags": [
-          "text-exercise",
-          "long-text"
+          "long-text",
+          "text-exercise"
         ],
         "slug": "aulas/04-funcoes-mov/long_13"
       }
     }
   },
   "tags": {
-    "text-exercise": "text-exercise",
+    "short-text": "short-text",
     "long-text": "long-text",
-    "short-text": "short-text"
+    "text-exercise": "text-exercise"
   }
 }

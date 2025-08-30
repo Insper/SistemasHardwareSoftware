@@ -26,8 +26,8 @@ nav:
     - "04 - Funções": aulas/04-funcoes-mov/index.md
     # - "05 - Condicionais": aulas/05-condicionais/index.md
     # - "06 - Condicionais e funções": aulas/06-condicionais-funcoes/index.md
-  # - Labs:
-  #   - "Hackerlab": labs/hackerlab.md
+  - Labs:
+    - "Hackerlab": labs/hackerlab.md
   #   - "Lab processos": labs/processos.md
   #   - "Lab threads": labs/threads.md
   - Referências e links:
