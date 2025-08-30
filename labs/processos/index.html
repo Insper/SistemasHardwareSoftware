@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Processos - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../aulas/01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-de-processos">Lab de Processos</h1>
+<p>Neste laboratório, você implementará um <em>shell Unix</em> simples (como tantos outros que existem, <em>bash</em>, <em>csh</em> etc.) chamado <code>inspersh</code>. A função básica de um <em>shell</em> é aceitar comandos como entradas na linha de comando e executar os programas correspondentes em resposta.</p>
+<p>O propósito deste laboratório é ajudar você a aprender os fundamentos das chamadas de sistema para criar e gerenciar processos conforme você implementa seu programa. </p>
+<p>Você escreverá o código para seu programa <em>shell</em> no arquivo <code>inspersh.c</code>, que estará em branco sem nenhuma função, isto desafiará suas habilidades de desenvolvedor, pois terá que aprender a usar diversas funções das bibliotecas da linguagem C, uma sugestão é que para cada função que for utilizar, teste o seu funcionamento (entrada e saída) em um programa separado para depois utilizar na implementação do <code>inspersh.c</code>, e lembre-se, é muito importante que você leia com atenção as especificações das funções no manual da função, para isso você pode usar o comando <code>man</code> no terminal. A seguir seguem algumas boas boas práticas de programação que poderão lhe ajudar:</p>
+<ul>
+<li><strong>Planeje a totalidade da sua tarefa</strong>: Crie um esqueleto de como todo o seu código ficará. Isso evitará que você precise reestruturar todo o seu código para adicionar um único recurso novo;</li>
+<li><strong>Estruture seu código em funções modulares</strong>: Você não quer depurar um <code>while</code> de <code>1500</code> linhas dentro de <code>main</code>;</li>
+<li><strong>Trabalhe incrementalmente</strong>: Implemente um recurso, teste, depure, siga em frente; e</li>
+<li><strong>Faça o código legível</strong>: Uma boa nomenclatura e espaçamento tornarão seu código muito mais legível.</li>
+</ul>
+<h2 id="iniciando-seu-shell">Iniciando seu <em>shell</em></h2>
+<p>O <em>shell</em> de ser iniciado a partir do diretório onde foi carregado o programa, em seguida deve ficar executando um <code>loop</code> como o trecho abaixo:</p>
+<p><div class="language-C highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">enquanto</span><span class="w"> </span><span class="n">comando</span><span class="w"> </span><span class="n">diferente</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exit</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">   </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Imprima</span><span class="w"> </span><span class="n">um</span><span class="w"> </span><span class="n">prompt</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">comando</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">   </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Leia</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">comando</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">entrada</span><span class="w"> </span><span class="n">padrão</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">   </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Executa</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">comando</span>
+</code></pre></div>
+O <em>shell</em> suporta dois tipos de comandos: <strong>internos</strong> e <strong>externos</strong>. Os comandos <strong>internos</strong> são parte do código do <em>shell</em> e são executados sem criar um novo processo. Os comandos <strong>externos</strong> devem ser executados por um novo processo, com a chamada das funções <code>fork/execvp/waitpid</code>. Para identificar um <strong>comando externo</strong>, considere que se o comando não for um dos <strong>comandos  internos</strong> listados a seguir, ele é um comando <strong>externo</strong>.</p>
+<p>Os argumentos de comando serão separados por espaços em branco, não se preocupe com espaçamento irregular em entradas de comando (ou seja, espaço em branco extra antes e depois de cada <em>token</em>). Isso é considerado comportamento indefinido e não será testado. Você é livre para tornar seu código tão robusto quanto quiser, mas testaremos apenas os casos básicos com <strong>um espaço</strong> entre os <em>tokens</em>.</p>
+<h2 id="avaliacao">Avaliação</h2>
+<p>O <code>inspersh</code> será avaliado de forma manual usando uma rubrica que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades maior será a nota. </p>
+<h3 id="fase-0"><strong>FASE 0</strong></h3>
+<ul>
+<li>O programa <code>inspersh.c</code> <strong>não compila</strong> ou compila com <em>warnings</em>.</li>
+<li><strong>Não preencheu</strong> o arquivo <code>README.md</code></li>
+<li><strong>Não entregou</strong> o vídeo explicativo;</li>
+<li>O programa não implementa algum dos requisitos da rubrica da <strong>fase 1</strong>.</li>
+</ul>
+<h4 id="nota-desta-fase-00">NOTA desta fase: <code>0.0</code></h4>
+<h3 id="fase-1"><strong>FASE 1:</strong></h3>
+<ul>
+<li><strong>Video explicativo</strong> com áudio e a tela de visível com a execução da implamentação, comentando as informações colocadas no arquivo <code>README.md</code>.</li>
+<li>
+<p><strong>Preencheu</strong> o arquivo <code>README.md</code> com as seguintes informações:</p>
+<ul>
+<li>Seu nome e uma descrição de qual fase do laboratório você conseguiu completar;</li>
+<li>Relate também quaisquer <em>bugs</em> ou erros identificados no seu <em>shell</em>;e</li>
+<li>Alguma decisão de <em>design</em> interessante que você gostaria de compartilhar.</li>
+</ul>
+</li>
+<li>
+<p>O programa  <code>inspersh.c</code> compila sem <em>warnings</em>. Para compilar use: </p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>gcc inspersh.c -Wall -Wno-unused-result -g -Og -o inspersh
+</code></pre></div>
+</li>
+<li>
+<p>O programa printa o <em>prompt</em> do <em>shell</em>, a partir do diretório onde foi carregado o programa no formato <code>(pid=&lt;pid&gt;)&lt;path&gt;$</code>, como por exemplo:</p>
+<p><div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+Sendo que o <code>&lt;pid&gt;</code> é o ID do processo atual e <code>&lt;path&gt;</code> é o caminho completo para o diretório de trabalho atual. </p>
+</li>
+<li>
+<p>O programa lê e interpreta uma linha com o comando que será executado, pela entrada padrão (<code>stdin</code>), para isso será necessário dividir a entrada com base nos espaços. Um <em>token</em> é qualquer sequẽncia de caracteres delimitado pelo início e fim da linha, ou por espaços. O primeiro <em>token</em> é considerado o <strong>comando</strong>, e todos os <em>tokens</em> seguintes são referidos como <strong>argumentos</strong>. </p>
+</li>
+<li>
+<p>Implmenta os <strong>comandos internos</strong>: </p>
+<p><strong><code>exit</code></strong>: encerra o <code>inspersh</code> elibera todos os recursos.</p>
+<p><strong><code>cd &lt;dir&gt;</code></strong>: o diretorio atual é alterado para o diretório informado  <code>&lt;dir&gt;</code>.  Se o diretório informado começar com <code>/</code> o diretorio deve ser atualizado a partir da raiz do sistema de arquivo, caso contrário deve ser atualizado em relação ao diretório atual. Caso o argumento  <code>&lt;dir&gt;</code> não seja informado o <em>shell</em> deve regressar ao diretório inicial onde foi carregado o programa. Se por algum motivo <code>&lt;dir&gt;</code> não for um diretório válido, o <code>inspersh</code> deverá manter seu diretório de trabalho atual e deverá imprimir: <code>dir: diretorio nao existe.</code>, além disso não é necessário tratar o comando <code>cd ..</code>, veja abaixo um trecho de execução do comando <code>cd</code>:</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>testes
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02/testes$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>dir_imaginario:<span class="w"> </span>diretorio<span class="w"> </span>nao<span class="w"> </span>existe.
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02/testes$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>teste2
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02/testes/teste2$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+<p><strong><code>ls</code></strong>: lista conteúdo de um diretório (arquivos e outros diretórios), informando se um elemento é um diretório ou arquivo. Se for um arquivo deve ser impresso o tamanho do arquivo em <em>bytes</em>, e por fim o nome do elemento no sistema de arquivos, ignorem os arquivos e diretórios que comecem com caractere <code>.</code> (ponto), este não deve ser listado, abaixo um exemplo da execução do comando <code>ls</code>:</p>
+<p><div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>ls
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>d<span class="w"> </span>-<span class="w">          </span>-<span class="w"> </span>um_diretorio
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>a<span class="w"> </span>-<span class="w">     </span><span class="m">7566</span><span class="w"> </span>-<span class="w"> </span>inspersh.c
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>a<span class="w"> </span>-<span class="w">    </span><span class="m">16526</span><span class="w"> </span>-<span class="w"> </span>processos.md
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>a<span class="w"> </span>-<span class="w">    </span><span class="m">19064</span><span class="w"> </span>-<span class="w"> </span>processo.html
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>a<span class="w"> </span>-<span class="w">   </span><span class="m">332496</span><span class="w"> </span>-<span class="w"> </span>inspersh
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>d<span class="w"> </span>-<span class="w">          </span>-<span class="w"> </span>testes
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+Não se preocupe aqui com a ordem em que aparecem os elementos que estão no diretório, o importante é informar corretamente as informaçoes dos elementos.</p>
+</li>
+<li>
+<p><strong>Dica de implementação</strong>: leia atentamente os manuais (<code>man</code>) das funções a seguir, elas poderão lhe ajudar a atender os requisitos dessa fase. <code>getpid</code>, <code>getcwd</code>,<code>fgets</code>,<code>chdir</code>,<code>opendir</code>, <code>readdir</code>, <code>closedir</code> e <code>stat</code>(<code>man 2 stat</code>)-</p>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-30">NOTA até essa fase: <code>3.0</code></h4>
+<h3 id="fase-2"><strong>FASE 2</strong></h3>
+<ul>
+<li>
+<p>Programa <code>inspersh.c</code>roda <strong>sem erros no valgrind</strong>. Para testar o seu program use: </p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>valgrind --leak-check=yes ./inspersh
+</code></pre></div>
+</li>
+<li>
+<p>Implementa os <strong>comandos externos</strong>: se o comando não for um comando interno do <code>inspersh.c</code> (ou seja, qualquer comando diferente de <code>cd</code>, <code>ls</code>, <code>exit</code>), o <code>inspersh</code> deve considerar o nome do comando como o nome de um arquivo executável, como por exemplos os comandos:  </p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat, top, pwd, ps, /usr/bin/ls -l, echo hello, sleep 5, lscpu, ...
+</code></pre></div>
+<p>O código desses comandos deve ser executado em um processo diferente daquele que executa o <code>inspersh.c</code>, para tanto você deve usar <code>fork()</code>, <code>execvp()</code> e <code>waitpid()</code>. Caso tenha sucesso na execução do <strong>comando externo</strong> deve ser impressa a seguinte mensagem: <code>(pid=&lt;pid&gt;):comando externo [&lt;cmd&gt;] executado com sucesso.</code>, se o <strong>comando externo</strong> falhar no momento da chamada do <code>execvp</code> o <code>inspersh</code> deve enviar uma mensagem apropriadas, como por exemplo:<code>(pid=&lt;pid&gt;):falha na execucao do comando externo [&lt;cmd&gt;]</code>. Considere que  <code>&lt;pid&gt;</code> é o valor do pid do executável e <code>&lt;cmd&gt;</code> é o nome do comando.  Veja um exemplo de execução dos comandos externos:</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>sleep<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4321</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>sleep<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>SLEEP<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4322</span><span class="o">)</span>:falha<span class="w"> </span>na<span class="w"> </span>execução<span class="w"> </span><span class="k">do</span><span class="w"> </span>comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>SLEEP<span class="o">]</span>.
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Ola<span class="w"> </span>mundo<span class="w"> </span>!!
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>Ola<span class="w"> </span>Mundo<span class="w"> </span>!!
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4327</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">pwd</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>/home/lab02
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4327</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>pwd<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>
+</code></pre></div>
+<p><strong>IMPORTANTE</strong>: Não é permitido o uso da função <strong><code>system()</code></strong> nesse lab, caso use será atribuído a nota da <strong>FASE 0</strong>. </p>
+</li>
+<li>
+<p>Programa captura <code>Ctrl+C</code>: geralmente quando pressionamos <code>Ctrl+C</code>, o programa em execução no primeiro plano é finalizado, no entanto, o <code>inspersh.c</code> deve verificar se há outro programa em primeiro plano em execução no momento e, se houver, ele deve finalizar esse processo usando o sinal <code>SIGINT</code>, e apresentar uma mensagem apropriado como <code>(pid=&lt;pid&gt;):comando externo [&lt;cmd&gt;] finalizado com Ctrl+C.</code>, caso contrário o <code>inspersh.c</code> ignora o <code>Ctrl+C</code>.</p>
+<p><div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>sleep<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>^C
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">4323</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>sleep<span class="o">]</span><span class="w"> </span>finalizado<span class="w"> </span>com<span class="w"> </span>Ctrl+C.
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
++ <strong>Dica de implementação</strong>: para aguardar os comandos externos finalizados com <code>Ctrl+C</code> utilize a função <code>waitpid()</code> com argumento  não bloqueante, para tanto leia atentamente o manual dessa função (<code>man waitpid</code>).</p>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-50">NOTA até essa fase: <code>5.0</code></h4>
+<h3 id="fase-3"><strong>FASE 3</strong></h3>
+<p>Nessa fase o seu shell deve suportar o armazenamento do histórico de comandos executados, por conta disso o executável <code>inspersh</code> deverá ser inicializado da seguinte forma:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$./inspersh  &lt;arquivo_historico&gt;
+</code></pre></div>
+<p>Se o arquivo não existir, você deve tratá-lo como um arquivo vazio, o formato do arquivo de histórico deve ser uma lista comandos executados. Ao sair, o <code>inspersh</code> deve anexar os comandos da sessão atual no arquivo de histórico fornecido, no mesmo arquivo informado no início da execução do <em>shell</em>. Exemplo do arquivo <code>historico.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cd testes
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>echo Ola Mundo!
+</code></pre></div>
+<p>Considere o <code>inspersh</code> executando carregando o arquivo <code>historico.txt</code>:</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$./inspersh<span class="w">  </span>historico.txt
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>dir_imaginario:<span class="w"> </span>diretório<span class="w"> </span>nao<span class="w"> </span>existe.
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+<p>Exemplo como ficaria o arquivo de  <code>historico.txt</code> após a execução do <code>inspersh</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cd testes
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>echo Ola Mundo!
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>cd dir_imaginario
+</code></pre></div>
+<p>Note que comando tanto os comandos executados com sucesso e com falha são armazenados no histórico, e o comando <code>exit</code> não é armazenado no arquivo de histórico. </p>
+<ul>
+<li>
+<p>Implementa comandos para acessar o histórico do <em>shell</em> a partir do <em>prompt</em> do <code>inspersh</code>:</p>
+<p><strong><code>!</code></strong>: Imprime para cada comando (em ordem cronológica) seu número de linha (indexado a partir do <code>0</code>), uma tabulação, o comando em si e uma nova linha, e é claro, o comando <strong><code>!</code></strong> não é armazenado no histórico.</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="m">0</span><span class="w">   </span><span class="nb">cd</span><span class="w"> </span>testes
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Ola<span class="w"> </span>Mundo!
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="m">2</span><span class="w">   </span><span class="nb">cd</span><span class="w"> </span>dir_imaginario
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>
+</code></pre></div>
+<p><strong><code>!#</code></strong>: Reexecuta o <em>#ésimo</em> comando no histórico e armazena a nova execução do comando no histórico, antes de executar o <em>#ésimo</em> comando de ser impresso na tela. Se <strong><code>#</code></strong>  não for um índice válido, imprima <code>indice invalido</code> (essa mensagem não deve ser armazenado no histórico). E por fim o comando <strong><code>!#</code></strong> não é armazenado no histórico, o exemplo abaixo assume que o <strong>histórico está vazio</strong>:</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1237</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1239</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!1
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">2230</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!4
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>indice<span class="w"> </span>invalido
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="m">2</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+<p><strong><code>!&lt;prefixo&gt;</code></strong>: Imprime e executa o <strong>último comando</strong> que tem o prefixo especificado. Se nenhuma correspondência for encontrada, imprima a mensagem de erro <code>comando nao encontrado</code> e não armazene nada no histórico. Caso encontre alguma correspondência, imprima o comando antes de executá-lo. Importante, comando <strong><code>!&lt;prefixo&gt;</code></strong> não é armazenado no histórico, mas o comando que está sendo executado (se houver) é, o exemplo a seguir assume um <strong>histórico vazio</strong>:</p>
+<div class="language-Shell highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1237</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1239</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!echo
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">2230</span><span class="o">)</span>:comando<span class="w"> </span>externo<span class="w"> </span><span class="o">[</span>echo<span class="o">]</span><span class="w"> </span>executado<span class="w"> </span>com<span class="w"> </span>sucesso.
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!eco
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>comando<span class="w"> </span>nao<span class="w"> </span>encontrado
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$<span class="w"> </span>!
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="m">0</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Echo<span class="w"> </span>Algo!
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="m">1</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="m">2</span><span class="w">   </span><span class="nb">echo</span><span class="w"> </span>Outro<span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="o">(</span><span class="nv">pid</span><span class="o">=</span><span class="m">1234</span><span class="o">)</span>/home/lab02$
+</code></pre></div>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-80">NOTA até essa fase: 8.0</h4>
+<h3 id="fase-4"><strong>FASE 4</strong></h3>
+<p>Nessa fase o <strong>comando interno</strong> <code>ls</code> deve ser incrementado. Considera a  <em>Figura 1</em> que apresenta uma de árvore de diretórios e arquivos de um sistema de arquivos. O seu programa <code>inspersh.c</code> deve implementar as seguintes funcionalidades:</p>
+<p><img alt="Árvore de diretórios" src="../img/tree.png" /></p>
+<p><em>Figura 1</em>: Exemplo de árvore de diretórios e arquivos</p>
+<ul>
+<li>
+<p>Implementa o argumento <code>-o</code> para o comando <code>ls</code>, o argumento indica ao comando ao comando <code>ls</code> que conteúdo do diretorio corrente deve ser impressa em ordem alfabética, colocando os diretórios antes dos arquivos. 
+Considere que o executável <code>inspersh</code> está na raiz da árvore acima, a saída para o comando <code>ls -o</code> seria:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>./dirA
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>./dirC
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>./temp.txt
+</code></pre></div>
+</li>
+<li>
+<p>Implementa o argumento <code>-n</code> que percorre, a partir do diretório corrente, toda a árvore de diretório por <strong>nível</strong>, considere que o executável <code>inspersh</code> está na raiz da árvore apresentada na <em>Figura 1</em>, a saída para o comando <code>ls -n</code> seria:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>./dirA
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>./dirC
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>./temp.txt
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>./dirA/dirB
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>./dirA/my1.dat
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>./dirC/my2.dat
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>./dirC/temp.txt
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>./dirA/dirB/my3.dat
+</code></pre></div>
+</li>
+<li>
+<p>Implementa o argumento <code>-h</code> que faz com que o comando <code>ls</code> percorra toda árvore de diretório a partir do diretório corrente <strong>explorando o primeiro diretório completamente</strong> antes de voltar e explorar o próximo diretório no mesmo nível, repetindo esse processo para cada diretório que será percorrido. Considere que o executável <code>inspersh</code> está na raiz da árvore apresentada na <em>Figura 1</em>, a saída para o comando <code>ls -h</code> seria:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>./dirA
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>./dirA/dirB
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>./dirA/dirB/my3.dat
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>./dirA/my1.dat
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>./dirC
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>./dirC/my2.dat
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>./dirC/temp.txt
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>./temp.txt
+</code></pre></div>
+</li>
+</ul>
+<h4 id="nota-ate-essa-fase-100">NOTA até essa fase: 10.0</h4>
+<p><strong>IMPORTANTE:</strong> Considere as <strong>fases como cumulativas</strong>, ou seja, cada versão deve <strong>manter as funcionalidades da fase anterior</strong> e acrescentar novas. Por exemplo, a versão da <strong>Fase  2</strong>, além de executar os <strong>comandos externos</strong> deve continuar os <strong>comandos internos</strong> implementado na <strong>Fase 1</strong>, e assim por diante. </p>
+<h3 id="notas-de-programacao"><strong>Notas de programação</strong></h3>
+<ul>
+<li>A linha de comando do seu programa precisa manipular linhas de entrada de até <strong>1024 caracteres</strong>;</li>
+<li>Um comando não ultrapassará 8 <em>tokens</em>; e</li>
+<li>Em diretório teremos no máximo <strong>128 elementos</strong> (diretórios e arquivos).</li>
+<li>Considere que o tamanho máximo de um <code>&lt;path&gt;</code> será de <code>1024</code> caracteres.</li>
+</ul>
+<h2 id="restricoes">Restrições</h2>
+<p>Esta atividade serve como avaliação dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código de vocês:</p>
+<ul>
+<li>todo trabalho com arquivos deverá ser feito usando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como por exemplo <code>fopen()</code>, <code>fdopen()</code>, <code>fread()</code>, <code>fclose()</code>, entre outras . </li>
+<li>se você usar algum trecho de código da documentação (ou de outra fonte), coloque uma atribuição em um comentário no código.</li>
+<li><strong>Fica proibido</strong> o uso de ferramentas de <strong>geração de código automático por IA</strong>, como por exemplo o <strong>ChatGPT</strong>.</li>
+</ul>
+<p><strong>O não atendimento dessas restrições resultarão em atribuição da nota zero para esse lab.</strong></p>
+<h2 id="entrega">Entrega</h2>
+<p>Você deverá colocar o programa fonte <code>inspersh.c</code> na pasta <code>lab/02-lab-processos</code> em seu repositório de atividades (github), na branch principal, e fazer <strong>upload (push) do arquivo fonte no seu repositório</strong>, não precisa soltar tag.  Lembre-se de se atentar ao prazo de entrega definido <a href="../../sobre/">aqui!</a>.</p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
