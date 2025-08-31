@@ -79,6 +79,9 @@ End of assembler dump.
 !!! exercise text short
     Qual é o tamanho do argumento de `ex1`? Ele é `signed` ou `unsigned`?
 
+    !!! answer
+        Note que é usado a instrução `setg %al` para setar o valor de `%al`, e quando essa instrução é usado o tipo da variável que está sendo comparada é `signed`. Veja a tabela acima.
+
 !!! exercise
     Coloque sua tradução em um arquivo `.c`. Valide sua solução com o professor ou com algum colega que já validou sua solução, ou utilize o gdb, conforme a próxima dica!
 
@@ -113,8 +116,12 @@ End of assembler dump.
 !!! exercise text short
     Qual é o tamanho dos argumentos de `ex2`? Ele é `signed` ou `unsigned`?
 
+    !!! answer
+        A função `ex2` recebe dois argumentos `%rdi` e `%rsi`, nessa ordem. No que é usada a instrução `setbe` usada para avalir o resultado de comparação de variáveis `unsigned`. Veja a tabela acima.
+
+
 !!! exercise text long
-    Coloque sua tradução abaixo. Valide sua solução utilizando comparação do ASM (dica nesta aula), com o professor ou com algum colega que já validou sua solução.
+    Coloque sua tradução abaixo. Valide sua solução utilizando comparação do ASM (dica nesta aula), com os gabaritos disponíveis no arquivo `fontes.zip`.
 
 ### Arquivo `ex3.o`
 
@@ -137,7 +144,7 @@ End of assembler dump.
     Qual é o tamanho dos argumentos de `ex3`? Ele é `signed` ou `unsigned`?
 
 !!! exercise text long
-    Coloque sua tradução abaixo. Valide sua solução com o professor ou com algum colega.
+    Coloque sua tradução abaixo. Valide sua solução com os gabaritos disponíveis no arquivo `fontes.zip`..
 
 ## Condicionais
 
