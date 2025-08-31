@@ -38,7 +38,6 @@ Nao foi desta vez!
 <br>
 
 Como podemos ver, `lasanha` não é uma senha correta para o nível 1!
-
 Conforme for descobrindo, você deverá editar um arquivo `solucao.txt` contendo as senhas usadas para desativar cada nível. Cada senha deverá estar em uma linha. O arquivo entregue deve funcionar como entrada para liberar acesso à aplicação!
 
 <div class="termy">
@@ -48,6 +47,7 @@ $ ./app < solucao.txt
 ```
 
 </div>
+
 <br>
 
 !!! warning "Atenção!"
