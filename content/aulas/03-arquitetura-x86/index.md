@@ -83,7 +83,7 @@ $ gcc -Og -g -Wall -std=c99 funcoes.c -o funcoes
 
 Após executar o `run`, utilize `disas funcao1` e observe no código da função uma seta indicando o próximo comando a ser executado, que representa o breakpoint no início da função.
 
-!!! tip "Dica"
+!!! tip
     Os comandos `info breakpoints`, `info b` ou ainda `i b` podem ser utilizados para listar os breakpoints inseridos no código!
 
 !!! exercise text long
