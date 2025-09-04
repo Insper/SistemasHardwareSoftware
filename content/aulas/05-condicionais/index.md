@@ -174,12 +174,19 @@ c:   b8 01 00 00 00          mov    $0x1,%eax
 11:  c3                      retq
 ```
 
-Pares de instruções `test-j*` ou `cmp-j*` são comumente usadas para representar a construção `if-goto`.
+Pares de instruções `test-j*` (`test` seguido de um `j*`) ou `cmp-j*` (`cmp` seguido de um `j*`) são comumente usadas para representar a construção `if-goto`.
 
 !!! exercise text short
     O nome da função dá uma dica de seu valor de retorno. Você consegue entender o porquê `test $1, %dil` faz isto?
 
     **Dica:** Escreva o teste exato que a função faz.
+    !!! answer
+        `testb $1, %dil` faz **AND** entre `%dil` e `1`, se resultado foi zero (ou seja, `%dil & 1 == 0`), pula para `L3`. Caso contrário, coloca `0` em `%eax`, ou seja, número é ímpar.
+        
+        O teste em `C` seria:
+        
+        `if (a % 2 != 0)`
+    
 
 Vamos agora traduzir a função `eh_par` para **gotoC**. As linhas `0-4` são transformadas em um par `if-goto`. O restante são instruções que já conhecemos.
 
