@@ -425,9 +425,208 @@
         ],
         "slug": "aulas/05-condicionais/long_14"
       }
+    },
+    "aulas/06-condicionais-funcoes/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/choice_1",
+        "answer_idx": 1
+      },
+      "short_1": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_2"
+      },
+      "short_3": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_3"
+      },
+      "long_4": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_4"
+      },
+      "short_5": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_5"
+      },
+      "long_6": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_6"
+      },
+      "short_7": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_7"
+      },
+      "long_8": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_8"
+      },
+      "long_9": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_9"
+      },
+      "long_10": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_10"
+      },
+      "long_11": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_11"
+      },
+      "long_12": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_12"
+      },
+      "long_13": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_13"
+      },
+      "short_14": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_14"
+      },
+      "short_15": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_15"
+      },
+      "short_16": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_16"
+      },
+      "short_17": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_17"
+      },
+      "short_18": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/short_18"
+      },
+      "long_19": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_19"
+      },
+      "long_20": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_20"
+      },
+      "long_21": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_21"
+      },
+      "long_22": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_22"
+      },
+      "long_23": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_23"
+      },
+      "long_24": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_24"
+      },
+      "long_25": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_25"
+      },
+      "long_26": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_26"
+      },
+      "long_27": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/06-condicionais-funcoes/long_27"
+      }
     }
   },
   "tags": {
+    "choice-exercise": "choice-exercise",
     "text-exercise": "text-exercise",
     "long-text": "long-text",
     "short-text": "short-text"
