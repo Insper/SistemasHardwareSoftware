@@ -758,13 +758,113 @@
         ],
         "slug": "aulas/07-loops/long_18"
       }
+    },
+    "aulas/08-variaveis-locais/": {
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_1"
+      },
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/choice_1",
+        "answer_idx": 1
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/choice_2",
+        "answer_idx": 0
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_2"
+      },
+      "choice_3": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/choice_3",
+        "answer_idx": 1
+      },
+      "long_3": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/long_3"
+      },
+      "long_4": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/long_4"
+      },
+      "short_5": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_5"
+      },
+      "short_6": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_6"
+      },
+      "short_7": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_7"
+      },
+      "short_8": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_8"
+      },
+      "short_9": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_9"
+      },
+      "short_10": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/short_10"
+      },
+      "long_11": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/08-variaveis-locais/long_11"
+      }
     }
   },
   "tags": {
     "choice-exercise": "choice-exercise",
+    "long-text": "long-text",
     "text-exercise": "text-exercise",
     "short-text": "short-text",
-    "long-text": "long-text",
     "medium-text": "medium-text"
   }
 }
