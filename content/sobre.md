@@ -25,7 +25,7 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 ## Datas provas
 
 - **Multirão C**: final da primeira semana
-- **AI**: a definir
+- **AI**: 25/09 (quinta-feira) das 16h às 19h 
 - **AF**: a definir
 - **SUB**: a definir (**Todo o conteúdo da AI e AF**)
 
