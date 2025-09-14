@@ -683,15 +683,15 @@
       },
       "medium_8": {
         "tags": [
-          "medium-text",
-          "text-exercise"
+          "text-exercise",
+          "medium-text"
         ],
         "slug": "aulas/07-loops/medium_8"
       },
       "medium_9": {
         "tags": [
-          "medium-text",
-          "text-exercise"
+          "text-exercise",
+          "medium-text"
         ],
         "slug": "aulas/07-loops/medium_9"
       },
@@ -858,13 +858,134 @@
         ],
         "slug": "aulas/08-variaveis-locais/long_11"
       }
+    },
+    "aulas/09-arrays/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/09-arrays/choice_1",
+        "answer_idx": 3
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/09-arrays/choice_2",
+        "answer_idx": 0
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_2"
+      },
+      "long_3": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_3"
+      },
+      "short_4": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_4"
+      },
+      "short_5": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_5"
+      },
+      "long_6": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_6"
+      },
+      "short_7": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_7"
+      },
+      "short_8": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_8"
+      },
+      "short_9": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_9"
+      },
+      "short_10": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_10"
+      },
+      "long_11": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_11"
+      },
+      "long_12": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_12"
+      },
+      "short_13": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/short_13"
+      },
+      "long_14": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_14"
+      },
+      "long_15": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/09-arrays/long_15"
+      }
     }
   },
   "tags": {
-    "choice-exercise": "choice-exercise",
     "long-text": "long-text",
-    "text-exercise": "text-exercise",
     "short-text": "short-text",
-    "medium-text": "medium-text"
+    "text-exercise": "text-exercise",
+    "medium-text": "medium-text",
+    "choice-exercise": "choice-exercise"
   }
 }
