@@ -2,7 +2,7 @@
 
 !!! pdf
     ![](slides.pdf)
-
+<br>
 ## Arquivo `ex1`
 
 Utilize como base o código assembly abaixo (arquivo `ex1`) e responda os itens.
