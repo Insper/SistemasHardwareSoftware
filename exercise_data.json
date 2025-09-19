@@ -1051,6 +1051,134 @@
         ],
         "slug": "aulas/10-malloc/short_10"
       }
+    },
+    "aulas/11-revisao/": {
+      "short_1": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_2"
+      },
+      "short_3": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_3"
+      },
+      "short_4": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_4"
+      },
+      "short_5": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_5"
+      },
+      "long_6": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_6"
+      },
+      "short_7": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_7"
+      },
+      "long_8": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_8"
+      },
+      "short_9": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_9"
+      },
+      "short_10": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_10"
+      },
+      "short_11": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_11"
+      },
+      "short_12": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_12"
+      },
+      "long_13": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_13"
+      },
+      "short_14": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_14"
+      },
+      "long_15": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_15"
+      },
+      "short_16": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/11-revisao/short_16"
+      },
+      "long_17": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_17"
+      },
+      "long_18": {
+        "tags": [
+          "text-exercise",
+          "long-text"
+        ],
+        "slug": "aulas/11-revisao/long_18"
+      }
     }
   },
   "tags": {
