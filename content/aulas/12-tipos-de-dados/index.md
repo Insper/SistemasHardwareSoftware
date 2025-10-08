@@ -3,7 +3,7 @@
 !!! pdf
     ![](slides.pdf)
 
-
+<br>
 ## A estrutura `Point2D`
 
 Vamos considerar primeiro uma estrutura usada para guardar um ponto 2D. Este tipo de estrutura seria útil ao trabalhar com algoritmos de Geometria Computacional ou mesmo em aplicações de física.

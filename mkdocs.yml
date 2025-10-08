@@ -32,6 +32,8 @@ nav:
     - "10 - Alocação Dinâmica de Memória": aulas/10-malloc/index.md
     - "11 - Revisão": aulas/11-revisao/index.md
     - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
+    - "13 - Processos": aulas/13-processos/index.md
+
   - Labs:
     - "Hackerlab": labs/hackerlab.md
   #   - "Lab processos": labs/processos.md
