@@ -33,7 +33,7 @@ nav:
     - "11 - Revisão": aulas/11-revisao/index.md
     - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
     - "13 - Processos": aulas/13-processos/index.md
-
+    - "14 - Carregamento de programas": aulas/14-exec/index.md
   - Labs:
     - "Hackerlab": labs/hackerlab.md
   #   - "Lab processos": labs/processos.md

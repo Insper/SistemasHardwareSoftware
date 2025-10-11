@@ -1245,13 +1245,50 @@
         "tags": [],
         "slug": "aulas/13-processos/exercise_5"
       }
+    },
+    "aulas/14-exec/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/14-exec/choice_1",
+        "answer_idx": 1
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/14-exec/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/14-exec/short_2"
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/14-exec/choice_2",
+        "answer_idx": 1
+      },
+      "choice_3": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/14-exec/choice_3",
+        "answer_idx": 1
+      }
     }
   },
   "tags": {
     "long-text": "long-text",
+    "choice-exercise": "choice-exercise",
     "short-text": "short-text",
     "text-exercise": "text-exercise",
-    "choice-exercise": "choice-exercise",
     "medium-text": "medium-text"
   }
 }
