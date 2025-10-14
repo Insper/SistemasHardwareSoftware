@@ -103,7 +103,7 @@ execvp(prog, args);
     !!! answer "Resposta"
         Serão três argumentos!
 
-!!! tip "if duvidas then man!"
+!!! note "Em caso de dúvidas consulte o manual (`man`)"
     Caso tenha dúvidas, lembre-se do comando `man`. Explore o manual do `execvp` com:
     <div class="termy">
 
@@ -116,7 +116,7 @@ execvp(prog, args);
 !!! warning
     Os dois próximos exercícios você começar o programa do zero (vazio), pois adaptar exemplos anteriores, apesar de prático, atrapalha a memorização dos comandos usados.
 
-!!! tip "Executando programas fora do `PATH` do sistema"
+!!! note "Executando programas fora do `PATH` do sistema"
     Nos exemplos de **exec**, supomos que os programas a serem executados estavam no **PATH** do sistema. Caso você queira subir algum executável que está na própria pasta do seu projeto (ou em qualquer caminho fixo/relativo conhecido), utilize algo como (**lembre do `./`**):
 
     ```C
@@ -128,7 +128,7 @@ execvp(prog, args);
     }
     ```
 
-!!! tip "Várias formas de chamar `exec`"
+!!! note "Várias formas de chamar `exec`"
     No manual, percebemos que temos várias chamadas de exec: `execl`, `execlp`, `execle`, `execv`, `execvp` e `execvpe`.
     Releia prestando atenção nas diferenças.
     
@@ -138,7 +138,7 @@ execvp(prog, args);
 
     Solicite exemplos e valide códigos!
 
-!!! exercice
+!!! exercise
     Crie um programa `eh_par` que recebe um inteiro como argumento de linha de comando e cujo `main` retorne 1 se o número for par, 0 caso contrário e -1 se ele for negativo.
 
     **Dicas**:
@@ -151,7 +151,7 @@ execvp(prog, args);
 
 Vamos agora juntar `fork`, `wait` e `exec` em um único exercício!
 
-!!! exercice
+!!! exercise
     Crie um programa que recebe números via `scanf`, executa `eh_par` em um processo filho e usa seu valor de retorno para decidir se o número é par ou não. Seu programa deverá parar de receber números quando `eh_par` retornar -1.
 
     **Dica**: você pode usar `sprintf` para converter o inteiro lido para string. Se não souber como usar consulte o manual executando `man sprintf` no terminal.
