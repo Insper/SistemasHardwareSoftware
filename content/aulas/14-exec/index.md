@@ -103,7 +103,7 @@ execvp(prog, args);
     !!! answer "Resposta"
         Serão três argumentos!
 
-!!! note "Em caso de dúvidas consulte o manual (`man`)"
+!!! note  "Em caso de dúvidas consulte o manual (`man`)"
     Caso tenha dúvidas, lembre-se do comando `man`. Explore o manual do `execvp` com:
     <div class="termy">
 
