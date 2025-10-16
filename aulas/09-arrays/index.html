@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>09 - Array em Assembly - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">09 - Array em Assembly</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#exemplo-guiado">Exemplo guiado</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exercicio-1-funcao-soma">Exercício 1 - função soma</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#acesso-a-elementos-constantes">Acesso a elementos constantes</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exercicio-3-funcao-first_neg">Exercício 3 - função first_neg</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="09-array-em-assembly">09 - Array em Assembly</h1>
+<p>A parte final de nossas atividades com Assembly é entender <em>Arrays</em>. Já estudamos todo o necessário para lidar com eles:</p>
+<ol>
+<li>um array é representado por um apontador para seu primeiro elemento. Já estudamos ponteiros e a escrita em memória com <code>MOV</code>.</li>
+<li>ao acessar o elemento <code>i</code> de <code>long *vec</code> estamos acessando o endereço <code>&amp;vec[0] + sizeof(long) * i</code>. A notação de cálculos de endereço de memória faz exatamente isso.</li>
+</ol>
+<p>Para iniciar vamos revisar a notação de cálculo de endereços de memória: <code>D(%reg1, %reg2, S)</code>, onde</p>
+<ul>
+<li><code>D</code> é um número inteiro que representa um deslocamento constante a partir do endereço guardado em <code>%reg1</code></li>
+<li><code>%reg1</code> contém o endereço do primeiro elemento do vetor</li>
+<li><code>%reg2</code> contém o índice do elemento a ser acessado</li>
+<li><code>S</code> contém o tamanho de cada elemento do vetor e pode ser <code>1, 2, 4</code> ou <code>8</code>.</li>
+</ul>
+<p>O acesso é feito ao endereço <code>D + %reg1 + %reg2 * S</code>. Ou seja, primeiro computamos o endereço e depois acessamos a memória <em>no endereço computado</em>.</p>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="3" data-slug="aulas/09-arrays/choice_1" id="choice_1_0">
+<p class="admonition-title">Exercise 1</p>
+<form class="exercise-form">
+<p>Supondo que <code>%rsi=0x24, %rdi=0x8</code>, o valor final da expressão <code>(%rsi, %rdi, 4)</code> é</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x48</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x32</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x44</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x56</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Tudo está em hexa. A conta é <code>36 + 4 * 8 = 68</code>.</p>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="0" data-slug="aulas/09-arrays/choice_2" id="choice_2_0">
+<p class="admonition-title">Exercise 2</p>
+<form class="exercise-form">
+<p>Supondo que <code>%rdx=0x44</code>, o valor da expressão <code>0x12(%rdx)</code> é</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x52</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x44</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>0x56</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Tudo está em hexa. A conta é <code>18 + 68 = 86 = 0x56</code>.</p>
+</div>
+</div>
+<h2 id="exemplo-guiado">Exemplo guiado</h2>
+<p>Dado o array <code>int *vec</code> (guardado em <code>%rdx</code>). A atribuição de 5 ao elemento <code>i</code> (guardado em <code>%ecx</code>) seria traduzida como</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">MOVL</span><span class="w"> </span><span class="no">$0x5</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nv">%rdx</span><span class="p">,</span><span class="w"> </span><span class="nv">%rcx</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>Lembre-se de que apontadores são tipos de dados com tamanho <em>8 bytes</em>.</p>
+</div>
+<p>Considerando um vetor <code>short *vec</code> e que o endereço do primeiro elemento de <code>vec</code> esteja em <code>%rdi</code>,</p>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual a instrução usada para mover o conteúdo de <code>vec[i]</code> para o registrador <code>%eax</code>? (supondo que o valor de <code>i</code> esteja em <code>%esi</code>)</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p><code>mov (%rdi, %rsi, 2), %eax</code></p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual a instrução usada para mover <code>&amp;vec[i]</code> para o registrador <code>%eax</code>?</p>
+<p><strong>Dica</strong>: como você implementava o operador <code>&amp;</code> com variáveis locais?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p><code>lea (%rdi, %rsi, 2), %rax</code>
+Atenção: instrução utilizada apenas de forma pedagógica para diferenciar <code>MOV</code> e <code>LEA</code>.</p>
+</div>
+</div>
+<h2 id="exercicio-1-funcao-soma">Exercício 1 - função <code>soma</code></h2>
+<p>Veja o código abaixo e responda as perguntas.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">soma</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x0</span><span class="p">,</span><span class="nv">%edx</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x0</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000a</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">10</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jmp</span><span class="w">    </span><span class="mh">0x15</span> <span class="p">&lt;</span><span class="no">soma</span><span class="p">+</span><span class="mi">21</span><span class="p">&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">movslq</span><span class="w"> </span><span class="nv">%edx</span><span class="p">,</span><span class="nv">%rcx</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000f</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">15</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">add</span><span class="w">    </span><span class="p">(</span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rcx</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0012</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">18</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">add</span><span class="w">    </span><span class="no">$0x1</span><span class="p">,</span><span class="nv">%edx</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0015</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">21</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%edx</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0017</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">23</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jl</span><span class="w">     </span><span class="mh">0xc</span> <span class="p">&lt;</span><span class="no">soma</span><span class="p">+</span><span class="mi">12</span><span class="p">&gt;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0019</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">25</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">repz</span><span class="w"> </span><span class="no">retq</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>A função acima usa vários registradores. Para facilitar a descoberta de quais são parâmetros da função anote abaixo cada registrador usado e, ao lado, a linha do primeiro uso e se esse uso foi leitura ou escrita.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Em  <code>&lt;soma+0&gt;</code>, usa-se <code>%edx</code> para <em>escrita</em>.
+Em  <code>&lt;soma+5&gt;</code>, usa-se <code>%eax</code> para <em>escrita</em>.
+Em <code>&lt;soma+12&gt;</code>, usa-se <code>%rcx</code> para <em>escrita</em>.
+Em <code>&lt;soma+15&gt;</code>, usa-se <code>%rdi</code> para <strong>leitura</strong>.
+Em <code>&lt;soma+21&gt;</code>, usa-se <code>%esi</code> para <strong>leitura</strong>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_4" id="short_4_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Se o primeiro acesso ao registrador é de escrita então ele provavelmente não é um parâmetro. Com base nisto, escreva abaixo a declaração da função acima.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-C highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">soma</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_5" id="short_5_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Sempre que escrevemos a notação de acesso à memória <code>D(%reg1, %reg2, S)</code> precisamos usar registradores de <code>64</code> bits nos lugares de <code>reg1</code> e <code>reg2</code>. Com base nisto, explique qual o uso feito do registrador <code>%edx</code> e porquê usamos a instrução <code>movslq</code> na linha <code>c</code> (ou <code>&lt;soma+12&gt;</code>).</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Faz o <em>casting</em> com sinal de 4 bytes para 8 bytes. Então o código-fonte original deve utilizar uma variável <code>int i</code> (4 bytes) para controlar o índice do vetor. Para que a instrução seja realizada, faz-se um casting para <code>long</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_6" id="long_6_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça uma versão em <em>C</em> do código acima usando somente <code>if-goto</code>. Escreva, então, ao lado desta versão um código legível em <em>C</em>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-C highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">\\</span><span class="w"> </span><span class="n">confira</span><span class="w"> </span><span class="n">com</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="n">professores</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="acesso-a-elementos-constantes">Acesso a elementos constantes</h2>
+<p>O acesso a elementos "constantes", como <code>long v[10]; v[5] = 0;</code>, não é feito usando a notação acima, pois o compilador já sabe <strong>em tempo de compilação</strong>, qual é o deslocamento necessário para encontrar a posição 6 de <code>v</code>.</p>
+<p>Considerando o exemplo acima, responda.</p>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_7" id="short_7_0">
+<p class="admonition-title">Exercise 9<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Supondo que <code>v=0x100</code>, qual o é o endereço de <code>v[5]</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Cada <code>long</code> ocupa 8 bytes, logo o elemento <code>v[5]</code> está 40 bytes após o início do vetor. Logo, o endereço de <code>v[5]</code> é <code>0x100 + 0x028 = 0x128</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_8" id="short_8_0">
+<p class="admonition-title">Exercise 10<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Escreva a instrução usada para mover o valor <code>0</code> para <code>v[5]</code> (supondo que o endereço do primeiro elemento esteja em <code>%rdi</code>).</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p><code>mov $0, 0x28(%rdi)</code> = Início de <code>%rdi</code> + 40 bytes.</p>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Importante 1</p>
+<p>O compilador pode (e vai) aplicar diversas otimizações para economizar o máximo possível. Por essa razão, é importante saber calcular os endereços de memória na mão. Assim conseguimos "refazer" o processo que gerou a otimização e entender melhor o código <em>C</em> original.</p>
+</div>
+<h3 id="exercicio-2-funcao-func_que_recebe_array">Exercício 2 - função <code>func_que_recebe_array</code></h3>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">func_que_recebe_array</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="mi">0x4</span><span class="p">(</span><span class="nv">%rdi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">add</span><span class="w">    </span><span class="p">(</span><span class="nv">%rdi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">cmp</span><span class="w">    </span><span class="mi">0x8</span><span class="p">(</span><span class="nv">%rdi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0008</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setl</span><span class="w">   </span><span class="nv">%al</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000b</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">11</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+</code></pre></div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_9" id="short_9_0">
+<p class="admonition-title">Exercise 11<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Temos acessos à memória relativos ao endereço passado em <code>%rdi</code> nas linhas <code>0, 3</code> e <code>5</code>. Isto significa que <code>%rdi</code> é um ponteiro. Pelos tipos de acessos feitos, você consegue identificar para qual tipo de variável ele aponta?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Como em na linha <code>&lt;+0&gt;</code> o vetor está sendo lido em um registrador de 4 bytes, identificamos como <code>int</code></p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_10" id="short_10_0">
+<p class="admonition-title">Exercise 12<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Traduza os acessos de memória feitos nas linhas citadas acima para a notação de acesso a arrays em <em>C</em>.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Em <code>&lt;+0&gt;</code> faz-se <code>aux = vec[1]</code>.
+Em <code>&lt;+03&gt;</code> o acesso é <code>aux = vec[0] + aux</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_11" id="long_11_0">
+<p class="admonition-title">Exercise 13<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Com base no respondido acima, faça uma versão em <em>C</em> legível do código assembly acima. Se ajudar, faça uma tradução linha a linha do Assembly e depois torne-a legível.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-C highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">func_que_recebe_array</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="exercicio-3-funcao-first_neg">Exercício 3 - função <code>first_neg</code></h2>
+<p>Veja agora o código abaixo e responda.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">first_neg</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x0</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0007</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">7</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">jge</span><span class="w">    </span><span class="mh">0x17</span> <span class="p">&lt;</span><span class="no">first_neg</span><span class="p">+</span><span class="mi">23</span><span class="p">&gt;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">movslq</span><span class="w"> </span><span class="nv">%eax</span><span class="p">,</span><span class="nv">%rdx</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">cmpl</span><span class="w">   </span><span class="no">$0x0</span><span class="p">,(</span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdx</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0010</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">16</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">js</span><span class="w">     </span><span class="mh">0x17</span> <span class="p">&lt;</span><span class="no">first_neg</span><span class="p">+</span><span class="mi">23</span><span class="p">&gt;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0012</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">18</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">add</span><span class="w">    </span><span class="no">$0x1</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0015</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">21</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jmp</span><span class="w">    </span><span class="mh">0x5</span> <span class="p">&lt;</span><span class="no">first_neg</span><span class="p">+</span><span class="mi">5</span><span class="p">&gt;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0017</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">23</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">repz</span><span class="w"> </span><span class="no">retq</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_12" id="long_12_0">
+<p class="admonition-title">Exercise 14<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>A função acima usa vários registradores. Para facilitar a descoberta de quais são parâmetros da função anote abaixo cada registrador usado e, ao lado, a linha do primeiro uso e se esse uso foi leitura ou escrita.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Em   <code>&lt;first_neg+0&gt;</code>, usa-se <code>%eax</code> para <em>escrita</em>.
+Em   <code>&lt;first_neg+5&gt;</code>, usa-se <code>%esi</code> para <strong>leitura</strong>.
+Em  <code>&lt;first_neg+12&gt;</code>, usa-se <code>%rdi</code> para <strong>leitura</strong>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/09-arrays/short_13" id="short_13_0">
+<p class="admonition-title">Exercise 15<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Desenhe setas indicando o destino dos pulos no código acima. Você consegue idenfiticar quais estruturas de controle? Entre quais linhas?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Confira com os professores</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_14" id="long_14_0">
+<p class="admonition-title">Exercise 16<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça uma versão em <em>C</em> usando <code>if-goto</code> do código acima.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-C highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">first_neg</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nl">loop</span><span class="p">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="o">&gt;=</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">            </span><span class="k">goto</span><span class="w"> </span><span class="n">retorno</span><span class="p">;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">res</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">            </span><span class="k">goto</span><span class="w"> </span><span class="n">retorno</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">loop</span><span class="o">:</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nl">retorno</span><span class="p">:</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/09-arrays/long_15" id="long_15_0">
+<p class="admonition-title">Exercise 17<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Transforme seu código em uma versão legível.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-C highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">first_neg</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../08-variaveis-locais/"
+               class="ah-prev"
+               title="08 - Variáveis locais">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">08 - Variáveis locais</span>
+            </a>
+          
+          
+            <a href="../10-malloc/"
+               class="ah-next"
+               title="10 - Alocação Dinâmica de Memória">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">10 - Alocação Dinâmica de Memória</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

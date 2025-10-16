@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>05 - Condicionais - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">05 - Condicionais</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#expressoes-booleanas">Expressões booleanas</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#condicionais">Condicionais</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="05-condicionais">05 - Condicionais</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<h2 id="expressoes-booleanas">Expressões booleanas</h2>
+<p>Vimos na expositiva que toda operação aritmética preenche as flags <code>CF</code>, <code>ZF</code>, <code>SF</code> e <code>OF</code> e que podemos usar estas flags para montar expressões booleanas com as instruções <code>set*</code>. A tabela abaixo mostra as instruções responsáveis cada tipo de expressão booleana.</p>
+<p><img alt="Tabela de set para operações booleanas" src="tabela-set.png" /></p>
+<p>Também vimos que podemos preencher estas flags usando as instruções <code>cmp</code> e <code>test</code>, que executam operações aritméticas (subtração e E bit a bit) mas não guardam o resultado.</p>
+<p>Vamos analisar o código assembly da função <code>igual</code>. Por enquanto não precisa abrir o <strong>gdb</strong> nem código algum, apenas faça a análise direto neste material!</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">igual</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">igual</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">0:</span><span class="w">   </span><span class="err">39</span><span class="w"> </span><span class="nf">f7</span><span class="w">                   </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%edi</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">2:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">94</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">sete</span><span class="w">   </span><span class="nv">%al</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">5:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="no">b6</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">8:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<p>A comparação <code>a == b</code> é feita primeiro executando <code>cmp</code> entre os argumentos <code>%edi</code> e <code>%esi</code> e depois usando <code>sete</code> (<em>set equal</em>) para atribuir <strong>1</strong> em <code>%al</code> se <code>%edi == %esi</code> e <strong>0</strong> caso contrário.</p>
+<p>Por fim, temos a instrução <code>movzbl</code>, que faz o cast de <code>char</code> (<code>%al</code>) para <code>int</code> (<code>%eax</code>). Lembre-se que as instruções <code>set*</code> só modificam os primeiros 8 bits de <code>%eax</code>. O restante continua com o valor antigo. Usamos <code>movzbl</code> para extender o número em <code>%al</code> para ocupar todo <code>%eax</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>As instruções de conversão de tipos são bastante frequentes em Assembly, principalmente para expandir valores colocados em registradores menores para registradores maiores. Elas seguem a seguinte regra:</p>
+<p><code>MOVtsd</code></p>
+<ul>
+<li><code>t</code> pode ser <code>z</code> para tipos unsigned (completando com **z**eros) e <code>s</code> para tipos signed (completando com o bit de **s**inal).</li>
+<li><code>s</code> é o tamanho do registrador fonte seguindo a notação <code>b</code> para 1 byte, <code>w</code> para 2 bytes, <code>l</code> para 4 bytes e <code>q</code> para 8 bytes.</li>
+<li><code>d</code> é o tamanho do registrador destino, seguinto a mesma notação acima.</li>
+</ul>
+</div>
+<p>Por exemplo, a instrução <code>MOVZWQ</code> converte um <code>unsigned short</code> para um <code>unsigned long</code>. Conversões de 4 para 8 bytes muitas vezes são feitas com a instrução <code>cltq</code>, que extende (com sinal) <code>%eax</code> para <code>%rax</code>. Uma boa referência é este <a href="https://docs.oracle.com/cd/E19120-01/open.solaris/817-5477/eoizm/index.html">site da Oracle</a>.</p>
+<p>Vamos agora praticar. Mas antes, relembre da aula anterior a os registradores e a ordem em que os parâmetros da função são passados:</p>
+<ol>
+<li><strong>Argumentos inteiros ou ponteiros</strong> são passados nos registradores (<strong>nesta ordem</strong>):<ol>
+<li><code>%rdi</code></li>
+<li><code>%rsi</code></li>
+<li><code>%rdx</code></li>
+<li><code>%rcx</code></li>
+<li><code>%r8</code></li>
+<li><code>%r9</code></li>
+</ol>
+</li>
+</ol>
+<p>Para retornar usamos a instrução <code>ret</code>. Ela é equivalente ao comando <code>return</code> de <em>C</em> e devolverá o valor armazenado no <code>%rax</code>.</p>
+<p>Registradores:</p>
+<p><img alt="Registradores de 64 e 32 bits" src="registradores-grandes.png" /></p>
+<p><img alt="Registradores de 32, 16 e 8 bits" src="registradores-pequenos.png" /></p>
+<p>Pronto! Nos 3 exercícios abaixo temos funções que avaliam uma (ou mais) expressões booleanas entre seus argumentos e retornam o resultado.</p>
+<h3 id="arquivo-ex1o">Arquivo <code>ex1.o</code></h3>
+<p>Reconstrua a função <code>ex1</code> a partir do código assembly abaixo.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex1</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">cmp</span><span class="w">    </span><span class="no">$0xa</span><span class="p">,</span><span class="nv">%edi</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">setg</span><span class="w">   </span><span class="nv">%al</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">retq</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/05-condicionais/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual é o tamanho do argumento de <code>ex1</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Note que é usado a instrução <code>setg %al</code> para setar o valor de <code>%al</code>, e quando essa instrução é usado o tipo da variável que está sendo comparada é <code>signed</code>. Veja a tabela acima.</p>
+</div>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/05-condicionais/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise 2</p>
+<form class="exercise-form">
+<p>Coloque sua tradução em um arquivo <code>.c</code>. Valide sua solução com o professor ou com algum colega que já validou sua solução, ou utilize o gdb, conforme a próxima dica!</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip 2</p>
+<p>Uma outra maneira de conferir se sua solução está correta é compilar e conferir no <strong>gdb</strong> se a sua solução produz o mesmo ASM que o compilado disponibilizado pelo professor. Caso seu código não possua função main, gere um <code>.o</code> utilizando a flag <code>-c</code>. Veja o Exemplo de compilação sem função main:</p>
+</div>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-std<span class="o">=</span>c99<span class="w"> </span>-c<span class="w"> </span>ex_resposta.c<span class="w"> </span>-o<span class="w"> </span>ex1_resp.o
+</code></pre></div>
+
+</div>
+
+<p>Então, abra o <strong>gdb</strong> e confira se o ASM gerado confere com o disponibilizado pelo professor!</p>
+<h3 id="arquivo-ex2o">Arquivo <code>ex2.o</code></h3>
+<p>Reconstrua a função <code>ex2</code> a partir do código assembly abaixo</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex2</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">setbe</span><span class="w">  </span><span class="nv">%al</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w"> </span><span class="no">retq</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/05-condicionais/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual é o tamanho dos argumentos de <code>ex2</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A função <code>ex2</code> recebe dois argumentos <code>%rdi</code> e <code>%rsi</code>, nessa ordem. No que é usada a instrução <code>setbe</code> usada para avalir o resultado de comparação de variáveis <code>unsigned</code>. Veja a tabela acima.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Coloque sua tradução abaixo. Valide sua solução utilizando comparação do ASM (dica nesta aula), com os gabaritos disponíveis no arquivo <code>fontes.zip</code>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="arquivo-ex3o">Arquivo <code>ex3.o</code></h3>
+<p>Reconstrua a função <code>ex3</code> a partir do código assembly abaixo.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex3</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%al</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">and</span><span class="w">    </span><span class="nv">%edx</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">movzbl</span><span class="w"> </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000011</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">17</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/05-condicionais/short_4" id="short_4_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual é o tamanho dos argumentos de <code>ex3</code>? Ele é <code>signed</code> ou <code>unsigned</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_5" id="long_5_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Coloque sua tradução abaixo. Valide sua solução com os gabaritos disponíveis no arquivo <code>fontes.zip</code>..</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h2 id="condicionais">Condicionais</h2>
+<p>Vimos na segunda parte expositiva que Assembly possui apenas instruções de pulos condicionais (<code>j*</code> onde <code>*</code> representa uma comparação usando as mesmas abreviações de <code>set*</code>) e não condicionais (<code>jmp</code>). Vimos também que a combinação destas instruções com <code>cmp</code> e <code>test</code> é equivalente à dupla de comandos</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cond</span><span class="o">-</span><span class="n">booleana</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">label</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>A tabela abaixo mostra as operações de saltos condicionais.</p>
+<p><img alt="Tabela de set para saltos condicionais" src="tabela-jmp.png" /></p>
+<h3 id="exemplo-guiado">Exemplo guiado</h3>
+<p>Vamos agora fazer um exemplo guiado. Analisaremos o seguinte código:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="mo">0000000000000000</span><span class="w"> </span><span class="o">&lt;</span><span class="n">eh_par</span><span class="o">&gt;:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="mi">0</span><span class="o">:</span><span class="w">   </span><span class="mi">40</span><span class="w"> </span><span class="n">f6</span><span class="w"> </span><span class="n">c7</span><span class="w"> </span><span class="mo">01</span><span class="w">             </span><span class="n">test</span><span class="w">   </span><span class="n">$0x1</span><span class="p">,</span><span class="o">%</span><span class="n">dil</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="mi">4</span><span class="o">:</span><span class="w">   </span><span class="mi">74</span><span class="w"> </span><span class="mo">06</span><span class="w">                   </span><span class="n">je</span><span class="w">     </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="n">eh_par</span><span class="o">+</span><span class="mh">0xc</span><span class="o">&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="mi">6</span><span class="o">:</span><span class="w">   </span><span class="n">b8</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w">          </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x0</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nl">b</span><span class="p">:</span><span class="w">   </span><span class="n">c3</span><span class="w">                      </span><span class="n">retq</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nl">c</span><span class="p">:</span><span class="w">   </span><span class="n">b8</span><span class="w"> </span><span class="mo">01</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w">          </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x1</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="mi">11</span><span class="o">:</span><span class="w">  </span><span class="n">c3</span><span class="w">                      </span><span class="n">retq</span>
+</code></pre></div>
+<p>Pares de instruções <code>test-j*</code> (<code>test</code> seguido de um <code>j*</code>) ou <code>cmp-j*</code> (<code>cmp</code> seguido de um <code>j*</code>) são comumente usadas para representar a construção <code>if-goto</code>.</p>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/05-condicionais/short_6" id="short_6_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O nome da função dá uma dica de seu valor de retorno. Você consegue entender o porquê <code>test $1, %dil</code> faz isto?</p>
+<p><strong>Dica:</strong> Escreva o teste exato que a função faz.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p><code>testb $1, %dil</code> faz <strong>AND</strong> entre <code>%dil</code> e <code>1</code>, se resultado foi zero (ou seja, <code>%dil &amp; 1 == 0</code>), pula para <code>L3</code>. Caso contrário, coloca <code>0</code> em <code>%eax</code>, ou seja, número é ímpar.</p>
+<p>O teste em <code>C</code> seria:</p>
+<p><code>if (a % 2 != 0)</code></p>
+</div>
+</div>
+<p>Vamos agora traduzir a função <code>eh_par</code> para <strong>gotoC</strong>. As linhas <code>0-4</code> são transformadas em um par <code>if-goto</code>. O restante são instruções que já conhecemos.</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_par</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">if1</span><span class="p">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nl">if1</span><span class="p">:</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Tiramos então o <code>goto</code> e levando em conta sua resposta no item anterior, ficamos com o seguinte código. Note que precisamos negar a comparação feita no código anterior!</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">eh_par</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Podemos observar duas coisas no código assembly gerado:</p>
+<ol>
+<li>O código que estava dentro do <code>if</code> foi colocado após o código que estava fora do if! O compilador pode mudar a ordem dos nossos blocos de código se for conveniente (para ele, não para nós).</li>
+<li>A construção <code>test-j*</code> e <code>cmp-j*</code> pode ser mapeada diretamente para <code>if-goto</code>. Porém, reconstruir um código legível requer, muitas vezes, mudar código de lugar.</li>
+</ol>
+<p>Vamos agora praticar com alguns exercícios simples:</p>
+<h3 id="arquivo-ex4o">Arquivo <code>ex4.o</code></h3>
+<p>Veja o código abaixo</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">fun4</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">jle</span><span class="w">    </span><span class="mh">0xf</span> <span class="p">&lt;</span><span class="no">fun4</span><span class="p">+</span><span class="mi">15</span><span class="p">&gt;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x2</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000a</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">10</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">imul</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rax</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000f</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">15</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x1</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000014</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">20</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jmp</span><span class="w">    </span><span class="mh">0xa</span> <span class="p">&lt;</span><span class="no">fun4</span><span class="p">+</span><span class="mi">10</span><span class="p">&gt;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/05-condicionais/short_7" id="short_7_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual expressão booleana é testada?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_8" id="long_8_0">
+<p class="admonition-title">Exercise 9<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça a tradução desta função para <strong>gotoC</strong>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_9" id="long_9_0">
+<p class="admonition-title">Exercise 10<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Transforme o código acima em <em>C</em> legível.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="arquivo-ex5o">Arquivo <code>ex5.o</code></h3>
+<p>Veja o código da função abaixo.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex5</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000006</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000009</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">9</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">setle</span><span class="w">  </span><span class="nv">%al</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000c</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">12</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">test</span><span class="w">   </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%dl</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000e</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jne</span><span class="w">    </span><span class="mh">0x15</span> <span class="p">&lt;</span><span class="no">ex5</span><span class="p">+</span><span class="mi">21</span><span class="p">&gt;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000010</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">16</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">lea</span><span class="w">    </span><span class="mi">-0</span><span class="no">x2</span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="nv">%rax</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000014</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">20</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000015</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">21</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">lea</span><span class="w">    </span><span class="mi">0x5</span><span class="p">(</span><span class="nv">%rdi</span><span class="p">),</span><span class="nv">%rax</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000019</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">25</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_10" id="long_10_0">
+<p class="admonition-title">Exercise 11<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual são as expressões booleanas testadas? (Dica: são 3, assim como no exercício 3).</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_11" id="long_11_0">
+<p class="admonition-title">Exercise 12<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça uma tradução para <strong>gotoC</strong>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_12" id="long_12_0">
+<p class="admonition-title">Exercise 13<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Transforme seu código acima para <em>C</em> legível.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="exemplo-guiado-ii">Exemplo guiado II</h3>
+<p>Veremos agora um exemplo <code>if/else</code>:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>Seu assembly correspondente, quando compilado com <code>gcc -Og -c</code> é</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">exemplo2</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="err">0:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">83</span><span class="w"> </span><span class="nf">ff</span><span class="w"> </span><span class="mi">04</span><span class="w">             </span><span class="no">cmp</span><span class="w">    </span><span class="no">$0x4</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="err">4:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">9</span><span class="no">f</span><span class="w"> </span><span class="no">c2</span><span class="w">                </span><span class="no">setg</span><span class="w">   </span><span class="nv">%dl</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="err">7:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">85</span><span class="w"> </span><span class="nf">f6</span><span class="w">                </span><span class="no">test</span><span class="w">   </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rsi</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nl">a:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="mi">9</span><span class="no">e</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">setle</span><span class="w">  </span><span class="nv">%al</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nl">d:</span><span class="w">   </span><span class="err">84</span><span class="w"> </span><span class="nf">c2</span><span class="w">                   </span><span class="no">test</span><span class="w">   </span><span class="nv">%al</span><span class="p">,</span><span class="nv">%dl</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nl">f:</span><span class="w">   </span><span class="err">75</span><span class="w"> </span><span class="err">07</span><span class="w">                   </span><span class="nf">jne</span><span class="w">    </span><span class="mh">18</span> <span class="p">&lt;</span><span class="no">exemplo2</span><span class="p">+</span><span class="mi">0x18</span><span class="p">&gt;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="err">11:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">89</span><span class="w"> </span><span class="nf">f8</span><span class="w">                </span><span class="no">mov</span><span class="w">    </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rax</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="err">14:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">29</span><span class="w"> </span><span class="nf">f0</span><span class="w">                </span><span class="no">sub</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rax</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="err">17:</span><span class="w">  </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="err">18:</span><span class="w">  </span><span class="err">48</span><span class="w"> </span><span class="err">8</span><span class="nf">d</span><span class="w"> </span><span class="mi">04</span><span class="w"> </span><span class="mi">37</span><span class="w">             </span><span class="no">lea</span><span class="w">    </span><span class="p">(</span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rsi</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="nv">%rax</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="err">1</span><span class="nl">c:</span><span class="w">  </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<p>Primeiramente, notamos que a função recebe dois argumentos (pois só utiliza <code>%rdi</code> e <code>%rsi</code>) e que ambos são tratados como <code>long</code>. Vamos então às expressões booleanas. Existem três expressões boolenas:</p>
+<ol>
+<li><code>cmp</code>-<code>setg</code>(linhas <code>0-4</code>) compara <code>%rdi</code> com <code>4</code> e seta <code>%dl=1</code> se <code>%rdi&gt;4</code> (**g**reater)</li>
+<li><code>test-setle</code> (linhas <code>7-a</code>) compara <code>%rsi</code> com <code>0</code> e seta <code>%al=1</code> se <code>%rsi&lt;=0</code> (**l**ess or **e**qual).</li>
+<li><code>test</code>(linha <code>d</code>) entre <code>%dl</code> e <code>%al</code>. O resultado não é armazenado.</li>
+</ol>
+<p>Logo abaixo do último <code>test</code> temos um <code>jne</code> (linha <code>f</code>), acrônimo para **j**ump if **n**ot **e**qual. Ou seja, fazemos o jump se <code>%dl &amp;&amp; %al</code> for verdadeiro.</p>
+<p>Logo em seguida temos instruções aritméticas, que já estudamos nos últimos handouts. Assim como vimos nos slides, vamos converter este código para <strong>gotoC</strong> primeiro.</p>
+<p>Assim como fizemos nos exercícios de 1 a 3, criaremos uma variável para as expressões booleanas 1 e 2 e substituiremos as instruções <code>test-jne</code> (linhas <code>d-f</code>) por um par <code>if-goto</code>. Veja abaixo:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">expr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">expr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">expr1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">expr2</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">if1</span><span class="p">;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="nl">if1</span><span class="p">:</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="p">}</span>
+</code></pre></div>
+<p>Podemos então melhorar tornar este código mais legível, resultando no seguinte:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">exemplo2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Duas coisas importantes podem ser vistas neste código</p>
+<ol>
+<li>As comparações não são exatamente iguais (<code>a&gt;4</code> e <code>a&gt;=5</code>), mas são equivalentes.</li>
+<li>O compilador pode trocar a ordem do <code>if/else</code> e colocar o <code>else</code> primeiro no Assembly gerado. Isto não altera o resultado da função, mas pode ser confuso de início.</li>
+</ol>
+<h3 id="arquivo-ex6o">Arquivo <code>ex6.o</code></h3>
+<p>O exercício abaixo usa <code>if-else</code>.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">ex6</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000000</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">cmp</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000003</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">3</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">jle</span><span class="w">    </span><span class="mh">0x8</span> <span class="p">&lt;</span><span class="no">ex6</span><span class="p">+</span><span class="mi">8</span><span class="p">&gt;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000005</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rsi</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000008</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">test</span><span class="w">   </span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000b</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">11</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">jle</span><span class="w">    </span><span class="mh">0x10</span> <span class="p">&lt;</span><span class="no">ex6</span><span class="p">+</span><span class="mi">16</span><span class="p">&gt;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000000000000000d</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">13</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">neg</span><span class="w">    </span><span class="nv">%rsi</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000010</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">16</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">mov</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000000000000012</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">18</span><span class="err">&gt;</span><span class="p">:</span><span class="w">    </span><span class="no">retq</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="nf">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_13" id="long_13_0">
+<p class="admonition-title">Exercise 14<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Traduza o código acima para <strong>gotoC</strong>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/05-condicionais/long_14" id="long_14_0">
+<p class="admonition-title">Exercise 15<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça uma versão legível do código acima.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Conferindo tudo!</p>
+<p>Agora que terminou todos os exercícios, confira suas traduções com os gabaritos disponíveis no arquivo <code>fontes.zip</code>.</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../04-funcoes-mov/"
+               class="ah-prev"
+               title="04 - Funções">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">04 - Funções</span>
+            </a>
+          
+          
+            <a href="../06-condicionais-funcoes/"
+               class="ah-next"
+               title="06 - Condicionais e funções">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">06 - Condicionais e funções</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

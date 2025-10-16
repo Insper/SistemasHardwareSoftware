@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>13 - Processos - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">13 - Processos</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#a-chamada-fork">A chamada fork</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#as-chamadas-waitwaitpid">As chamadas wait/waitpid</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exercicios-extras">Exercícios Extras</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="13-processos">13 - Processos</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p><br></p>
+<h2 id="a-chamada-fork">A chamada <code>fork</code></h2>
+<p>A chamada <code>fork</code> cria um clone do processo atual e retorna duas vezes: uma vez no processo original (pai) e uma vez no processo novo (filho). Cada processo segue executando o programa linha a linha, porém cada um possui áreas de memória separadas. Ou seja, mudar uma variável no processo pai não muda seu valor no filho (e vice-versa). Todo processo é identificado por um número chamado de <code>pid</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>O <code>pid</code> é incrementado conforme novos processos vão sendo iniciados.</p>
+</div>
+<p>Considerando o código abaixo (arquivo <em>exemplo1-fork.c</em>), responda.</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">pid_t</span><span class="w"> </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">filho</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">variavel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">filho</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// processo filho aqui</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">pai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getppid</span><span class="p">();</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpid</span><span class="p">();</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">variavel</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;eu sou o processo filho %d, meu pai é %d</span><span class="se">\n</span><span class="s">variavel %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="n">filho</span><span class="p">,</span><span class="w"> </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">variavel</span><span class="p">);</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="c1">// processo pai aqui!</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">pai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getpid</span><span class="p">();</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;eu sou o processo pai %d, meu filho é %d</span><span class="se">\n</span><span class="s">variavel %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="n">pai</span><span class="p">,</span><span class="w"> </span><span class="n">filho</span><span class="p">,</span><span class="w"> </span><span class="n">variavel</span><span class="p">);</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">}</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<p>Responda os primeiros dois exercícios <strong>sem rodar o programa</strong>!</p>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/13-processos/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual seria o valor de <code>variavel</code> no print do pai? e do filho?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>No pai <code>variavel</code> vale <code>5</code>.
+No filho <code>variavel</code> vale <code>10</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/13-processos/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Esse valor mudaria conforme o pai (ou o filho) executam primeiro?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Não, isto mudaria apenas a ordem dos textos na tela. Uma vez realizado o <code>fork</code>, passamos a ter dois processos independentes em memória e execução.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Compile e execute o programa acima. As suas respostas estão corretas?</p>
+<div class="termy">
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-Wall<span class="w"> </span>-g<span class="w"> </span>exemplo1-fork.c<span class="w"> </span>-o<span class="w"> </span>exemplo1-fork
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="gp">$ </span>./exemplo1-fork
+</code></pre></div>
+</div>
+</div>
+<hr />
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Em um arquivo novo <code>.c</code> criado do zero, faça um programa que cria 8 processos filhos (numerados de 1 a 8) e faz cada um imprimir na tela seu seu identificador. O processo pai deve imprimir 0, enquanto o primeiro filho imprime 1, o segundo 2 e assim em diante. A saída de seu programa deverá seguir o modelo abaixo:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Eu sou o processo pai, pid=%d, meu id do programa é %d\n
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Eu sou um processo filho, pid=%d, ppid=%d, meu id do programa é %d\n
+</code></pre></div>
+<p>A primeira linha só deve ser mostrada uma vez pelo processo pai. Para verificar que seu programa funciona corretamente não se esqueça de contar quantos <code>printf</code> foram feitos. Se houver mais que 9 houve algum problema na sua solução.</p>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/13-processos/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O programa abaixo termina? Explique sua resposta.</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">rodando</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">pid_t</span><span class="w"> </span><span class="n">filho</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">filho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">filho</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Acabei filho</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">rodando</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">rodando</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Esperando o filho acabar!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Não.
+Uma vez realizado o <code>fork</code>, passamos a ter dois processo independentes em memória e execução.
+Como o código <code>rodando = 0</code> é executado apenas no processo filho, esta ação não tem efeito no processo pai, que é onde será executado o <code>while</code>.
+Se ficou com dúvidas por que o bloco verdadeiro do <code>if</code> é executado apenas no filho e o bloco falso apenas no pai, peça ajuda ao professor!</p>
+</div>
+</div>
+<!-- !!! progress
+    Próxima seção -->
+
+<h2 id="as-chamadas-waitwaitpid">As chamadas <code>wait/waitpid</code></h2>
+<p>Um processo pode esperar seus filhos acabarem usando uma das chamadas <code>wait</code> ou <code>waitpid</code>. Esta chamada retorna um código numérico que representa a saída do programa (o que foi retornado pelo <code>main</code>) e um conjunto de flags que indica se houve término anormal. O código <strong>errado</strong> do último exercício tentava simular estas chamadas usando uma variável <code>rodando</code> e checando seu valor. A maneira correta de esperar um processo filho terminar é usando <code>wait</code> ou <code>waitpid</code>.</p>
+<div class="admonition exercise text medium tag-text-exercise tag-medium-text editable" data-slug="aulas/13-processos/medium_4" id="medium_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Pesquise como usar <code>wait</code> no manual. Escreva abaixo a assinatura da função. Qual é o valor retornado? O que é retornado na varíavel passada como ponteiro?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Aqui está a saída do <code>man wait</code>. <strong>Execute em seu terminal</strong> para ver a saída completa!
+<div class="termy"></p>
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>man<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="nb">wait</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">        WAIT(2)                                                                                   Linux Programmer&#39;s Manual                                                                                   WAIT(2)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">NAME</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">    wait, waitpid, waitid - wait for process to change state</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">SYNOPSIS</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="gp">    #</span>include<span class="w"> </span>&lt;sys/types.h&gt;
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="gp">    #</span>include<span class="w"> </span>&lt;sys/wait.h&gt;
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">    pid_t wait(int *wstatus);</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    pid_t waitpid(pid_t pid, int *wstatus, int options);</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">    int waitid(idtype_t idtype, id_t id, siginfo_t *infop, int options);</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">                    /* This is the glibc and POSIX interface; see</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="go">                        NOTES for information on the raw system call. */</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="go">Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o programa <code>exemplo2-errado.c</code> para usar <code>wait</code> para esperar o processo filho terminar. Após o filho terminar o pai deve mostrar uma mensagem na tela indicando este fato. Salve este arquivo como <code>exemplo2-certo.c</code></p>
+</div>
+<div class="admonition exercise text short tag-short-text tag-text-exercise editable" data-slug="aulas/13-processos/short_5" id="short_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>É possível obter o valor retornado pelo <code>main</code> de um processo usando <code>wait</code>. Pesquise no manual como fazê-lo.</p>
+<p><strong>Dica</strong>: procure por <em>exit status</em>.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Confira com o professor!</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o <code>exemplo2-certo.c</code> para que o filho retorne <code>2</code> e modifique o pai para que ele obtenha esta informação a partir dos valores retornados pelo <code>wait</code>. Você precisará ler o manual de <code>wait</code> para fazer este exercício.</p>
+</div>
+<h2 id="exercicios-extras">Exercícios Extras</h2>
+<p>Estes exercícios não são para entrega. Utilize esta lista para praticar os assuntos aprendidos na aula.</p>
+<div class="admonition exercise self-progress" data-slug="aulas/13-processos/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise 6</p>
+<form class="exercise-form">
+<p>Faça um programa que lê um número inteiro. Em dois processos filhos, deve ser calculado e impresso o dobro e a metade desse número.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/13-processos/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise 7</p>
+<form class="exercise-form">
+<p>Faça um programa em que o processo pai lê dois valores inteiros (<code>n1</code> e <code>n2</code>). Em seguida, são criados 4 processos filhos. Com os valores lidos pelo pai, os filhos devem calcular e imprimir em paralelo as seguintes operações.
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>n1 – n2 
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>n1 + n2 
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>n1 / n2 
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>n1 * n2 
+</code></pre></div></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/13-processos/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Exercise 8</p>
+<form class="exercise-form">
+<p>Faça um programa que crie um grupo de processos conforme a hierarquia apresentado abaixo, cada filho deve imprimir o seu PID e o PID do processo que o criou.</p>
+<p><img alt="" src="img/proc_tree.png" /></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/13-processos/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Exercise 9</p>
+<form class="exercise-form">
+<p>Faça um programa que lê um número inteiro indicando o número de filhos que o pai terá que criar. Ou seja, todos os processos filhos são do mesmo pai. Crie o número de processos solicitado.</p>
+<p>Cada filho deve:</p>
+<ul>
+<li>Esperar por 5 segundos assim que for criado</li>
+<li>Imprimir:<ul>
+<li>O seu número de ordem de criação</li>
+<li>O seu PID</li>
+<li>O PID do processo pai. </li>
+</ul>
+</li>
+<li>Sair retornando <code>0</code>.</li>
+</ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Super importante!</p>
+<p>Caso ainda não tenha feito, reescreva os exercícios anteriores para que o pai só seja finalizado quando todos os seus filhos já tenham terminado sua execução.</p>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/13-processos/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Exercise 10</p>
+<form class="exercise-form">
+<p>Dado um vetor <code>A</code> de <code>n</code> elementos e uma variável <code>c</code>, faça um programa paralelo para determinar a quantidade de elementos de <code>A</code> que são menores que <code>c</code>.</p>
+<p>Cada filho deve imprimir a quantidade de elementos de <code>A</code> que são menores que <code>c</code>.</p>
+<p><strong>Obs</strong>:</p>
+<ul>
+<li>Você pode escolher o tipo do vetor (int, char, long, short)</li>
+<li>Leia o <code>n</code>, aloque o vetor dinamicamente e então leia todos os elementos do vetor</li>
+<li>Suponha que <code>n</code> é múltiplo do número de filhos criados pelo processo pai</li>
+<li>Você pode escolher o número de filhos criados pelo pai.</li>
+</ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../12-tipos-de-dados/"
+               class="ah-prev"
+               title="12 - Tipos abstratos de dados">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">12 - Tipos abstratos de dados</span>
+            </a>
+          
+          
+            <a href="../14-exec/"
+               class="ah-next"
+               title="14 - Carregamento de programas">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">14 - Carregamento de programas</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
