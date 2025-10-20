@@ -10,6 +10,11 @@ int main() {
         int i = 1/0;
         printf("Divisão por zero!\n");
     }
+    else{
+
+        wait(NULL);
+        
+    }
 
     return 0;
 }
