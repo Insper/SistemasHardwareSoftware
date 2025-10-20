@@ -1362,13 +1362,36 @@
         ],
         "slug": "aulas/15-entrada-saida/medium_10"
       }
+    },
+    "aulas/16-sinais-I/": {
+      "short_1": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/16-sinais-I/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/16-sinais-I/short_2"
+      },
+      "short_3": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/16-sinais-I/short_3"
+      }
     }
   },
   "tags": {
-    "text-exercise": "text-exercise",
     "long-text": "long-text",
-    "short-text": "short-text",
+    "choice-exercise": "choice-exercise",
+    "text-exercise": "text-exercise",
     "medium-text": "medium-text",
-    "choice-exercise": "choice-exercise"
+    "short-text": "short-text"
   }
 }
