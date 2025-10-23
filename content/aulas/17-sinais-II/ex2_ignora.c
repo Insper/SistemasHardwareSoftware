@@ -7,13 +7,12 @@
 
 int main() {
     struct sigaction sa;
-    // Zera a estrutura
-    memset(&sa, 0, sizeof(sa));
     // Define a ação: ignorar o sinal
     sa.sa_handler = SIG_IGN;
+    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+
     sigaction(SIGINT, &sa, NULL);
-
-
 
     // Loop infinito para demonstrar
     while (1) {
