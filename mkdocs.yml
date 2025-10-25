@@ -37,6 +37,7 @@ nav:
     - "15 - Entrada/Saída": aulas/15-entrada-saida/index.md
     - "16 - Enviando sinais": aulas/16-sinais-I/index.md
     - "17 - Capturando sinais": aulas/17-sinais-II/index.md
+    - "18 - Concorrência e Threads": aulas/18-threads-I/index.md
 
   - Labs:
     - "Hackerlab": labs/hackerlab.md
