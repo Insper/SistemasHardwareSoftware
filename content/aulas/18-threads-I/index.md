@@ -80,7 +80,14 @@ Assim como processos, threads são escalonadas pelo kernel. Isto significa que *
     É possível que duas threads chamem `pthread_join` na mesma thread destino? Consulte o manual para saber esta resposta.
 
     !!! answer "Resposta"
-        A resposta está disponível na seção **DESCRIPTION** ao executar `man 3 pthread_join`: *If multiple threads simultaneously try to join with the same thread...*
+        Quando uma thread termina, ela entra num estado chamado “*joinable*” (aguardando ser recolhida). A chamada da função `pthread_join()` faz duas coisas:
+
+        * Bloqueia a thread fez a chamada da função `pthread_join()` até outra thread terminar.
+        * Desaloca os recursos da *thread* que está finalizando (stack, estruturas internas do sistema, etc.), evitando um *memory leak*.
+
+        Assim, só uma thread pode “recolher” (*join*) outra — se mais de uma tentar, não há uma regra definida sobre qual delas consegue, e isso gera comportamento indefinido.
+        
+        Para saber mais acesse a seção **DESCRIPTION** em `man 3 pthread_join`: *If multiple threads simultaneously try to join with the same thread...*
 
 A resposta acima indica que precisaremos de outras primitivas de **sincronização** mais sofisticadas no futuro. Veremos isso nas próximas aulas.
 
