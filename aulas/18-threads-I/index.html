@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>18 - Concorrência e Threads - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">18 - Concorrência e Threads</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#criando-tarefas-e-esperando-elas-acabarem">Criando tarefas e esperando elas acabarem</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#passando-argumentos-para-threads">Passando argumentos para threads</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#retornando-valores">Retornando valores</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="18-concorrencia-e-threads">18 - Concorrência e Threads</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p><br></p>
+<p>Nossa aula de hoje envolverá aprender a API <code>pthreads</code> para criação de threads e sincronização simples.</p>
+<h2 id="criando-tarefas-e-esperando-elas-acabarem">Criando tarefas e esperando elas acabarem</h2>
+<p>O exemplo abaixo cria uma thread que roda a função <code>primeira_thread</code>, espera por seu fim e mostra a mensagem <em>Fim do programa</em>.</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Funções rodadas em thread sempre tem essa assinatura</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">minha_thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello thread!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">....</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">pthread_t</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kt">int</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">minha_thread</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">pthread_join</span><span class="p">(</span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"> </span><span class="c1">// espera tid acabar.</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Compile o arquivo <em>exemplo1.c</em> com a flag especial <code>-pthread</code> e execute-o.</p>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>exemplo1.c<span class="w"> </span>-o<span class="w"> </span>exemplo1<span class="w"> </span>-pthread
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="gp">$ </span>./exemplo1
+</code></pre></div>
+
+</div>
+
+<p>Vamos dissecar a chamada da função <code>pthread_create</code>:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_create</span><span class="p">(</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">                           </span><span class="o">&amp;</span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="c1">// variável para guardar ID da nova thread</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">                           </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="c1">// opções de criação. NULL = opções padrão</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">                           </span><span class="n">minha_thread</span><span class="p">,</span><span class="w"> </span><span class="c1">// função a ser executada</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">                           </span><span class="nb">NULL</span><span class="w"> </span><span class="c1">// parâmetro passado para a função acima</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">);</span>
+</code></pre></div>
+<p>Toda thread que rodarmos terá a seguinte assinatura (mudando, é claro, o nome da função).</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">minha_thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">);</span>
+</code></pre></div>
+<p>Uma variável do tipo <code>void *</code> representa um endereço de memória cujo conteúdo é desconhecido. Ou seja, ele diz somente onde encontrar os dados, mas não diz o que está guardado na memória naquele lugar. Este tipo de variável é usada quando queremos passar blocos de memória entre funções mas não queremos fixar um tipo de dados. Veremos com mais detalhes como isto funciona na parte 2.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>O manual contém entradas muito bem escritas de todas as chamadas de POSIX threads que usaremos. Abra as seguintes e se familiarize com seu conteúdo.</p>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>man<span class="w"> </span><span class="m">7</span><span class="w"> </span>pthreads
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="gp">$ </span>man<span class="w"> </span><span class="m">3</span><span class="w"> </span>pthread_create
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="gp">$ </span>man<span class="w"> </span><span class="m">3</span><span class="w"> </span>pthread_join
+</code></pre></div>
+
+</div>
+
+<p>Assim como processos, threads são escalonadas pelo kernel. Isto significa que <strong>não controlamos a ordem em que elas rodam</strong> no nosso programa. Ou seja, ao executar <code>pthread_create</code> não sabemos se a thread principal (aquela que roda o <code>main</code>) continuará rodando ou se o controle passará instantaneamente para a nova thread. A primitiva de <strong>sincronização</strong> mais simples que dispomos é <code>pthread_join</code>, que garante que uma thread só prossegue quando outra acabar.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/18-threads-I/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Retire o <code>pthread_join</code> do programa exemplo e o execute. Repita a execução várias vezes. Todas as vezes o resultado é o mesmo? O quê acontece?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Não. Como a <code>main</code> pode chegar no <code>return 0</code>, então o processo pode acabar sem que a thread tenha sido devidamente executada.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/18-threads-I/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>É possível que duas threads chamem <code>pthread_join</code> na mesma thread destino? Consulte o manual para saber esta resposta.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Quando uma thread termina, ela entra num estado chamado “<em>joinable</em>” (aguardando ser recolhida). A chamada da função <code>pthread_join()</code> faz duas coisas:</p>
+<ul>
+<li>Bloqueia a thread fez a chamada da função <code>pthread_join()</code> até outra thread terminar.</li>
+<li>Desaloca os recursos da <em>thread</em> que está finalizando (stack, estruturas internas do sistema, etc.), evitando um <em>memory leak</em>.</li>
+</ul>
+<p>Assim, só uma thread pode “recolher” (<em>join</em>) outra — se mais de uma tentar, não há uma regra definida sobre qual delas consegue, e isso gera comportamento indefinido.</p>
+<p>Para saber mais acesse a seção <strong>DESCRIPTION</strong> em <code>man 3 pthread_join</code>: <em>If multiple threads simultaneously try to join with the same thread...</em></p>
+</div>
+</div>
+<p>A resposta acima indica que precisaremos de outras primitivas de <strong>sincronização</strong> mais sofisticadas no futuro. Veremos isso nas próximas aulas.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Em um novo arquivo <code>.c</code>, crie quatro threads, cada uma executando uma função diferente que faz um print distinto. Compile e execute seu programa várias vezes. A saída será sempre a mesma, com os printfs sempre na mesma ordem? O que está acontecendo?!</p>
+</div>
+<h2 id="passando-argumentos-para-threads">Passando argumentos para threads</h2>
+<p>Nossas threads ainda são muito limitadas: elas não recebem nenhum argumento nem devolvem resultados. Vamos consertar isso nesta seção.</p>
+<p>Vimos na parte 1 que o último argumento de <code>pthread_create</code> é um ponteiro para os dados que nossa função deverá receber. Neste sequência de exercícios iremos aprender a usar este argumento para passar dados para nossas threads.</p>
+<p>Nosso primeiro exercício será feito passo a passo. Siga cada um dos passos a risca e depois responda as questões. Vamos trabalhar a partir de um arquivo vazio.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Crie um programa simples com uma função <code>main</code> que aloca (usando malloc) um vetor <code>*vi</code> com 4 <code>int</code>s  e um vetor <code>*tids</code> com 4 <code>pthread_t</code>s.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Adicione ao seu programa um <code>for</code> que cria 4 threads, use o vetor <code>*vi</code> para armazenar, em cada posição do vetor, os valores do índice do <code>for</code>, e no vetor <code>*tids</code> na na chamada da função <code>pthread_create</code>. Passe como último argumento da função <code>pthread_create</code> o endereço do elemento correspondente de <code>vi</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Espere pelo fim desta thread.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Crie uma função <code>void *tarefa_print_i(void *arg)</code> que declara uma variável <code>int *i</code> e dá print em seu conteúdo. Inicialize a variável <code>i</code> como mostrado abaixo:</p>
+<blockquote>
+<p><code>int *i = (int *) arg;</code></p>
+</blockquote>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/18-threads-I/short_3" id="short_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Explique a utilização da variável <code>i</code> na tarefa acima.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Apontadores <code>void *</code> contém somente o endereço do dado, mas sem indicar seu tipo. Ao declarar <code>i</code> acima dizemos que queremos interpretar aquele endereço como o endereço de um <code>int</code>. Assim, quando fazemos <code>*i</code> conseguimos acessar o inteiro presente no endereço passado para a thread. </p>
+</div>
+</div>
+<p>Se seu programa estiver correto você deverá ver no terminal 4 prints com números de 0 a 3, cada um vindo de um thread.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Se tiver problemas, valide seu código com algum colega que já tenha sido validado pelo professor. Se não tiver ninguém por perto já validado me chame ;)</p>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/18-threads-I/short_4" id="short_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Explique como é feita a passagem do argumento para a thread.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>A thread recebe o endereço da respectiva posição do array alocado dinâmicamente.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/18-threads-I/short_5" id="short_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Passamos para a thread um valor alocado dinamicamente. Por que isso é necessário?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Vamos discutir depois!</p>
+</div>
+</div>
+<p>Vamos explorar a resposta da pergunta acima nos próximos exercícios. Para cada exercício, encontre seu problema, descreva-o usando suas próprias palavras e mostre um exemplo de saída possível. Somente depois de escrever sua resposta rode o programa.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cada exercício foca em um problema diferente. A resposta não é a mesma para ambas.</p>
+</div>
+<div class="admonition exercise text medium tag-text-exercise tag-medium-text editable" data-slug="aulas/18-threads-I/medium_6" id="medium_6_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Identifique um problema de escopo de dados no código abaixo (arquivo <em>parte2-1.c</em>)</p>
+<p>Dica: compile, execute e leia o código para tentar entender o problema!</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">minha_thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">arg</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello thread! %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">// dentro do main</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">minha_thread</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Com threads, não tenho garantir da ordem de escalonamento (não qual thread o sistema operacional vai escolher para execução, nem em qual ordem). Assim, a thread da <code>main</code> altera o valor da variável <code>i</code> e quando cada thread executa, o valor recuperado é diferente do esperado.</p>
+</div>
+</div>
+<div class="admonition exercise text medium tag-text-exercise tag-medium-text editable" data-slug="aulas/18-threads-I/medium_7" id="medium_7_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Identifique um problema de escopo de dados no código abaixo (arquivo <em>parte2-2.c</em>)</p>
+<p>Dica: compile, execute e leia o código para tentar entender o problema!</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">minha_thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">arg</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello thread! %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">pthread_t</span><span class="w"> </span><span class="o">*</span><span class="nf">criar_threads</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="n">pthread_t</span><span class="w"> </span><span class="o">*</span><span class="n">tids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">pthread_t</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">minha_thread</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tids</span><span class="p">;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">}</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1">// dentro do main</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="n">pthread_t</span><span class="w"> </span><span class="o">*</span><span class="n">tids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Lembra da pilha ou <code>stack</code>? Veja nos slides, cada thread tem o seu próprio espaço para guardar suas variáveis locais. Quando uma função é finalizada, o espaço alocado a ela na <code>stack</code> pode ser reutilizado. Neste exemplo, cada thread da <code>minha_thread</code> tenta ler uma variável local <code>i</code> criada no <code>for</code> da função <code>criar_threads</code>, que pode não "existir" mais quando a função <code>minha_thread</code> é executada.</p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Valide sua solução com o professor para garantir que realmente entendeu!</p>
+</div>
+<p>Agora que já entendemos como passar um argumento e que devemos sempre colocá-lo no <em>heap</em>, passar vários é muito simples: alocamos um <code>struct</code> com todos os dados que queremos enviar e passamos seu endereço no último argumento. Ao recebê-lo, a função faz um <em>cast</em> de <code>void *</code> para um ponteiro para o <code>struct</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique seu exercício do começo desta parte para receber dois argumentos do tipo inteiro e imprimir ambos valores.</p>
+</div>
+<h2 id="retornando-valores">Retornando valores</h2>
+<p>Na prática, ao passar <code>struct</code>s para threads como argumentos já sabemos como retornar valores: basta adicionar um campo que própria thread deve preencher com o resultado de sua execução. Isso é equivalente a criar uma função que retorna valores em variáveis passadas por referência (ou seja, escrevendo em variáveis passadas como ponteiros).</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique seu exercício da parte anterior para que as threads retornem a multiplicação dos dois inteiros passados. Faça o print deste valor no <code>main</code>.</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../17-sinais-II/"
+               class="ah-prev"
+               title="17 - Capturando sinais">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">17 - Capturando sinais</span>
+            </a>
+          
+          
+            <a href="../19-sincronizacao/"
+               class="ah-next"
+               title="19 - Sincronização com Mutex">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">19 - Sincronização com Mutex</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
