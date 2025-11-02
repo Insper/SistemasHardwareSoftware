@@ -39,6 +39,7 @@ nav:
     - "17 - Capturando sinais": aulas/17-sinais-II/index.md
     - "18 - Concorrência e Threads": aulas/18-threads-I/index.md
     - "19 - Sincronização com Mutex": aulas/19-sincronizacao/index.md
+    - "20 - Semáforos": aulas/20-semaforos/index.md
 
   - Labs:
     - "Hackerlab": labs/hackerlab.md
