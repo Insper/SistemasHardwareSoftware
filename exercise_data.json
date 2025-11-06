@@ -1658,13 +1658,50 @@
         "slug": "aulas/20-semaforos/choice_5",
         "answer_idx": 2
       }
+    },
+    "aulas/21-semaforos-II/": {
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/21-semaforos-II/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/21-semaforos-II/short_2"
+      },
+      "short_3": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/21-semaforos-II/short_3"
+      },
+      "short_4": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/21-semaforos-II/short_4"
+      },
+      "short_5": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "aulas/21-semaforos-II/short_5"
+      }
     }
   },
   "tags": {
-    "medium-text": "medium-text",
-    "long-text": "long-text",
-    "short-text": "short-text",
     "choice-exercise": "choice-exercise",
+    "medium-text": "medium-text",
+    "short-text": "short-text",
+    "long-text": "long-text",
     "text-exercise": "text-exercise"
   }
 }
