@@ -83,7 +83,7 @@ Ler um arquivo linha a linha é uma operação comum em programas e é feito de 
 
 Para completar a revisão, desenvolva soluções para um simulado de prova!
 
-Faça o download do arquivo `simulado_sishard.zip` disponivel no Blackboard da disciplina (**Conteúdo->AF-Simulado->Avaliação Final Simulado**). Desenvolva a prova e aproveite para tirar qualquer dúvida com os professores!
+Faça o download do arquivo `simulado_af.zip` disponivel no Blackboard da disciplina (**Conteúdo->Simulado AF->Download e entrega do simulado da AF**). Desenvolva a prova e aproveite para tirar qualquer dúvida com os professores!
 
 !!! warning "Atenção"
     Perceba no simulado de prova que o `README.md` ou `README.html` contém todos os detalhes para resolução das questões, incluindo **critérios de avaliação**.
