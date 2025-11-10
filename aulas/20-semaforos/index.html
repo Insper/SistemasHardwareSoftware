@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>20 - Semáforos - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../18-threads-I/">18 - Concorrência e Threads</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">20 - Semáforos</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#rendez-vous-semaforos-no-papel">Rendez-vous (Semáforos no Papel)</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#semaforos-posix">Semáforos POSIX</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#barreiras-exercicio-para-entrega">Barreiras - Exercício para Entrega</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../21-semaforos-II/">21 - Semáforos II</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../22-questoes-de-revisao/">22 - Questões de revisão</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="20-semaforos">20 - Semáforos</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p><br></p>
+<p>Nas últimas aulas aprendemos as APIs da biblioteca <code>pthread</code> para criar e esperar a finalização de threads. Também aprendemos a passar argumentos e receber de volta valores usando um <code>struct</code> alocado dinamicamente.</p>
+<p>Usamos <code>mutex</code> quando precisamos criar regiões de <strong>exclusão mútua</strong> onde somente uma thread pode entrar por vez. Esta restrição é muito forte e não contempla outro caso muito comum em programação concorrente: sincronização de threads. Ou seja, o objetivo não é proteger o acesso a dados compartilhados, mas sim impor restrições no progresso das threads de maneira que elas estejam sempre em uma situação válida. Para isto trabalharemos com <strong>semáforos</strong>, que são um mecanismo de sincronização mais sofisticado e em geral usado para que threads sincronizem seu progresso e possam executar <strong>em paralelo</strong>.</p>
+<p><strong>Definição</strong>: duas tarefas podem ser feitas em paralelo se</p>
+<ol>
+<li>elas não compartilham absolutamente nenhuma informação.</li>
+<li>elas compartilham informação mas possuem <strong>mecanismos de sincronização</strong> de tal maneira que <strong>toda ordem de execução possível</strong> de suas instruções resulte no mesmo resultado final.</li>
+</ol>
+<p><strong>Semáforos</strong> ajudam a criar programas no segundo caso. Nesta aula iremos olhar o caso mais simples de sincronização: duas threads combinam de só progredirem quando chegarem em um certo ponto do programa.</p>
+<h2 id="rendez-vous-semaforos-no-papel">Rendez-vous (Semáforos no Papel)</h2>
+<p>A expressão <em>Rendez-vous</em> significa, literalmente, <em>encontro</em> em francês. Ela é usada para marcar um horário para duas ou mais pessoas se encontrarem. No contexto de sincronização de tarefas, ele também é usado para nomear o problema de sincronização mais simples: duas threads rodando funções distintas precisam se sincronizar no meio de suas funções.</p>
+<p><img alt="Tarefas sincronizadas usando um RDV" src="rdv.svg" /></p>
+<p>As partes A e B podem ser feitas em qualquer ordem, mas ambas obrigatoriamente devem ocorrer antes de iniciar a execução de C e D. Note que C e D também podem ser feitas em qualquer ordem.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Quando dizemos que duas tarefas podem ser feitas em qualquer ordem não quer dizer que elas possam ser feitas em paralelo! Apenas estamos dizendo que A inteira pode ocorrer antes ou depois de B inteira e os resultados serão os mesmos.</p>
+</div>
+<div class="admonition exercise text choice tag-choice-exercise" data-answer-idx="1" data-slug="aulas/20-semaforos/choice_1" id="choice_1_0">
+<p class="admonition-title">Exercise 1</p>
+<form class="exercise-form">
+<p>Quais das ordens de execução das partes A, B, C e D são válidas, segundo o RDV?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    A C B D
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    A B C D
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    B D A C
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>O RDV separa a execução de A e B de C e D. Ou seja, <code>A B C D</code> é um resultado possível!</p>
+</div>
+</div>
+<div class="admonition exercise text choice tag-choice-exercise" data-answer-idx="0" data-slug="aulas/20-semaforos/choice_2" id="choice_2_0">
+<p class="admonition-title">Exercise 2</p>
+<form class="exercise-form">
+<p>Quais das ordens de execução das partes A, B, C e D são válidas, segundo o RDV?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    A D B C
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    B A D C
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    B C A D
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>O RDV separa a execução de A e B de C e D. Ou seja, <code>B A D C</code> é um resultado possível!</p>
+</div>
+</div>
+<div class="admonition exercise text choice tag-choice-exercise" data-answer-idx="0" data-slug="aulas/20-semaforos/choice_3" id="choice_3_0">
+<p class="admonition-title">Exercise 3</p>
+<form class="exercise-form">
+<p>Quais das ordens de execução das partes A, B, C e D são válidas, segundo o RDV?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    B C A D
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    B D A C
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    A B D C
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Vamos listar todos os resultados válidos/possívels: <code>ABCD</code>, <code>ABDC</code>, <code>BACD</code> ou <code>BADC</code>. Sempre <code>A</code> ou <code>B</code> antes de <code>C</code>ou <code>D</code>!</p>
+</div>
+</div>
+<p>Vamos fazer a solução do RDV no papel primeiro.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/20-semaforos/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Preencha aqui quantos semáforos serão usados, seus nomes e valores iniciais.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Vamos criar dois semáforos <code>s1</code> e <code>s2</code>, inicializados na <code>main</code> com valor zero. Como as threads recebem apenas um argumento, seria uma boa criar uma <code>struct</code> para passar a referência dos semáforos.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/20-semaforos/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Indique onde você usaria seus semáforos para resolver o RDV.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>O semáforo <code>s1</code> será útil para indicar que a <code>thread1</code> chegou no RDV. Já o semáforo <code>s2</code> será utilizado para indicar que a <code>thread2</code> chegou no RDV.
+Assim, utilizaremos os semáforos entre os dois <code>printf</code> em cada função das threads.</p>
+</div>
+</div>
+<h2 id="semaforos-posix">Semáforos POSIX</h2>
+<p>Existem, basicamente, dois tipos de semáforos:</p>
+<ul>
+<li><strong>named semaphores</strong> recebem um <strong>nome globalmente único no sistema operacional</strong> e são compartilhados entre <strong>processos diferentes</strong> e independentes, inclusive que não têm relação de parentesco (como pai-filho).</li>
+<li><strong>unnamed semaphores</strong> não têm nome, são criados como <strong>variáveis</strong> local ou global e são acessados diretamente pelas <strong>threads</strong> de um mesmo processo.</li>
+</ul>
+<p>Como estamos usando threads, estamos interessados em <strong>unnamed semaphores</strong>. Use a página <code>sem_overview</code> do manual para responder as perguntas abaixo.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/20-semaforos/short_3" id="short_3_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Quais funções podemos usar para criar, destruir e operar <strong>unnamed semaphore</strong>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p><code>sem_init</code>, <code>sem_destroy</code>, <code>sem_post</code> e <code>sem_wait</code>.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente (do zero) um programa que cria duas threads e as sincroniza usando <em>RDV</em>. Ambas deverão fazer um <code>printf</code> qualquer antes e um depois do ponto de encontro. Use a imagem do começo da aula como guia. </p>
+</div>
+<h2 id="barreiras-exercicio-para-entrega">Barreiras - Exercício para Entrega</h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>Esta aula contém atividade para entrega! Trabalhe na pasta <code>atv/13-barrier</code> que está no seu repositório de entregas! Leia o <code>README.md</code>!</p>
+</div>
+<p>Se até aqui foi tranquilo, vamos misturar as duas aulas? Uma barreira é a generalização do Rendez-vous, em que <code>N</code> threads rodando o mesmo código precisam esperar umas pelas outras para continuar.</p>
+<p>Nesta tarefa, você deve lançar quatro <em>threads</em> e utilizar uma barreira para sincronizar as <em>threads</em>, de modo que elas esperem todas terem chegado na barreira para liberar a impressão de qualquer <code>printf("Depois da barreira\n");</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Não altere os <code>printf</code>, eles representam uma tarefa a ser executada. Faça a implementação da barreira sem alterá-los, nem adicione novos.</p>
+</div>
+<p>Vamos implementar nossa barreira usando a seguinte estratégia:</p>
+<ol>
+<li>uma variável compartilhada <code>num_barrier</code> irá contar quantas threads já chegaram e estão esperando na barreira.</li>
+<li>um semáforo <code>sem_barrier</code> servirá para "travar" as threads na barreira.</li>
+</ol>
+<div class="admonition exercise text choice tag-choice-exercise" data-answer-idx="0" data-slug="aulas/20-semaforos/choice_4" id="choice_4_0">
+<p class="admonition-title">Exercise 7</p>
+<form class="exercise-form">
+<p>Dadas as variáveis acima, precisaríamos usar um <code>mutex_t</code>?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    SIM
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    NÂO
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>A variável compartilhada <code>num_barrier</code> precisa ser protegida por um mutex para ser acessada simultâneamente.</p>
+</div>
+</div>
+<p>Seguiremos o seguinte algoritmo:</p>
+<ul>
+<li>Quando uma thread chega na barreira ela verifica se é a última:<ul>
+<li>se não for, ela soma 1 em <code>num_barrier</code> e espera <code>sem_barrier</code>.</li>
+<li>se se ela for a última, ela irá liberar todas as outras usando <code>sem_barrier</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition exercise text choice tag-choice-exercise" data-answer-idx="2" data-slug="aulas/20-semaforos/choice_5" id="choice_5_0">
+<p class="admonition-title">Exercise 8</p>
+<form class="exercise-form">
+<p>A última thread deverá executar <code>sem_post</code> quantas vezes em <code>sem_barrier</code> para liberar todas as threads que estão esperando?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    1
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>N - 1</code> : Onde <code>N</code> é o número de threads criadas
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    4
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Cada <code>sem_post</code> libera exatamente uma thread que estava bloqueada no <code>sem_wait</code>. Como teremos <code>N - 1</code> bloqueadas, basta 1 thread realizar  <code>N - 1</code> chamadas de <code>sem_post</code> para liberar cada uma das threads bloqueadas.</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente as ideias acima no arquivo <code>barrier.c</code>.</p>
+</div>
+<div class="admonition done">
+<p class="admonition-title">Done</p>
+<p>Acabou? Garanta que seu resultado está na pasta <code>13-barrier</code> do repositório de atividades e faça a submissão da tag!</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../19-sincronizacao/"
+               class="ah-prev"
+               title="19 - Sincronização com Mutex">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">19 - Sincronização com Mutex</span>
+            </a>
+          
+          
+            <a href="../21-semaforos-II/"
+               class="ah-next"
+               title="21 - Semáforos II">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">21 - Semáforos II</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

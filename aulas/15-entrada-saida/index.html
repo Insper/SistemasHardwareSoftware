@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>15 - Entrada/Saída - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">15 - Entrada/Saída</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#trabalhando-com-arquivos">Trabalhando com arquivos</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#permissoes-e-posse-de-arquivos">Permissões e posse de arquivos</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../18-threads-I/">18 - Concorrência e Threads</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../20-semaforos/">20 - Semáforos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../21-semaforos-II/">21 - Semáforos II</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../22-questoes-de-revisao/">22 - Questões de revisão</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="15-entradasaida">15 - Entrada/Saída</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p><br></p>
+<h2 id="trabalhando-com-arquivos">Trabalhando com arquivos</h2>
+<p>Nesta seção trabalharemos com as chamadas <code>open</code>, <code>close</code>, <code>read</code> e <code>write</code>.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_1" id="short_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Leia o código do arquivo <code>exemplo_io1.c</code>. O quê ele faz?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Lê os 5 primeiros caracteres de um arquivo. O arquivo lido é passado via terminal.</p>
+</div>
+</div>
+<p>Vamos agora usar o comando <code>man</code> para ver a documentação das chamadas de sistema do Linux. Digite no terminal <code>man read</code>. A tela mostrada contém a documentação da função <code>read</code>, incluindo sua assinatura e quais cabeçalhos devem ser incluídos para que ela possa ser usada.</p>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>man<span class="w"> </span><span class="nb">read</span>
+</code></pre></div>
+
+</div>
+
+<p><br></p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_2" id="short_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Usando como apoio a documentação aberta pelo comando <code>man</code>, como saber que um arquivo foi lido até o fim?</p>
+<p><strong>Dica</strong>: a seção <code>RETURN VALUE</code> pode te ajudar.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>A função <code>read</code> retorna o número de caracteres efetivamente lidos. Ela retorna 0 quando o arquivo acabou. A função só retorna quando os caracteres forem lidos, então ela pode bloquear o programa.</p>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>Para acelerar suas buscas no <code>man</code> você pode ativar a busca pressionando <code>/</code>. Aí basta digitar o termo procurado. Para avançar para as próximas ocorrências de um termo basta apertar <code>/</code> + <code>Enter</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Baseado em sua resposta acima, modifique <code>exemplo_io1.c</code> para que ele mostre o todo o conteúdo do arquivo. </p>
+</div>
+<p>Vamos agora trabalhar com a chamada <code>write</code>. Um exemplo de seu uso está mostrado no arquivo <code>exemplo_io2.c</code>.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_3" id="short_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Abra o arquivo <code>exemplo_io2.c</code> e explique abaixo como usar <code>write</code>. Se ficar em dúvida use o manual (<code>man write</code>).</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p><code>write</code> recebe o identificador do arquivo, um endereço de memória e o número de bytes que devem ser copiados deste endereço para o arquivo.</p>
+</div>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>man<span class="w"> </span>write
+</code></pre></div>
+
+</div>
+
+<p><br></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Em um novo arquivo <code>copy_file.c</code>, crie um programa <code>copy_file</code> que recebe dois nomes de arquivos como argumentos no terminal e copia o conteúdo do primeiro para o segundo. Ou seja, você deverá</p>
+<ol>
+<li>abrir ambos arquivos (cada um terá seu próprio <em>file descriptor</em>) </li>
+<li>enquanto não chegar ao final do primeiro arquivo<ol>
+<li>ler do primeiro para um buffer</li>
+<li>escrever este buffer no segundo</li>
+</ol>
+</li>
+<li>fecha os dois arquivos</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Validando 2</p>
+<p>Após compilar, teste sua solução com um arquivo qualquer e utilize <code>diff</code> ou <code>cmp</code> para comparar os arquivos.</p>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>./copy_file<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="gp">$ </span>diff<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="gp">$ </span>cmp<span class="w"> </span>arquivo_origem.txt<span class="w"> </span>arquivo_destino.txt
+</code></pre></div>
+
+</div>
+<p><br></p>
+<h3 id="extra">Extra</h3>
+<p>Estes exercícios não terão correção durante a aula e devem ser checados no atendimento. Faça-os se você já acabou os anteriores e a correção/discussão ainda não começou.</p>
+<p>Até agora trabalhamos com um buffer com somente um caractere. Isso facilita a programação, mas deixa nosso código muito lento.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Modifique o <code>copy_file</code> para usar um buffer de 100 caracteres. Meça o tempo de execução para a cópia de um arquivo grande (~100Mb) usando o comando <code>time</code>. Não se esqueça de verificar que os resultados ficaram iguais com o comando <code>diff</code>.</p>
+</div>
+<p>O comando <code>time</code> tem como saída três informações sobre o processo executado:</p>
+<ul>
+<li>Tempo Real (<strong>real</strong>): O tempo que real que levou para executar o comando, do início ao fim.</li>
+<li>Tempo do usuário (<strong>user</strong>): O tempo que a CPU gastou na tarefa em si.</li>
+<li>Tempo do sistema (<strong>sys</strong>): O tempo que a CPU gastou em tarefas de nível de sistema relacionadas ao comando. </li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip 3</p>
+<p>Para saber mais como o  <code>time</code> ou <code>diff</code> funcionam use o comando <code>man</code> conforme abaixo.</p>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>man<span class="w"> </span><span class="nb">time</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="gp">$ </span>man<span class="w"> </span>diff
+</code></pre></div>
+
+</div>
+<p><br></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip 4</p>
+<p>Você pode utilizar o comando <code>dd</code> para gerar um arquivo aleatório de tamanho arbitrário. Por exemplo, para gerar um arquivo de 100MB, podemos fazer:</p>
+</div>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>ex.bin<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock
+</code></pre></div>
+
+</div>
+
+<p><br></p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_4" id="short_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Você consegue explicar a diferença de desempenho entre as duas versões?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Ter disponível o buffer aumentado faz com que o programa tenha que acessar menos vezes a fila de IO, provendo ganho de performance.</p>
+</div>
+</div>
+<h2 id="permissoes-e-posse-de-arquivos">Permissões e posse de arquivos</h2>
+<p>No <code>exemplo_io2.c</code> passamos algumas opções extras para poder criar o arquivo:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">fd1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">arq1</span><span class="p">,</span><span class="w"> </span><span class="n">O_WRONLY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_CREAT</span><span class="p">,</span><span class="w"> </span><span class="mo">0700</span><span class="p">);</span>
+</code></pre></div>
+<p>A flag <code>O_CREAT</code> é usada para indicar que o arquivo deve ser criado caso ele não exista. O número <code>0700</code> representa os bits de acesso visto na expositiva. Cada dígito contém 3 dígitos que representam as seguintes permissões</p>
+<ul>
+<li>4 - permissão de leitura</li>
+<li>2 - permissão de escrita</li>
+<li>1 - permissão de execução</li>
+</ul>
+<p>O primeiro dígito contém as permissões do usuário dono do arquivo. O segundo dígito contém as permissões do grupo dono do arquivo. Usuários que pertencem a este grupo possuem estas permissões. O terceiro dígito lista as permissões para todos os outros usuários.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_5" id="short_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use <code>ls -l</code> na pasta do arquivo criado por <code>copy_file</code> (ou por <code>exemplo_io2</code>). Onde é possível obter as informações de permissões do arquivo? Qual o usuário e grupo donos do arquivo? As permissões passadas para o <code>open</code> foram corretamente colocadas no arquivo?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>A primeira coluna contém as permissões na ordem leitura (<code>r</code>), escrita (<code>w</code>) e execução (<code>x</code>) para o dono do arquivo, o grupo principal do arquivo e todos os usuários. É usado o caractere <code>-</code> para as permissões não concedidas. A segunda coluna mostra o usuário dono do arquivo. A terceira mostra o grupo dono do arquivo.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_6" id="short_6_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Quais permissões são garantidas pela máscara <code>640</code>? É uma boa ideia usá-la?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Leitura e escrita para o dono, leitura para o grupo e nenhuma permissão para outros usuários. Ela é interessante pois permite edição somente pelo dono, mas permite leitura para alguns usuários que o dono confia. Porém, não permite que qualquer usuário leia nem escreva no arquivo. </p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_7" id="short_7_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual máscara usaria se quisesse que um arquivo possa ser modificado somente por seu dono, mas possa ser executado por qualquer usuário do sistema (incluindo o dono do arquivo)? Justifique.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>755</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_8" id="short_8_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Rode o comando <code>copy_file</code> usando <code>sudo</code>. Use <code>ls -l</code> para listar as informações do arquivo. Escreva abaixo quem é seu dono e suas permissões de acesso.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Confira no output do <code>ls -l</code>. Se ainda restar dúvida, confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Use os comandos <code>chown</code> para mudar o dono do arquivo para seu usuário e <code>chmod</code> para deixar suas permissões como leitura e escrita para você e somente leitura para o restante.</p>
+<p><strong>Dica</strong>: não sabe como usar os comandos acima? Use <code>man</code>.</p>
+</div>
+<div class="termy">
+
+    <div class="language-console highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>man<span class="w"> </span>chown
+</code></pre></div>
+
+</div>
+
+<h3 id="extra_1">Extra</h3>
+<p>Estes exercícios trabalham com o conceito de posse de arquivos e de sobrescrita de arquivos já existentes.</p>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/15-entrada-saida/short_9" id="short_9_0">
+<p class="admonition-title">Exercise 9<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Tente usar <code>copy_file</code> usando como fonte algum arquivo que você não possui acesso de leitura (você pode criá-lo e depois usar <code>chmod</code> para editar os acessos). O quê ocorre? Você consegue explicar este comportamento?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Conserte o erro ocorrido acima checando a saída de <code>open</code>. Consulte o manual caso necessário. Não se esqueça de fazê-lo para o arquivo fonte e destino.</p>
+</div>
+<div class="admonition exercise text medium tag-text-exercise tag-medium-text editable" data-slug="aulas/15-entrada-saida/medium_10" id="medium_10_0">
+<p class="admonition-title">Exercise 10<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Vamos realizar um experimento neste exercício:</p>
+<ol>
+<li>Crie um arquivo com 100 caracteres <em>a</em> e chame-o de <code>100a</code>;</li>
+<li>Crie um arquivo com 3 caracteres <em>b</em> e chame-o de <code>3b</code>;</li>
+<li>Use <code>copy_file</code> para copiar <code>3b</code> em cima de <code>100a</code>;</li>
+<li>Mostre o conteúdo do arquivo sobrescrito <code>100a</code>.</li>
+</ol>
+<p>Você consegue explicar o que ocorreu? Se sim, busque no manual uma flag que, ao ser passada para o <code>open</code>, evita que isto ocorra.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Resposta</p>
+<p>Confira com o professor</p>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>O <code>copy_file</code> sobrescreve arquivos sem considerar se arquivo existe ou não. Use o manual (<code>man 2 open</code>) para encontrar a flag que faz <code>open</code> falhar caso o arquivo de destino já exista e conserte seu programa para perguntar se o usuário deseja sobrescrever o arquivo. Entenda como usar <code>errno</code> para que você consiga diferenciar os dois tipos de erros.</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../14-exec/"
+               class="ah-prev"
+               title="14 - Carregamento de programas">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">14 - Carregamento de programas</span>
+            </a>
+          
+          
+            <a href="../16-sinais-I/"
+               class="ah-next"
+               title="16 - Enviando sinais">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">16 - Enviando sinais</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>04 - Funções - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">04 - Funções</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#funcoes-e-seus-argumentos">Funções e seus argumentos</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exemplo-guiado">Exemplo guiado</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#pratica">Prática</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#atividade-para-entrega">Atividade para entrega!</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#hackerlab">Hackerlab</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../18-threads-I/">18 - Concorrência e Threads</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../20-semaforos/">20 - Semáforos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../21-semaforos-II/">21 - Semáforos II</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../22-questoes-de-revisao/">22 - Questões de revisão</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="04-funcoes">04 -  Funções</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p>Neste handout vamos trabalhar pela primeira vez na tradução reversa de programas em Assembly para <em>C</em>. Nas últimas aulas vimos as instruções <code>mov</code> e <code>add</code> e na aula de hoje vimos uma tabela grande com as instruções aritméticas (<code>add</code>, <code>sub</code>, <code>mul</code>, <code>imul</code>, <code>div</code>, etc).</p>
+<p>Como em todas as aulas, veremos hoje um detalhe a mais sobre arquitetura <em>x64</em>: chamadas de funções e argumentos.</p>
+<h2 id="funcoes-e-seus-argumentos">Funções e seus argumentos</h2>
+<p>Em <em>x64</em> os argumentos das funções são passados nos registradores e o valor de retorno é colocado também em um registrador.</p>
+<ol>
+<li><strong>Argumentos inteiros ou ponteiros</strong> são passados nos registradores (<strong>nesta ordem</strong>):<ol>
+<li><code>%rdi</code></li>
+<li><code>%rsi</code></li>
+<li><code>%rdx</code></li>
+<li><code>%rcx</code></li>
+<li><code>%r8</code></li>
+<li><code>%r9</code></li>
+</ol>
+</li>
+<li><strong>Argumentos ponto flutuante</strong> são passados nos registradores <code>%xmm0</code> até <code>%xmm7</code>.</li>
+<li><strong>Valores de retorno inteiros ou ponteiros</strong> são colocados no registrador <code>%rax</code>.</li>
+<li><strong>Valores de retorno ponto flutuante</strong> são colocados no registrador <code>%xmm0</code>.</li>
+</ol>
+<p>Para chamar funções usamos a instrução <code>call</code> seguido do endereço de memória da função. O <code>gdb</code> cria um "apelido" para estes endereços de memória usando o nome original da função no arquivo <em>.c</em>. Assim, estas instruções são mostradas, normalmente, como <code>call func1</code>, por exemplo. Note que antes de cada <code>call</code> devemos preencher os argumentos nos registradores corretos.</p>
+<p>Para retornar usamos a instrução <code>ret</code>. Ela é equivalente ao comando <code>return</code> de <em>C</em> e devolverá o valor armazenado no <code>%rax</code> (ou <code>%xmm0</code> para ponto flutuante).</p>
+<p><img alt="Registradores de 64 e 32 bits" src="registradores-grandes.png" /></p>
+<p><img alt="Registradores de 32, 16 e 8 bits" src="registradores-pequenos.png" /></p>
+<p>Não se esqueça da equivalência entre o tamanhos dos registradores e os tipos inteiros em <em>C</em>. Um resumo gráfico pode ser visto nas figuras acima.</p>
+<ol>
+<li><strong>64 bits</strong> (<code>%rax</code>, <code>%rdi</code> e outros que começam com <code>r</code>): <code>long</code>, <code>unsigned long</code> ou ponteiro;</li>
+<li><strong>32 bits</strong> (<code>%eax</code>, <code>%edi</code> e outros que começa com <code>e</code> e os que terminam em <code>d</code> como <code>r10d</code>): <code>int</code> ou <code>unsigned int</code>;</li>
+<li><strong>16 bits</strong> (<code>%ax</code>, <code>%di</code> e outros com duas letras somente terminando em <code>x</code>): <code>short</code> ou <code>unsigned short</code></li>
+<li><strong>8 bits</strong> (<code>%al</code>, <code>%ah</code> e outros com duas letras terminando em <code>h</code> ou <code>l</code>): <code>char</code> ou <code>unsigned char</code>.</li>
+</ol>
+<p>Vamos agora praticar fazendo a tradução de funções que fazem aritmética simples entre inteiros (usando ou não ponteiros). O exemplo abaixo mostra todas as etapas que precisamos seguir para fazer a tradução Assembly -&gt; C.</p>
+<h2 id="exemplo-guiado">Exemplo guiado</h2>
+<p>Dado o código Assembly abaixo, faça sua tradução para <em>C</em></p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">misterio1</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">0:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">01</span><span class="w"> </span><span class="nf">f7</span><span class="w">                </span><span class="no">add</span><span class="w">    </span><span class="nv">%rsi</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="err">3:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">8</span><span class="nf">d</span><span class="w"> </span><span class="mi">04</span><span class="w"> </span><span class="mi">57</span><span class="w">             </span><span class="no">lea</span><span class="w">    </span><span class="p">(</span><span class="nv">%rdi</span><span class="p">,</span><span class="nv">%rdx</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nv">%rax</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="err">7:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<h3 id="assinatura-da-funcao">Assinatura da função</h3>
+<p>Vamos começar pela assinatura da função. É sempre útil identificar quais registradores são lidos antes de serem escritos. Isso nos ajuda a entender se um registrador é um argumento da função ou se ele é apenas usado como variável local. Faremos isso escrevendo todos os registradores que podem ser argumentos em ordem e vendo se são lidos ou escritos primeiro:</p>
+<ul>
+<li><code>%rdi</code> - lido primeiro (<code>add</code> faz a operação <code>+=</code>)</li>
+<li><code>%rsi</code> - lido primeiro (no lado esquerdo do <code>add</code>)</li>
+<li><code>%rdx</code> - lido primeiro (no lado esquerdo do <code>lea</code>)</li>
+<li><code>%rcx</code> - não usado</li>
+<li><code>%r8</code> - não usado</li>
+<li><code>%r9</code> - não usado</li>
+</ul>
+<p>Logo, os registradores <code>%rdi</code>, <code>%rsi</code> e <code>%rdx</code> são argumentos da função. Consultando o box de arquitetura de computadores, vemos que a função recebe três argumentos do tipo <code>long</code> (pois usa os registradores de 64 bits).</p>
+<p>Note que o resultado das computações é guardado em <code>%rax</code>, que guarda sempre o retorno da função. Por usar a porção de 64 bits do registrador, o tipo de retorno também é <code>long</code>. A assinatura da função é, portanto</p>
+<p><code>long misterio1(long a, long b, long c);</code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>Ponteiros também usam os registradores de 64 bits. Porém, olhando rapidamente o código notamos que não há nenhum acesso a memória. Logo, se trata realmente de <code>long</code>.</p>
+</div>
+<h3 id="o-codigo">O código</h3>
+<p>Vamos agora para o código. Nossa primeira estratégia é atribuir um nome para cada registrador. Os três registradores de argumentos já receberam os nomes <code>a</code>, <code>b</code> e <code>c</code>. Para deixar explícito o papel do <code>%rax</code> vamos nomeá-lo de <code>retval</code>.</p>
+<p>A primeira instrução <code>add %rsi, %rdi</code> realiza a adição dos dois registradores e armazena em <code>%rdi</code>. Logo, sua tradução direta seria:</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</code></pre></div>
+<p>A instrução <code>lea (%rdi, %rdx, 2), %rax</code> é usada tanto para calcular endereços de memória quanto para aritmética simples. Vemos que é o segundo caso pois, no código seguinte, não acessamos a memória com o valor calculado. Logo, podemos traduzir este trecho como</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+</code></pre></div>
+<p>Logo após temos o <code>ret</code>, que é traduzido como</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+</code></pre></div>
+<p>Logo, nossa função é traduzida como</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">long</span><span class="w"> </span><span class="nf">misterio1</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">){</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Finalmente, podemos deixar nosso código legível e escrevê-lo como</p>
+<div class="language-c highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">long</span><span class="w"> </span><span class="nf">misterio1</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">c</span><span class="p">){</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Você pode verificar o código original no arquivo <code>exemplo1.c</code>.</p>
+<hr />
+<p>O processo acima pode ser formalizado no seguinte algoritmo:</p>
+<ol>
+<li>Identifique quantos argumentos a função recebe</li>
+<li>Identifique os tipos de cada argumento (pode ser necessário olhar o código assembly da função)</li>
+<li>Dê um nome para cada registrador. Se um mesmo registrador é usado com tamanhos diferentes (<code>%rdi</code> e <code>%edi</code> são usados no código), dê um nome diferente para cada tamanho.</li>
+<li>Faça a tradução de cada instrução separadamente.</li>
+<li>Fique atento aos valores colocados em <code>%rax</code> e <code>%eax</code> perto do fim do código. Esses valores serão retornados pela função.</li>
+<li>O código gerado costuma ser ilegível. Refatore-o para melhorar sua legibilidade.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip 2</p>
+<ul>
+<li>A instrução <code>lea</code> pode ser usada tanto para aritmética quanto para cálculo de endereços. Para tirar a dúvida basta olhar se as próximas instruções fazem acesso à memória com o endereço calculado ou apenas usam o valor diretamente (aritmética).</li>
+<li>Os registradores de tamanhos menores são virtuais. Quanto escrevo em <code>%ax</code> estou escrevendo nos 16 bits menos significativos de <code>%rax</code> e de <code>%eax</code> também.</li>
+<li>Muitas instruções com operadores de 32bits zeram os 32bits superiores. Assim, vemos por exemplo a instrução <code>mov $0, %eax</code> sendo usada para zerar um <code>long</code>. Nesses casos é necessário verificar se a função continua usando <code>%eax</code> (é <code>int</code> mesmo) ou se ela magicamente passa a usar <code>%rax</code> (o tipo era <code>long</code>).</li>
+</ul>
+</div>
+<h2 id="pratica">Prática</h2>
+<p>Vamos agora exercitar. Cada exercício faz um cálculo diferente. Se houver alguma instrução desconhecida, consulte o link <a href="https://www.felixcloutier.com/x86/">https://www.felixcloutier.com/x86/</a> ou a referência oficial da <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">Intel</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Usaremos o <code>gdb</code> para abrir os arquivos <code>.o</code> nesta aula. Este tipo de arquivo contém funções compiladas, mas não é um executável completo por não ter uma função <code>main</code>.</p>
+</div>
+<h3 id="arquivo-ex1o">Arquivo <em>ex1.o</em></h3>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_1" id="long_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O código abaixo foi retirado do arquivo <code>ex1.o</code>. Faça sua tradução para <em>C</em>.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">ex1</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">0:</span><span class="w">   </span><span class="err">89</span><span class="w"> </span><span class="nf">f8</span><span class="w">                   </span><span class="no">mov</span><span class="w">    </span><span class="nv">%edi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">2:</span><span class="w">   </span><span class="err">29</span><span class="w"> </span><span class="nf">f0</span><span class="w">                   </span><span class="no">sub</span><span class="w">    </span><span class="nv">%esi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">4:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="arquivo-ex2o">Arquivo <em>ex2.o</em></h3>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_2" id="long_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use o <code>gdb</code> para listar as funções definidas em <code>ex2.o</code> e escreva-as abaixo.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça a tradução das funções acima para <em>C</em></p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="arquivo-ex3o">Arquivo <em>ex3.o</em></h3>
+<p>A função abaixo foi obtida de <code>ex3.o</code>.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="err">0000000000000000</span><span class="w"> </span><span class="err">&lt;</span><span class="nf">ex3</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">0:</span><span class="w">   </span><span class="err">8</span><span class="nf">b</span><span class="w"> </span><span class="mi">06</span><span class="w">                   </span><span class="no">mov</span><span class="w">    </span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">2:</span><span class="w">   </span><span class="err">0</span><span class="nf">f</span><span class="w"> </span><span class="no">af</span><span class="w"> </span><span class="no">c0</span><span class="w">                </span><span class="no">imul</span><span class="w">   </span><span class="nv">%eax</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">5:</span><span class="w">   </span><span class="err">89</span><span class="w"> </span><span class="err">07</span><span class="w">                   </span><span class="nf">mov</span><span class="w">    </span><span class="nv">%eax</span><span class="p">,(</span><span class="nv">%rdi</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">7:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_4" id="long_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O quê faz a instrução <code>imul</code>?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Multiplica o valor em <code>r/m</code> (um registrador ou memória) pelo valor implícito em <code>%ax</code>, <code>%eax</code> ou <code>%rax</code> (dependendo do tamanho da operação).</p>
+<p>O resultado é armazenado em <strong>par de registradores</strong>:</p>
+<ul>
+<li><strong>8 bits</strong>: <code>%al × r/m8 → %ax</code>  </li>
+<li><strong>16 bits</strong>: <code>%ax × r/m16 → %dx:%ax</code>  </li>
+<li><strong>32 bits</strong>: <code>%eax × r/m32 → %edx:%eax</code>  </li>
+<li><strong>64 bits</strong>: <code>%rax × r/m64 → %rdx:%rax</code>  </li>
+</ul>
+<p>A instrução <code>imul   %eax, %eax</code> multiplica <code>%eax</code> por ele mesmo, ou seja, <code>%eax = %eax * %eax</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_5" id="long_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Traduza esta função para <em>C</em>. Fique atento ao tamanho dos registradores usados para identificar o tamanho dos variáveis inteiras.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<hr />
+<p>Antes de prosseguir, valide suas soluções da seção anterior com o professor.</p>
+<p>Vamos agora trabalhar com executáveis "completos". Vamos analisar não somente o código das funções mas também sua chamada.</p>
+<h3 id="arquivo-ex4">Arquivo <em>ex4</em></h3>
+<div class="admonition example">
+<p class="admonition-title">Para começar!</p>
+<p>Use o <code>gdb</code> para obter o conteúdo das funções <code>main</code> e <code>ex4</code>.</p>
+<p><strong>Dica</strong>: lembre-se do comando <code>disas</code></p>
+</div>
+<p>Localize a chamada da função <code>ex4</code> no main. As intruções acima do <code>call</code> colocam os argumentos nos lugares corretos para <code>ex4</code> rodar.</p>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_6" id="long_6_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Quantos argumentos a função recebe? Quais são seus valores?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_7" id="long_7_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Traduza a função <code>ex4</code> para <em>C</em>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<h3 id="arquivo-ex5-desafio">Arquivo <em>ex5</em> (desafio)</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Este exercício é avançado e necessita de pesquisa para ser realizado. Faça-o somente após validar suas soluções dos anteriores com os professores.</p>
+</div>
+<p>Neste exercício vamos nos aprofundar no uso de ponteiros. Vimos no <em>ex3.o</em> um exemplo de função que armazenava um valor calculado em um ponteiro. Agora veremos um exemplo completo que inclui a chamada de uma função recebendo um endereço.</p>
+<p>O trecho abaixo da função <code>main</code> copia os argumentos para os registradores corretos e chama a função <code>ex5</code>.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="err">60</span><span class="nl">b:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">8</span><span class="nf">d</span><span class="w"> </span><span class="mi">4</span><span class="no">c</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="mi">08</span><span class="w">          </span><span class="no">lea</span><span class="w">    </span><span class="mi">0x8</span><span class="p">(</span><span class="nv">%rsp</span><span class="p">),</span><span class="nv">%rcx</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">610:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">8</span><span class="nf">d</span><span class="w"> </span><span class="mi">54</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="mi">0</span><span class="no">c</span><span class="w">          </span><span class="no">lea</span><span class="w">    </span><span class="mi">0xc</span><span class="p">(</span><span class="nv">%rsp</span><span class="p">),</span><span class="nv">%rdx</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">615:</span><span class="w">   </span><span class="nf">be</span><span class="w"> </span><span class="mi">03</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">00</span><span class="w">          </span><span class="no">mov</span><span class="w">    </span><span class="no">$0x3</span><span class="p">,</span><span class="nv">%esi</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">61</span><span class="nl">a:</span><span class="w">   </span><span class="nf">bf</span><span class="w"> </span><span class="mi">0</span><span class="no">a</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">00</span><span class="w">          </span><span class="no">mov</span><span class="w">    </span><span class="no">$0xa</span><span class="p">,</span><span class="nv">%edi</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">61</span><span class="nl">f:</span><span class="w">   </span><span class="nf">e8</span><span class="w"> </span><span class="no">d6</span><span class="w"> </span><span class="no">ff</span><span class="w"> </span><span class="no">ff</span><span class="w"> </span><span class="no">ff</span><span class="w">          </span><span class="no">callq</span><span class="w">  </span><span class="mh">5fa</span> <span class="p">&lt;</span><span class="no">ex5</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_8" id="long_8_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Identifique a partir dos tipos de dados colocados nos registradores qual o tipo dos argumentos da função.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_9" id="long_9_0">
+<p class="admonition-title">Exercise 9<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual são os endereços passados para a função <code>ex5</code>? Escreva-os em função do registrador <code>%rsp</code>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_10" id="long_10_0">
+<p class="admonition-title">Exercise 10<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Os endereços acima são passados em quais registradores?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<p>Vamos agora ao código de <code>ex5</code>:</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="err">00000000000005</span><span class="nf">fa</span><span class="w"> </span><span class="err">&lt;</span><span class="no">ex5</span><span class="err">&gt;</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">5</span><span class="nl">fa:</span><span class="w">   </span><span class="err">89</span><span class="w"> </span><span class="nf">f8</span><span class="w">                   </span><span class="no">mov</span><span class="w">    </span><span class="nv">%edi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="err">5</span><span class="nl">fc:</span><span class="w">   </span><span class="err">48</span><span class="w"> </span><span class="err">89</span><span class="w"> </span><span class="nf">d7</span><span class="w">                </span><span class="no">mov</span><span class="w">    </span><span class="nv">%rdx</span><span class="p">,</span><span class="nv">%rdi</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="err">5</span><span class="nl">ff:</span><span class="w">   </span><span class="err">99</span><span class="w">                      </span><span class="nf">cltd</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="err">600:</span><span class="w">   </span><span class="nf">f7</span><span class="w"> </span><span class="no">fe</span><span class="w">                   </span><span class="no">idiv</span><span class="w">   </span><span class="nv">%esi</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="err">602:</span><span class="w">   </span><span class="err">89</span><span class="w"> </span><span class="err">07</span><span class="w">                   </span><span class="nf">mov</span><span class="w">    </span><span class="nv">%eax</span><span class="p">,(</span><span class="nv">%rdi</span><span class="p">)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="err">604:</span><span class="w">   </span><span class="err">89</span><span class="w"> </span><span class="err">11</span><span class="w">                   </span><span class="nf">mov</span><span class="w">    </span><span class="nv">%edx</span><span class="p">,(</span><span class="nv">%rcx</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="err">606:</span><span class="w">   </span><span class="nf">c3</span><span class="w">                      </span><span class="no">retq</span>
+</code></pre></div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_11" id="long_11_0">
+<p class="admonition-title">Exercise 11<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Como a instrução <code>idiv</code> funciona? Em quais registradores ela posiciona seu resultado? Em quais registradores ela espera a entrada?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A instrução <code>idiv</code> faz a divisão inteira com sinal (<code>dividendo/divisor</code>). O dividendo deve ser um registrador de 64 bits com sinal, ou seja, dividendo é <code>%edx:%eax</code> e o divisor é  <code>%esi</code>.</p>
+<p>Depois da execução da instrução, <code>%eax</code> recebe o <strong>quociente</strong> e <code>%edx</code> recebe o <strong>resto</strong>.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_12" id="long_12_0">
+<p class="admonition-title">Exercise 12<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O quê faz a instrução <code>cltd</code>? Por quê ela é necessária?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>No exemplo acima a instruçao <code>mov %edi,%eax</code> copia o primeiro argumento da função para o registrador <code>%eax</code> (dividendo), nesse ponto temos um problema !! </p>
+<p><code>%eax</code> só tem 32 bits, e a instrução <code>idiv</code> precisa de um dividendo de 64 bits com sinal.</p>
+<p>Para resolver isso o compilador usa a instrução <code>cltd</code> (Convert Long to Doubleword) que copia o sinal de <code>%eax</code> para <code>%edx</code> (parte alta). Agora o par <code>%edx:%eax</code> representa o dividendo de 64 bits, em seguida <code>idiv %esi</code> divide esse valor por <code>%esi</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-text-exercise tag-long-text editable" data-slug="aulas/04-funcoes-mov/long_13" id="long_13_0">
+<p class="admonition-title">Exercise 13<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Faça a tradução de <code>ex5</code> para <em>C</em>.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Conferindo tudo!</p>
+<p>Agora que terminou todos os exercícios, confira suas traduções com os gabaritos disponíveis no arquivo <code>fontes.zip</code>.</p>
+</div>
+<h2 id="atividade-para-entrega">Atividade para entrega!</h2>
+<p>Aula com <strong>atividade</strong> para <strong>entrega</strong>. Confira seu repositório de entregas do classroom!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>atv</code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Como começar?</p>
+<p>Leia o <code>README.md</code> disponível <strong>na pasta da atividade</strong> para descobrir como resolver e entregar.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Prazo!</p>
+<p>Confira o <strong>prazo</strong> de entrega no menu <a href="../../sobre/">Entregas e Prazos</a></p>
+</div>
+<h2 id="hackerlab">Hackerlab</h2>
+<p>Nesse final de semana será liberado o enunciado do primeiro lab! Confira em <a href="../../labs/hackerlab/">Hackerlab</a> no menu <strong>Labs</strong>!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção!</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>lab</code>.</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../03-arquitetura-x86/"
+               class="ah-prev"
+               title="03 - Arquitetura x86-64">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">03 - Arquitetura x86-64</span>
+            </a>
+          
+          
+            <a href="../05-condicionais/"
+               class="ah-next"
+               title="05 - Condicionais">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">05 - Condicionais</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

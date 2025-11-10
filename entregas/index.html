@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Entregas - Sistemas Hardware-Software - 2025/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href=".."
+           title="Sistemas Hardware-Software - 2025/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2025/2">
+          Sistemas Hardware-Software - 2025/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Entregas</span>
+      <ul>
+        
+          
+            
+            
+        
+      </ul>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../aulas/01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/10-malloc/">10 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/11-revisao/">11 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/18-threads-I/">18 - Concorrência e Threads</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/20-semaforos/">20 - Semáforos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/21-semaforos-II/">21 - Semáforos II</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../aulas/22-questoes-de-revisao/">22 - Questões de revisão</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../labs/hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../labs/processos/">Lab processos</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="entregas-de-atividades-e-labs">Entregas de Atividades e Labs</h1>
+<p>Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar para o <em>GitHub</em>. O prazo limite considera o final do dia (<strong>23:59:59</strong>). <strong>NÃO SERÃO ACEITAS ENTREGAS FORA DO PRAZO</strong>. </p>
+<table>
+<thead>
+<tr>
+<th>Data início</th>
+<th>Atividade/Lab</th>
+<th>Como entregar</th>
+<th>Prazo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>06/08</td>
+<td>Instalação</td>
+<td>Sem entrega, apenas instale o Ubuntu 22.04!</td>
+<td>18/08 15:45</td>
+</tr>
+<tr>
+<td>18/02</td>
+<td>Atv01-inteiros</td>
+<td>Github (Lembre de <strong><a href="https://classroom.github.com/a/-m-MAIA9">Criar repo</a></strong> e <strong><a href="../dicas/tutorial_servidor_testes.pdf">Configurar webhook</a></strong>)</td>
+<td>25/08 23h59</td>
+</tr>
+<tr>
+<td>25/08</td>
+<td>Atv02-intro-gdb</td>
+<td>Github</td>
+<td>01/09 23h59</td>
+</tr>
+<tr>
+<td>28/08</td>
+<td>Atv03-funcoes</td>
+<td>Github</td>
+<td>04/09 23h59</td>
+</tr>
+<tr>
+<td>30/08</td>
+<td>Lab01-hackerlab</td>
+<td>Github</td>
+<td>22/09 23h59</td>
+</tr>
+<tr>
+<td>04/09</td>
+<td>Atv04-condicionais-funcoes</td>
+<td>Github</td>
+<td>11/09 23h59</td>
+</tr>
+<tr>
+<td>09/09</td>
+<td>Atv05-loops</td>
+<td>Github</td>
+<td>15/09 23h59</td>
+</tr>
+<tr>
+<td>11/09</td>
+<td>Atv06-variaveis-locais</td>
+<td>Github</td>
+<td>18/03 23h59</td>
+</tr>
+<tr>
+<td>15/09</td>
+<td>Atv07-arrays</td>
+<td>Github</td>
+<td>22/09 23h59</td>
+</tr>
+<tr>
+<td>18/09</td>
+<td>Atv08-malloc</td>
+<td>Github</td>
+<td>25/09 23h59</td>
+</tr>
+<tr>
+<td>06/10</td>
+<td>Atv09-TAD</td>
+<td>Github</td>
+<td>10/10 23h59</td>
+</tr>
+<tr>
+<td>13/10</td>
+<td>Atv10-processos</td>
+<td>Github</td>
+<td>19/10 23h59</td>
+</tr>
+<tr>
+<td>16/10</td>
+<td><strong>Lab02-processos</strong></td>
+<td>Github</td>
+<td><strong>10/11  23h59</strong></td>
+</tr>
+<tr>
+<td>16/10</td>
+<td>Atv11-entrada-saida</td>
+<td>Github</td>
+<td>27/10 23h59</td>
+</tr>
+<tr>
+<td>27/10</td>
+<td>Atv12-threads</td>
+<td>Github</td>
+<td>03/11 23h59</td>
+</tr>
+<tr>
+<td>03/11</td>
+<td>Atv13-barrier</td>
+<td>Github</td>
+<td>07/11 23h59</td>
+</tr>
+</tbody>
+</table>
+<!--
+| 05/13 | **Lab03-threads** | Github | **31/05  23h59** |  
+-->
+
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../sobre/"
+               class="ah-prev"
+               title="Sobre">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Sobre</span>
+            </a>
+          
+          
+            <a href="../aulas/01-inteiros/"
+               class="ah-next"
+               title="01 - Inteiros na CPU">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">01 - Inteiros na CPU</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../js/tabs.js"></script><script src="../js/termynal.js"></script><script src="../js/custom.js"></script>
+    
+  </body>
+</html>
