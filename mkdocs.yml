@@ -41,6 +41,7 @@ nav:
     - "19 - Sincronização com Mutex": aulas/19-sincronizacao/index.md
     - "20 - Semáforos": aulas/20-semaforos/index.md
     - "21 - Semáforos II": aulas/21-semaforos-II/index.md
+    - "22 - Questões de revisão": aulas/22-questoes-de-revisao/index.md
 
   - Labs:
     - "Hackerlab": labs/hackerlab.md
