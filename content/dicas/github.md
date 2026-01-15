@@ -8,7 +8,8 @@ Se você costuma clonar os repositórios utilizando **ssh**, acesse [este LINK](
 
 ## Arquivo `.netrc`
 
-Se você costuma clonar os repositórios utilizando **https**, acesse [este LINK](https://github.com/settings/tokens) e crie um **Token**. Na criação do Token, selecione uma validade adequada (pelo menos 90 dias) e marque em **Select scopes** pelo menos a seção `repo`.
+Se você costuma clonar os repositórios utilizando **https**, acesse [este LINK](https://github.com/settings/tokens), na página selecine **Personal access tokens -> Tokens (classic)**. Clique o botão **Generate new token** e escolha **Generate new token (classic)**, de um nome para token na caixa de texto **Note** selecione uma validade adequada (**pelo menos 120 dias**) e marque em **Select scopes** pelo menos a seção `repo.
+
 
 Em seguida, crie um arquivo `.netrc` (sim, começa com "ponto") na raiz do seu usuário no Ubuntu. O conteúdo deste arquivo deve estar no padrão:
 
