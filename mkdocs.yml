@@ -21,32 +21,33 @@ nav:
   - entregas.md
   - Aulas:
     - "01 - Inteiros na CPU": aulas/01-inteiros/index.md
-    - "02 - Representação de dados em RAM": aulas/02-ram/index.md
-    - "03 - Arquitetura x86-64": aulas/03-arquitetura-x86/index.md
-    - "04 - Funções": aulas/04-funcoes-mov/index.md
-    - "05 - Condicionais": aulas/05-condicionais/index.md 
-    - "06 - Condicionais e funções": aulas/06-condicionais-funcoes/index.md
-    - "07 - Loops": aulas/07-loops/index.md
-    - "08 - Variáveis locais": aulas/08-variaveis-locais/index.md
-    - "09 - Array em Assembly": aulas/09-arrays/index.md
-    - "10 - Alocação Dinâmica de Memória": aulas/10-malloc/index.md
-    - "11 - Revisão": aulas/11-revisao/index.md
-    - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
-    - "13 - Processos": aulas/13-processos/index.md
-    - "14 - Carregamento de programas": aulas/14-exec/index.md
-    - "15 - Entrada/Saída": aulas/15-entrada-saida/index.md
-    - "16 - Enviando sinais": aulas/16-sinais-I/index.md
-    - "17 - Capturando sinais": aulas/17-sinais-II/index.md
-    - "18 - Concorrência e Threads": aulas/18-threads-I/index.md
-    - "19 - Sincronização com Mutex": aulas/19-sincronizacao/index.md
-    - "20 - Semáforos": aulas/20-semaforos/index.md
-    - "21 - Semáforos II": aulas/21-semaforos-II/index.md
-    - "22 - Questões de revisão": aulas/22-questoes-de-revisao/index.md
 
-  - Labs:
-    - "Hackerlab": labs/hackerlab.md
-    - "Lab processos": labs/processos.md
-  #   - "Lab threads": labs/threads.md
+  #   - "02 - Representação de dados em RAM": aulas/02-ram/index.md
+  #   - "03 - Arquitetura x86-64": aulas/03-arquitetura-x86/index.md
+  #   - "04 - Funções": aulas/04-funcoes-mov/index.md
+  #   - "05 - Condicionais": aulas/05-condicionais/index.md 
+  #   - "06 - Condicionais e funções": aulas/06-condicionais-funcoes/index.md
+  #   - "07 - Loops": aulas/07-loops/index.md
+  #   - "08 - Variáveis locais": aulas/08-variaveis-locais/index.md
+  #   - "09 - Array em Assembly": aulas/09-arrays/index.md
+  #   - "10 - Alocação Dinâmica de Memória": aulas/10-malloc/index.md
+  #   - "11 - Revisão": aulas/11-revisao/index.md
+  #   - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
+  #   - "13 - Processos": aulas/13-processos/index.md
+  #   - "14 - Carregamento de programas": aulas/14-exec/index.md
+  #   - "15 - Entrada/Saída": aulas/15-entrada-saida/index.md
+  #   - "16 - Enviando sinais": aulas/16-sinais-I/index.md
+  #   - "17 - Capturando sinais": aulas/17-sinais-II/index.md
+  #   - "18 - Concorrência e Threads": aulas/18-threads-I/index.md
+  #   - "19 - Sincronização com Mutex": aulas/19-sincronizacao/index.md
+  #   - "20 - Semáforos": aulas/20-semaforos/index.md
+  #   - "21 - Semáforos II": aulas/21-semaforos-II/index.md
+  #   - "22 - Questões de revisão": aulas/22-questoes-de-revisao/index.md
+
+  # - Labs:
+  #   - "Hackerlab": labs/hackerlab.md
+  #   - "Lab processos": labs/processos.md
+ 
   - Referências e links:
     - "Dicas e links": dicas/DicasLinks.md
     - "Configuração github": dicas/github.md
