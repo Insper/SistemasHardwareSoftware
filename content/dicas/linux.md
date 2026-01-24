@@ -7,7 +7,7 @@ Para fazer o download do Linux Ubuntu 22.04.5 LTS acesse o link [https://release
 ## Usando WSL
 Uma outra opção é usar Subsistema do Windows para Linux (WSL) que permite que os desenvolvedores instalem uma distribuição do Linux (como Ubuntu, OpenSUSE, Kali, Debian, Arch Linux etc) e usem aplicativos Linux, utilitários e ferramentas de linha de comando bash diretamente no Windows, sem modificação, sem a sobrecarga de uma máquina virtual tradicional.
 
-Siga os passos de instalação no documento [Instalação do WSL+Ubuntu no Windows](WSL_Windows_Ubuntu.pdf) para saber mais acesse [esse LINK](https://learn.microsoft.com/pt-br/windows/wsl/install) para configurar VSCode+WSL acesse [esse LINK] (https://code.visualstudio.com/docs/remote/wsl).
+Siga os passos de instalação no documento [Instalação do WSL+Ubuntu no Windows](WSL_Windows_Ubuntu_VSCode.pdf). Para saber mais acesse [esse LINK](https://learn.microsoft.com/pt-br/windows/wsl/install) para configurar VSCode+WSL acesse [esse LINK](https://code.visualstudio.com/docs/remote/wsl).
 
 
 ## VM usando Virtualbox
