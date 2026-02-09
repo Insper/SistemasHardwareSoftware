@@ -6,7 +6,7 @@
 Os exercícios da aula de hoje estão no executável `bases_e_sinais`.
 
 !!! warning "Aula com atividade para entrega!"
-    Para criar o seu repositório de entrega de atividades acesse **[este LINK](https://classroom.github.com/a/-m-MAIA9)**, após criar seu repositório **configure o webhook** do servidor de testes, acesse **[este LINK](../../dicas/tutorial_servidor_testes.pdf)**, essa configuração é importante para que apareça o *feedback* das atividades entregues que passaram sem erros.
+    Para criar o seu repositório de entrega de atividades acesse **[este LINK](https://classroom.github.com/a/dITs3has)**, após criar seu repositório **configure o webhook** do servidor de testes, acesse **[este LINK](../../dicas/tutorial_servidor_testes.pdf)**, essa configuração é importante para que apareça o *feedback* das atividades entregues que passaram sem erros.
 
 
 Assim que criar seu repositório, a **atividade 01** já estará disponível nele. 
