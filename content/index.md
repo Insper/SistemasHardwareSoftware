@@ -12,4 +12,4 @@ Mas antes de começar, você sabe o que é um  <b> <a href="./dicas/sistemas-har
 
 * **[Informações importantes](sobre.md)**:  nesse link você encontrará informações importantes da disciplina, como por exemplo os critérios de aprovação. Leia com atenção!!
 
-* **[Plano de Aula](./dicas/PlanoDeAula_26_1.pdf)**: para consultar o planejamento aula a aula da disciplina.
+* **[Plano de Aula](./plano_de_aula-26-1.pdf)**: para consultar o planejamento aula a aula da disciplina.

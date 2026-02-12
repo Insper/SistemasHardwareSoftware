@@ -34,7 +34,7 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 
 ```
 NS = 0,10*Atv + 0,20*AI + 0,30*AF + 0,40*Lab
-NC = 0,10*Atv + 0,20*AI + 0,25*AF + 0,40*Lab + 0,05*MC
+NC = 0,10*Atv + 0,20*AI + 0,30*AF + 0,35*Lab + 0,05*MC
 ```
 
 Para aprovação as **CONDIÇÕES** abaixo devem ser atendidas:
