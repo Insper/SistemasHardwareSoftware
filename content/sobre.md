@@ -12,7 +12,7 @@
 - **quinta-feira**:  16:30 às 18:30 (Lab Ágil 2)
 
 ### Atendimento 
-- **quinta-feira** 12:30 às 14:00 (**a definir**) <!-- (Sala 411 - 4º andar - Prédio Quatá 200)  -->
+- **quinta-feira** 12:30 às 14:00 (Lab Ágil 1) 
 
 ## Instrumentos avaliativos
 
@@ -23,7 +23,6 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 - `Atv`: Atividades práticas desenvolvidas durante e após as aulas.
 - `MC`: Prova aplicada no final da primeira semana de aula.
 
-
 ## Datas provas
 
 - **Multirão C**: final da primeira semana
@@ -32,7 +31,6 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 - **SUB**: A definir (**Todo o conteúdo da AI e AF**)
 
 ## Critérios de avaliação
-
 
 ```
 NS = 0,10*Atv + 0,20*AI + 0,30*AF + 0,40*Lab
