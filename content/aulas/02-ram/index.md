@@ -244,7 +244,7 @@ $ gcc -Wall -pedantic parte2.c -o parte2_semdebug
     O comando *info* mostra informações que podem ser obtidas a partir de um executável. Execute-o e veja o que acontece.
 
 !!! exercise
-    Use `info` para mostrar as **funções** e **variáveis globais** que existem em `parte2`. Lembre de fazer tanto na versão **com** quanto na **sem debugging**!
+    Use `info` para mostrar as **funções** - `(gdb) info functions` e **variáveis globais** `(gdb) info variables` que existem em `parte2`. Lembre de fazer tanto na versão **com** quanto na **sem debugging**!
 
 !!! warning "Muita informação!"
     Muitos nomes são estranhos. Eles fazem parte do padrão de arquivos executáveis *ELF*, que contém informações específicas do sistema operacional usado. Você não precisa se preocupar com estes nomes.
@@ -255,7 +255,7 @@ $ gcc -Wall -pedantic parte2.c -o parte2_semdebug
     **Dica**: o valor está em hexadecimal, que usamos na expositiva para mostrar ponteiros.
     
     !!! answer
-        A primeira coluna do comando info variables no GDB mostra os endereços de memória onde as variáveis estão armazenadas.
+        A primeira coluna do comando info variables no GDB mostra os endereços de memória onde as variáveis estão armazenadas na seção .data`.
 
 !!! exercise text short
     Podemos usar o comando *print* para mostrar o valor inicial das variáveis globais identificadas. Mostre o valor inicial de `global_var` usando este comando e compare com o visto no arquivo *parte2.c*.
