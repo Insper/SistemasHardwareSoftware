@@ -255,7 +255,7 @@ $ gcc -Wall -pedantic parte2.c -o parte2_semdebug
     **Dica**: o valor está em hexadecimal, que usamos na expositiva para mostrar ponteiros.
     
     !!! answer
-        A primeira coluna do comando info variables no GDB mostra os endereços de memória onde as variáveis estão armazenadas na seção .data`.
+        A primeira coluna do comando info variables no GDB mostra os endereços de memória onde as variáveis estão armazenadas na seção `.data`.
 
 !!! exercise text short
     Podemos usar o comando *print* para mostrar o valor inicial das variáveis globais identificadas. Mostre o valor inicial de `global_var` usando este comando e compare com o visto no arquivo *parte2.c*.
