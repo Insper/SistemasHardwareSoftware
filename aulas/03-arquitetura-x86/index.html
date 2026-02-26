@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>03 - Arquitetura x86-64 - Sistemas Hardware-Software - 2026/1</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2026/1"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2026/1">
+          Sistemas Hardware-Software - 2026/1
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">03 - Arquitetura x86-64</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#parando-e-continuando-a-execucao-de-um-programa">Parando e continuando a execução de um programa.</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#enderecamento-relativo-e-variaveis-globais">Endereçamento relativo e variáveis globais</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#atividade-para-entrega">Atividade para entrega!</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Aulas</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="03-arquitetura-x86-64">03 - Arquitetura x86-64</h1>
+<div>
+<center><embed height="300" src="slides.pdf" type="application/pdf" width="80%" /></center>
+</div>
+<p>No handout passado usamos o <em>gdb</em> para listar variáveis globais, nomes de funções e examinar endereços de memória. Neste handout vamos começar a usar o <em>gdb</em> também para examinar nossos programas <em>durante sua execução</em>.</p>
+<h2 id="parando-e-continuando-a-execucao-de-um-programa">Parando e continuando a execução de um programa.</h2>
+<p>Compile <em>funcoes.c</em> usando as flags:</p>
+<div class="termy">
+
+<div class="language-console highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>gcc<span class="w"> </span>-Og<span class="w"> </span>-g<span class="w"> </span>-Wall<span class="w"> </span>-std<span class="o">=</span>c99<span class="w"> </span>funcoes.c<span class="w"> </span>-o<span class="w"> </span>funcoes
+</code></pre></div>
+<br>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>Na compilação, <code>-Og</code> irá permitir otimizações de código que não interfiram no debugging. Já o parâmetro <code>-g</code> irá tornar disponíveis informações úteis para o debugging (como tipos de variáveis e cabeçalhos das funções)</p>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_1" id="long_1_0">
+<p class="admonition-title">Exercise 1<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Abra o executável com o <em>gdb</em> e liste suas funções e suas variáveis globais. <strong>Não rode o programa ainda!</strong> Anote abaixo seus endereços e nomes.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">info</span><span class="w"> </span><span class="no">functions</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nf">All</span><span class="w"> </span><span class="no">defined</span><span class="w"> </span><span class="no">functions</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nf">File</span><span class="w"> </span><span class="no">funcoes.c</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="err">10:</span><span class="w">     </span><span class="nf">int</span><span class="w"> </span><span class="no">funcao1</span><span class="p">(</span><span class="no">int</span><span class="p">,</span><span class="w"> </span><span class="no">int</span><span class="w"> </span><span class="p">*)</span><span class="c1">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="err">5:</span><span class="w">      </span><span class="nf">int</span><span class="w"> </span><span class="no">funcao2</span><span class="p">(</span><span class="no">int</span><span class="p">)</span><span class="c1">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="err">18:</span><span class="w">     </span><span class="nf">int</span><span class="w"> </span><span class="no">main</span><span class="p">(</span><span class="no">int</span><span class="p">,</span><span class="w"> </span><span class="no">char</span><span class="w"> </span><span class="p">**)</span><span class="c1">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">info</span><span class="w"> </span><span class="no">variables</span><span class="w"> </span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="no">All</span><span class="w"> </span><span class="no">defined</span><span class="w"> </span><span class="no">variables</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nf">File</span><span class="w"> </span><span class="no">funcoes.c</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="err">3:</span><span class="w">      </span><span class="nf">int</span><span class="w"> </span><span class="no">times_called</span><span class="c1">;</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_2" id="long_2_0">
+<p class="admonition-title">Exercise 2<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O comando <code>disas</code> é usado para mostrar as instruções de máquina de uma função. Use-o para ver o código de máquina da função <code>funcao1</code>. Liste abaixo quais registradores foram usados nesta função e qual o tamanho dos dados guardados neles.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">disas</span><span class="w"> </span><span class="no">funcao1</span><span class="w"> </span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="no">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">funcao1</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">0</span><span class="nf">x000000000000117f</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">endbr64</span><span class="w"> </span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="mi">0x0000000000001183</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">4</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="nv">%edi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">0</span><span class="nf">x0000000000001185</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">add</span><span class="w">    </span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">0</span><span class="nf">x0000000000001187</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">ret</span><span class="w">    </span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="no">End</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">dump.</span>
+</code></pre></div>
+<p>Os registradores <code>%edi</code>, <code>%eax</code> armazenam valores de 4 bytes e o registrado <code>%rsi</code> armazena um endereço de 8 bytes.</p>
+</div>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_3" id="long_3_0">
+<p class="admonition-title">Exercise 3<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Com base nos tamanhos identificados, você consegue associar os registradores acima com as variáveis no código de <code>funcao1</code>?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O registrador <code>%edi</code> armazena o valor da variável <code>int a</code> e o registrador <code>%rsi</code> representa o argumento  <code>int *b</code>, e por fim, o retorno da função, variável <code>int c</code>, é armazenado na variável <code>%eax</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_4" id="short_4_0">
+<p class="admonition-title">Exercise 4<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use o comando <code>break funcao1</code> para parar a execução do programa quando a função <code>funcao1</code> começar a executar. Execute o programa usando <code>run</code>. O quê ocorre?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A execução do programa para exatamente na entrada da função <code>int funcao1(int a, int *b)</code>. 
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">run</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nf">Starting</span><span class="w"> </span><span class="no">program</span><span class="p">:</span><span class="w"> </span><span class="err">/</span><span class="no">home</span><span class="err">/</span><span class="no">luba</span><span class="err">/</span><span class="mi">00</span><span class="p">-</span><span class="no">Aulas</span><span class="err">/</span><span class="mi">03</span><span class="p">-</span><span class="no">arquitetura-x86</span><span class="err">/</span><span class="no">funcoes</span><span class="w"> </span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">[</span><span class="no">Thread</span><span class="w"> </span><span class="no">debugging</span><span class="w"> </span><span class="no">using</span><span class="w"> </span><span class="no">libthread_db</span><span class="w"> </span><span class="no">enabled</span><span class="p">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nf">Using</span><span class="w"> </span><span class="no">host</span><span class="w"> </span><span class="no">libthread_db</span><span class="w"> </span><span class="no">library</span><span class="w"> </span><span class="err">&quot;/</span><span class="no">lib</span><span class="err">/</span><span class="no">x86_64-linux-gnu</span><span class="err">/</span><span class="no">libthread_db.so.1</span><span class="err">&quot;</span><span class="p">.</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nf">Breakpoint</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="no">funcao1</span><span class="w"> </span><span class="p">(</span><span class="no">a</span><span class="err">=</span><span class="no">a@entry</span><span class="err">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="no">b</span><span class="err">=</span><span class="no">b@entry</span><span class="err">=</span><span class="mi">0x7fffffffdc80</span><span class="p">)</span><span class="w"> </span><span class="no">at</span><span class="w"> </span><span class="no">funcoes.c</span><span class="p">:</span><span class="mi">10</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">10</span><span class="w">      </span><span class="nf">int</span><span class="w"> </span><span class="no">funcao1</span><span class="p">(</span><span class="no">int</span><span class="w"> </span><span class="no">a</span><span class="p">,</span><span class="w"> </span><span class="no">int</span><span class="w"> </span><span class="p">*</span><span class="no">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div></p>
+</div>
+</div>
+<p>Após executar o <code>run</code>, utilize <code>disas funcao1</code> e observe no código da função uma seta indicando o próximo comando a ser executado, que representa o breakpoint no início da função.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip 2</p>
+<p>Os comandos <code>info breakpoints</code>, <code>info b</code> ou ainda <code>i b</code> podem ser utilizados para listar os breakpoints inseridos no código!</p>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_5" id="long_5_0">
+<p class="admonition-title">Exercise 5<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Podemos usar o comando <code>info registers edi</code> para ver o conteúdo atual do registrador <code>%edi</code>. Qual é este valor? Verifique quais argumentos são passados para <code>funcao1</code> no código <em>C</em> e, com estas informações em mãos, escreva abaixo suas novas conclusões.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O regitrador <code>%edi</code> tem o valor <code>10</code>, esse valor é passado no primeiro argumento da <code>função1</code>.</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">info</span><span class="w"> </span><span class="no">registers</span><span class="w"> </span><span class="no">edi</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">edi</span><span class="w">            </span><span class="mi">0xa</span><span class="w">                 </span><span class="mi">10</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_6" id="short_6_0">
+<p class="admonition-title">Exercise 6<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O comando <code>stepi</code> executa exatamente uma instrução de máquina. Use-o uma vez e execute novamente <code>disas funcao1</code>. O que aconteceu? É possível saber em qual instrução o programa está parado?</p>
+<p><strong>Dicas</strong>:</p>
+<ol>
+<li>se a primeira instrução for <code>endbr64</code>, execute <code>stepi</code> mais uma vez!</li>
+<li>use <code>disas</code> de novo</li>
+<li>verifique novamente o conteúdo de <code>%edi</code></li>
+</ol>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A instrução em que o programa está parado é apontada pela seta <code>=&gt;</code></p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">stepi</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">13</span><span class="w">          </span><span class="nf">int</span><span class="w"> </span><span class="no">c2</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="no">b1</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="no">c</span><span class="c1">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">disas</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nf">Dump</span><span class="w"> </span><span class="no">of</span><span class="w"> </span><span class="no">assembler</span><span class="w"> </span><span class="no">code</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">function</span><span class="w"> </span><span class="no">funcao1</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">   </span><span class="err">0</span><span class="nf">x000055555555517f</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">0</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">endbr64</span><span class="w"> </span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">=&gt;</span><span class="w"> </span><span class="mi">0x0000555555555183</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">4</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">mov</span><span class="w">    </span><span class="nv">%edi</span><span class="p">,</span><span class="nv">%eax</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000555555555185</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">6</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">add</span><span class="w">    </span><span class="p">(</span><span class="nv">%rsi</span><span class="p">),</span><span class="nv">%eax</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">   </span><span class="err">0</span><span class="nf">x0000555555555187</span><span class="w"> </span><span class="err">&lt;+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span><span class="w">     </span><span class="no">ret</span><span class="w"> </span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_7" id="short_7_0">
+<p class="admonition-title">Exercise 7<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Cheque novamente o valor de <code>%edi</code>. Este valor condiz com a instrução executada? O que ela faz, exatamente?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A instrução <code>mov %edi,%eax</code> move o valor de <code>%edi</code> para <code>%eax</code>, em seguida, a instrução <code>add (%rsi),%eax</code> adiciona o conteúdo apontado pelo registrador <code>%rsi</code> ao registrador <code>%eax</code>, pois <code>%rsi</code> é um ponteiro.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_8" id="short_8_0">
+<p class="admonition-title">Exercise 8<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use <code>stepi</code> para parar logo antes do retorno da função. Verifique o conteúdo do registrador <code>%eax</code> e compare-o com os prints feitos pelo program. Você consegue dizer seu uso?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O registrador  <code>%eax</code> tem o valor <code>30</code> e usado para retornar o valor calculado na função.
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">info</span><span class="w"> </span><span class="no">registers</span><span class="w"> </span><span class="no">eax</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">eax</span><span class="w">            </span><span class="mi">0x1e</span><span class="w">                </span><span class="mi">30</span>
+</code></pre></div></p>
+</div>
+</div>
+<div class="admonition exercise text self-progress" data-slug="aulas/03-arquitetura-x86/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise 9</p>
+<form class="exercise-form">
+<p>Vamos agora analisar o registrador <code>%rsi</code>. Toda vez que um registrador aparece entre <code>( )</code> estamos fazendo um acesso a memória. Ao mostrar seu conteúdo usando <code>info registers rsi</code> recebemos o endereço de memória que contém o dado que queremos acessar.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise text self-progress" data-slug="aulas/03-arquitetura-x86/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise 10</p>
+<form class="exercise-form">
+<p>Use o comando <code>x</code> para mostrar, em decimal, o <code>int</code> que está armazenado no endereço descoberto no exercício anterior. Confira seu resultado com o código.</p>
+<p>Para lembrar como usar o comando <code>x</code> acesse esse link: <a href="https://sourceware.org/gdb/onlinedocs/gdb/Memory.html">https://sourceware.org/gdb/onlinedocs/gdb/Memory.html</a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip 3</p>
+<p>Execute o comando <code>continue</code> para continuar rodando o programa. Ele irá rodar até que o próximo <em>breakpoint</em> seja alcançado ou até que o programa termine.</p>
+</div>
+<h2 id="enderecamento-relativo-e-variaveis-globais">Endereçamento relativo e variáveis globais</h2>
+<p>Na parte anterior analisamos o código Assembly de nossa primeira função e vimos como</p>
+<ul>
+<li>mostrar o código fonte de uma função usando <code>disas</code></li>
+<li>mostrar o conteúdo de um registrador usando <code>info registers</code></li>
+<li>executar exatamente uma instrução usando <code>stepi</code></li>
+</ul>
+<p>Também vimos que ao colocar um registrador entre <code>( )</code> estamos fazendo um acesso a memória. Esta operação é equivalente a desreferenciar um ponteiro usando <code>*p</code>. Neste roteiro iremos adicionar um detalhe importante: podemos fazer contas com endereços usando esta notação. Nos exemplo abaixo nos referimos a memória como um grande vetor de bytes <code>unsigned char M[]</code>. Ou seja, ao acessar <code>M[%rax]</code>, por exemplo, estamos acessando o lugar na memória cujo endereço está escrito em <code>%rax</code>.</p>
+<ol>
+<li><code>10(%rax)</code>: acessa a memória <code>M[%rax + 10]</code>.</li>
+<li><code>(%rax, %rdi, 4)</code>: acessa a memória <code>M[%rax + 4 * % rdi]</code>. Note que isto se parece com aritmética de ponteiros cujo tipo apontado seja inteiro, pois os endereços pulam de 4 em 4 bytes.</li>
+</ol>
+<div class="admonition exercise self-progress" data-slug="aulas/03-arquitetura-x86/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Exercise 11</p>
+<form class="exercise-form">
+<p>Saia e abra o <em>gdb</em> novamente. Mostre o código de máquina da função <code>funcao2</code> e coloque um breakpoint em sua primeira instrução.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="aulas/03-arquitetura-x86/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Exercise 12</p>
+<form class="exercise-form">
+<p>Execute agora o programa. A execução deve ter parado no início de <code>funcao2</code>. Rode <code>disas funcao2</code>.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_9" id="long_9_0">
+<p class="admonition-title">Exercise 13<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Você consegue identificar acessos a memória em <code>funcao2</code>? Quais são de leitura e quais são de escrita? Qual o tamanho dos dados lidos/escritos?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A instrução <code>mov 0x2ea1(%rip),%eax</code> faz <strong>leitura</strong> do valor da variável global <code>times_called</code> representado pelo endereço <code>0x2ea1(%rip)</code>, a instrução <code>mov %eax,0x2e98(%rip)</code> faz a <strong>escrita</strong> do valor de <code>%eax</code> na variável global  <code>times_called</code>.</p>
+</div>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_10" id="short_10_0">
+<p class="admonition-title">Exercise 14<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Qual o significado do registrador <code>%rip</code>? Se não se lembrar reveja os slides.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Registrador <code>%rip</code> (<em>Instruction Pointer Register</em>), às vezes também chamado de <em>Program Counter</em>, guarda o endereço da próxima instrução a ser executada pela CPU.</p>
+</div>
+</div>
+<p>O tipo de acesso a memória que estamos realizando se chama <code>rip relative addressing</code>. Este tipo de acesso é reservado para variáveis globais e dados somente leitura. Estes dados tem uma característica especial: eles são copiados para a memória seguindo o mesmo layout do arquivo executável. Ou seja, as posições <em>relativas</em> entre o código e os dados globais são fixas.</p>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_11" id="long_11_0">
+<p class="admonition-title">Exercise 15<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Anote abaixo o endereço das funções <code>MOV</code> que utilizam este acesso. Baseado nos exemplos acima, descubra o endereço da variável acessada.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>A variável acessa é a <code>times_called</code> e seu endereço é <code>0x555555558014</code>, veja abaixo:
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">mov</span><span class="w">    </span><span class="mi">0x2ea1</span><span class="p">(</span><span class="nv">%rip</span><span class="p">),</span><span class="nv">%eax</span><span class="w">        </span><span class="c1"># 0x555555558014 &lt;times_called&gt;</span>
+</code></pre></div></p>
+</div>
+</div>
+<details class="details">
+<summary>Desenho de acesso a memória usando <code>%rip</code></summary>
+<p>A figura abaixo ilustra como funciona o endereçamento usando o registrador <code>%rip</code>. Note que os deslocamentos são diferentes pois o endereço da instrução atual é diferente. Porém, o resultado final do endereço calculado em ambas instruções é o mesmo, indicando que ambas se referem ao mesmo local na memória.</p>
+<p><img alt="" src="pilha-rip.png" /></p>
+</details>
+<div class="admonition exercise self-progress" data-slug="aulas/03-arquitetura-x86/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Exercise 16</p>
+<form class="exercise-form">
+<p>Confira se o valor identificado na questão anterior é o mesmo mostrado a direita das instruções <code>MOV</code> na saída do <code>disas</code>. O <em>gdb</em> já calcula este endereço para facilitar nossa vida, mas é interessante calcular isto manualmente uma vez para entender melhor o processo.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise text short tag-text-exercise tag-short-text editable" data-slug="aulas/03-arquitetura-x86/short_12" id="short_12_0">
+<p class="admonition-title">Exercise 17<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Use o comando <code>continue</code> para continuar o programa. Você deve estar agora na segunda execução de <code>funcao2</code>. Use o comando <code>x</code> para mostrar o valor armazenado na memória calculada acima. Lendo o código do programa, você consegue dizer qual variável é armazenada neste endereço? O valor atual é o esperado para a segunda execução de <code>funcao2</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="mi">0x555555558014</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">0</span><span class="nf">x555555558014</span><span class="w"> </span><span class="err">&lt;</span><span class="no">times_called</span><span class="err">&gt;</span><span class="p">:</span><span class="w">  </span><span class="mi">0x00000001</span>
+</code></pre></div>
+</div>
+</div>
+<p>Além de poder mostrar valores na memória podemos <strong>escrever</strong> valores também. A sintaxe usada é a seguinte:</p>
+<blockquote>
+<p><code>set *( (tipo *) 0x.....) = valor</code></p>
+</blockquote>
+<p>onde devemos substituir <code>tipo</code> por um tipo básico de <em>C</em>, <code>0x...</code> pelo endereço desejado e <code>valor</code> pelo valor que queremos escrever. Note que o que estamos fazendo é um <em>cast</em> do endereço <code>0x....</code> para um ponteiro de <code>tipo</code> e depois estamos acessando o valor apontado usando <code>*</code>!</p>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_13" id="long_13_0">
+<p class="admonition-title">Exercise 18<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Escreva o valor <code>-10</code> na memória da variável global usada em <code>funcao2</code>. Rode o programa até o fim. O resultado foi o esperado? Escreva abaixo os comandos utilizados.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">set</span><span class="w"> </span><span class="p">*((</span><span class="no">int</span><span class="p">*)</span><span class="w">  </span><span class="mi">0x555555558014</span><span class="p">)</span><span class="err">=</span><span class="mi">-10</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">x</span><span class="w"> </span><span class="mi">0x555555558014</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="err">0</span><span class="nf">x555555558014</span><span class="w"> </span><span class="err">&lt;</span><span class="no">times_called</span><span class="err">&gt;</span><span class="p">:</span><span class="w">  </span><span class="mi">0xfffffff6</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition bug">
+<p class="admonition-title">Desafio</p>
+<p>Localize na função <code>main</code> as chamadas ao comando <code>printf</code>, analise as chamadas para responder o próximo exercício!</p>
+</div>
+<div class="admonition exercise text long tag-long-text tag-text-exercise editable" data-slug="aulas/03-arquitetura-x86/long_14" id="long_14_0">
+<p class="admonition-title">Exercise 19<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Encontre os endereço das strings de formatação do <code>printf</code> e use o comando <code>x</code> para mostrá-las no gdb. Escreva os comandos usados abaixo.</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O endereço das strings da função <code>printf</code> estão nas instruções como  <code>lea 0xe46(%rip),%rsi        # 0x2004</code> para mostrar o seu conteúdo use <code>x/s &lt;endereço&gt;</code>:
+<div class="language-asm highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="err">(</span><span class="nf">gdb</span><span class="p">)</span><span class="w"> </span><span class="no">x</span><span class="err">/</span><span class="no">s</span><span class="w"> </span><span class="mi">0x2004</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">0</span><span class="nl">x2004:</span><span class="w"> </span><span class="err">&quot;</span><span class="nl">Resultado:</span><span class="w"> </span><span class="err">%</span><span class="nf">d</span><span class="err">\</span><span class="no">n</span><span class="err">&quot;</span>
+</code></pre></div></p>
+</div>
+</div>
+<h2 id="atividade-para-entrega">Atividade para entrega!</h2>
+<p>Aula com <strong>atividade</strong> para <strong>entrega</strong>. Confira seu repositório de entregas do classroom!</p>
+<div class="admonition warning">
+<p class="admonition-title">Atenção</p>
+<p>Faça <code>git pull</code> no seu repositório de entregas que irá aparecer uma nova pasta dentro de <code>atv</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Dica 4</p>
+<p>Leia o <code>README.md</code> disponível <strong>na pasta da atividade</strong> para descobrir como resolver e entregar.</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../02-ram/"
+               class="ah-prev"
+               title="02 - Representação de dados em RAM">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">02 - Representação de dados em RAM</span>
+            </a>
+          
+          
+            <a href="../../dicas/DicasLinks/"
+               class="ah-next"
+               title="Dicas e links">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Dicas e links</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>

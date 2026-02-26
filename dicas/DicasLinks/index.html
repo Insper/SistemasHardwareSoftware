@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Dicas e links - Sistemas Hardware-Software - 2026/1</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2026/1"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2026/1">
+          Sistemas Hardware-Software - 2026/1
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../aulas/01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Dicas e links</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#referencia-para-as-instrucoes-do-assembly-x86-e-amd64">Referência para as instruções do Assembly x86 e amd64</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#gdb-referencia-completa">GDB - referência completa</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#compiler-explorer-godboltorg">Compiler Explorer - godbolt.org</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#resumo-sishard-da-universidade-stanford">Resumo SisHard da Universidade Stanford</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#ponteiros-e-alocacao-de-memoria-na-linguagem-c">Ponteiros e alocação de memória na Linguagem C</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Referências e links</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="dicas-e-links">Dicas e links</h1>
+<h2 id="referencia-para-as-instrucoes-do-assembly-x86-e-amd64">Referência para as instruções do Assembly x86 e amd64</h2>
+<p>Este guia de referência <a href="https://www.felixcloutier.com/x86/">https://www.felixcloutier.com/x86/</a> sobre as intruções da linguagem Assembly é um resumo da referência oficial da <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">Intel</a>. </p>
+<p>Acredito que para nossos propositos na disciplina de SisHard seja suficiente.</p>
+<h2 id="gdb-referencia-completa">GDB - referência completa</h2>
+<p>O GNU Debugger, mais conhecido por GDB, é um depurador do GNU. Ele pode ser usado para depuração em sistemas Unix-like, como por exemplo o Ubuntu 22.04, na nossa disciplina usaremos o GDB para entender os códigos em assemblye de atividades e do Lab01</p>
+<p>Para aprender como depurar código com GDB acesse este link <a href="https://diveintosystems.org/book/C3-C_debug/gdb.html">https://diveintosystems.org/book/C3-C_debug/gdb.html</a> e nesse link <a href="https://diveintosystems.org/book/C3-C_debug/gdb_commands.html">https://diveintosystems.org/book/C3-C_debug/gdb_commands.html</a> você poderá conhecer o os principais comandos do gdb.</p>
+<p>Nesse link <a href="https://sourceware.org/gdb/current/onlinedocs/gdb">https://sourceware.org/gdb/current/onlinedocs/gdb</a> 
+ você terá a documentação completa do GDB.</p>
+<p>Aqui <a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html">https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html</a> tem as explicações do comando <code>x</code> (<code>x/nfu addr</code>) que permite examinar a memória de um programa Assembly.</p>
+<h2 id="compiler-explorer-godboltorg">Compiler Explorer - godbolt.org</h2>
+<p>Compiler Explorer, também chamado de godbolt.org, é um site interativo de exploração de compiladores. Ele permite ao usuário inserir código em uma das linguagens C e visualizar a tradução do código para Assembly. </p>
+<p>Para utilizá-lo <a href="https://godbolt.org/">acesse o LINK</a>, a configuação do godbolt está nos slides da aula <a href="https://insper.github.io/SistemasHardwareSoftware/aulas/04-funcoes-mov/slides.pdf">04 - Funções-mov</a>.</p>
+<h2 id="resumo-sishard-da-universidade-stanford">Resumo SisHard da Universidade Stanford</h2>
+<p>No link abaixo está uma visão geral dos assuntos abordados na primeira parte da disciplina de Sistemas Hardware-Software elaborado na Universidade de Stanford. </p>
+<p><a href="https://web.stanford.edu/class/cs107/guide/x86-64.html">acesse o LINK</a></p>
+<h2 id="ponteiros-e-alocacao-de-memoria-na-linguagem-c">Ponteiros e alocação de memória na Linguagem C</h2>
+<p>Alguns links que podem ajuda-los a entender ponteiros e alocação de memória na Linguagem C.</p>
+<p>Os links abaixo são do material desenvolvido pelo <strong>professor Paulo Feofiloff</strong>:</p>
+<ul>
+<li><a href="https://www.ime.usp.br/~pf/algoritmos/aulas/pont.html">Endereços e ponteiros</a></li>
+<li><a href="https://www.ime.usp.br/~pf/algoritmos/aulas/aloca.html">Alocação dinâmica de memória</a></li>
+</ul>
+<p>Os links abaixo são do material desenvolvido pelo <strong>professor Carlos Maziero</strong>:</p>
+<ul>
+<li><a href="https://wiki.inf.ufpr.br/maziero/doku.php?id=c:ponteiros">Ponteiros</a></li>
+<li><a href="https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_de_memoria">Alocação de memória</a></li>
+<li><a href="https://wiki.inf.ufpr.br/maziero/doku.php?id=c:alocacao_dinamica_de_matrizes">Alocação dinâmica de matrizes</a></li>
+</ul>
+<p>Dicas do livro <strong><a href="https://diveintosystems.org/book/">Dive Into Systems</a></strong>:</p>
+<ul>
+<li>
+<p><a href="https://diveintosystems.org/book/C2-C_depth/pointers.html">Ponteiros</a> e <a href="https://diveintosystems.org/book/C2-C_depth/pointers_functions.html">funções com referências</a></p>
+</li>
+<li>
+<p><a href="https://diveintosystems.org/book/C2-C_depth/dynamic_memory.html">Alocação de memória</a></p>
+</li>
+<li>
+<p><a href="https://diveintosystems.org/book/C2-C_depth/arrays.html">Alocação dinâmica de matrizes</a></p>
+</li>
+</ul>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../aulas/03-arquitetura-x86/"
+               class="ah-prev"
+               title="03 - Arquitetura x86-64">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">03 - Arquitetura x86-64</span>
+            </a>
+          
+          
+            <a href="../github/"
+               class="ah-next"
+               title="Configuração github">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Configuração github</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
