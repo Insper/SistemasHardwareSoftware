@@ -23,7 +23,8 @@ Aqui [https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html](https:
 
 Compiler Explorer, também chamado de godbolt.org, é um site interativo de exploração de compiladores. Ele permite ao usuário inserir código em uma das linguagens C e visualizar a tradução do código para Assembly. 
 
-Para utilizá-lo [acesse o LINK](https://godbolt.org/), a configuação do godbolt está nos slides da aula [04 - Funções-mov](https://insper.github.io/SistemasHardwareSoftware/aulas/04-funcoes-mov/slides.pdf).
+Para utilizá-lo [acesse o LINK](https://godbolt.org/), a configuação do godbolt está nos slides da aula [05 - Condicionais](https://insper.github.io/SistemasHardwareSoftware/aulas/05-condicionais/slides.pdf).
+
 
 
 ## Resumo SisHard da Universidade Stanford

@@ -10,9 +10,8 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | 26/02 | Atv02-intro-gdb | Github | 02/03 23h59 |
 | 02/03 | Atv03-funcoes | Github | 09/03 23h59 |
 | 05/03 | **Lab01-hackerlab** | Github | 25/03 23h59 |
-<!-- 
-| 04/09 | Atv04-condicionais-funcoes | Github | 11/09 23h59 |
-| 09/09 | Atv05-loops | Github | 15/09 23h59 |
+| 09/03 | Atv04-condicionais-funcoes | Github | 12/03 23h59 |
+<!-- | 09/09 | Atv05-loops | Github | 15/09 23h59 |
 | 11/09 | Atv06-variaveis-locais | Github | 18/03 23h59 |
 | 15/09 | Atv07-arrays | Github | 22/09 23h59 |
 | 18/09 | Atv08-malloc | Github | 25/09 23h59 |
