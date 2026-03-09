@@ -86,7 +86,7 @@ Dump of assembler code for function exemplo1:
     O que faz o conjunto de instruções `add` nas linhas `+4` até `+10`? Escreva uma expressão em *C* equivalente.
 
     !!! answer
-        Ela soma os primeiros 5 argumentos: `a + b + c + e`.
+        Ela soma os primeiros 5 argumentos: `a + b + c + d + e`.
 
 Vemos na linha `exemplo1+13` que colocamos um valor no registrador `%eax` e depois finalizamos a função usando `ret`. Este é o segundo ponto que nunca muda: **o valor de retorno de toda função é colocado no registrador `%rax`** (ou uma de suas partes menores). Neste exemplo, a instrução usada foi o `LEA` que relembraremos na seção a seguir.
 
