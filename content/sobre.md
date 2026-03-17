@@ -3,7 +3,8 @@
 * **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
 
 * **Ninja**:  
-    - a definir
+    - Carol
+    - Yamandú 
 
 
 ## Aulas
@@ -26,7 +27,7 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 ## Datas provas
 
 - **Multirão C**: final da primeira semana
-- **AI**: A definir
+- **AI**: 26/03 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2
 - **AF**: A definir 
 - **SUB**: A definir (**Todo o conteúdo da AI e AF**)
 
