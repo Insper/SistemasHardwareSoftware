@@ -70,15 +70,18 @@ Veja o código abaixo e responda as perguntas.
 
 ```asm
 Dump of assembler code for function soma:
-   0x0000 <+0>:	    mov    $0x0,%edx
-   0x0005 <+5>:	    mov    $0x0,%eax
-   0x000a <+10>:	jmp    0x15 <soma+21>
-   0x000c <+12>:	movslq %edx,%rcx
-   0x000f <+15>:	add    (%rdi,%rcx,4),%eax
-   0x0012 <+18>:	add    $0x1,%edx
-   0x0015 <+21>:	cmp    %esi,%edx
-   0x0017 <+23>:	jl     0xc <soma+12>
-   0x0019 <+25>:	repz retq
+   0x0000000000000000 <+0>:     endbr64 
+   0x0000000000000004 <+4>:     mov    $0x0,%eax
+   0x0000000000000009 <+9>:     mov    $0x0,%edx
+   0x000000000000000e <+14>:    jmp    0x19 <soma+25>
+   0x0000000000000010 <+16>:    movslq %eax,%rcx
+   0x0000000000000013 <+19>:    add    (%rdi,%rcx,4),%edx
+   0x0000000000000016 <+22>:    add    $0x1,%eax
+   0x0000000000000019 <+25>:    cmp    %esi,%eax
+   0x000000000000001b <+27>:    jl     0x10 <soma+16>
+   0x000000000000001d <+29>:    mov    %edx,%eax
+   0x000000000000001f <+31>:    ret    
+End of assembler dump.
 ```
 
 !!! exercise text long
