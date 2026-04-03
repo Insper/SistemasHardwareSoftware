@@ -28,5 +28,6 @@ int main() {
     printf("%d ",p[i]);
   }
   /* libera a memória alocada */
+  /* o que acontece se tirar essa linha ?*/
   free(p);
 }
