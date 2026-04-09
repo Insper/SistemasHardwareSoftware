@@ -31,7 +31,7 @@ nav:
     - "09 - Array em Assembly": aulas/09-arrays/index.md
     - "10 - Revisão": aulas/10-revisao/index.md
     - "11 - Alocação Dinâmica de Memória": aulas/11-malloc/index.md
-  #   - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
+    - "12 - Tipos abstratos de dados": aulas/12-tipos-de-dados/index.md
   #   - "13 - Processos": aulas/13-processos/index.md
   #   - "14 - Carregamento de programas": aulas/14-exec/index.md
   #   - "15 - Entrada/Saída": aulas/15-entrada-saida/index.md
