@@ -28,7 +28,7 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 
 - **Multirão C**: final da primeira semana
 - **AI**: 26/03 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2
-- **AF**: A definir 
+- **AF**: 28/05 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2 
 - **SUB**: A definir (**Todo o conteúdo da AI e AF**)
 
 ## Critérios de avaliação
