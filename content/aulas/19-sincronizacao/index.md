@@ -41,7 +41,7 @@ Para fins didáticos, estamos atualizando diretamente a variável `soma_total` d
     
     `./soma_global < in1.txt`
 
-    `./soma_global < in1.txt`
+    `./soma_global < in2.txt`
 
     Eles dão os resultados esperados?
 
