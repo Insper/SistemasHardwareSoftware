@@ -1600,13 +1600,71 @@
         ],
         "slug": "aulas/19-sincronizacao/short_11"
       }
+    },
+    "aulas/20-semaforos/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/20-semaforos/choice_1",
+        "answer_idx": 1
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/20-semaforos/choice_2",
+        "answer_idx": 0
+      },
+      "choice_3": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/20-semaforos/choice_3",
+        "answer_idx": 0
+      },
+      "short_1": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/20-semaforos/short_1"
+      },
+      "short_2": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/20-semaforos/short_2"
+      },
+      "short_3": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "aulas/20-semaforos/short_3"
+      },
+      "choice_4": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/20-semaforos/choice_4",
+        "answer_idx": 0
+      },
+      "choice_5": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "aulas/20-semaforos/choice_5",
+        "answer_idx": 2
+      }
     }
   },
   "tags": {
-    "long-text": "long-text",
-    "short-text": "short-text",
     "text-exercise": "text-exercise",
     "choice-exercise": "choice-exercise",
-    "medium-text": "medium-text"
+    "short-text": "short-text",
+    "medium-text": "medium-text",
+    "long-text": "long-text"
   }
 }
