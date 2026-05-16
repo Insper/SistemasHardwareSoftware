@@ -154,11 +154,12 @@ Esta atividade tem com objetivo avaliar dos conceitos vistos na disciplina. Port
 
 ### **Fase 2**
 
-- A partir desta fase, **e para todas as fases seguintes**, você deverá entregar o arquivo `README.md` contendo as seguintes informações:
+- Entregue o arquivo `README.md` com as informações da **última fase que você concluiu**. No arquivo deve constar:
     - Seu nome e uma descrição das fases do laboratório que conseguiu completar;
     - Relato de quaisquer *bugs* ou erros identificados no seu programa;
     - Alguma decisão de *design* relevante que você gostaria de compartilhar.
     - Inclua também o link de um **vídeo explicativo**, com áudio e captura de tela visível, apresentando a execução da sua implementação.
+    - Link de um **Vídeo explicativo**, com áudio e captura de tela visível, explicando como resolveu as funcionalidades relevantes descritas nas fases. Por exemplo, se a última fase que você concluiu foi **Fase 2**, seria muito importante mostrar no seu código como resolveu o travamento indefinido e as falhas de memória que acontecem na execução do `hashcat`.
 
 - Nesta fase, você deve melhorar a versão implementada na fase anterior. Agora caso a ferramenta `hashcat` falhe por acesso à memória (*segmentation fault*), o seu programa deverá realizar uma nova tentativa, modificando a semente do algoritmo de criptografia. Por exemplo: se a execução inicial utilizar a string `aa`, na próxima tentativa você pode utilizar `ab`. Em geral, a senha já é recuperada na segunda tentativa. Ao conseguir recuperar a senha, informe a semente utilizada. Veja o exemplo de execução a seguir:
 
