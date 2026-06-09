@@ -29,7 +29,8 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 - **Multirão C**: final da primeira semana
 - **AI**: 26/03 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2
 - **AF**: 28/05 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2 
-- **SUB**: 11/06 (quinta-feira) das 10:00 às 13:00 (sala a definir) (**Todo o conteúdo da AI e AF**)
+- **SUB**: 11/06 (quinta-feira) das 10:00 às 13:00 Sala BM&F Bovespa 1º andar prédio
+Quatá 300 (**Todo o conteúdo da AI e AF**)
 
 ## Critérios de avaliação
 
