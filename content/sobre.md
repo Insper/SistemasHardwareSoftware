@@ -1,19 +1,18 @@
 # Sistemas Hardware-Software
 
-* **Professor**: Fabio Lubacheski (e-mail: **fabioagl@insper.edu.br**)
+* **Professor**: Marcel P. Jackowski (e-mail: **mjack@insper.edu.br**)
 
 * **Ninja**:  
-    - Carol
     - Yamandú 
 
 
 ## Aulas
 
-- **segunda-feira**: 16:30 às 18:30 (Lab Ágil 2)
-- **quinta-feira**:  16:30 às 18:30 (Lab Ágil 2)
+- **segunda-feira**: 16:30 às 18:30 (Sala não divulgada)
+- **quinta-feira**:  16:30 às 18:30 (Sala não divulgada)
 
 ### Atendimento 
-- **quinta-feira** 12:30 às 14:00 (Lab Ágil 1) 
+- **quinta-feira** 12:30 às 14:00 (Sala não divulgada) 
 
 ## Instrumentos avaliativos
 
@@ -26,11 +25,10 @@ A avaliação da disciplina será composta por Avaliações (`AI` e `AF`), labor
 
 ## Datas provas
 
-- **Multirão C**: final da primeira semana
-- **AI**: 26/03 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2
-- **AF**: 28/05 (quinta-feira) das 16:00 às 19:00 Lab Ágil 1 e 2 
-- **SUB**: 11/06 (quinta-feira) das 10:00 às 13:00 Sala BM&F Bovespa 1º andar prédio
-Quatá 300 (**Todo o conteúdo da AI e AF**)
+- **Mutirão C**: final da primeira semana
+- **AI**: data e local a ser divulgado
+- **AF**: data e local a ser divulgado
+- **SUB**: data e local a ser divulgado (**Todo o conteúdo da AI e AF**)
 
 ## Critérios de avaliação
 
