@@ -1,6 +1,6 @@
 INHERIT: active-handout.yml
 
-site_name: Sistemas Hardware-Software - 2026/1
+site_name: Sistemas Hardware-Software - 2026/2
 
 extra:
   custom_variables:
