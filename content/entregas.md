@@ -5,8 +5,11 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
-| 06/02 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 19/02 15:45 |
-| 19/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/dITs3has)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 26/02 23h59 |
+| 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 17/02 16:30 |
+| 17/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/dITs3has)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 21/02 23h59 |
+
+
+<!--
 | 26/02 | Atv02-intro-gdb | Github | 02/03 23h59 |
 | 02/03 | Atv03-funcoes | Github | 09/03 23h59 |
 | 05/03 | **Lab01-hackerlab** | Github | 25/03 23h59 |
@@ -21,6 +24,8 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | 23/04 | Atv11-entrada-saida | Github | 30/04 23h59 |
 | 07/05 | Atv12-threads | Github | 14/05 23h59 |
 | 14/05 | Atv13-barrier | Github | 21/05 23h59 |  
+-->
+
 
 
 
