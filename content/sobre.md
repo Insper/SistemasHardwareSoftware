@@ -8,11 +8,11 @@
 
 ## Aulas
 
-- **segunda-feira**: 16:30 às 18:30 (Sala não divulgada)
-- **quinta-feira**:  16:30 às 18:30 (Sala não divulgada)
+- **segunda-feira**: 16:30 às 18:30 (Ágil 1)
+- **quinta-feira**:  16:30 às 18:30 (Sala ainda não divulgada)
 
 ### Atendimento 
-- **quinta-feira** 12:30 às 14:00 (Sala não divulgada) 
+- **quinta-feira** 12:30 às 14:00 (Sala ainda não divulgada) 
 
 ## Instrumentos avaliativos
 
