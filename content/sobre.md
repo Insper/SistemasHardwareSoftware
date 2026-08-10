@@ -2,8 +2,8 @@
 
 * **Professor**: Marcel P. Jackowski (e-mail: **mjack@insper.edu.br**)
 
-* **Ninja**:  
-    - Yamandú 
+* **Ninjas**:  
+    - Karyne, Yamandú 
 
 
 ## Aulas

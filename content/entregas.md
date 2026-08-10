@@ -5,8 +5,8 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 
 | Data início | Atividade/Lab                                                              | Como entregar   | Prazo              |
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
-| 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 17/02 16:30 |
-| 17/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/dITs3has)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 21/02 23h59 |
+| 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 17/08 16:30 |
+| 17/02 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/dITs3has)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 21/08 23h59 |
 
 
 <!--
