@@ -7,10 +7,8 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 |-------------|----------------------------------------------------------------------------|-----------------|--------------------|
 | 10/08 | Instalação | Sem entrega, apenas instale o Ubuntu 22.04! | 17/08 16:30 |
 | 17/08 | Atv01-inteiros | Github (Lembre de **[Criar repo](https://classroom.github.com/a/ITEThs9a)** e **[Configurar webhook](./dicas/tutorial_servidor_testes.pdf)**) | 21/08 23h59 |
-
-
+| 24/08 | Atv02-intro-gdb | Github | 30/08 23h59 |
 <!--
-| 26/02 | Atv02-intro-gdb | Github | 02/03 23h59 |
 | 02/03 | Atv03-funcoes | Github | 09/03 23h59 |
 | 05/03 | **Lab01-hackerlab** | Github | 25/03 23h59 |
 | 09/03 | Atv04-condicionais-funcoes | Github | 12/03 23h59 |
