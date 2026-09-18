@@ -13,8 +13,8 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | 03/09 | Atv04-condicionais-funcoes | Github | 11/09 23h59 |
 | 10/09 | Atv05-loops | Github | 18/09 23h59 |
 | 14/09 | Atv06-variaveis-locais | Github | 21/09 23h59 |
+| 17/09 | Atv07-arrays | Github | 25/09 23h59 |
 <!--
-| 19/03 | Atv07-arrays | Github | 23/03 23h59 |
 | 06/04 | Atv08-malloc | Github | 13/04 23h59 |
 | 09/04 | Atv09-TAD  | Github | 13/04 23h59 |
 | 16/04 | Atv10-processos | Github | 23/04 23h59 |
