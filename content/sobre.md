@@ -8,11 +8,11 @@
 
 ## Aulas
 
-- **segunda-feira**: 16:30 às 18:30 (Ágil 1)
-- **quinta-feira**:  16:30 às 18:30 (Sala ainda não divulgada)
+- **segunda-feira**: 16:30 às 18:30 (Ágil 2)
+- **quinta-feira**:  16:30 às 18:30 (Ágil 2)
 
 ### Atendimento 
-- **quinta-feira** 12:30 às 14:00 (Sala ainda não divulgada) 
+- **sexta-feira** 12:30 às 14:00 (Sala 511, Prédio Quatá 200 - 5º andar)
 
 ## Instrumentos avaliativos
 
