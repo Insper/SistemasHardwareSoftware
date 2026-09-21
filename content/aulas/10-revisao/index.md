@@ -13,7 +13,7 @@ Quando tiver dúvidas, chame o professor ou os ninjas!
     - **Exercícios de revisão** (`ex1.c`, `ex2.c`, `ex3.c` e `ex4.c`)
         - Siga o roteiro para desenvolvê-los
     - **Simulado de prova**
-        - Veja mais detalhes no final do roteiro!
+        - Disponível no Blackboard!
 
 ## Ex1.c
 
@@ -344,14 +344,6 @@ Abra o arquivo `ex4` com o **gdb** sem abrir o código-fonte e responda:
 
 ## Simulado de prova
 
-Além dos exercícios de revisão feitos na aula, no **Blackboard** da disciplina está disponível o arquivo `simulado_ai.zip`. 
+Além dos exercícios de revisão feitos na aula, no **Blackboard** da disciplina está disponível um simulado de prova escrita. 
 
-!!! Note "Para baixar o arquivo acesse no Blackboard:"
-
-    `Conteudo / Simulado AI / Donwload e entrega do simulado da AI`
-
-Siga as orientações no Blackboard para fazer o downloado do simulado, na AI, vocês receberão um arquivo semelhante a este. No dia da prova, você terá que baixar o zip, descompactar, resolver os exercícios, compactar novamente e anexar no Blackboard.
-
-!!! Note "Importante" 
-    Leia o `README.md` ou `README.html` para saber o que é esperado em cada questão e como você será avaliado
 
