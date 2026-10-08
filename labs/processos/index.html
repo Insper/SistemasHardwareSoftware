@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab processos - Sistemas Hardware-Software - 2026/2</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../..';
+      
+      var telemetryEnabled = false;
+      var backendUrl = "";
+      var courseSlug = "";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    
+    <link rel="stylesheet" href="../../css/termynal.css">
+  </head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../.."
+           title="Sistemas Hardware-Software - 2026/2"
+           class="ah-logo"
+           aria-label="Sistemas Hardware-Software - 2026/2">
+          Sistemas Hardware-Software - 2026/2
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../sobre/">Sobre</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../entregas/">Entregas</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Aulas</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../aulas/01-inteiros/">01 - Inteiros na CPU</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/02-ram/">02 - Representação de dados em RAM</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/03-arquitetura-x86/">03 - Arquitetura x86-64</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/04-funcoes-mov/">04 - Funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/05-condicionais/">05 - Condicionais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/06-condicionais-funcoes/">06 - Condicionais e funções</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/07-loops/">07 - Loops</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/08-variaveis-locais/">08 - Variáveis locais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/09-arrays/">09 - Array em Assembly</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/10-revisao/">10 - Revisão</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/11-malloc/">11 - Alocação Dinâmica de Memória</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/12-tipos-de-dados/">12 - Tipos abstratos de dados</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/13-processos/">13 - Processos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/14-exec/">14 - Carregamento de programas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/15-entrada-saida/">15 - Entrada/Saída</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/16-sinais-I/">16 - Enviando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/17-sinais-II/">17 - Capturando sinais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/18-threads-I/">18 - Concorrência e Threads</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/19-sincronizacao/">19 - Sincronização com Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/20-semaforos/">20 - Semáforos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/21-semaforos-II/">21 - Semáforos II</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../aulas/22-questoes-de-revisao/">22 - Questões de revisão</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../hackerlab/">Hackerlab</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab processos</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#entrega">Entrega</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#avaliacao">Avaliação</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#restricoes">Restrições</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Referências e links</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../dicas/DicasLinks/">Dicas e links</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/github/">Configuração github</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../dicas/linux/">Linux: Instalação e configuração</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-de-processos">Lab de Processos</h1>
+<p>Em um Sistema Operacional, por razões de segurança, as senhas dos usuários não são armazenadas em texto simples, mas sim como um <em>hash</em>. Quando um usuário tenta fazer login a senha digitada é criptografada (gerado um <em>hash</em>) para ser comparado com o <em>hash</em> armazenado. Dessa forma, não há necessidade de armazenar sua senha real.</p>
+<p>Caso o usuário tenha utilizado letras maiúsculas e minúsculas, caracteres especiais e numeros é praticamente impossível restaurar a senha a partir do <em>hash</em>. No entanto, se a senha for simples, e estivermos dispostos a gastar algum tempo de CPU, é possível tentar todas as combinações de caracteres possíveis em uma senha (ataque de força bruta) até gerar um <em>hash</em> igual ao <em>hash</em> armazenado.</p>
+<p>Neste lab você deve implementar o programa <code>cracker_insper.c</code> que recupera as senhas perdidas de usuários, a partir de uma parte conhecida da senha. Para tanto, utilizaremos a ferramenta <code>hashcat</code> que gera o <em>hash</em> de uma senha (o nome da ferramenta é uma brincadeira com o comando <code>cat</code> do <em>Linux</em> com préfixo <em>hash</em>). A ferramenta tem como entrada um <em>hash</em> da senha original, a parte conhecida da senha e uma <em>string</em> (<strong>semente</strong>), com pelo menos dois caracteres, usada no algoritmo de criptografia para iniciar o gerador de <em>hash</em>.</p>
+<p>O programa <code>hashcat</code> quebra o <em>hash</em> utilizando um algoritmo de criptografia, que gera  várias combinações de caracteres, começando com a parte conhecida da  senha. Caso a ferramenta tenha sucesso, a senha é impressa no terminal. Abaixo um exemplo de chamada e saída do executável <code>hashcat</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ./hashcat xxhx0AsVpMTMU sysx???? aa
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./hashcat: recuperando a senha para o hash [xxhx0AsVpMTMU].
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>./hashcat: senha [sysxpert] recuperada.
+</code></pre></div>
+<p>No exemplo acima é informado o <em>hash</em> <code>"xxhx0AsVpMTMU"</code>, associado a uma senha, e a parte conhecida da senha <code>"sysx"</code>, seguida de caracteres de interrogação (<code>?</code>), representando os caracteres desconhecidos, e por fim a <em>string</em> <code>"aa"</code> que representa a semente para o inicializar algoritmo de criptografia. Para entrada do exemplo acima o executável <code>hashcat</code> consegue recuperar a senha a partir da parte conhecida da senha.</p>
+<p>Ao finalizar o executável <code>hashcat</code> pode retornar os seguintes valores:</p>
+<ul>
+<li>
+<p>-1: quando a <strong>quantidade ou tamanho dos argumentos está incorreta ou errada</strong></p>
+</li>
+<li>
+<p>0: quando consegue finalizar normalmente e quebrar a senha</p>
+</li>
+<li>
+<p>1: quando não consegue quebrar a senha</p>
+</li>
+</ul>
+<p>Ultimamente o executável <code>hashcat</code> está um pouco instável, com falhas e travamentos inesperados, culpa talvez do último estagiário que deu manutenção no código. Essa manutenção fez com que, as vezes, a ferramenta trave indefinidamente, nem <code>Ctrl+C</code> o finaliza. O executável também tem um erro inexplicável de acesso à memória, finalizado pelo SO com um sinal de <em>segmentation fault</em> (Falha de segmentação).</p>
+<p>O estagiário que fez a manutenção informou que quando o <code>hashcat</code> falhar por acesso à memória ou ficar travado indefinidamente, o usuário pode executar novamente a programa alterando a semente usada para o inicializar algoritmo de criptografia. Acreditem, essa gambiarra funciona. Veja uma sequencia desses erros:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ ./hashcat xxqJ7cKzV3v4E zip????? aa 
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./hashcat: recuperando a senha para o hash [xxqJ7cKzV3v4E].
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Falha de segmentação (imagem do núcleo gravada)
+</code></pre></div>
+<p>Para semente <code>"ab"</code> o programa trava indefinidamente, sendo necessário  enviar um sinal de <code>kill</code> a partir do <em>Shell</em> para finalizá-lo. Para descobrir o número do processo execute <code>ps -C hashcat</code> e depois <code>kill -9 &lt;pid&gt;</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ./hashcat xxqJ7cKzV3v4E zip????? ab
+</code></pre></div>
+<p>Mas se passar a semente para <code>"ac"</code>, o executável consegue recuperar a senha:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$./hashcat xxq5aBqiB66j2 xz???? ac
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>./hashcat: recuperando a senha para o hash [xxqJ7cKzV3v4E].
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>./hashcat: senha [xzzzzy] recuperada.
+</code></pre></div>
+<h2 id="entrega">Entrega</h2>
+<p>O programa fonte <code>cracker_insper.c</code> já está na pasta <code>lab/02-lab-processos</code> em seu repositório de atividades (<em>github</em>), na <em>branch</em> principal, para entregar você só precisa fazer <strong>upload</strong>  (<code>git add . &amp; git commit -m "fase#" &amp; git push</code>) do arquivo fonte no seu repositório a <strong>cada fase finalizada</strong>. Não precisa criar <em>tag</em>. </p>
+<p>Lembre-se de se atentar ao prazo de entrega definido <a href="../../entregas/">aqui!</a>.</p>
+<h2 id="avaliacao">Avaliação</h2>
+<p>O programa será avaliado de forma manual pelo professor da disciplina, utilizando rubricas que descreve as funcionalidades implementadas. Quanto maior o número de funcionalidades implementadas, maior será a nota.</p>
+<p>Caso necessário, para validação das fases, poderá ser realizada uma <strong>entrevista sobre a implementação desse laboratório</strong>.</p>
+<h2 id="restricoes">Restrições</h2>
+<p>Esta atividade tem com objetivo avaliar dos conceitos vistos na disciplina. Portanto, algumas restrições serão aplicadas ao código:</p>
+<ul>
+<li>
+<p>Todo o trabalho com arquivos deverá ser realizado utilizando as APIs POSIX vistas em aula. <strong>Não é permitido o uso de funções da</strong> <code>Standard I/O</code> para manipulação de arquivos, como, por exemplo, <code>fopen()</code>, <code>fdopen()</code>, <code>fread()</code> e <code>fclose()</code>.</p>
+</li>
+<li>
+<p><strong>As impressões no terminal da sua implementação devem seguir rigorosamente os exemplos apresentados nas fases</strong>.</p>
+</li>
+<li>
+<p>Caso você utilize algum trecho de código da documentação (ou de outra fonte), inclua a devida atribuição em um comentário no código.</p>
+</li>
+<li>
+<p><strong>É proibido</strong> o uso de ferramentas de <strong>geração automática de código por IA</strong>, como, por exemplo, o <strong>ChatGPT</strong>.</p>
+</li>
+</ul>
+<p><strong>O não cumprimento dessas restrições resultará na atribuição de nota zero para este laboratório.</strong></p>
+<h3 id="fase-0"><strong>Fase 0</strong></h3>
+<ul>
+<li>
+<p>O programa <code>cracker_insper.c</code> não compila ou compila com <em>warnings</em>. Para compilar use: </p>
+<p><div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>gcc cracker_insper.c -Wall -Wno-unused-result -g -Og -o cracker_insper
+</code></pre></div>
+- O programa não implementa algum dos requisitos da rubrica da <strong>Fase 1</strong>.</p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 0.0</p>
+<h3 id="fase-1"><strong>Fase 1</strong></h3>
+<ul>
+<li>
+<p>O programa <code>cracker_insper.c</code> compila <strong>SEM</strong> <em>warnings</em>.</p>
+</li>
+<li>
+<p><strong>Não preencheu</strong> o arquivo <code>README.md</code></p>
+</li>
+<li>
+<p>O programa roda na linha de comando como abaixo, recebendo os argumentos para o executável conforme abaixo, informando o nome do usuário, o <em>hash</em> da senha e parte da senha conhecida.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$./cracker_insper fabio xxhx0AsVpMTMU sysx????
+</code></pre></div>
+</li>
+<li>
+<p>Para recuperar a senha do usuário <code>fabio</code> o seu programa <code>cracker_insper.c</code> deve realizar uma chamada ao executável <code>hashcat</code> utilizando a função <code>execvp</code> conforme visto em aula. Você não pode, por exemplo, usar a chamada da função <strong>system</strong>.</p>
+</li>
+<li>
+<p>Caso seja informado o número de parâmetros incorreto no seu programa, este deve finalizar com uma mensagem de orientação.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ ./cracker_insper fabio
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>./cracker_insper: quantidade de argumentos informados errados.
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>USE:
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>./cracker_insper &lt;usuario&gt; &lt;hash&gt; &lt;prefixo_da_senha&gt;
+</code></pre></div>
+</li>
+<li>
+<p>As chamadas do executável <code>hashcat</code> você deve começar a string <strong><code>aa</code></strong> como a primeira semente para o algoritmo de criptografia. </p>
+</li>
+<li>
+<p>Caso o <code>hashcat</code> tenha sucesso, ou seja, o <code>hashcat</code> <strong>retornou 0</strong>, o  seu programa, você deverá mostrar, após a mensagem do executável <code>hashcat</code> a mensagem abaixo:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ ./cracker_insper fabio xxhx0AsVpMTMU sysx????
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>./hashcat: recuperando a senha para o hash [xxhx0AsVpMTMU].
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>./hashcat: senha [sysxpert] recuperada.
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>./cracker_insper: senha do usuario {fabio} recuperada. 
+</code></pre></div>
+<p>Se a recuperação falhar por acesso à memória ou não for possível recuperar a senha o seu programa deverá mostrar uma mensagem informando o usuário e qual foi a falha ocorrida, por exemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ ./cracker_insper paulo xxHUf9zUctXNA miss???? 
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>./hashcat: recuperando a senha para o hash [xxHUf9zUctXNA].
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>./cracker_insper: falha de memoria na recuperacao da senha do usuario {paulo}.
+</code></pre></div>
+<p>Ou quando não é possível recuperar a senha, como o <strong>retornou igual 1</strong> do executário <code>hashcat</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ ./cracker_insper andre xxGGPN89YLcGY cse????
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>./hashcat: recuperando a senha para o hash [xxGGPN89YLcGY].
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>./hashcat: nao eh possivel recuperar a senha.
+</code></pre></div>
+</li>
+<li>
+<p>Caso o seu programa <code>cracker_insper</code> fique travado devido à execução do <code>hashcat</code>, finalize-o com <code>Ctrl+C</code> e encerre o processo <code>hashcat</code> com o comando <code>kill</code> no <em>Shell</em>, a fim de evitar sobrecarga no sistema operacional.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ ./cracker_insper fabio xxC4UjY9eNri6 hello??? 
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>^C
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>$
+</code></pre></div>
+</li>
+<li>
+<p>Para essa e as outras fases, o programa <code>cracker_insper.c</code> deve imprimir exclusivamente as mensagens especificadas nos exemplos. Mensagens de depuração ou quaisquer saídas adicionais devem ser removidas antes da entrega.</p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 2.0</p>
+<h3 id="fase-2"><strong>Fase 2</strong></h3>
+<ul>
+<li>
+<p>Entrega do arquivo <code>README.md</code> com as informações da <strong>última fase que você concluiu</strong>. No arquivo deve constar:</p>
+<ul>
+<li>Seu nome e uma descrição das fases do laboratório que conseguiu completar;</li>
+<li>Relato de quaisquer <em>bugs</em> ou erros identificados no seu programa;</li>
+<li>Alguma decisão de <em>design</em> relevante que você gostaria de compartilhar.</li>
+<li>Link, no arquivo <code>README.md</code>, de um <strong>Vídeo explicativo</strong>, com áudio e captura de tela visível, explicando como resolveu as funcionalidades relevantes descritas na fases. Por exemplo, se concluiu a <strong>Fase 2</strong>, seria muito importante mostrar no seu código como resolveu o travamento indefinido e as falhas de memória que acontecem na execução do <code>hashcat</code>.</li>
+</ul>
+</li>
+<li>
+<p>Nesta fase, você deve melhorar a versão implementada na fase anterior. Agora caso a ferramenta <code>hashcat</code> falhe por acesso à memória (<em>segmentation fault</em>), o seu programa deverá realizar uma nova tentativa, modificando a semente do algoritmo de criptografia. Por exemplo: se a execução inicial utilizar a string <code>aa</code>, na próxima tentativa você pode utilizar <code>ab</code>. Em geral, a senha já é recuperada na segunda tentativa. Ao conseguir recuperar a senha, informe a semente utilizada. Veja o exemplo de execução a seguir:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ ./cracker_insper paulo xxHUf9zUctXNA miss????
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./hashcat: recuperando a senha para o hash [xxHUf9zUctXNA].
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>./cracker_insper: falha de memoria na recuperacao da senha do usuario {paulo}.
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>./hashcat: recuperando a senha para o hash [xxHUf9zUctXNA].
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>./hashcat: senha [missudad] recuperada.
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>./cracker_insper: senha do usuario {paulo} recuperada com a semente {ab}.
+</code></pre></div>
+</li>
+<li>
+<p>Nesta fase você também deverá tratar o travamento indefinido da ferramenta <code>hashcat</code>. O seu programa  <code>cracker_insper.c</code> deve aguardar alguns segundos (por exemplo, 5 segundos) pela finalização do processo filho (<code>hashcat</code>).  Caso esse tempo seja excedido (<em>timeout</em>), o programa deve encerrá-lo utilizando o sinal <code>SIGKILL</code>, por meio da função <code>kill()</code> da biblioteca <code>signal.h</code>, em seguida, realizar uma nova tentativa com uma semente diferente. <strong>Dica de implementação</strong>: para que o seu programa aguarde a finalização do processo filho de forma não bloqueante, pesquise a utilização da função <code>waitpid(-1,...)</code> e leia atentamente o manual dessa função (<code>man waitpid</code>).</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$ ./cracker_insper fabio xxC4UjY9eNri6 hello??? 
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>./hashcat: recuperando a senha para o hash [xxC4UjY9eNri6].
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>./hashcat: senha [helloaac] recuperada.
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>./cracker_insper: senha do usuario {fabio} recuperada com a semente {ab}.
+</code></pre></div>
+</li>
+<li>
+<p>Programa <code>cracker_insper.c</code> roda <strong>sem erros no valgrind</strong>. Para testar use:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ valgrind --leak-check=yes ./cracker_insper fabio xxhx0AsVpMTMU sysx????
+</code></pre></div>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 5.0</p>
+<h3 id="fase-3"><strong>Fase 3</strong></h3>
+<ul>
+<li>
+<p>Nesta fase, além das funcionalidades da <strong>Fase 2</strong>, que devem ser mantidas na <strong>Fase 3</strong>, o programa <code>cracker_insper.c</code> tem a opção de receber uma flag <code>-f</code> seguida pelo nome de um arquivo de senhas, informado por linha de comando. Seu programa deverá ler o arquivo e recuperar as senhas dos usuários armazenados dentro do arquivo, exemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ ./cracker_insper -f senhas1.in
+</code></pre></div>
+</li>
+<li>
+<p>Cada linha do arquivo deve ser tratado como um processo independente, e a recuperação das senhas pode ser realizada de forma sequencial, assim seu programa pode ler uma linha do arquivo de entrada, chamar o executável <code>hashcat</code>, receber a resposta e imprimir no terminal. Cada linha do arquivo conterá:</p>
+<ul>
+<li>Nome de usuário (de 1 a 8 caracteres)</li>
+<li>Hash de senha (13 caracteres)</li>
+<li>Parte conhecida da senha (mais interrogações que representam caracteres desconhecidos), contém de 0 a 8 letras minúsculas seguidas de 0 a 8 pontos de interrogação. <strong>Importante</strong>: a soma da parte conhecida + os pontos de interrogação terão no máximo 8 caracteres.</li>
+</ul>
+</li>
+<li>
+<p>Esses três campos são separados por um único espaço. Todas as informações que fornecemos estão garantidas neste formato. Não se preocupe com nomes de usuário duplicados ou prefixos duplicados. Exemplo de arquivo de entrada (<code>senhas1.in</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>fabio xxhx0AsVpMTMU sysx????
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>paulo xxHUf9zUctXNA miss????
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>andre xxGGPN89YLcGY cse????
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>jose xxC4UjY9eNri6 hello??? 
+</code></pre></div>
+</li>
+<li>
+<p>A partir desta fase você deverá utilizar o executável <code>hashcat</code> em modo silencioso, no qual não há saída no terminal. Para isso, basta colocar no final da chamada o argumento  <code>-f</code>, que fará com que o <code>hashcat</code> gere um arquivo com a senha encontrada. O nome do arquivo será o <em>hash</em> informado com extensão <code>.txt</code>, veja um exemplo de execução do <code>hashcat</code> com esse argumento. </p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$ ./hashcat xxhx0AsVpMTMU sysx???? aa -f
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>$ ls xxhx0AsVpMTMU.txt 
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>$ xxhx0AsVpMTMU.txt
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>$ cat xxhx0AsVpMTMU.txt 
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sysxpert
+</code></pre></div>
+</li>
+<li>
+<p>Abaixo há um exemplo da chamada do seu programa com o <em>flag</em> <code>-f</code> com o arquivo <code>senhas1.in</code>, juntamente com a respectiva saída no terminal. Observe que <strong>cada linha do arquivo é processada sequencialmente</strong>. Em cada tentativa de execução do <code>hashcat</code>, deve ser informado a linha do arquivo, o nome do <strong>usuário</strong> e <strong>semente</strong>. Caso a senha seja recuperada com sucesso, o programa deve informar o <strong>usuário</strong> e a <strong>senha</strong> correspondente. Os casos de falha do executável <code>hashcat</code> devem ser reportados conforme exemplo a seguir:</p>
+<p><div class="language-text highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$ ./cracker_insper -f senhas1.in
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>linha 1: recuperando senha de {fabio} com semente {aa}.
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>linha 1: senha do usuario {fabio} recuperada {sysxpert}.
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>linha 2: recuperando senha de {paulo} com semente {aa}.
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>linha 2: falha de memoria na recuperacao da senha do usuario {paulo}.
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>linha 2: recuperando senha de {paulo} com semente {ab}.
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>linha 2: senha do usuario {paulo} recuperada {missudad}.
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>linha 3: recuperando senha de {andre} com semente {aa}.
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>linha 3: nao eh possivel recuperar a senha do usuario {andre}.
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>linha 4: recuperando senha de {jose} com semente {aa}.
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>linha 4: timeout de espera para senha de {jose}.
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>linha 4: recuperando senha de {jose} com semente {ab}.
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>linha 4: senha do usuario {jose} recuperada {helloaac}.
+</code></pre></div>
+- Importante: Como na <strong>Fase 2</strong> </p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 7.5</p>
+<h3 id="fase-4"><strong>Fase 4</strong></h3>
+<ul>
+<li>
+<p>Nesta fase, você deve paralelizar a solução da <strong>Fase 3</strong>. O arquivo de senhas <strong>deve ser processado em paralelo, e não mais sequencial</strong>. No início da execução, o programa <code>cracker_insper.c</code> deverá carregar todas as linhas do arquivo de entrada e, para cada linha, disparar a execução do <code>hashcat</code>, e depois aguardar a finalização de todas as execuções e apresentar as saídas correspondentes.</p>
+</li>
+<li>
+<p>Abaixo um exemplo de execução do programa com o arquivo <code>senhas1.in</code>, juntamente com <strong>uma possível saída</strong>.  Note que deve ser informado a linha que foi processada, bem como os casos em que ocorreu falha na recuperação da senha.</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>$ ./cracker_insper -f senhas1.in
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>linha 1: recuperando senha de {fabio} com semente {aa}.
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>linha 2: recuperando senha de {paulo} com semente {aa}.
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>linha 3: recuperando senha de {andre} com semente {aa}.
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>linha 4: recuperando senha de {jose} com semente {aa}.
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>linha 1: senha do usuario {fabio} recuperada {sysxpert}.
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>linha 2: falha de memoria na recuperacao da senha do usuario {paulo}.
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>linha 2: recuperando senha de {paulo} com semente {ab}.
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>linha 2: senha do usuario {paulo} recuperada {missudad}.
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>linha 4: timeout de espera para senha de {jose}.
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>linha 3: nao eh possivel recuperar a senha do usuario {andre}.
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>linha 4: recuperando senha de {jose} com semente {ab}.
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>linha 4: senha do usuario {jose} recuperada {helloaac}.
+</code></pre></div>
+</li>
+<li>
+<p>Lembre-se que o programa <code>cracker_insper.c</code> deve imprimir exclusivamente as mensagens apresentadas nos exemplos. Mensagens de depuração ou quaisquer saídas adicionais devem ser removidas antes da entrega.</p>
+</li>
+<li>
+<p>Por fim, ao pressionar <code>Ctrl+C</code> no terminal, o programa <code>cracker_insper.c</code> deve encerrar todos os processos do <code>hashcat</code> que ainda estão executando ou travados, e remove todos os arquivos de senhas gerados.</p>
+</li>
+</ul>
+<p><strong>NOTA desta fase</strong>: 10.0</p>
+<p><strong>IMPORTANTE:</strong> Considere as <strong>fases como cumulativas</strong>, ou seja, cada versão deve <strong>manter as funcionalidades da fase anterior</strong> e acrescentar novas. Por exemplo, a versão da <strong>Fase  2</strong>, você deveria passar nos testes do <em>valgrind</em>, isso passa valer para todas as seguintes da <strong>Fase  2</strong>. E em caso de dúvida consulte o professor. Caso você não implemente alguma funcionalidade de uma determinada fase a nota atribuída será a da fase anterior.</p>
+<h3 id="prazo">Prazo:</h3>
+<p><a href="../../entregas/">Clique aqui!</a>.</p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../hackerlab/"
+               class="ah-prev"
+               title="Hackerlab">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Hackerlab</span>
+            </a>
+          
+          
+            <a href="../../dicas/DicasLinks/"
+               class="ah-next"
+               title="Dicas e links">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Dicas e links</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="../../js/tabs.js"></script><script src="../../js/termynal.js"></script><script src="../../js/custom.js"></script>
+    
+  </body>
+</html>
