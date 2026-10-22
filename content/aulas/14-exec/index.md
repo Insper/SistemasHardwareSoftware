@@ -132,7 +132,7 @@ execvp(prog, args);
     No manual, percebemos que temos várias chamadas de exec: `execl`, `execlp`, `execle`, `execv`, `execvp` e `execvpe`.
     Releia prestando atenção nas diferenças.
     
-    Aqui, um auxílio de IA será útil! Abra o link https://chatbot.theb.ai/ e faça perguntas como:
+    Aqui, um auxílio de IA será útil! Faça perguntas como:
     
     `"whats the difference between C functions execv and execvp?"`.
 
