@@ -17,9 +17,9 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | 05/10 | Atv08-malloc | Github | 11/10 23h59 |
 | 08/10 | Atv09-TAD  | Github | 16/10 23h59 |
 | 19/10 | Atv10-processos | Github | 26/10 23h59 |
+| 26/10 | Atv11-entrada-saida | Github |02/11 23h59 |
 <!--
-| 23/04 | **Lab02-processos** | Github | **25/05  23h59** |
-| 23/04 | Atv11-entrada-saida | Github | 30/04 23h59 |
+| 26/10 | **Lab02-processos** | Github | **27/11  23h59** |
 | 07/05 | Atv12-threads | Github | 14/05 23h59 |
 | 14/05 | Atv13-barrier | Github | 21/05 23h59 |  
 -->
