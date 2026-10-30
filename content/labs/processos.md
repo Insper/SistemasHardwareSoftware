@@ -154,12 +154,6 @@ Esta atividade tem com objetivo avaliar dos conceitos vistos na disciplina. Port
 
 ### **Fase 2**
 
-- Entrega do arquivo `README.md` com as informações da **última fase que você concluiu**. No arquivo deve constar:
-    - Seu nome e uma descrição das fases do laboratório que conseguiu completar;
-    - Relato de quaisquer *bugs* ou erros identificados no seu programa;
-    - Alguma decisão de *design* relevante que você gostaria de compartilhar.
-    - Link, no arquivo `README.md`, de um **Vídeo explicativo**, com áudio e captura de tela visível, explicando como resolveu as funcionalidades relevantes descritas na fases. Por exemplo, se concluiu a **Fase 2**, seria muito importante mostrar no seu código como resolveu o travamento indefinido e as falhas de memória que acontecem na execução do `hashcat`.
-
 - Nesta fase, você deve melhorar a versão implementada na fase anterior. Agora caso a ferramenta `hashcat` falhe por acesso à memória (*segmentation fault*), o seu programa deverá realizar uma nova tentativa, modificando a semente do algoritmo de criptografia. Por exemplo: se a execução inicial utilizar a string `aa`, na próxima tentativa você pode utilizar `ab`. Em geral, a senha já é recuperada na segunda tentativa. Ao conseguir recuperar a senha, informe a semente utilizada. Veja o exemplo de execução a seguir:
 
     ```
@@ -272,6 +266,12 @@ Esta atividade tem com objetivo avaliar dos conceitos vistos na disciplina. Port
 **NOTA desta fase**: 10.0
 
 **IMPORTANTE:** Considere as **fases como cumulativas**, ou seja, cada versão deve **manter as funcionalidades da fase anterior** e acrescentar novas. Por exemplo, a versão da **Fase  2**, você deveria passar nos testes do *valgrind*, isso passa valer para todas as seguintes da **Fase  2**. E em caso de dúvida consulte o professor. Caso você não implemente alguma funcionalidade de uma determinada fase a nota atribuída será a da fase anterior.
+
+- Entregue o arquivo `README.md` com as informações da **última fase que você concluiu**. No arquivo deve constar:
+    - Seu nome e uma descrição das fases do laboratório que conseguiu completar;
+    - Relato de quaisquer *bugs* ou erros identificados no seu programa;
+    - Alguma decisão de *design* relevante que você gostaria de compartilhar.
+    - Link, no arquivo `README.md`, de um **Vídeo explicativo**, com áudio e captura de tela visível, explicando como resolveu as funcionalidades relevantes descritas na fases. Por exemplo, se concluiu a **Fase 2**, seria muito importante mostrar no seu código como resolveu o travamento indefinido e as falhas de memória que acontecem na execução do `hashcat`.
 
 
 ### Prazo:
