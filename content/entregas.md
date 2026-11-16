@@ -20,12 +20,5 @@ Cada tarefa detalha como sua submissão deve ser feita. Geralmente, basta enviar
 | 26/10 | Atv11-entrada-saida | Github |02/11 23h59 |
 | 29/10 | **Lab02-processos** | Github | **27/11  23h59** |
 | 09/11 | Atv12-threads | Github | 16/11 23h59 |
-<!--
-| 14/05 | Atv13-barrier | Github | 21/05 23h59 |  
--->
-
-
-
-
-
+| 16/11 | Atv13-barrier | Github | 23/11 23h59 |  
 
