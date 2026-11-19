@@ -197,7 +197,7 @@ Já vimos o uso de semáforos para sincronizar threads, de forma que as threads 
 Vamos implementar o modelo **produtor consumidor**, levando em consideração que:
 
 1. As threads produtoras e consumidoras compartilham um cache único. Pode ser um array de inteiros.
-2. Ambas as threads rodam em loop infinito simulando um stream de dados. A cada iteração, as threads sorteiam um valor aleatório de segundos (por ex, entre `0` e `5`) e então tentam pruduzir / consumir os dados.
+2. Ambas as threads rodam em loop infinito simulando um stream de dados. A cada iteração, as threads sorteiam um valor aleatório de segundos (por ex, entre `0` e `5`) e então tentam produzir / consumir os dados.
 
 !!! example "Faça!"
     Implemente (do zero) um programa que cria uma thread produtora e uma thread consumidora.
